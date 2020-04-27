@@ -1,0 +1,348 @@
+# Retos en la construcción y desarrollo de los modelos
+
+
+En primer lugar, consideramos el proceso usual de construcción de métodos predictivos 
+con aprendizaje automático [@ESL], [@kuhn]:
+
+1. Preprocesamiento y limpieza de datos
+2. Entrenamiento o ajuste de métodos de predicción
+3. Estimación de métricas de error y selección de predictores
+4. Validación final de predictor seleccionado
+
+Esto generalmente involucra al menos dos muestras (1 y 2), y de preferencia tres:
+
+1. Datos de entrenamiento
+2. Datos de validación
+3. Datos de prueba
+
+## Ausencia de validación
+
+Uno de los primeros errores graves en este proceso es la no consideración de
+etapas robustas de validación y prueba de los modelos
+
+```{block2, type='rmdnote'}
+**Reto: ausencia de muestras de validación**
+
+Los resultados de la construcción de modelos se presentan según su desempeño
+con el conjunto de datos que se usó para entrenarlos. Las métricas de desempeño, en 
+este caso, en general no pueden utilizarse para evaluar el verdadero comportamiento del
+modelo para las nuevas muestras con las que se pretende usar.
+  
+```
+
+Este problema de validación inexistente o pobre ocurre muchas veces con **pronósticos de series de tiempo**, donde 
+generalmente tenemos poca información a futuro para garantizar buen desempeño, o se trata de procesos altamente dinámicos
+que son en cualquier escenario difíciles de predecir.
+
+```{block2, type='rmdtip'}
+**Medida: ausencia de muestras de validación**
+
+- (Cuantitativa 1) Construir muestras de validación y prueba preparadas adecuadamente, como discutiremos más adelante. Esto incluye tamaño apropiado para estimar el error con precisión razonable.
+
+- (Cuantitativa 2) Existen estrategias de remuestreo o consideraciones estadísticas teóricas fundamentadas para justificar la generalización del desempeño en entrenamiento.
+
+```
+
+Argumentos teóricos requieren cuidado adicional, y sus supuestos deben ser evaluados.
+
+
+## Fugas de información
+
+Las fugas de información [@kaufman] ponen en duda la validación de modelos como manera de estimar el desempeño en producción de los métodos de aprendizaje automático. Esto ocurre de dos maneras:
+
+  - La muestra de entrenamiento recibe *fugas* de los datos de validación, lo que implica el uso de datos de validación en entrenamiento e invalida la estimación del error de predicción.
+  - Muestras de validación y entrenamiento tienen agrupaciones temporales o de otro tipo que no se conservan en el proceso de entrenamiento y validación. En este caso, entrenamiento y validación recibe *fugas* de información que no estará disponible el momento de hacer predicciones.
+
+
+```{block2, type = 'rmdnote'}
+**Reto: fugas entrenamiento validación**
+
+Si alguna parte de los datos de validación/prueba se utiliza en la construcción de los modelos durante entrenamiento, la muestra de validación prueba no cumple su función de dar una estimación realista del error en producción.
+
+```
+
+#### Ejemplo {-}
+Validación cruzada con selección de variables usando todos los datos [@ESL]
+
+```{block2, type='rmdtip'}
+**Medidas: fugas entrenamiento validación**
+
+Cualquier procesamiento y perparación de datos de entrenamiento debe evitar usar los datos de validación o prueba de ninguna manera. Se debe mantener una barrera sólida entre entrenamiento vs validación y prueba.
+  
+```  
+
+  
+Esto incluye recodificación de datos, normalizaciones, selección de variables, identificación de datos atípicos y cualquier otro tipo de preparación de cualquier variable a ser incluida en los modelos.  
+  
+El segundo tipo de filtración 
+
+
+```{block2, type='rmdnote'}
+**Reto: fugas de datos no disponbiles en la predicción**
+
+Algunos modelos son riesgosos de poner en producción 
+pues utilizan variables en entrenamiento y validación que no estarán disponibles 
+en la misma forma al momento de poner en producción. Esto generalmente
+tiene ver con temporalidad de los datos o agrupaciones particulares.
+
+```
+
+
+#### Ejemplo {-}
+
+Un modelo hace predicción de actividad criminal en distintas zonas geográficas para el 
+tiempo $t$. En la extracción de datos se usa como variable de entrada el número de
+unidades de policía que antendieron la zona de interés al tiempo $t$. Esto representa una fuga en la predicción, pues al momento de predecir actividad criminal al tiempo $t$ no
+estará disponible las unidades de policía al tiempo $t$. El modelo puede parecer preciso, pero en producción su exactitud se verá considerablemente degradada.
+
+
+
+En el caso más extremo, aunque quizá más fácil de detectar, existen variables
+presentes en datos de entrenamiento que no estarán disponibles en producción
+(por ejemplo, cantidad impagada si estamos haciendo predicción de impago). **En casos
+más sutiles este error puede ser difícil de detectar**.
+
+- En entrenamiento: pueden existir variables acumuladas hasta el momento donde
+se registra la variable a predecir.
+- En producción: las variables están acumuladas hasta el momento donde se hacen
+las predicciones. La variable a predecir ocurre en el futuro.
+
+Este tipo de error generalmente produce modelos que parecen muy optimistas,
+y ocurre de muchas maneras. 
+
+```{block2, type='rmdtip'}
+**Reto: fugas de datos no disponbiles en la predicción**
+
+El esquema de validación debe **replicar tan cerca como sea posible** el esquema
+bajo el cual se aplicarán las predicciones. Esto incluye que hay que replicar
+  
+- Ventanas temporales de observación y registro de variables y ventanas de predicción
+- Si existen grupos en los datos, considerar si tendremos información disponible de cada grupo cuando hacemos la predicción, o es necesario predecir para nuevos grupos.
+
+```
+
+
+#### Ejemplo {-}
+
+Supongamos que queremos predecir, en varias regiones o ciudades, el daño de edificios a partir de fotos aéreas después de un temblor, usando como métrica objetivo peritajes de los edificios seleccionados. En la validación podríamos cometer el error de no respetar la agrupación regional, y el modelo podría parecer dar buenas predicciones. En la realidad, aplicaríamos para una región sobre la cual no tenemos información. La validación debe considerar la necesidad de predecir para puntos en regiones enteras sin tener información adicional de tal región (es decir, la validación debe estratificar por región). 
+
+
+
+## Clasificación: probabilidades y clases
+
+En muchos problemas de clasificación, por su naturaleza, es difícil acercarse
+a tener certidumbre acerca de la clase de una observación según sus covariables. En
+estos casos, es más útil usar probabilidades 
+
+```{block2, type='rmdnote'}
+**Reto: puntos de corte arbitrario**
+
+En problemas de clasificación, los puntos de corte o decisiones de clasificación
+se toman con criterios vagamente relacionados con el contexto de la decisión 
+(por ejemplo, escogiendo una sensibilidad o especificidad dadas). 
+
+```
+
+Muchas veces
+se toma erróneamente un punto de corte de 1/2 para clasificación binaria, por ejemplo. Esta decisión se toma fuera del contexto de la decisión que se quiere tomar.
+
+
+```{block2, type='rmdtip'}
+**Medida: puntos de corte arbitrario**
+
+- En problemas de clasificación ruidosos (no es posible acercarse a tener certidumbre para muchos casos), las **probabilidades de clasificación** en cada clase son instrumentos más apropiados para la toma de decisiones.
+- Costos y utilidades pueden utilizarse, en combinación con las probabilidades, para tomar mejores decisiones caso por caso.
+
+```
+
+
+
+#### Ejemplo: churn de clientes, evaluación de alumnos {-}
+
+## Clasificación: Datos desbalanceados
+
+En problemas de clasificación muchas veces se presenta el problema de que algunas
+clases tienen representación relativamente baja (por ejemplo, clases con menos de 1% de los
+casos totales). Estas clases presentan dificultades considerables en los modelos predictivos, pues puede ser que tengamos poca información acerca de esas clases y sea difícil discriminarlas existosamente de otras clases, aún cuando contemos con la información correcta.
+
+
+
+```{block2, type='rmdnote'}
+**Reto: desbalance de clases**
+  
+En datos con desbalance grande, **predictores de clase** pueden tener desempeño malo
+(por ejemplo, nunca hacen predicciones de la clase minoritaria).
+
+```
+
+
+La solución es considerar las probabilidades de clase como salida principal:
+
+```{block2, type='rmdtip'}
+**Medidas: desbalance de clases**
+
+  
+- Hacer **predicciones de probabilidad** en lugar de clase. Estas probabilidades pueden ser incorporadas al proceso de decisión posterior como tales. Evitar puntos de corte estándar de probabilidad como 0.5, o predecir según máxima probabilidad.
+- Cuando el número absoluto de casos minoritarios es muy chico, puede ser muy dificil encontrar información apropiada para discriminar esa clase. Se requiere **recolectar** más datos de la clase minoritaria. 
+- Submuestrar la clase dominante (ponderando hacia arriba los casos para no perder calibración) puede ser una estrategia exitosa para reducir el tamaño de los datos y tiempo de entrenamiento.
+
+```
+
+
+#### Ejemplos {-}
+
+- Consideremos que tenemos 1 millón de datos, 999 mil negativos y mil positivos. Puede ser buena idea submuestrar los negativos por una fracción dada (por ejemplo 10%) ponderando cada caso muestreado por 10 en el ajuste y el postproceso. 
+
+- Consideremos que tenemos 1 millón de datos, 999,950 mil negativos y 50 positivos. Puede ser imposible discriminar apropiadamente los 50 datos positivos. Construir conjuntos de validación empeora la situación: no es posible validar el desempeño predictivo ni construir un modelo con buen desempeño.
+
+#### Ejemplo: CTR en ligas  (Google) {-}
+
+
+**Observaciones**:
+
+- Sub y sobremuestreo alteran la proporción natural de positivos y negativos en los datos. Esto quiere decir que las probabilidades obtenidas están mal calibradas y tienen menos utilidad para la toma de decisiones. 
+
+## Subajuste y sobreajuste
+
+Subajuste y sobreajuste ocurren cuando la información predictiva en los datos es
+usada de manera poco apropiada: en subajuste agrupamos de más y damos demasiado poco
+peso a características individuales de los casos, y en subajuste les damos demasiado peso.
+
+### Términos {-}
+
+- **Sobreajuste**: un modelo demasiado complejo para los datos disponibles tiende a capturar características no informativas como parte de la estructura predictiva. Esto se refleja muchas veces en una brecha de error grande entre entrenamiento y validación. Estos pueden ser modelos ruidosos difíciles de interpretar, y las predicciones pueden ser inestables dependiendo del conjunto de datos particular que se utilice.
+
+- **Subajuste** uno modelo demasiado simple para los datos disponibles tiende a ignorar patrones sólidos en la estructura predictiva. Esto se refleja en errores sistemáticos e identificables, por ejemplo, sub/sobre predicción sistemática para ciertos grupos o valores de las variables de entrada.
+
+
+```{block2, type='rmdnote'}
+**Reto: sub y sobreajuste**
+
+- Modelos que presentan subajuste o sobreajuste son particularmente difíciles de interpretar, y comparaciones predictivas pueden ser malas.
+- Modelos subajustados pueden cometer errores sistemáticos que pueden afectar negativamente, por ejemplo, al tratamiento de grupos protegidos.
+- Modelos sobreajustados pueden tener predicciones inestables que cambian mucho dependiendo de los datos, por ejemplo, con cada actualización.
+
+```
+
+Aunque sub y sobre ajuste puede producir resultados predictivos subóptimos, pueden producir rangos de error aceptables. Sin embargo, están expuestos a los problemas señalados arriba.
+
+
+```{block2, type='rmdtip'}
+**Medidas: sub y sobreajuste**
+
+- Sobreajuste: debe evitarse modelos cuya brecha validación - entrenamiento sea grande (indicios de sobreajuste).
+- Subajuste: deben checarse subconjuntos importantes de casos (por ejemplo grupos protegidos) para verificar que no existen errores sistemáticos indeseables.
+
+```
+
+#### Ejemplo: reconocimiento de imágenes {-}
+
+
+## Equidad y desempeño diferencial de predictores
+
+Métodos basados en aprendizaje automático pueden producir predicciones, que cuando no son usadas apropiadamente
+en la toma de decisiones, pueden producir resultados injustos o discriminatorios ([@boulamwini], [@barocas], [@bolukbasi]).
+
+En primer lugar establecemos que no siempre el contexto completo del problema de decisión puede enmarcarse dentro
+de la parte correspondiente al *aprendizaje automático*. Generalmente habrá varios objetivos de los tomadores de decisiones
+que van más allá de un pronóstico dado, un sistema de clasificación, etc. 
+
+Un ejemplo es el de paridad demográfica (por ejemplo, que dos grupos de interés obtengan tasas de clasificación positiva 
+muy similar), que es un tipo de paridad puede ser deseable para los tomadores de decisiones, pero no necesariamente uno
+que aparece naturalmente en lso métodos predictivos. De esta forma separamos dos preocupaciones importantes:
+
+- Objetivos de política pública o estrategia, orientados a la justica algorítmica, 
+que tienen que incorporarse en el proceso de toma de decisiones.
+- Fallas técnicas en los modelos que producen disparidad de resultados para grupos protegidos.
+
+En esta parte discutiremos principalmente el segundo punto. 
+
+### Términos
+
+- **Atributo protegido**: una característica o variable **protegida** $A$ es una para la que queremos
+que se cumplan cierto criterio de equidad en las predicciones.
+
+---
+
+Nuestro objetivo es establecer
+lineamientos para evitar que deficiencias en los modelos produzcan disparidades indeseables según los
+distintos subgrupos asociados a una variable protegida $A$ (por ejemplo, $A$ puede ser género, raza, nivel de marginación). 
+
+Dos estrategias no muy útiles para prevenir disparidades entre los grupos de $A$ son: *ignorar* la variable $A$ y
+buscar *paridad demográfica* de predicciones. En el primer caso, se pretende eliminar la posibilidad de disparidad **no** incluyendo
+la variable $G$ en el proceso de construcción de predictores. Este enfoque en pocos casos produce resultados deseables,
+pues típicamente existen otros atributos asociados a $A$ que pueden producir resultados similares aunque $A$ no se considere.
+El segundo caso, paridad demográfica de predicciones buscamos que las predicciones de los distintos grupos de $A$ sean
+similares: en el caso de clasificación, por ejemplo, que la tasa de positivos sea similar. Esto poco deseable 
+por sí solo: por ejemplo, si quisiéramos construir un clasificador para cierta enfermedad, consideramos que es posible que
+mujeres y hombres sean afectados de manera distinta. Sin embargo, *paridad demográfica* puede ser un objetivo de los tomadores
+de decisiones, y eso debe tomarse en cuenta al momento de tomar la decisión asociada a la predicción. 
+
+El concepto de **equidad de posibilidades** ([@hardt]) es uno menos dependiente de los objetivos de los tomadores de decisiones,
+y se refiere al desempeño predictivo a lo largo de distintos grupos definidos de $A$. Si $Y$ es la variable que queremos
+predecir, y $\hat{Y}$ es nuestra predicción, decimos que nuestra predicción satisface **equidad de posibilidades** cuando
+
+- $\hat{Y}$ y $A$ son independientes dado el valor verdadero $Y$
+
+Esto quiere decir que $A$ no debe influir en la predicción cuando conocemos el valor verdadero $Y$, o dicho de otra
+manera: $A$ sólo puede influir en la predicción a través de su efecto sobre $Y$. Consideramos predictores
+que se alejan mucho de este criterio son suceptibles de incluir disparidades asociadas a la variable protegida $A$
+
+Una primera implicación de este criterio es:
+
+- Bajo el suspuesto de equidad de posibilidades, las tasas de error predictivo sobre cada subgrupo de $A$ son similares 
+
+En problemas de clasificación binaria, el criterio es_
+
+- En cada subgrupo, las tasas de falsos positivos y de falsos negativos son similares
+
+```{block2, type='rmdnote'}
+**Reto: inequidad algorítmica**
+
+Aún conociendo el verdadero valor de la variable que queremos predecir, las predicciones de un método dado dependen
+fuertemente de una variable protegida. En particular, las tasas de error de distintos grupos de la variable protegida
+pueden ser muy distintos.
+
+```
+
+Esta situación de inequidad muchas veces implica que la estructura predictiva depende fuertemente o *abuse* [@hardt] 
+de la información
+que contiene la variable protegida $A$ acerca de la variable respuesta, con el riesgo de producir sesgos injustos a lo largo
+de distintos valores de la variable protegida.
+
+
+---
+
+En el caso de clasificacón binaria, cuando una de las alternativas es *deseable* para los individuos
+(por ejemplo, calificar para un beneficio, crédito, candidatura de un trabajo, etc), 
+Un criterio menos exigente de equidad puede ser la **equidad de oportunidad**:
+
+- Bajo el suspuesto de equidad de oportunidad, las tasas de falsos negativos de cada subgrupo de $A$ son similares.
+
+En la práctica puede considerarse cuál es más apropiado. Equidad de oportunidad muchas veces es un criterio aceptable, que
+introduce criterios de justicia algorítmica permitiendo también optimizar otros resultados deseables.
+
+
+#### Ejemplo {-}
+Supongamos que queremos predecir si un potencial empleado va a durar más de 2 años en cierta compañía, y que la variable
+protegida $A$ toma dos valores (que supondremos en este caso toma dos valores: se autodenomina con religión o sin religión).
+El predictor satisface **equidad de posibilidades** cuando tanto la tasa de falsos positivos como la de falsos negativos
+son iguales para personas con religión y sin religión.
+
+
+```{block2, type='rmdtip'}
+**Medidas: inequidad algorítmica**
+
+- Cuando existen atributos protegidos, debe evaluarse qué tanto se alejan las predicciones de la **equidad de posibilidades
+o de oportunidad**
+  
+- Posprocesar adecuadamente las predicciones, si es necesario, para lograr equidad de posibilidades o oportunidad [@hardt]. En el caso de clasificación, puntos de corte para distintos subgrupos pueden ajustarse para lograr equidad de oportunidad.
+
+- Recolectar información más relevante de subgrupos protegidos (tanto casos como características) para mejorar el desempeño
+predictivo en grupos minoritarios.
+
+```
+
+Esto en general implica que además de la decisión tomada en función de las predicciones depende de esta métrica adicional 
+de equidad, y no solo del análisis costo-beneficio.
+

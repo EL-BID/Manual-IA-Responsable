@@ -1,0 +1,17 @@
+--- 
+title: "AI responsable"
+author: "Felipe González, Teresa Ortiz, Roberto Sánchez"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [referencias.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical"
+---
+
+# Acerca de este material
+
+Este material es reproducible según instrucciones en [este repositorio](https://github.com/felipegonzalez/ai-responsable).
+
+

@@ -1,0 +1,58 @@
+# Retos de uso durante ejecución
+
+Una vez que los métodos de aprendizaje automático se comienzan utilizar para tomar decisiones, es necesario:
+
+- Monitorear, en general, desempeño y características usadas en el tiempo.
+- Monitorear en particular resultados indeseables que pueden resultar de la interacción de usuarios con algoritmos.
+- Tomar decisiones acerca del proceso generador de datos para mejorar desempeño o evaluar resultados
+
+## Degradación de desempeño
+
+ 
+```{block2, type='rmdnote'}
+**Reto: degradación de predicciones **
+
+  El desempeño de un modelo puede degradarse en el tiempo, debido a cambios en la población sobre la que se
+hacen predicciones
+
+```
+
+Cantidades con tasa total de positivos y negativos (incluyendo desagregaciones por otras variables protegidas o de interés), 
+distribución de predicciones y atributos o variables deben monitorearse en cada ronda de predicción.
+
+```{block2, type='rmdtip'}
+**Medidas: degradación de predicciones**
+
+- Monitorear varias métricas asociadas a las predicciones, en subgrupos definidos con antelación 
+(incluyendo variables protegidas).
+- Monitorear deriva en distribuciones de características con respecto al conjunto de entrenamiento.
+- Idelamente, planear para recolectar datos de la variable no observada para reajustar modelos y mantener el desempeño.
+- Cuando sea aplicable y factible, una fracción de las predicciones deberán ser examinadas por humanos y calificadas
+según alguna rúbrica o mediciones de las variable que se busca predecir.
+
+```
+
+
+## Experimentos y recopilación de datos
+
+La forma y los datos que se recopilan para mantenimiento de los algoritmos de predicción debe planearse con 
+el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso de los algoritmos
+
+```{block2, type='rmdnote'}
+**Reto: evaluación de efectividad**
+
+  Las mejoras que esperamos en el proceso pueden ser dificíles de sin contrafactuales sólidos.
+
+```
+
+
+Pruebas con diseño experimental pueden planearse (pruebas de tipo A/B, o ver por ejemplo [vaver]), cuando sea posible, para entender qué cambios particulares, deseables o indeseables, introduce el uso de los algoritmos.
+
+```{block2, type='rmdtip'}
+**Medidas: evaluación de efectividad**
+
+- Cuando sea posible, planear asignar tratamiento al azar (o según el status-quo) algunas unidades. Hacer comparaciones de
+desempeño y comportamiento entre esta muestra y los resultados bajo el régimen algorítmico. 
+
+```
+

@@ -1,0 +1,104 @@
+\mainmatter
+
+# Introducción {#intro}
+
+Los métodos de aprendizaje de máquina e inteligencia artificial (ML/IA), que para resumir
+en este documento llamamos **aprendizaje automático** son cada vez más requeridos
+y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos,
+desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos
+grados de éxito, y con esto ha aparecido la preocupación creciente de cómo entender 
+el desempeño o influencia positiva o negativa de estos métodos en el contexto de la toma de decisiones ([@Suresh], [@barocas]).
+
+```{block2, type='rmdpunto'}
+
+¿Cuándo estos métodos de aprendizaje automático nos llevan a tomar decisiones que son costosas, riesgosas o pueden inducir estados
+no deseados (por ejemplo, discriminatorios o injustos) en los sistemas y decisiones en donde se utilizan?
+
+```
+
+
+## IA y toma de decisiones
+
+En este documento pretendemos discutir los problemas más comunes en el uso de ML/IA para la
+toma decisiones, cómo detectar problemas potenciales y evaluar la posiblidad de resultados indeseables
+para los tomadores de decisiones, para la sociedad o una compañía o institución particular. Consideramos
+dos arquetipos de inclusión de aprendizaje automático en el proceso de toma de decisiones:
+
+1. **Las decisiones se toman automáticamente, sin intervención humana directa.** 
+Por ejemplo, inclusión de individuos en programas sociales, u otorgamiento de créditos al consumo.
+2. **Resultados del aprendizaje automático son insumos para decisiones que se toman de forma más tradicional.** Por ejemplo, decisiones acerca del funcionamiento o refinación de un programa social, pronósticos 
+de variables clave para planeación.
+
+
+El primer punto que tenemos que tener presente y es guía de este documento es que
+en la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general, y **en este documento** no pretendemos definir cómo deben ser esos procedimientos. En lugar de eso
+
+```{block2, type='rmdpunto'}
+**Principio guía 1**
+
+- Nos concentramos en la **evaluación** de estos sistemas, antes y después de poner 
+en producción o utilizar para tomar decisiones.
+- La evaluación sólo tiene sentido en términos del contexto de la decisión, y de los
+**resultados que son deseables para los tomadores de decisiones**, instituciones o compañías involucradas.
+
+```
+
+
+La evaluación de un sistema de aprendizaje no tiene sentido fuera de su contexto: qué es una tasa
+de error apropiado, cuáles son sesgos poco aceptables, y así sucesivamente, sólo pueden considerarse
+dentro de los propósitos de los tomadores de decisiones. Esto quiere decir que 
+aunque mucha de la discusión se concentra en 
+aspectos técnicos, métricas particulares de desempeño o métodos de ML, al final
+ninguna de estas discusiones tiene sentido fuera del contexto de la **decisión** que
+se quiere tomar, ya sea una decisión automatizada totalmente o como insumo de una decisión
+tomada por páneles de expertos o tomadores de decisiones.
+
+
+## Las tres componentes de la aplicación de ML/AI
+
+Las decisiones que consideramos tienen tres partes importantes: se considera 
+alguna **intervención** que se
+planea aplicar a personas, unidades o procesos. Esta intervención se pretende utilizar en ciertos casos
+que **dependen de variables desconocidas**. Usamos aprendizaje automático para **predecir o estimar** estas variables desconocidas.
+
+Nuestra pregunta es entonces cómo la calidad o tipo de predicciones o estimaciones pueden
+influir en la focalización, y más adelante, en el resultado global de la intervención.
+
+1. (**Intervención**) Tenemos una intervención o política que estamos considerando aplicar a ciertas
+personas, unidades o procesos. Supondremos generalmente que tenemos alguna idea del beneficio de esa política cuando se aplica a distintos sectores de la población objetivo.
+
+2. (**Focalización**) Esta intervención o política pretende focalizarse en ciertas unidades o circunstancias para mejorar resultados o uso de recursos.
+
+3. (**Predicción o Estimación**) La focalización depende de algunas características desconocidas de las personas, unidades o procesos. Utilizamos entonces predicciones o estimaciones basadas en métodos de ML/AI para informar variables desconocidas y mejorar la focalización.
+
+
+Ejemplos de esto puede ser:
+
+- Predicción del desempeño de alumnos en un sistema educativo (unidad individuo)
+- Predicción de ingresos trimestrales para hogares (unidad hogar)
+- Predicción de eventos riesgosos, por ejemplo actividad criminal (unidad zona geográfica)
+- Predicción de qué documentos o artículos sería útil sugerir dada una búsqueda (unidad
+usuario-búsqueda)
+
+
+```{block2, type='rmdpunto'}
+**Principio guía 2**
+
+En este documento, nos concentramos en la parte de **predicción o estimación**, y cómo deficiencias o lagunas en el proceso
+de validación puede producir resultados indeseables de **focalización**
+```
+
+\pagebreak
+
+## Los retos de la aplicación
+
+En estos tres casos, examinaremos los problemas más comunes, diagnósticos para detectarlos, y sugerencias
+para mitigarlos, divididos en cuatro secciones:
+
+1. **Intrínsecos a los datos**: que se refieren principalmente a deficiencias, sesgos y al proceso que genera los datos utilizados [@biasdata]. Este es un punto de bloqueo para muchas aplicaciones.
+2. **Relativos a la construcción y desarrollo de los modelos**: que se refiere a métodos y principios importantes para construir modelos robustos y validados correctamente.
+3. **Relativos a la evaluación y monitoreo del modelo**: que se refiere a la interpretación del modelo, evaluación una vez puesto en producción y principios de monitoreo para evitar consecuencias inesperadas.
+4. **Rendición de cuentas**, que se refiere al entendimiento o la capacidad de explicar
+cómo es que métodos automatizados toman ciertas decisiones.
+
+
