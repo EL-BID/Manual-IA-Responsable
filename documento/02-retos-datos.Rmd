@@ -1,12 +1,17 @@
-# Retos intrínsecos a los datos
+# Fuente de datos (retos intrínsecos a los datos)
 
-El primer conjunto de retos que tratamos es el que tiene qué ver
-con los datos disponibles para aplicar métodos de aprendizaje automático. 
-Estos retos se pueden separar en dos grandes grupos:
+`r colorize("Mientras leía me parece que los retos entran demasiado rápido y falta algo de contexto. ¿Qué pensarías de empezar los capítulos no por el reto sino con el ciclo del proyecto?", "red")`
+
+`r colorize("Bajo el comentario anterior creo que sería bueno empezar este capítulo describiendo los pros y contras de las posibles fuentes de info de un proyecto de Ciencia de datos en política pública y que eso te lleve a discutir su calidad y relevancia.", "red")`
+
+Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión de política pública. Censos, encuestas, registros administrativos, logs en páginas web e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen métricas que describen a la población objetivo o al fenómeno que estás buscando entender. 
+
+Sin embargo, no siempre los datos recolectados tienen una frecuencia o desagregación que los haga relevantes o no tienen la calidad necesaria para ser utilizados. Por ejemplo, las encuestas diseñadas mediante muestreos probabilístico especifican el tipo de análisis que se pueden hacer con ellas pero suelen levantarse con poca frecuencia y son insuficientes para capturar el movimiento de los patrones a estudiar, la información proveniente de registros administrativos suele tener una frecuencia mucho mayor pero en pocos casos cubre a la población en su conjunto. `r colorize("Vi que esto lo mencionan más abajo pero creo que comentarlo brevemente aquí podría hacer más cercano/entendible.", "red")`
+
+El primer conjunto de retos que tratamos es el que tiene qué ver con entender las limitantes de los datos disponibles para aplicar métodos de aprendizaje automático. Estos retos se pueden separar en dos grandes grupos:
 
 1. Calidad y relevancia de las métricas recolectadas
 2. Información incompleta acerca de la población objetivo
-
 
 ## Métricas: introducción
 
@@ -14,11 +19,10 @@ En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra
 disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles 
 son las mediciones ideales para la decisión que se considera tomar.
  
-
 #### Términos {-}
 
 - **Métrica objetivo**: medición que se considera ideal para tomar la decisión relevante. 
-En la aplicación, ese ideal es tipicamente solo alcanzado en parte. 
+En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 
 ```{block2, type='rmdnote'}
@@ -30,6 +34,7 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 ```
 
+`r colorize("ToDo(R): discusion de diferencias con discriminacion pasada - ", "red")` [e.g.](https://science.sciencemag.org/content/366/6464/447.abstract)
 
 #### Ejemplos {-}
 
@@ -39,8 +44,7 @@ Esta medición está sujeta a sesgos desconocidos, y existen incentivos para ocu
 por parte de los participantes. Predictores de ingreso construidos con estos datos tienen el riesgo
 de replicar el sesgo de las mediciones, afectando negativamente los resultados de la asignación de la intervención.
 
-- Consideramos pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el 
-*número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida 
+- Consideramos pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el *número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida 
 exacta de la demanda, porque puede ser que cuando los inventarios se agotan, los involucrados dejan de hacer requerimientos a los abastecedores. Pronosticar la demanda con estos datos puede incurrir en 
 subeestimación, con el resultado de que reforzamos o empeoramos la escasez de medicamentos.
 
@@ -86,8 +90,6 @@ usual es que sólo tenemos disponible una **muestra** de esta población, a part
 de la cual queremos desarrollar predicciones o estimaciones que ayuden en la toma
 de decisiones posterior. 
 
-
-
 #### Términos {-}
 
 - **Población objetivo**: son las unidades que se pretende intervenir 
@@ -104,13 +106,16 @@ no lineales).
 
 - **Representatividad**: término alternativo a muestra probabilística bajo el caso más
 simple de muestreo autoponderado. Este es un requisito que se considera relativamente poco importante
-o relevante. Lo importante es que los datos provengan de un diseño muestral probabilístico.
+o relevante. `r colorize("Creo que quitaría este statement ya que la mayor parte del tiempo para política pública tienes muestras no naturales... y mejor abajo decir que cuando proviene de muestreo probabilístico hay formas de controlarlo", "red")` Lo importante es que los datos provengan de un diseño muestral probabilístico. 
 
 Cuando tenemos una muestra, consideramos dos extremos posibles, siendo el primer extremo
 el más deseable aunque no siempre alcanzable:
 
+
 1. **Muestreo probabilístico**: Los casos son seleccionados a partir de un diseño muestral probabilístico.
+
 2. **Muestras naturales**: Los casos son seleccionados por un proceso natural mal o parcialmente conocido.
+
 
 Bajo el caso 1, todos las predicciones y estimaciones que se pretenden aplicar
 a la población objetivo pueden ser evaluadas en cuanto
@@ -144,14 +149,16 @@ y características útiles en la muestra pueden no aplicar en la población obje
 #### Ejemplo {-}
 
 Supongamos que nos interesa predecir la prevalencia de anemia en niños de una población objetivo
-dada. Decidimos tomar una muestra acudiendo a hospitales que "corresponden" a la población 
+dada. Decidimos tomar una muestra `r colorize("natural", "red")`  
+acudiendo a hospitales que "corresponden" a la población 
 objetivo para aplicar las pruebas correspondientes. La prevalencia de anemia que encontremos en esta
 muestra tendrá error desconocido, posiblemente grande, como estimación de la prevalencia
 en la población objetivo. Más aún, modelos de predicción construidos para esta muestra natural
 no necesariamente generalizarán correctamente a la población total, y no es posible tener
 una estimación confiable del error. Puede ser que la estructura predictiva
- para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural.
+para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural.
 
+`r colorize("*Nota - Sistema de auto diagnóstico: https://www.nature.com/articles/s41467-018-07262-2 pueden existir diferencias importantes en la presencia - > https://www.ncbi.nlm.nih.gov/pubmed/7282595", "red")`
 
 ```{block2, type='rmdtip'}
 **Medidas: muestras naturales**
@@ -176,13 +183,14 @@ metodología de muestreo (ver @lohr).
 - Si no está disponible tal muestra, es **indispensable** un análisis de riesgos y limitaciones de
 la muestra naturales, conducida por expertos y personas que conozcan el proceso
 que generó esos datos muestrales.
-- Muestras *representativas* no son necesarias ni en construcción de modelos ni en validación. Por ejemplo, 
-en muestreo de personas muchas veces se usan esquemas de selección desconocidos, pero acotado por cuotas. Esto
-produce balance en las tasas a la que aparecen ciertos grupos, 
+- Muestras *representativas* no son necesarias ni en construcción de modelos ni en validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, 
+pero acotado por cuotas. Esto produce balance en las tasas a la que aparecen ciertos grupos, 
 sin embargo, sigue siendo una
 muestra natural (en este caso a la muestra natural se le llama también *de conveniencia*).
 
-La situación ideal es la de muestreo probabilístico. 
+`r colorize("Aquí es importante acotar o dirigir a bibliografía sobre requerimientos de calidad necesarios para que esto sea válido. Lo que no queremos es que el ingeniero proveedor se justifique con esto y obtenga conclusiones 'no soportadas' por los datos, entonces digamos... se puede controlar siguiendo esto -> y cita a metodología.", "red")`
+
+La situación ideal es la de muestreo probabilístico.  
 En este caso, podemos entender exactamente qué 
 subpoblaciones se muestrearon, a qué tasas, y cómo se relacionan estas tasas con
 las tasas poblacionales. El diseño de la muestra determina nuestro alcance inferencial. 
