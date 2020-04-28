@@ -2,15 +2,33 @@
 title: "AI responsable"
 author: "Felipe González, Teresa Ortiz, Roberto Sánchez"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+bibliography:
+- referencias.bib
+- packages.bib
+description: Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable
+  de aprendizaje de máquina e Inteligencia Artifical
 documentclass: book
-bibliography: [referencias.bib, packages.bib]
-biblio-style: apalike
 link-citations: yes
-description: "Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical"
+site: bookdown::bookdown_site
+biblio-style: apalike
 ---
 
+
+```{r, results=FALSE}
+source("temp.R")
+```
+
+
 # Acerca de este material
+
+`r colorize("ToDo(R): Describir contexto de iniciativa fAIr LAC - BID", "red")`
+
+
+`r colorize("Describir público objetivo", "red")`
+
+Los que nos preocupan más y a quien debe ir dirigido el libro no es a personas con conocimiento de estadística sino ingenieros que puedan usar scikit learn o peor aún autoML sin conocer sus implicaciones.
+-> Vean esto: https://liaa.dc.uba.ar/es/sobre-la-prediccion-automatica-de-embarazos-adolescentes/
+
 
 Este material es reproducible según instrucciones en [este repositorio](https://github.com/felipegonzalez/ai-responsable).
 
