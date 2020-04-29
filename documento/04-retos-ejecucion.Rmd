@@ -30,6 +30,8 @@ distribución de predicciones y atributos o variables deben monitorearse en cada
 - Cuando sea aplicable y factible, una fracción de las predicciones deberán ser examinadas por humanos y calificadas
 según alguna rúbrica o mediciones de las variable que se busca predecir.
 
+`r colorize("incluiría monitorear las covariables y su comportamiento, ya que puede cambiar metodología de levantamiento o en caso de que sean registros administrativos reducir cobertura o calidad", "red")`
+
 ```
 
 

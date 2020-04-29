@@ -1,6 +1,5 @@
 # Retos en la construcción y desarrollo de los modelos
 
-
 En primer lugar, consideramos el proceso usual de construcción de métodos predictivos 
 con aprendizaje automático [@ESL], [@kuhn]:
 
@@ -67,7 +66,7 @@ Validación cruzada con selección de variables usando todos los datos [@ESL]
 ```{block2, type='rmdtip'}
 **Medidas: fugas entrenamiento validación**
 
-Cualquier procesamiento y perparación de datos de entrenamiento debe evitar usar los datos de validación o prueba de ninguna manera. Se debe mantener una barrera sólida entre entrenamiento vs validación y prueba.
+Cualquier procesamiento y preparación de datos de entrenamiento debe evitar usar los datos de validación o prueba de ninguna manera. Se debe mantener una barrera sólida entre entrenamiento vs validación y prueba.
   
 ```  
 
@@ -271,7 +270,7 @@ distintos subgrupos asociados a una variable protegida $A$ (por ejemplo, $A$ pue
 Dos estrategias no muy útiles para prevenir disparidades entre los grupos de $A$ son: *ignorar* la variable $A$ y
 buscar *paridad demográfica* de predicciones. En el primer caso, se pretende eliminar la posibilidad de disparidad **no** incluyendo
 la variable $G$ en el proceso de construcción de predictores. Este enfoque en pocos casos produce resultados deseables,
-pues típicamente existen otros atributos asociados a $A$ que pueden producir resultados similares aunque $A$ no se considere.
+pues típicamente existen otros atributos asociados a $A$ que pueden producir resultados similares aunque $A$ no se considere. `r colorize("Podríamos enfatizar esta parte, hace unos años el BID recomendaba no incluir variables sensibles y en los últimos proyectos siempre existe esa duda.", "red")`
 El segundo caso, paridad demográfica de predicciones buscamos que las predicciones de los distintos grupos de $A$ sean
 similares: en el caso de clasificación, por ejemplo, que la tasa de positivos sea similar. Esto poco deseable 
 por sí solo: por ejemplo, si quisiéramos construir un clasificador para cierta enfermedad, consideramos que es posible que

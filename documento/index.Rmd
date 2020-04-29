@@ -2,13 +2,14 @@
 title: "AI responsable"
 author: "Felipe González, Teresa Ortiz, Roberto Sánchez"
 date: "`r Sys.Date()`"
-bibliography:
-- referencias.bib
-- packages.bib
+output: pdf_document
 description: Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable
   de aprendizaje de máquina e Inteligencia Artifical
 documentclass: book
 link-citations: yes
+bibliography:
+- referencias.bib
+- packages.bib
 site: bookdown::bookdown_site
 biblio-style: apalike
 ---
@@ -27,7 +28,8 @@ source("temp.R")
 `r colorize("Describir público objetivo", "red")`
 
 Los que nos preocupan más y a quien debe ir dirigido el libro no es a personas con conocimiento de estadística sino ingenieros que puedan usar scikit learn o peor aún autoML sin conocer sus implicaciones.
--> Vean esto: https://liaa.dc.uba.ar/es/sobre-la-prediccion-automatica-de-embarazos-adolescentes/
+-> Vean este: https://github.com/facundod/case-studies/blob/master/Prediccion%20de%20Embarazo%20Adolescente%20con%20Machine%20Learning.md
+-> https://liaa.dc.uba.ar/es/sobre-la-prediccion-automatica-de-embarazos-adolescentes/
 
 
 Este material es reproducible según instrucciones en [este repositorio](https://github.com/felipegonzalez/ai-responsable).
