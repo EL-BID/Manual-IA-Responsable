@@ -32,7 +32,6 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 ```
 
-`r colorize("ToDo(R): discusion de diferencias con discriminacion pasada - ", "red")` [e.g.](https://science.sciencemag.org/content/366/6464/447.abstract)
 
 #### Ejemplos {-}
 
@@ -42,9 +41,21 @@ Esta medición está sujeta a sesgos desconocidos, y existen incentivos para ocu
 por parte de los participantes. Predictores de ingreso construidos con estos datos tienen el riesgo
 de replicar el sesgo de las mediciones, afectando negativamente los resultados de la asignación de la intervención.
 
+- Ver [@Obermeyer4]: donde se buscaba predecir necesidades de cuidado médico, usando como
+variable a predecir los costos médicos de cada paciente. Esta es una *medida pobre de necesidad de cuidado médico*
+cuando hay desigualdades entre los pacientes de cuánto pueden pagar por el mismo tipo de condiciones médicas. 
+La conclusión errónea sería que pacientes que requieren más cuidado tienden a ser pacientes de grupos económicamente más
+privilegiados.
+
 - Consideramos pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el *número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida 
 exacta de la demanda, porque puede ser que cuando los inventarios se agotan, los involucrados dejan de hacer requerimientos a los abastecedores. Pronosticar la demanda con estos datos puede incurrir en 
 subeestimación, con el resultado de que reforzamos o empeoramos la escasez de medicamentos.
+
+- En una encuesta preguntamos a mujeres de menos de 18 años si está embarazada actualmente o no, junto con
+otras variables socioeconómicas. Esta pregunta da una métrica pobre si nos interesa predecir la probabilidad de
+embarazo adolescente según características socioeconómicas. Esta métrica puede ser pobre por incentivos de las
+personas a no contestar verazmente la pregunta, lo cual puede ocurrir de manera diferencial en distintos grupos
+de vulnerabilidad.
 
 ---
 
@@ -65,6 +76,11 @@ Se deben identificar sesgos sistemáticos o validez sobre de la métrica sustitu
 - En la estimación de ingreso, generalmente se utilizan fuentes de datos oficiales con
 metodología bien establecida para estimar el ingreso de un hogar. Tal metodología
 debe ser sostenida por validaciones de distinto tipo que muestra posibles sesgos en la medición y de ser posible cuantificaciones del error de medición.
+
+- Usar gasto en salud como medida *sucedánea* de necesidad de cuidado médico es poco apropiado en situaciones
+donde existe desigualdad económica. Otras medidas asociadas a la salud de los individuos serían más apropiadas (por ejemplo
+evaluaciones médicas).
+
 - Para los pronósticos de demanda, es posible que sea necesario identificar fuentes adicionales
 de datos que indiquen mejor la demanda, ya sea con estudios indirectos (fuentes de datos de los compradores) o 
 construyendo experimentos que nos permitan observar la demanda en ciertas unidades.
