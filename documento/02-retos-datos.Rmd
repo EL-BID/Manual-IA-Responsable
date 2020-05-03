@@ -207,7 +207,8 @@ metodología de muestreo (ver @lohr).
 - Si no está disponible tal muestra, es **indispensable** un análisis de riesgos y limitaciones de
 la muestra naturales, conducida por expertos y personas que conozcan el proceso
 que generó esos datos muestrales.
-- Muestras *representativas* no son necesarias ni en construcción de modelos ni en validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, 
+- Muestras *representativas* no es una condición ni necesaria ni suficiente
+para calificar como apropiada la construcción de modelos ni la validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, 
 pero acotado por cuotas. Esto produce balance en las tasas a la que aparecen ciertos grupos, 
 sin embargo, sigue siendo una
 muestra natural (en este caso a la muestra natural se le llama también *de conveniencia*).
@@ -273,7 +274,7 @@ causales correctas en la muestra seleccionada, pero tener dificultades para gene
 ```{block2, type='rmdnote'}
 **Reto: atributos faltantes o incompletos**
   
-- Información crucial acerca de las unidades es totalmente desconocida puede resultar en
+- Cuando información crucial acerca de las unidades es totalmente desconocida, esto puede resultar en
 modelos de desempeño pobre, con poca utilidad para la toma de decisiones. Comparaciones predictivas pueden ser 
 poco útiles y a veces engañosas cuando existen variables omitidas importantes.
 
@@ -296,7 +297,8 @@ de la unidades para las que se quiere predecir.
 mediciones asociadas. Indentificar razones por las que existen datos faltantes: si la falta de datos está
 fuertemente asociada con la variable a predecir será difícil obtener buenos resultados.
 
-- (Cuantitativa) Los procesos de imputación tienen que ser evaluados en cuanto a su sensibilidad. De preferencia,
+- (Cuantitativa) Los procesos de imputación tienen que ser evaluados en cuanto a su sensibilidad a supuestos
+y datos. De preferencia,
 se deben utilizar métodos de imputación múltiple que permitan evaluar incertidumbre en la imputación [@missingrubin], [@mice].
 
 ```
