@@ -163,16 +163,26 @@ y características útiles en la muestra pueden no aplicar en la población obje
 #### Ejemplo {-}
 
 Supongamos que nos interesa predecir la prevalencia de anemia en niños de una población objetivo
-dada. Decidimos tomar una muestra `r colorize("natural", "red")`  
-acudiendo a hospitales que "corresponden" a la población 
-objetivo para aplicar las pruebas correspondientes. La prevalencia de anemia que encontremos en esta
+dada. Decidimos 
+acudir a hospitales que "corresponden" a la población 
+objetivo para aplicar las pruebas correspondientes a pacientes en el rango de edad de interés. 
+La prevalencia de anemia que encontremos en esta
 muestra tendrá error desconocido, posiblemente grande, como estimación de la prevalencia
-en la población objetivo. Más aún, modelos de predicción construidos para esta muestra natural
+en la población objetivo. 
+Otro caso usual es cuando la información es autoreportada, en particular en plataformas
+que pueden excluir grupos particulares de población, por ejemplo, con aplicaciones de 
+teléfono (por ejemplo, @anemiaapp). 
+
+
+Más aún, modelos de predicción construidos para esta muestra natural
 no necesariamente generalizarán correctamente a la población total, y no es posible tener
 una estimación confiable del error. Puede ser que la estructura predictiva
-para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural.
+para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural (ver por
+ejemplo (ver por ejemplo @anemiaracial, donde se muestra que valores predictivos de anemia pueden
+ser distintos para distintos grupos raciales). 
 
-`r colorize("*Nota - Sistema de auto diagnóstico: https://www.nature.com/articles/s41467-018-07262-2 pueden existir diferencias importantes en la presencia - > https://www.ncbi.nlm.nih.gov/pubmed/7282595", "red")`
+
+
 
 ```{block2, type='rmdtip'}
 **Medidas: muestras naturales**
