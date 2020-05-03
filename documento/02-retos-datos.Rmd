@@ -1,12 +1,10 @@
 # Fuente de datos (retos intrínsecos a los datos)
 
-`r colorize("Mientras leía me parece que los retos entran demasiado rápido y falta algo de contexto. ¿Qué pensarías de empezar los capítulos no por el reto sino con el ciclo del proyecto?", "red")`
-
-`r colorize("Bajo el comentario anterior creo que sería bueno empezar este capítulo describiendo los pros y contras de las posibles fuentes de info de un proyecto de Ciencia de datos en política pública y que eso te lleve a discutir su calidad y relevancia.", "red")`
 
 Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión de política pública. Censos, encuestas, registros administrativos, logs en páginas web e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen métricas que describen a la población objetivo o al fenómeno que estás buscando entender. 
 
-Sin embargo, no siempre los datos recolectados tienen una frecuencia o desagregación que los haga relevantes o no tienen la calidad necesaria para ser utilizados. Por ejemplo, las encuestas diseñadas mediante muestreos probabilístico especifican el tipo de análisis que se pueden hacer con ellas pero suelen levantarse con poca frecuencia y son insuficientes para capturar el movimiento de los patrones a estudiar, la información proveniente de registros administrativos suele tener una frecuencia mucho mayor pero en pocos casos cubre a la población en su conjunto. `r colorize("Vi que esto lo mencionan más abajo pero creo que comentarlo brevemente aquí podría hacer más cercano/entendible.", "red")`
+Sin embargo, no siempre los datos recolectados tienen una frecuencia, desagregación o cobertura
+que los haga relevantes, o no tienen la calidad necesaria para ser utilizados. Por ejemplo, las encuestas diseñadas mediante muestreos probabilístico especifican el tipo de análisis que se pueden hacer con ellas pero suelen levantarse con poca frecuencia y pueden ser insuficientes para capturar el movimiento de los patrones a estudiar, la información proveniente de registros administrativos suele tener una frecuencia mucho mayor pero en pocos casos cubre a la población en su conjunto. 
 
 El primer conjunto de retos que tratamos es el que tiene qué ver con entender las limitantes de los datos disponibles para aplicar métodos de aprendizaje automático. Estos retos se pueden separar en dos grandes grupos:
 
