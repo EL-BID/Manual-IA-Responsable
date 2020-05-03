@@ -35,9 +35,8 @@ Por ejemplo, inclusión de individuos en programas sociales, u otorgamiento de c
 `r colorize("ToDo(R): mostrar patrones de sistemas de soporte de decisión", "red")`
 
 El primer punto que tenemos que tener presente y es guía de este documento es que
-en la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general, y **en este documento** no pretendemos definir cómo deben ser esos procedimientos. En lugar de eso
-
-`r colorize("podríamos dejar recomendaciones de bibliografía que se enfoque en esto?", "red")`
+en la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general, y **en este documento** no pretendemos hablar
+de técnicas o modelos particulares (ver por ejemplo @ESL, @kuhn, @GelmanHill). En lugar de eso:
 
 ```{block2, type='rmdpunto'}
 **Principio guía 1**
