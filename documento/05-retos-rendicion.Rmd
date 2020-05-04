@@ -5,7 +5,7 @@
 
 Es difícil dar una definición técnica de **interpretabilidad** o **explicabilidad**, que en general se refieren 
 a hacer inteligible para humanos el funcionamiento de un algoritmo ([@molnar2019], [@miller]). Hay varias razones
-por las que tener cierto grado de interpretabilidad en los algoritmos que se usan para tomar decisiones es importantes ([@molnar2019]):
+por las que tener cierto grado de interpretabilidad en los algoritmos que se usan para tomar decisiones es importante ([@molnar2019]):
 
 1. Aprendizaje acerca del dominio del problema.
 2. Aceptación social.
@@ -70,7 +70,7 @@ variables problemáticas que reciben mucho peso en la predicción, en contra de 
 ## Explicabilidad de predicciones individuales
 
 Explicaciones individuales pueden ser importantes para rendir cuentas a usuarios o poder explicar decisiones tomadas
-con aprendizaje automático_
+con aprendizaje automático:
 
 ```{block2, type='rmdnote'}
 **Reto: explicaciones individuales**
