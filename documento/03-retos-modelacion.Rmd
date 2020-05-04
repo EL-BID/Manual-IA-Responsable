@@ -110,7 +110,7 @@ Este tipo de error generalmente produce modelos que parecen muy optimistas,
 y ocurre de muchas maneras. 
 
 ```{block2, type='rmdtip'}
-**Reto: fugas de datos no disponbiles en la predicción**
+**Medida: fugas de datos no disponbiles en la predicción**
 
 El esquema de validación debe **replicar tan cerca como sea posible** el esquema
 bajo el cual se aplicarán las predicciones. Esto incluye que hay que replicar
@@ -268,17 +268,24 @@ lineamientos para evitar que deficiencias en los modelos produzcan disparidades 
 distintos subgrupos asociados a una variable protegida $A$ (por ejemplo, $A$ puede ser género, raza, nivel de marginación). 
 
 Dos estrategias no muy útiles para prevenir disparidades entre los grupos de $A$ son: *ignorar* la variable $A$ y
-buscar *paridad demográfica* de predicciones. En el primer caso, se pretende eliminar la posibilidad de disparidad **no** incluyendo
-la variable $G$ en el proceso de construcción de predictores. Este enfoque en pocos casos produce resultados deseables,
-pues típicamente existen otros atributos asociados a $A$ que pueden producir resultados similares aunque $A$ no se considere. `r colorize("Podríamos enfatizar esta parte, hace unos años el BID recomendaba no incluir variables sensibles y en los últimos proyectos siempre existe esa duda.", "red")`
-El segundo caso, paridad demográfica de predicciones buscamos que las predicciones de los distintos grupos de $A$ sean
-similares: en el caso de clasificación, por ejemplo, que la tasa de positivos sea similar. Esto poco deseable 
+buscar *paridad demográfica* de predicciones. 
+
+En el primer caso, se pretende eliminar la posibilidad de disparidad **no** incluyendo
+la variable $A$ en el proceso de construcción de predictores. Este enfoque no resuelve el problema:
+
+- Típicamente existen otros atributos asociados a $A$ que pueden producir 
+resultados similares aunque $A$ no se considere (por ejemplo, zona geográfico o código postal y nivel socioeconómico). 
+- Puede haber razones importantes para incluir $A$ en los modelos predictivos. Por ejemplo, en
+el caso de presión arterial, existe variaciones en los grupos raciales ($A$) en cuanto a predisposición a presión alta
+(@hipertension), por lo tanto un modelo que evalúe riesgo sería más preciso y adecuado si incluye la variable $A$.
+
+
+En el segundo caso, en *paridad demográfica* de predicciones buscamos que las predicciones de los distintos grupos de $A$ sean similares: en el caso de clasificación, por ejemplo, que la tasa de positivos sea similar. Esto poco deseable 
 por sí solo: por ejemplo, si quisiéramos construir un clasificador para cierta enfermedad, consideramos que es posible que
-mujeres y hombres sean afectados de manera distinta. Sin embargo, *paridad demográfica* puede ser un objetivo de los tomadores
-de decisiones, y eso debe tomarse en cuenta al momento de tomar la decisión asociada a la predicción. 
+mujeres y hombres sean afectados de manera distinta. Sin embargo, *paridad demográfica* puede ser un objetivo de los tomadores de decisiones, y eso debe tomarse en cuenta al momento de tomar la decisión asociada a la predicción. 
 
 El concepto de **equidad de posibilidades** ([@hardt]) es uno menos dependiente de los objetivos de los tomadores de decisiones,
-y se refiere al desempeño predictivo a lo largo de distintos grupos definidos de $A$. Si $Y$ es la variable que queremos
+y se refiere al desempeño predictivo a lo largo de distintos grupos definidos por $A$. Si $Y$ es la variable que queremos
 predecir, y $\hat{Y}$ es nuestra predicción, decimos que nuestra predicción satisface **equidad de posibilidades** cuando
 
 - $\hat{Y}$ y $A$ son independientes dado el valor verdadero $Y$
