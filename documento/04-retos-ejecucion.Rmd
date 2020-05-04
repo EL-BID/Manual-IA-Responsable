@@ -26,11 +26,10 @@ distribución de predicciones y atributos o variables deben monitorearse en cada
 - Monitorear varias métricas asociadas a las predicciones, en subgrupos definidos con antelación 
 (incluyendo variables protegidas).
 - Monitorear deriva en distribuciones de características con respecto al conjunto de entrenamiento.
-- Idelamente, planear para recolectar datos de la variable no observada para reajustar modelos y mantener el desempeño.
+- Monitorear cambios en la metodología de levantamiento y procesamiento de datos que pueden reducir calidad de las predicciones.
+- Idealmente, planear para recolectar datos de la variable no observada para reajustar modelos y mantener el desempeño.
 - Cuando sea aplicable y factible, una fracción de las predicciones deberán ser examinadas por humanos y calificadas
 según alguna rúbrica o mediciones de las variable que se busca predecir.
-
-`r colorize("incluiría monitorear las covariables y su comportamiento, ya que puede cambiar metodología de levantamiento o en caso de que sean registros administrativos reducir cobertura o calidad", "red")`
 
 ```
 
@@ -43,17 +42,17 @@ el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso d
 ```{block2, type='rmdnote'}
 **Reto: evaluación de efectividad**
 
-  Las mejoras que esperamos en el proceso pueden ser dificíles de sin contrafactuales sólidos.
+  Las mejoras que esperamos en el proceso pueden ser dificíles de evaluar sin contrafactuales sólidos.
 
 ```
 
 
-Pruebas con diseño experimental pueden planearse (pruebas de tipo A/B, o ver por ejemplo [vaver]), cuando sea posible, para entender qué cambios particulares, deseables o indeseables, introduce el uso de los algoritmos.
+Pruebas con diseño experimental pueden planearse (pruebas de tipo A/B, o ver por ejemplo [@vaver]), cuando sea posible, para entender qué cambios particulares, deseables o indeseables, introduce el uso de los algoritmos.
 
 ```{block2, type='rmdtip'}
 **Medidas: evaluación de efectividad**
 
-- Cuando sea posible, planear asignar tratamiento al azar (o según el status-quo) algunas unidades. Hacer comparaciones de
+- Cuando sea posible, planear asignar bajo diseños experimentales tratamientos al azar (o según el status-quo) a algunas unidades. Hacer comparaciones de
 desempeño y comportamiento entre esta muestra y los resultados bajo el régimen algorítmico. 
 
 ```
