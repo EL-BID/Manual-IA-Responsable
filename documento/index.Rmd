@@ -2,7 +2,6 @@
 title: "AI responsable"
 author: "Felipe González, Teresa Ortiz, Roberto Sánchez"
 date: "`r Sys.Date()`"
-output: pdf_document
 description: Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable
   de aprendizaje de máquina e Inteligencia Artifical
 documentclass: book
