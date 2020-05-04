@@ -2,7 +2,6 @@
 output:
   pdf_document: default
   html_document: default
-  word_document: default
 ---
 \mainmatter
 
@@ -19,6 +18,7 @@ el desempeño o influencia positiva o negativa de estos métodos en el contexto 
 
 ¿Cuándo estos métodos de aprendizaje automático nos llevan a tomar decisiones que son costosas, riesgosas o pueden inducir estados
 no deseados (por ejemplo, discriminatorios o injustos) en los sistemas y decisiones en donde se utilizan?
+  
 ```
 
 
@@ -71,11 +71,8 @@ influir en la focalización, y más adelante, en el resultado global de la inter
 
 1. (**Intervención**) Tenemos una intervención o política que estamos considerando aplicar a ciertas
 personas, unidades o procesos. Supondremos generalmente que tenemos alguna idea del beneficio de esa política cuando se aplica a distintos sectores de la población objetivo.
-
 2. (**Focalización**) Esta intervención o política pretende focalizarse en ciertas unidades o circunstancias para mejorar resultados o uso de recursos.
-
 3. (**Predicción o Estimación**) La focalización depende de algunas características desconocidas de las personas, unidades o procesos. Utilizamos entonces predicciones o estimaciones basadas en métodos de ML/AI para informar variables desconocidas y mejorar la focalización.
-
 
 Ejemplos de esto puede ser:
 
@@ -100,7 +97,7 @@ de validación puede producir resultados indeseables de **focalización**
 
 `r colorize("Creo que la sección siguiente se entiende mejor si ponemos una pequeña descripción del ciclo de proyecto para describir en dónde aparecen los principales riesgos. En la recolección de datos (intrinsecos a los datos) en la modelación, validación y deployment. Me parece que al final esto pasa siempre por un editor y pone bonitos los gráficos... ", "red")`
 
-![Ciclo de vida de sistema de soporte de decisión](https://www.oecd-ilibrary.org/sites/eedfee77-en/images/images/01-chapter1/media/image6.png)
+![Ciclo de vida de sistema de soporte de decisión](images/image6.png)
 
 
 ## Los retos de la aplicación

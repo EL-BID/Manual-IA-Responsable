@@ -15,7 +15,7 @@ biblio-style: apalike
 ---
 
 
-```{r, results=FALSE}
+```{r, results=FALSE, echo=FALSE}
 source("temp.R")
 ```
 
