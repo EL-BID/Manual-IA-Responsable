@@ -10,7 +10,7 @@ Veremos varios ejemplos de cómo las fugas de entrenamiento a validación produc
 sesgadas del desempeño de predictores.
 
 
-### Caso 1: selección de variables antes de particionar
+# Caso 1: selección de variables antes de particionar
 
 
 
@@ -93,4 +93,10 @@ valida <- anti_join(datos_entrena, corte_validacion)
 modelo_1 <- glm(y ~ ., datos_filtrados_corte, family = "binomial")
 mean(as.numeric(predict(modelo_1, valida) > 0) == valida$y)
 ```
+
+
+# Caso 1: sobremuestrean antes de particionar
+
+- Sobremuestrear clase chica antes de validación cruzada
+
 
