@@ -15,8 +15,17 @@ El primer conjunto de retos que tratamos es el que tiene qué ver con entender l
 
 En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra
 disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles 
-son las mediciones ideales para la decisión que se considera tomar.
- 
+son las mediciones ideales para la decisión que se considera tomar. 
+
+Consideramos dos retos a enfrentar: en primer lugar, aprendizaje de métricas que son indeseables desde el 
+punto de vista de los tomador de decisiones. Si las métricas que queremos predecir 
+son resultado de sistemas subóptimos o con inequidades o deficiencias históricos, 
+los algoritmos entrenados tenderán a aprender los mismos patrones indeseables.
+
+El segundo reto es cuando utilizamos medidas *proxy* o sucedáneas por no tener disponibilidad de la medición
+ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las métricas 
+ideales pueden producir algoritmos con consecuencias indeseables.
+
 #### Términos {-}
 
 - **Métrica objetivo**: medición que se considera ideal para tomar la decisión relevante. 
@@ -24,11 +33,35 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 
 ```{block2, type='rmdnote'}
-**Reto: mala correspondencia de métrica y objetivos**
+**Reto: especificación incorrecta de métrica objetivo**
+  
+- Las métricas objetivo definidas son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés.
+- Los estados indeseables incluyen defectos y inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
+  
+```
+
+#### Ejemplos {-}
+
+
+- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf). Intentar predecir métricas respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
+
+```{block2, type='rmdtip'}
+**Medidas: especificación incorrecta de métrica objetivo**
+
+- (Cualitativa) Debe establecerse claramente que la utilización de la métrica objetivo seleccionada
+está alineada con los propósitos o políticas de los tomadores de decisiones. 
+
+```
+
+
+En el segundo reto, consideramos métricas sustitutos de las métricas objetivo ideales:
+
+
+```{block2, type='rmdnote'}
+**Reto: métrica proxy débil respecto a la métrica objetivo**
   
 - Las variables medidas corresponden pobremente a las métricas objetivo de interés.
-
-- En particular, las variables medidas pueden contener sesgos indeseables en términos de los objetivos de la política.
+- Es indeseable desde el punto de vista de la política hacer aprendizaje automático de medidas sesgadas o poco apropiadas para la toma de decisiones.
 
 ```
 
@@ -119,8 +152,7 @@ no lineales).
 - **Subpoblaciones de interés** o **Subpoblaciones protegidas**: subpoblaciones de la población objetivo para las cuales queremos tener evaluaciones concretas del desempeño de estimaciones o los modelos.
 
 - **Representatividad**: término alternativo a muestra probabilística bajo el caso más
-simple de muestreo autoponderado. Este es un requisito que se considera relativamente poco importante
-o relevante. `r colorize("Creo que quitaría este statement ya que la mayor parte del tiempo para política pública tienes muestras no naturales... y mejor abajo decir que cuando proviene de muestreo probabilístico hay formas de controlarlo", "red")` Lo importante es que los datos provengan de un diseño muestral probabilístico. 
+simple de muestreo autoponderado. 
 
 Cuando tenemos una muestra, consideramos dos extremos posibles, siendo el primer extremo
 el más deseable aunque no siempre alcanzable:
@@ -207,13 +239,11 @@ metodología de muestreo (ver @lohr).
 - Si no está disponible tal muestra, es **indispensable** un análisis de riesgos y limitaciones de
 la muestra naturales, conducida por expertos y personas que conozcan el proceso
 que generó esos datos muestrales.
-- Muestras *representativas* no es una condición ni necesaria ni suficiente
+- Muestras equilibradas en términos de características de la población no son condición ni necesaria ni suficiente
 para calificar como apropiada la construcción de modelos ni la validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, 
 pero acotado por cuotas. Esto produce balance en las tasas a la que aparecen ciertos grupos, 
 sin embargo, sigue siendo una
 muestra natural (en este caso a la muestra natural se le llama también *de conveniencia*).
-
-`r colorize("Aquí es importante acotar o dirigir a bibliografía sobre requerimientos de calidad necesarios para que esto sea válido. Lo que no queremos es que el ingeniero proveedor se justifique con esto y obtenga conclusiones 'no soportadas' por los datos, entonces digamos... se puede controlar siguiendo esto -> y cita a metodología.", "red")`
 
 La situación ideal es la de muestreo probabilístico.  
 En este caso, podemos entender exactamente qué 
@@ -277,7 +307,6 @@ causales correctas en la muestra seleccionada, pero tener dificultades para gene
 - Cuando información crucial acerca de las unidades es totalmente desconocida, esto puede resultar en
 modelos de desempeño pobre, con poca utilidad para la toma de decisiones. Comparaciones predictivas pueden ser 
 poco útiles y a veces engañosas cuando existen variables omitidas importantes.
-
 
 - Información parcial
 completada con procesos de imputación puede producir sesgos, dependiendo de la
