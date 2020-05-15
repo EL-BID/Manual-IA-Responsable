@@ -1,13 +1,14 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 \mainmatter
 
 # Introducción {#intro}
 
-Los métodos de aprendizaje de máquina e inteligencia artificial (ML/IA) `r colorize("podemos hablar sobre aprendizaje de máquina unicamente, en todos los textos diferenciamos ML del concepto de IA ", "red")`, 
-que para resumir en este documento llamamos **aprendizaje automático** son cada vez más requeridos
-y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos,
-desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos
-grados de éxito, y con esto ha aparecido la preocupación creciente de cómo entender 
-el desempeño o influencia positiva o negativa de estos métodos en el contexto de la toma de decisiones ([@Suresh], [@barocas]).
+Los métodos de aprendizaje de máquina como un subconjunto de lo que se conoce como inteligencia artificial, que para resumir en este documento llamamos **aprendizaje automático** (ML por sus siglas en inglés) son cada vez más requeridos y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos, desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos grados de éxito, y con esto ha aparecido la preocupación creciente de cómo entender el desempeño o influencia positiva o negativa de estos métodos en el contexto de la toma de decisiones ([@Suresh], [@barocas]).
+
 
 ```{block2, type='rmdpunto'}
 
@@ -19,15 +20,14 @@ no deseados (por ejemplo, discriminatorios o injustos) en los sistemas y decisio
 
 ## IA y toma de decisiones
 
-En este documento pretendemos discutir los problemas más comunes en el uso de ML/IA para la
-toma decisiones, cómo detectar problemas potenciales y evaluar la posiblidad de resultados indeseables
+En este documento pretendemos discutir los problemas más comunes en el uso de ML para la
+toma de decisiones, cómo detectar problemas potenciales y evaluar la posiblidad de resultados indeseables
 para los tomadores de decisiones, para la sociedad o una compañía o institución particular. Consideramos
 dos arquetipos de inclusión de aprendizaje automático en el proceso de toma de decisiones:
 
 1. **Las decisiones se toman automáticamente, sin intervención humana directa.** 
 Por ejemplo, inclusión de individuos en programas sociales, u otorgamiento de créditos al consumo.
 2. **Resultados del aprendizaje automático son insumos para decisiones que se toman de forma más tradicional.** Por ejemplo, decisiones acerca del funcionamiento o refinación de un programa social, pronósticos  de variables clave para planeación.
-`r colorize("ToDo(R): mostrar patrones de sistemas de soporte de decisión", "red")`
 
 El primer punto que tenemos que tener presente y es guía de este documento es que
 en la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general, y **en este documento** no pretendemos hablar
@@ -54,7 +54,7 @@ se quiere tomar, ya sea una decisión automatizada totalmente o como insumo de u
 tomada por páneles de expertos o tomadores de decisiones.
 
 
-## Las tres componentes de la aplicación de ML/AI
+## Las tres componentes de la aplicación de ML
 
 Las decisiones que consideramos tienen tres partes importantes: se considera 
 alguna **intervención** que se
@@ -90,17 +90,12 @@ de validación puede producir resultados indeseables de **focalización**
 
 ## Ciclo de proyecto
 
-`r colorize("Creo que la sección siguiente se entiende mejor si ponemos una pequeña descripción del ciclo de proyecto para describir en dónde aparecen los principales riesgos. En la recolección de datos (intrinsecos a los datos) en la modelación, validación y deployment. Me parece que al final esto pasa siempre por un editor y pone bonitos los gráficos... ", "red")`
-
-![Ciclo de vida de sistema de soporte de decisión](images/image6.png)
-
+![Ciclo de vida de sistema de soporte de decisión](images/ciclo_proyecto.png)
 
 ## Los retos de la aplicación
 
 En estos tres casos, examinaremos los problemas más comunes, diagnósticos para detectarlos, y sugerencias
 para mitigarlos, divididos en cuatro secciones:
-
-`r colorize("El bid me anda pidiendo poner nombres más sencillos como: Manejo de datos, desarrollo de modelo, uso y toma de decisión, aún nada fijo. Podemos mientras usar estos, pero me acuerdo de cambiarlo al final.", "red")`
 
 1. **Intrínsecos a los datos**: que se refieren principalmente a deficiencias, sesgos y al proceso que genera los datos utilizados [@biasdata]. Este es un punto de bloqueo para muchas aplicaciones.
 2. **Relativos a la construcción y desarrollo de los modelos**: que se refiere a métodos y principios importantes para construir modelos robustos y validados correctamente.
