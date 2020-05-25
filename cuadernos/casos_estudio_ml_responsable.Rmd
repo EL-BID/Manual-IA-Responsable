@@ -30,6 +30,12 @@ library(tune)
 
 # Retos intrínsecos a los datos
 
+## Reto: mala correspondencia de métrica y objetivos
+
+
+## Reto: 
+
+
 ## Muestras naturales y sesgo
 
 Cuando las muestras de entrenamiento son diferentes a las poblaciones donde
@@ -277,4 +283,79 @@ bosque_1 %>%
 
 Aunque el accuracy parece alto, la precisión y la exhaustividad son cero.
 
+## Fugas en implementación
 
+This dataset was originally published alongside the 5th edition of William Greene's book Econometric Analysis.
+
+```{r}
+credito <- read_csv("datos/AER_credit_card_data.csv") 
+credito %>% knitr::kable()
+```
+
+Queremos construir un modelo para predecir que solicitudes fueron aceptadas y automatizar
+el proceso de selección. Usamos regresión logística con keras y penalización L2:
+
+```{r}
+credito_split <- initial_split(credito)
+entrena <- training(credito_split)
+prueba <- testing(credito_split)
+```
+
+```{r}
+# preparacion de datos
+credito_receta <- recipe(card ~ ., credito) %>%
+  step_normalize(all_numeric()) %>% 
+  step_dummy(all_nominal(), -card) 
+# modelo
+modelo_regularizado <- 
+  logistic_reg(penalty = 1) %>% 
+  set_engine("keras", epochs = 500, verbose = FALSE)  %>% 
+  set_mode("classification") 
+```
+
+```{r, message=FALSE, warning = FALSE}
+# ajustar parametros de preprocesamiento
+receta_prep <- credito_receta %>% prep(entrena)
+# preprocesar datos
+entrena_prep <- bake(receta_prep, entrena)
+prueba_prep <- bake(receta_prep, prueba)
+# ajustar modelo
+ajuste <- modelo_regularizado %>% 
+  fit(card~ expenditure + dependents + income + age + owner_yes, data = entrena_prep)
+```
+
+```{r}
+# evaluar
+metricas <- metric_set(accuracy, recall, precision)
+ajuste %>% predict(prueba_prep) %>%
+  bind_cols(prueba) %>% 
+  metricas(truth = card, estimate = .pred_class)
+```
+
+Y parece tener un desempeño razonable. Si quitamos la variable *expenditure* se
+degrada totalmente el desempeño del modelo:
+
+```{r}
+ajuste_2 <- modelo_regularizado %>% 
+  fit(card~ dependents + income + age + owner_yes, data = entrena_prep)
+ajuste_2 %>% predict(prueba_prep) %>%
+  bind_cols(prueba) %>% 
+  metricas(truth = card, estimate = .pred_class)
+```
+
+La razón es que *expenditure* es gasto en tarjetas de crédito. Esto incluye
+la tarjeta para la que queremos hacer predicción de aceptación:
+
+```{r}
+entrena %>% 
+  mutate(algun_gasto = expenditure > 0) %>% 
+  group_by(algun_gasto, card) %>% 
+  tally()
+```
+
+Lo que nos indica que algún gasto probablemente incluye el gasto en la tarjeta actual,
+y la variable *expenditure* es medida posteriormente a la entrega de la tarjeta:
+
+- El desempeño de este modelo para nuevas aplicaciones será muy malo, pues la variable
+*expenditure*, en el momento de la aplicación, evidentemente no cuenta cuánto va a gastar
+cada cliente en el futuro.
