@@ -296,6 +296,7 @@ Queremos construir un modelo para predecir que solicitudes fueron aceptadas y au
 el proceso de selección. Usamos regresión logística con keras y penalización L2:
 
 ```{r}
+set.seed(823)
 credito_split <- initial_split(credito)
 entrena <- training(credito_split)
 prueba <- testing(credito_split)
@@ -329,7 +330,7 @@ ajuste <- modelo_regularizado %>%
 metricas <- metric_set(accuracy, recall, precision)
 ajuste %>% predict(prueba_prep) %>%
   bind_cols(prueba) %>% 
-  metricas(truth = card, estimate = .pred_class)
+  metricas(truth = factor(card), estimate = .pred_class)
 ```
 
 Y parece tener un desempeño razonable. Si quitamos la variable *expenditure* se
@@ -340,7 +341,7 @@ ajuste_2 <- modelo_regularizado %>%
   fit(card~ dependents + income + age + owner_yes, data = entrena_prep)
 ajuste_2 %>% predict(prueba_prep) %>%
   bind_cols(prueba) %>% 
-  metricas(truth = card, estimate = .pred_class)
+  metricas(truth = factor(card), estimate = .pred_class)
 ```
 
 La razón es que *expenditure* es gasto en tarjetas de crédito. Esto incluye
