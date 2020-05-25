@@ -51,7 +51,7 @@ ventas <- tibble(
     ventas = pmin(inventario, demanda),
     indicador = indicador, 
     agotamiento = ifelse(ventas==inventario, 1, 0))
-ventas
+ventas %>% select(-demanda)
 ```
 
 ```{r}
