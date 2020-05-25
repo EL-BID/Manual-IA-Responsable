@@ -16,14 +16,90 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 En este cuaderno mostraremos varios ejemplos de los retos y soluciones explicadas
 en el documento principal.
 
+```{r}
+library(tidyverse)
+library(recipes)
+library(themis)
+library(rsample)
+library(parsnip)
+library(yardstick)
+library(workflows)
+library(tune)
+```
+
+
 # Retos intrínsecos a los datos
 
 ## Muestras naturales y sesgo
 
+Cuando las muestras de entrenamiento son diferentes a las poblaciones donde
+se van a aplicar los modelos, existen dificultades en validar correctamente las
+predicciones.
 
 
 
+### Muestras naturales: mala representatividad 
 
+
+```{r}
+set.seed(128)
+encuesta_ingreso <- read_csv("datos/enigh-ejemplo.csv")
+datos_ingreso <- encuesta_ingreso %>% 
+  mutate(num_focos = FOCOS) %>%
+  mutate(ingreso_miles = (INGCOR / 1000)) %>% 
+  mutate(tel_celular = ifelse(SERV_2 == 1, "Sí", "No")) %>% 
+  mutate(marginacion = fct_reorder(marginación, ingreso_miles, median)) %>% 
+  rename(ocupadas = PEROCU) %>% 
+  select(ingreso_miles, num_focos, tel_celular, marginacion, ocupadas)
+```
+
+```{r}
+ingreso_split <- initial_split(datos_ingreso, prop = 0.7)
+entrena <- training(ingreso_split)
+prueba <- testing(ingreso_split)
+```
+
+
+Supongamos que usamos una encuesta por teléfono celular, y que solo
+accedimos a zonas que no tienen marginación muy alta.
+
+```{r}
+entrena_sesgada <- filter(entrena, tel_celular == "Sí", marginacion=="Muy bajo")
+sesgados_split <- initial_split(entrena_sesgada)
+entrena_sesgo <- training(sesgados_split)
+validacion <- testing(sesgados_split)
+mod_1 <- lm(log(1 + ingreso_miles) ~ num_focos + ocupadas, data = entrena_sesgo)
+```
+
+
+```{r}
+preds_val <- predict(mod_1, newdata = validacion)
+mean(abs(preds_val - log(1 + validacion$ingreso_miles))) %>% round(2)
+```
+
+El error en una muestra más similar a la población que se pretende aplicar el algoritmo es mayor:
+
+```{r}
+preds_prueba <- predict(mod_1, newdata = prueba)
+mean(abs(preds_prueba - log(1 + prueba$ingreso_miles))) %>% round(2)
+prueba$pred <- preds_prueba
+```
+
+Sin embargo, la estimación con 
+
+```{r}
+ggplot(prueba %>% filter(pred < log(100)), 
+  aes(x = exp(pred) - 1, y = ingreso_miles, group=1)) + geom_jitter() +
+  geom_abline() + geom_smooth(method = "loess", se = FALSE) +
+  scale_x_log10() + scale_y_log10() + xlab("Predicción (miles al trimestre)") +
+  ylab("Ingreso corriente (miles al trimestre)") 
+```
+
+Tenemos entonces dos problemas:
+
+1. El sesgo produce un error considerablemente más grande en la implementación que en la validación
+2. Peor aún, el sesgo es mayor para hogares de menores ingresos, lo cual puede producir
+una focalización mediocre si buscamos identificar hogares de menores ingresos.
 
 # Retos en construcción y desarrollo de predictores
 
@@ -44,7 +120,6 @@ cuando usamos métodos como validación cruzada
 Este ejemplo es originalmente de [@ESL], y utilizaremos datos sintéticos 
 
 ```{r, message = FALSE}
-library(tidyverse)
 simular <- function(n = 100, p = 500, prob = 0.5){
   datos <- map(1:p, ~ rnorm(n)) %>% 
     bind_cols()
@@ -138,11 +213,6 @@ Supongamos que primero aplicamos (SMOTE)[https://www.jair.org/index.php/jair/art
 para intentar balancear los datos:
 
 ```{r}
-library(recipes)
-library(themis)
-library(rsample)
-library(parsnip)
-library(yardstick)
 receta_balance <- recipe(y ~ ., datos_desbalance) %>%
   step_smote(y) %>%
   prep()
