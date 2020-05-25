@@ -25,6 +25,7 @@ library(parsnip)
 library(yardstick)
 library(workflows)
 library(tune)
+library(knitr)
 ```
 
 
@@ -93,7 +94,7 @@ prueba$pred <- preds_prueba
 
 Sin embargo, la estimación con 
 
-```{r}
+```{r, fig.width = 5, fig.height = 4}
 ggplot(prueba %>% filter(pred < log(100)), 
   aes(x = exp(pred) - 1, y = ingreso_miles, group=1)) + geom_jitter() +
   geom_abline() + geom_smooth(method = "loess", se = FALSE) +
@@ -136,7 +137,7 @@ set.seed(8234)
 datos_entrena <- simular(n = 200, p = 1000)
 datos_prueba <- simular(n = 2000, p = 1000)
 dim(datos_entrena)
-datos_entrena %>% group_by(y) %>% tally()
+datos_entrena %>% group_by(y) %>% tally() %>% kable()
 ```
 
 Nuestra selección de variables está dada por la siguiente función. Esta función **selecciona las
@@ -166,7 +167,7 @@ Para cualquier corte de validación cruzada el error parece ser menor a 0.5:
 
 ```{r}
 datos_filtrados <- seleccionar(datos_entrena)
-datos_filtrados
+datos_filtrados %>% head %>% kable()
 ```
 
 
@@ -209,7 +210,7 @@ Supongamos que tenemos desbalance severo entre nuestras dos clases:
 set.seed(99134)
 datos_desbalance <- simular(n = 500, p = 20, prob = 0.1) %>% 
   mutate(y = factor(y, levels = c(1, 0)))
-datos_desbalance %>% group_by(y) %>% tally()
+datos_desbalance %>% group_by(y) %>% tally() %>% kable()
 ```
 
 
@@ -227,7 +228,7 @@ datos_smote <- juice(receta_balance)
 
 
 ```{r}
-datos_smote %>% group_by(y) %>% tally() 
+datos_smote %>% group_by(y) %>% tally() %>% kable()
 ```
 
 Ahora separamos entrenamiento y validación
@@ -246,7 +247,8 @@ bosque <- rand_forest(trees = 500, mtry = 20, mode = "classification") %>%
 bosque %>%
   predict(prueba_smote) %>%
   bind_cols(prueba_smote) %>% 
-  class_metrics(truth = y, estimate = .pred_class)
+  class_metrics(truth = y, estimate = .pred_class) %>% 
+  kable()
 ```
 
 Y parece ser que el desempeño es muy bueno. Sabemos que esto es fictico, pues no hay
@@ -278,18 +280,20 @@ bosque_1 <- rand_forest(trees = 500, mtry = 20, mode = "classification") %>%
 bosque_1 %>%
   predict(prueba) %>%
   bind_cols(prueba) %>% 
-  class_metrics(truth = y, estimate=.pred_class)
+  class_metrics(truth = y, estimate=.pred_class) %>% 
+  kable()
 ```
 
 Aunque el accuracy parece alto, la precisión y la exhaustividad son cero.
 
 ## Fugas en implementación
 
-This dataset was originally published alongside the 5th edition of William Greene's book Econometric Analysis.
+En este caso mostramos un ejemplo donde se utiliza erróneamente una variable que
+no estará disponible al momento de hacer las predicciones (Datos de William Greene's book Econometric Analysis)
 
 ```{r}
 credito <- read_csv("datos/AER_credit_card_data.csv") 
-credito %>% knitr::kable()
+credito %>% head %>% kable()
 ```
 
 Queremos construir un modelo para predecir que solicitudes fueron aceptadas y automatizar
@@ -341,7 +345,8 @@ ajuste_2 <- modelo_regularizado %>%
   fit(card~ dependents + income + age + owner_yes, data = entrena_prep)
 ajuste_2 %>% predict(prueba_prep) %>%
   bind_cols(prueba) %>% 
-  metricas(truth = factor(card), estimate = .pred_class)
+  metricas(truth = factor(card), estimate = .pred_class) %>% 
+  kable()
 ```
 
 La razón es que *expenditure* es gasto en tarjetas de crédito. Esto incluye
@@ -351,7 +356,8 @@ la tarjeta para la que queremos hacer predicción de aceptación:
 entrena %>% 
   mutate(algun_gasto = expenditure > 0) %>% 
   group_by(algun_gasto, card) %>% 
-  tally()
+  tally() %>% 
+  kable()
 ```
 
 Lo que nos indica que algún gasto probablemente incluye el gasto en la tarjeta actual,
