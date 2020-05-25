@@ -26,6 +26,7 @@ library(yardstick)
 library(workflows)
 library(tune)
 library(knitr)
+library(patchwork)
 ```
 
 
@@ -33,8 +34,101 @@ library(knitr)
 
 ## Reto: mala correspondencia de métrica y objetivos
 
+Usar modelos que predicen la métrica incorrecta puede llevar a tomar decisiones incorrectas.
+A veces el problema es claro, cuando la métrica sustituto tiene deficiencias obvias, y en otras
+puede ser más sutil.
 
-## Reto: 
+```{r, echo=FALSE, include=FALSE}
+set.seed(124)
+semana <- 1:100
+indicador <- rnorm(100, 0, 20)
+inventario <- 100 + 7*sqrt(1:100) + rpois(100, 50)
+demanda <- 30 + 1.2*1:100 + indicador + rpois(100, 100)
+ventas <- tibble(
+    semana = 1:100,
+    inventario = inventario, 
+    demanda = demanda, 
+    ventas = pmin(inventario, demanda),
+    indicador = indicador, 
+    agotamiento = ifelse(ventas==inventario, 1, 0))
+ventas
+```
+
+```{r}
+entrena <- ventas %>% filter(semana < 80)
+prueba <- ventas %>% filter(semana >= 80)
+entrena %>% head() %>% kable()
+mod_lineal <- lm(ventas ~ semana + indicador, data = ventas)
+mod_lineal
+```
+
+```{r}
+preds <- predict(mod_lineal, newdata = prueba)
+mean(abs(preds - prueba$ventas))/mean(prueba$ventas)
+```
+
+El error porcentual es bajo. Los datos ajustados y predicciones se ven como sigue:
+
+```{r, fig.width = 5, fig.height=2.5}
+preds <- predict(mod_lineal, newdata = ventas)
+ventas_larga <- ventas %>% mutate(pred = preds) %>% 
+  pivot_longer(cols = all_of(c("ventas","pred")), names_to = "tipo", values_to = "unidades")
+ggplot(ventas_larga %>% mutate(unidades = ifelse(tipo=="ventas" & semana > 80, NA, unidades)), 
+       aes(x = semana, y = unidades, group = tipo, colour = tipo)) + 
+  geom_line() +
+  geom_vline(xintercept = 80)
+```
+
+Pero tomar decisiones de demanda o inventario es equivocado. La razón es que 
+existen agotamientos de inventario:
+
+
+```{r, fig.width = 5, fig.height=2.5}
+preds <- predict(mod_lineal, newdata = ventas)
+ventas_larga <- ventas %>% mutate(pred = preds) %>% 
+  pivot_longer(cols = all_of(c("ventas","pred")), names_to = "tipo", values_to = "unidades")
+ggplot(ventas_larga %>% mutate(unidades = ifelse(tipo=="ventas" & semana > 80, NA, unidades)), aes(x = semana)) + 
+  geom_line(aes(group = tipo, colour = tipo, y = unidades)) +
+  geom_point(data = filter(ventas, agotamiento==1, semana < 80), aes(y = ventas), colour = "red") + 
+  geom_vline(xintercept = 80)
+```
+
+Si usáramos la política sugerida por las predicciones (por ejemplo 5% más), 
+veríamos las siguientes ventas:
+
+```{r, fig.width = 5, fig.height=2.5}
+preds <- predict(mod_lineal, newdata = ventas)
+ventas_larga <- ventas %>% mutate(pred = preds) %>% 
+  mutate(ventas = ifelse(semana > 80, pmin(1.02*pred, demanda), ventas)) %>% 
+  pivot_longer(cols = all_of(c("ventas","pred")), names_to = "tipo", values_to = "unidades")
+g1 <- ggplot(ventas_larga, aes(x = semana)) + 
+  geom_line(aes(group = tipo, colour = tipo, y = unidades)) +
+  geom_vline(xintercept = 80) + labs(subtitle = "Inventario: Predicciones + 2%")
+```
+
+Sin embargo, si usáramos una política de inventario con 250 unidades, observaríamos:
+
+```{r, fig.width = 5, fig.height=2.5}
+preds <- predict(mod_lineal, newdata = ventas)
+ventas_larga <- ventas %>% mutate(pred = preds) %>% 
+  mutate(ventas = ifelse(semana > 80, pmin(300, demanda), ventas)) %>% 
+  pivot_longer(cols = all_of(c("ventas","pred")), names_to = "tipo", values_to = "unidades")
+g2 <- ggplot(ventas_larga, aes(x = semana)) + 
+  geom_line(aes(group = tipo, colour = tipo, y = unidades)) +
+  geom_vline(xintercept = 80)+ labs(subtitle = "Inventario: 300 unidades cte")
+```
+
+```{r}
+g1 / g2
+```
+
+
+
+- La política basada en las predicciones **exacerba** el problema de los agotamientos.
+- Un uso no pensado de datos sin considerar el proceso generador de los mismos puede producir 
+errores grandes en la decisión de políticas
+- En este caso, la confusión proviene de no separar los conceptos de demanda y ventas. Otros
+indicadores de demanda o modelos más adecuados ayudarían a resolver el problema.
 
 
 ## Muestras naturales y sesgo
@@ -287,6 +381,8 @@ bosque_1 %>%
 Aunque el accuracy parece alto, la precisión y la exhaustividad son cero.
 
 ## Fugas en implementación
+
+### Variables no disponibles al momento de predicción
 
 En este caso mostramos un ejemplo donde se utiliza erróneamente una variable que
 no estará disponible al momento de hacer las predicciones (Datos de William Greene's book Econometric Analysis)
