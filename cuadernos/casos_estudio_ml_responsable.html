@@ -408,6 +408,7 @@ summary {
 </div>
 
 <p>En este cuaderno mostraremos varios ejemplos de los retos y soluciones explicadas en el documento principal.</p>
+<p>Se utiliza el lenguaje de programación R, y los siguientes paquetes: <span class="citation">Wickham (<a href="#ref-tidyverse" role="doc-biblioref">2017</a>)</span>, <span class="citation">Kuhn and Wickham (<a href="#ref-recipes" role="doc-biblioref">2020</a>)</span>, <span class="citation">Hvitfeldt (<a href="#ref-themis" role="doc-biblioref">2020</a>)</span>, <span class="citation">Kuhn, Chow, and Wickham (<a href="#ref-rsample" role="doc-biblioref">2020</a>)</span>, <span class="citation">Kuhn and Vaughan (<a href="#ref-parsnip" role="doc-biblioref">2020</a><a href="#ref-parsnip" role="doc-biblioref">a</a>)</span>, <span class="citation">Kuhn and Vaughan (<a href="#ref-yardstick" role="doc-biblioref">2020</a><a href="#ref-yardstick" role="doc-biblioref">b</a>)</span>, <span class="citation">Vaughan (<a href="#ref-workflows" role="doc-biblioref">2020</a>)</span>, <span class="citation">Kuhn (<a href="#ref-tune" role="doc-biblioref">2020</a>)</span>, <span class="citation">Xie (<a href="#ref-knitr" role="doc-biblioref">2019</a>)</span>, <span class="citation">Pedersen (<a href="#ref-patchwork" role="doc-biblioref">2019</a>)</span>.</p>
 <pre class="r"><code>library(tidyverse)
 library(recipes)
 library(themis)
@@ -1064,9 +1065,9 @@ ajuste %&gt;% predict(prueba_prep) %&gt;%
 <pre><code>## # A tibble: 3 x 3
 ##   .metric   .estimator .estimate
 ##   &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;
-## 1 accuracy  binary         0.854
-## 2 recall    binary         0.476
-## 3 precision binary         0.909</code></pre>
+## 1 accuracy  binary         0.833
+## 2 recall    binary         0.393
+## 3 precision binary         0.892</code></pre>
 <p>Y parece tener un desempeño razonable. Si quitamos la variable <em>expenditure</em> se degrada totalmente el desempeño del modelo:</p>
 <pre class="r"><code>ajuste_2 &lt;- modelo_regularizado %&gt;% 
   fit(card~ dependents + income + age + owner_yes, data = entrena_prep)
@@ -1149,8 +1150,38 @@ ajuste_2 %&gt;% predict(prueba_prep) %&gt;%
 <div id="ref-ESL">
 <p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2017. <em>The Elements of Statistical Learning</em>. Springer Series in Statistics. Springer New York Inc. <a href="http://web.stanford.edu/~hastie/ElemStatLearn/">http://web.stanford.edu/~hastie/ElemStatLearn/</a>.</p>
 </div>
+<div id="ref-themis">
+<p>Hvitfeldt, Emil. 2020. <em>Themis: Extra Recipes Steps for Dealing with Unbalanced Data</em>. <a href="https://CRAN.R-project.org/package=themis">https://CRAN.R-project.org/package=themis</a>.</p>
+</div>
 <div id="ref-enigh">
 <p>INEGI. 2014. “Encuesta Nacional de Ingresos Y Gastos de Los Hogares (Enigh-2014). Diseño Muestral.” <a href="http://internet.contenidos.inegi.org.mx/contenidos/Productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825070359.pdf">http://internet.contenidos.inegi.org.mx/contenidos/Productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825070359.pdf</a>.</p>
+</div>
+<div id="ref-tune">
+<p>Kuhn, Max. 2020. <em>Tune: Tidy Tuning Tools</em>. <a href="https://CRAN.R-project.org/package=tune">https://CRAN.R-project.org/package=tune</a>.</p>
+</div>
+<div id="ref-rsample">
+<p>Kuhn, Max, Fanny Chow, and Hadley Wickham. 2020. <em>Rsample: General Resampling Infrastructure</em>. <a href="https://CRAN.R-project.org/package=rsample">https://CRAN.R-project.org/package=rsample</a>.</p>
+</div>
+<div id="ref-parsnip">
+<p>Kuhn, Max, and Davis Vaughan. 2020a. <em>Parsnip: A Common Api to Modeling and Analysis Functions</em>. <a href="https://CRAN.R-project.org/package=parsnip">https://CRAN.R-project.org/package=parsnip</a>.</p>
+</div>
+<div id="ref-yardstick">
+<p>———. 2020b. <em>Yardstick: Tidy Characterizations of Model Performance</em>. <a href="https://CRAN.R-project.org/package=yardstick">https://CRAN.R-project.org/package=yardstick</a>.</p>
+</div>
+<div id="ref-recipes">
+<p>Kuhn, Max, and Hadley Wickham. 2020. <em>Recipes: Preprocessing Tools to Create Design Matrices</em>. <a href="https://CRAN.R-project.org/package=recipes">https://CRAN.R-project.org/package=recipes</a>.</p>
+</div>
+<div id="ref-patchwork">
+<p>Pedersen, Thomas Lin. 2019. <em>Patchwork: The Composer of Plots</em>. <a href="https://CRAN.R-project.org/package=patchwork">https://CRAN.R-project.org/package=patchwork</a>.</p>
+</div>
+<div id="ref-workflows">
+<p>Vaughan, Davis. 2020. <em>Workflows: Modeling Workflows</em>. <a href="https://CRAN.R-project.org/package=workflows">https://CRAN.R-project.org/package=workflows</a>.</p>
+</div>
+<div id="ref-tidyverse">
+<p>Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+</div>
+<div id="ref-knitr">
+<p>Xie, Yihui. 2019. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.name/knitr/">https://yihui.name/knitr/</a>.</p>
 </div>
 </div>
 </div>

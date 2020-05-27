@@ -1,13 +1,23 @@
 ---
 title: "Casos de estudio"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true
-    theme: cerulean
-    css: [ "./css/style.css"]
 link-citations: yes
+output:
+  html_document:
+    css: ./css/style.css
+    number_sections: yes
+    theme: cerulean
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+    includes:
+      in_header: ../documento/preamble.tex
+    latex_engine: xelatex
+    citation_package: natbib
+  word_document:
+    toc: yes
+    toc_depth: '3'
 bibliography:
 - ../documento/referencias.bib
 - ../documento/packages.bib
@@ -19,6 +29,10 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 En este cuaderno mostraremos varios ejemplos de los retos y soluciones explicadas
 en el documento principal.
+
+Se utiliza el lenguaje de programación R, y los siguientes paquetes: @tidyverse, 
+@recipes, @themis, @rsample, @parsnip, @yardstick, @workflows, @tune, @knitr, 
+@patchwork.
 
 ```{r}
 library(tidyverse)
