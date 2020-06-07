@@ -7,6 +7,10 @@ output:
     number_sections: true
     theme: cerulean
     css: [ "./css/style.css"]
+link-citations: yes
+bibliography:
+- ../documento/referencias.bib
+- ../documento/packages.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -38,6 +42,9 @@ Usar modelos que predicen la métrica incorrecta puede llevar a tomar decisiones
 A veces el problema es claro, cuando la métrica sustituto tiene deficiencias obvias, y en otras
 puede ser más sutil.
 
+En este ejemplo se busca predecir la demanda de cierto producto, y se cuenta
+con datos históricos de inventario, ventas y una covariable indicadora de ventas:
+
 ```{r, echo=FALSE, include=FALSE}
 set.seed(124)
 semana <- 1:100
@@ -54,13 +61,18 @@ ventas <- tibble(
 ventas %>% select(-demanda)
 ```
 
+Separamos los datos en entrenamiento y prueba, ajustando el modelo con el 
+subconjunto de datos de entrenamiento. En este caso se utiliza un modelo lineal
+con variable dependiente ventas y covariables de semana y una variable indicador.
+
 ```{r}
 entrena <- ventas %>% filter(semana < 80)
 prueba <- ventas %>% filter(semana >= 80)
-entrena %>% head() %>% kable()
+entrena %>% select(-demanda) %>%  head() %>% kable()
 mod_lineal <- lm(ventas ~ semana + indicador, data = ventas)
 mod_lineal
 ```
+Evaluamos el error de predicción.
 
 ```{r}
 preds <- predict(mod_lineal, newdata = prueba)
@@ -80,8 +92,7 @@ ggplot(ventas_larga %>% mutate(unidades = ifelse(tipo=="ventas" & semana > 80, N
 ```
 
 Pero tomar decisiones de demanda o inventario es equivocado. La razón es que 
-existen agotamientos de inventario:
-
+existen agotamientos de inventario, que marcamos con rojo en la siguiente gráfica.
 
 ```{r, fig.width = 5, fig.height=2.5}
 preds <- predict(mod_lineal, newdata = ventas)
@@ -94,7 +105,9 @@ ggplot(ventas_larga %>% mutate(unidades = ifelse(tipo=="ventas" & semana > 80, N
 ```
 
 Si usáramos la política sugerida por las predicciones (por ejemplo 5% más), 
-veríamos las siguientes ventas:
+veríamos las ventas de la primera gráfica a continuación. Sin embargo, si 
+usáramos una política de inventario con 250 unidades, observaríamos:
+
 
 ```{r, fig.width = 5, fig.height=2.5}
 preds <- predict(mod_lineal, newdata = ventas)
@@ -105,8 +118,6 @@ g1 <- ggplot(ventas_larga, aes(x = semana)) +
   geom_line(aes(group = tipo, colour = tipo, y = unidades)) +
   geom_vline(xintercept = 80) + labs(subtitle = "Inventario: Predicciones + 2%")
 ```
-
-Sin embargo, si usáramos una política de inventario con 250 unidades, observaríamos:
 
 ```{r, fig.width = 5, fig.height=2.5}
 preds <- predict(mod_lineal, newdata = ventas)
@@ -122,7 +133,7 @@ g2 <- ggplot(ventas_larga, aes(x = semana)) +
 g1 / g2
 ```
 
-
+Entonces, 
 
 - La política basada en las predicciones **exacerba** el problema de los agotamientos.
 - Un uso no pensado de datos sin considerar el proceso generador de los mismos puede producir 
@@ -133,14 +144,14 @@ indicadores de demanda o modelos más adecuados ayudarían a resolver el problem
 
 ## Muestras naturales y sesgo
 
-Cuando las muestras de entrenamiento son diferentes a las poblaciones donde
+Cuando las muestras de entrenamiento son diferentes a las poblaciones, donde
 se van a aplicar los modelos, existen dificultades en validar correctamente las
 predicciones.
 
-
-
 ### Muestras naturales: mala representatividad 
 
+Para este ejemplo utilizaremos datos de la encuesta nacional de ingresos y gastos
+en hogares de México [@enigh], para simular un escenario que queremos ejemplificar.
 
 ```{r}
 set.seed(128)
@@ -160,25 +171,34 @@ entrena <- training(ingreso_split)
 prueba <- testing(ingreso_split)
 ```
 
-
-Supongamos que usamos una encuesta por teléfono celular, y que solo
-accedimos a zonas que no tienen marginación muy alta.
+Supongamos que nos interesa estimar el ingreso de los hogares, para ello usamos 
+una encuesta por teléfono celular, más aún, supongamos que solo accedimos a 
+zonas que no tienen marginación muy alta.
 
 ```{r}
 entrena_sesgada <- filter(entrena, tel_celular == "Sí", marginacion=="Muy bajo")
 sesgados_split <- initial_split(entrena_sesgada)
 entrena_sesgo <- training(sesgados_split)
 validacion <- testing(sesgados_split)
+```
+
+Construimos nuestro modelo de ingreos con los datos disponibles.
+
+```{r}
 mod_1 <- lm(log(1 + ingreso_miles) ~ num_focos + ocupadas, data = entrena_sesgo)
 ```
 
+Y evaluamos el error en una muestra de prueba construida con datos con las mismas
+características que los datos de entrenamiento (hogares con teléfono celular y 
+grado de marginación no muy alto).
 
 ```{r}
 preds_val <- predict(mod_1, newdata = validacion)
 mean(abs(preds_val - log(1 + validacion$ingreso_miles))) %>% round(2)
 ```
 
-El error en una muestra más similar a la población que se pretende aplicar el algoritmo es mayor:
+El error en una muestra más similar a la población que se pretende aplicar el 
+algoritmo es mayor:
 
 ```{r}
 preds_prueba <- predict(mod_1, newdata = prueba)
@@ -186,7 +206,12 @@ mean(abs(preds_prueba - log(1 + prueba$ingreso_miles))) %>% round(2)
 prueba$pred <- preds_prueba
 ```
 
-Sin embargo, la estimación con 
+Sin embargo, el principal problema se refleja en la siguiente gráfica: cada punto 
+representa un hogar, la muestra es más similar a la población donde se aplicará la
+metodología, y en el 
+eje horizontal graficamos la predicción de los hogares utilizando el modelo,
+mientras que el eje vertical corresponde al ingreso de cada hogar. Como referencia
+agregamos la recta $y = x$, y un suavizador.
 
 ```{r, fig.width = 5, fig.height = 4}
 ggplot(prueba %>% filter(pred < log(100)), 
@@ -303,7 +328,12 @@ cuando usamos métodos como validación cruzada
 ```
 
 
-Este ejemplo es originalmente de [@ESL], y utilizaremos datos sintéticos 
+Este ejemplo es originalmente de [@ESL], y utilizaremos datos sintéticos, 
+generados con el siguiente proceso:
+
+1. Simulamos variables respuesta $y$ con distribución binomial,  
+2. Simulamos 1000 covariables independientes, cada una con distribución normal
+estándar.
 
 ```{r, message = FALSE}
 simular <- function(n = 100, p = 500, prob = 0.5){
@@ -319,8 +349,8 @@ dim(datos_entrena)
 datos_entrena %>% group_by(y) %>% tally() %>% kable()
 ```
 
-Nuestra selección de variables está dada por la siguiente función. Esta función **selecciona las
-variables más correlacionadas con la respuesta*. Por sí solo este método no es incorrecto, pero cuando
+Nuestra selección de variables está dada por la siguiente función. Esta función *selecciona las
+variables más correlacionadas con la respuesta**. Por sí solo este método no es incorrecto, pero cuando
 se ejecuta sobre los datos que se usarán en validación (validación cruzada), entonces la estimación
 de desempeño es optimista:
 
@@ -363,8 +393,6 @@ Sin embargo, el desempeño real del modelo será:
 mean(as.numeric(predict(modelo_1, datos_prueba) > 0) == datos_prueba$y) %>% round(2)
 ```
 
-
-
 #### Método correcto {-}
 
 La selección de variables debe hacerse en cada vuelta de validación cruzada:
@@ -380,8 +408,9 @@ mean(as.numeric(predict(modelo_1, valida) > 0) == valida$y) %>% round(2)
 
 ### Sobremuestrear antes de particionar
 
-Sobremuestrear clase chica antes de separar datos de validación o hacer validación cruzada puede
-producir con estimaciones demasiado optimistas del error de predicción.
+En este ejemplo veremos que sobremuestrear una clase chica antes de separar 
+datos de validación o hacer validación cruzada puede producir estimaciones 
+demasiado optimistas del error de predicción.
 
 Supongamos que tenemos desbalance severo entre nuestras dos clases:
 
@@ -395,8 +424,8 @@ datos_desbalance %>% group_by(y) %>% tally() %>% kable()
 
 #### Manera incorrecta {-}
 
-Supongamos que primero aplicamos (SMOTE)[https://www.jair.org/index.php/jair/article/view/10302]
-para intentar balancear los datos:
+Supongamos que primero aplicamos (SMOTE)[@chawla] para intentar balancear los 
+datos:
 
 ```{r}
 receta_balance <- recipe(y ~ ., datos_desbalance) %>%
@@ -405,6 +434,7 @@ receta_balance <- recipe(y ~ ., datos_desbalance) %>%
 datos_smote <- juice(receta_balance) 
 ```
 
+Obteniendo así,
 
 ```{r}
 datos_smote %>% group_by(y) %>% tally() %>% kable()
@@ -418,6 +448,8 @@ entrena_smote <- training(sep_datos_smote)
 prueba_smote <- testing(sep_datos_smote)
 ```
 
+Y usamos nuestro método de clasificación:
+
 ```{r}
 class_metrics <- metric_set(accuracy, recall, precision, kap)
 bosque <- rand_forest(trees = 500, mtry = 20, mode = "classification") %>%
@@ -429,16 +461,15 @@ bosque %>%
   class_metrics(truth = y, estimate = .pred_class) %>% 
   kable()
 ```
-gin with a naive estimate of SATT – the simple difference in means – which would
-be useful only if the in-sample distr
-Y parece ser que el desempeño es muy bueno. Sabemos que esto es fictico, pues no hay
-relación de $y$ con el resto de las covariables.
+
+En primera instancia parece ser que el desempeño es muy bueno. Sabemos que esto 
+es fictico, pues no hay relación de $y$ con el resto de las covariables.
 
 
 #### Manera correcta {-}
 
-Antes de hacer el rebalance de clases separamos entrenamiento y validación. Es posible
-hacer el muestro estratificado, por ejemplo:
+Antes de hacer el rebalance de clases separamos entrenamiento y validación. Es 
+posible hacer el muestro estratificado, por ejemplo:
 
 ```{r}
 sep_datos <- initial_split(datos_desbalance, prop = 0.5)
@@ -471,7 +502,7 @@ Aunque el accuracy parece alto, la precisión y la exhaustividad son cero.
 ### Variables no disponibles al momento de predicción
 
 En este caso mostramos un ejemplo donde se utiliza erróneamente una variable que
-no estará disponible al momento de hacer las predicciones (Datos de William Greene's book Econometric Analysis)
+no estará disponible al momento de hacer las predicciones (datos de [@greene]).
 
 ```{r}
 credito <- read_csv("datos/AER_credit_card_data.csv") 
@@ -548,3 +579,6 @@ y la variable *expenditure* es medida posteriormente a la entrega de la tarjeta:
 - El desempeño de este modelo para nuevas aplicaciones será muy malo, pues la variable
 *expenditure*, en el momento de la aplicación, evidentemente no cuenta cuánto va a gastar
 cada cliente en el futuro.
+
+
+### Referencias
