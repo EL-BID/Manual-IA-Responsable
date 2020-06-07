@@ -202,6 +202,91 @@ Tenemos entonces dos problemas:
 2. Peor aún, el sesgo es mayor para hogares de menores ingresos, lo cual puede producir
 una focalización mediocre si buscamos identificar hogares de menores ingresos.
 
+### Muestras naturales: comparaciones causales
+
+Supongamos que quisiéramos evaluar el efecto que tiene ir a una
+escuela pública vs una escuela privada en las calificaciones de un examen 
+estandarizado. Consideramos datos agregados por escuela
+
+```{r}
+escuelas <- read_csv("datos/enlace.csv")
+escuelas
+```
+
+En este caso particular tenemos pocas covariables, pero haremos un primer
+modelo considerando estado y tipo de escuela. La respuesta es la calificación
+en matemáticas
+
+```{r}
+library(recipes)
+escuelas_split <- rsample::initial_split(escuelas, prop = 0.5)
+escuelas_split
+receta_escuelas <- training(escuelas_split) %>%
+  recipe(mate_6 ~ estado + tipo + num_evaluados_total) %>%
+  step_dummy(all_nominal()) %>% 
+  prep()
+```
+
+
+
+```{r}
+escuelas_entrena <- receta_escuelas %>% juice
+escuelas_prueba <- receta_escuelas %>% bake(testing(escuelas_split)) 
+esc_ranger <- rand_forest(trees = 250, mode = "regression") %>%
+  set_engine("ranger") %>%
+  fit(mate_6 ~ ., data = escuelas_entrena)
+```
+
+Podemos comparar por ejemplo las predicciones por estado para cada tipo de
+escuela:
+
+```{r}
+grafica_datos <- training(escuelas_split) %>% 
+  dplyr::select(estado, tipo) %>% unique %>% 
+  crossing(tibble(num_evaluados_total = c(10, 20, 50, 100)))
+grafica_baked <- receta_escuelas %>% bake(grafica_datos)
+preds <- predict(esc_ranger, grafica_baked) %>% pull(.pred)
+graf_prom <- grafica_datos %>% mutate(prediccion = preds) %>% 
+  group_by(tipo, num_evaluados_total) %>% 
+  summarise(prediccion = mean(prediccion))
+ggplot(graf_prom, 
+       aes(x = num_evaluados_total, y = prediccion, colour=tipo)) +
+  geom_line() + geom_point()
+```
+
+Estas diferencias predictivas difícilmente pueden interpetarse como 
+"efectos de la calidad de la escuela". Podemos ver eso cuando
+consideramos incluír también nivel de marginación donde está el municipio.
+En este caso, obtrenemos
+
+```{r}
+receta_escuelas <- training(escuelas_split) %>%
+  recipe(mate_6 ~ estado + tipo + num_evaluados_total + marginacion) %>%
+  step_dummy(all_nominal()) %>% 
+  prep()
+escuelas_entrena <- receta_escuelas %>% juice
+esc_ranger <- rand_forest(trees = 250, mode = "regression") %>%
+  set_engine("ranger") %>%
+  fit(mate_6 ~ ., data = escuelas_entrena)
+grafica_datos <- training(escuelas_split) %>% 
+  dplyr::select(estado, tipo, marginacion) %>% unique %>% 
+  crossing(tibble(num_evaluados_total = c(10, 20, 50, 100)))
+grafica_baked <- receta_escuelas %>% bake(grafica_datos)
+preds <- predict(esc_ranger, grafica_baked) %>% pull(.pred)
+graf_prom <- grafica_datos %>% mutate(prediccion = preds) %>% 
+  group_by(tipo, num_evaluados_total, marginacion) %>% 
+  summarise(prediccion = mean(prediccion)) %>% 
+  mutate(marginacion = fct_relevel(marginacion, c("MUY BAJO", "BAJO", "MEDIO",
+                                                  "ALTO", "MUY ALTO")))
+ggplot(graf_prom, 
+       aes(x = num_evaluados_total, y = prediccion, colour=tipo)) +
+  geom_line() + geom_point() + facet_wrap(~marginacion)
+
+```
+
+
+
+
 # Retos en construcción y desarrollo de predictores
 
 ## Fugas Entrenamiento Validación
@@ -344,7 +429,8 @@ bosque %>%
   class_metrics(truth = y, estimate = .pred_class) %>% 
   kable()
 ```
-
+gin with a naive estimate of SATT – the simple difference in means – which would
+be useful only if the in-sample distr
 Y parece ser que el desempeño es muy bueno. Sabemos que esto es fictico, pues no hay
 relación de $y$ con el resto de las covariables.
 
