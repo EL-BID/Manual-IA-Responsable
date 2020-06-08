@@ -18,7 +18,9 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
 En este cuaderno mostraremos varios ejemplos de los retos y soluciones explicadas
-en el documento principal.
+en el documento principal. Usamos distintos tipos de modelos (lineales, basados en árboles y otros) y distintas implementaciones (R, keras, xgboost) para mostrar
+que estos problemas se presentan independientemente de la elección de herramientas
+particulares.
 
 ```{r}
 library(tidyverse)
@@ -550,5 +552,419 @@ y la variable *expenditure* es medida posteriormente a la entrega de la tarjeta:
 *expenditure*, en el momento de la aplicación, evidentemente no cuenta cuánto va a gastar
 cada cliente en el futuro.
 
+## Desbalance de clases
 
-### Referencias
+Cuando tenemos desbalance severo de clases podemos enfrentar dos problemas:
+existen en términos absolutos muy pocos elementos de una clase para poder
+discriminarla de manera efectiva (aún cuando tengamos los atributos
+o *features* correctas), o métodos usuales de evaluación de predicción 
+son deficientes para evaluar el desempeño de predicciones. 
+
+Consideremos los siguientes datos (del paquete @ISLR):
+
+The data contains 5822 real customer records. Each record consists of 86 variables, containing sociodemographic data (variables 1-43) and product ownership (variables 44-86). The sociodemographic data is derived from zip codes. All customers living in areas with the same zip code have the same sociodemographic attributes. Variable 86 (Purchase) indicates whether the customer purchased a caravan insurance policy. Further information on the individual variables can be obtained at http://www.liacs.nl/~putten/library/cc2000/data.html
+
+
+Queremos predecir la variable *Purchase*:
+
+```{r}
+caravan <- read_csv("datos/caravan.csv") %>% 
+  mutate(MOSTYPE = factor(MOSTYPE),
+         MOSHOOFD = factor(MOSHOOFD))
+nrow(caravan)
+caravan %>% count(Purchase) %>% 
+  mutate(pct = 100 * n / sum(n)) %>% 
+  mutate(pct = round(pct, 2))
+```
+
+Esta es la distribución natural de respuesta que vemos en los datos, y tenemos relativamente pocos
+datos en la categoría "Yes".
+
+Usaremos muestreo estratificado para obtener proporciones similares en conjuntos de entrenamiento y prueba
+
+```{r}
+set.seed(823)
+caravan_split = initial_split(caravan, strata = Purchase, prop = 0.8)
+caravan_split
+```
+
+Y usaremos regresión logística (podemos usar bosques, xgboost, keras, etc.)
+
+```{r}
+library(tune)
+# preparacion de datos
+caravan_receta <- recipe(Purchase ~ ., caravan) %>%
+  step_dummy(all_nominal(), -Purchase) %>% 
+  prep()
+# modelo
+modelo_log <- 
+  logistic_reg() %>% 
+  set_engine("glm")  %>% 
+  set_mode("classification") %>% 
+  fit(Purchase ~ ., data = caravan_receta %>% juice)
+```
+
+#### Análisis incorrecto {-}
+
+La matriz de confusión de prueba es:
+
+```{r, message=FALSE, warning = FALSE}
+prueba_procesado <- bake(caravan_receta, testing(caravan_split))
+predictions_glm <- modelo_log %>%
+  predict(new_data = prueba_procesado) %>%
+  bind_cols(prueba_procesado %>% select(Purchase))
+predictions_glm %>%
+  conf_mat(Purchase, .pred_class)
+```
+
+Y la de entrenamiento:
+
+```{r, message=FALSE, warning = FALSE}
+predictions_ent_glm <- modelo_log %>%
+  predict(new_data = juice(caravan_receta)) %>%
+  bind_cols(juice(caravan_receta) %>% select(Purchase))
+predictions_ent_glm %>%
+  conf_mat(Purchase, .pred_class)
+```
+
+
+Y obtenemos desempeño pobre según esta matriz de confusión (prueba y entrenamiento).
+La sensibilidad es muy baja, aunque
+la especificidad sea alta. Una conclusión típica es que 
+*el modelo no tiene valor predictivo*, o que
+*es necesario sobre muestrear la
+clase de ocurrencia baja*.
+
+#### Análisis correcto {-}
+
+En lugar de empezar con sobre/sub muestreo,
+que modifica lsas proporciones naturales de las categorías en los datos, podemos trabajar con probabilidades
+en lugar de predicciones de clase con punto de corte de 0.5.
+
+Por ejemplo, podemos visualizar con una curva ROC (o curva lift, precisión recall, o alguna otra similar que
+tome en cuenta probabilidades):
+
+```{r, fig.width = 5, fig.height = 4}
+library(yardstick)
+predictions_prob <- modelo_log %>%
+  predict(new_data = prueba_procesado, type = "prob") %>%
+  bind_cols(prueba_procesado %>% select(Purchase)) %>% 
+  select(.pred_Yes, Purchase)
+datos_roc <- roc_curve(predictions_prob, Purchase, .pred_Yes)
+autoplot(datos_roc)
+```
+
+Donde vemos que podemos alcanzar buenos niveles de sensibilidad si aceptamos alguna degradación en la especificidad,
+que originalmente es muy alta. Por ejemplo, cortando en 0.05 podemos obtener especificidad y sensibilidad
+que posiblemente sean adecuadas para el problema:
+
+```{r}
+datos_roc %>% filter(abs(.threshold - 0.05) < 1e-4) %>% round(3)
+```
+
+**¿Qué pasa si hacemos sub/sobremuestreo? **
+
+Sobremuetreamos:
+
+```{r}
+caravan_receta <- recipe(Purchase ~ ., caravan) %>%
+  step_dummy(all_nominal(), -Purchase) 
+# modelo
+entrena <- caravan_receta %>% step_smote(Purchase) %>% prep() %>% juice
+entrena %>% count(Purchase)
+modelo_log_smote <- 
+  logistic_reg() %>% 
+  set_engine("glm")  %>% 
+  set_mode("classification") %>% 
+  fit(Purchase ~ ., data = entrena)
+```
+
+En entrenamiento la matriz de confusión es *aparentemente* mejor:
+```{r, message=FALSE, warning = FALSE}
+predictions_ent_glm <- modelo_log_smote %>%
+  predict(new_data = entrena) %>%
+  bind_cols(entrena %>% select(Purchase))
+predictions_ent_glm %>%
+  conf_mat(Purchase, .pred_class)
+```
+
+
+Pero en prueba los resultados son muy similares:
+
+```{r}
+predictions_prob <- modelo_log_smote %>%
+  predict(new_data = prueba_procesado, type = "prob") %>%
+  bind_cols(prueba_procesado %>% select(Purchase)) %>% 
+  select(.pred_Yes, Purchase)
+datos_roc_smote <- roc_curve(predictions_prob, Purchase, .pred_Yes)
+datos_roc_comp <- bind_rows(datos_roc %>% mutate(tipo = "natural"),
+                            datos_roc_smote %>% mutate(tipo = "con sub-sobre muestreo")
+)
+ggplot(datos_roc_comp,
+       aes(x = 1 - specificity, y = sensitivity, colour = tipo)) +
+  geom_path() +
+  geom_abline(lty = 3) +
+  coord_equal() +
+  theme_bw()
+```
+
+- **El problema original no era que el ajuste no funcionaba, sino que evaluamos el punto 
+de corte incorrecto**. Un punto de corte de 0.5 con SMOTE equivale a uno mucho más chico sin
+SMOTE.
+
+- Peor aún, las **probabilidades del modelo construido con sobremuestreo no reflejan las tasas
+de ocurrencia de la respuesta que nos interesa**, lo cual puede producir resúmenes engañosos de las
+tasas de respuesta que esperamos observar en producción.
+
+## Evaluación de punto de corte 
+
+Las mejores decisiones de punto de corte pueden hacerse con análisis de costo beneficio,
+con curvas tipo *lift*. Aunque esta información muchas veces no está disponible, es la
+situación ideal para evaluar cómo ayuda el modelo y cuánto valen las acciones que pretendemos
+tomar. Es posible hacer este análisis con valores inciertos de costo beneficio.
+
+Supongamos que estamos pensando en un tratamiento para retener estudiantes en algún programa
+de entrenamiento o mejora.
+
+- El tratamiento de retención cuesta 5000 pesos por alumno,
+- Estimamos mediante experimentos o algún análisis externo que nuestro tratamiento reduce la probabilidad de abandono
+en un 60\%,
+- Tenemos algún tipo de valuación del valor social de que un alumno persista en el programa.
+
+Podemos evaluar a nuestro modelo en el contexto del problema de las siguiente 
+forma:
+
+- Suponemos que trataremos a un u % de los estudiantes con mayor probabilidad de rotar.
+- Calculamos el costos esperado si tratamos a u % de los estudiantes: 
+simulamos reduciendo su probabilidad de abandono por el tratamiento y sumamos los costos de tratarlos.
+- Comparamos contra el escenario de no aplicar ningún tratamiento
+
+No es necesario usar medidas muy técnicas para dar un resumen de cómo
+nos puede ayudar el tratamiento y modelo para mantener el valor de la cartera:
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+clientes <- tibble(id = 1:20000, valor = 50000) %>% 
+    mutate(prob_pred = rbeta(length(valor), 1, 2)) 
+```
+
+```{r echo = FALSE, fig.width = 8, fig.height = 5}
+calc_perdida_aleatorio <- function(corte, factor_ret, costo){
+    n_tratados <- filter(clientes, prob_pred >= corte) %>% nrow()
+    p_tratados <- n_tratados / nrow(clientes)
+    clientes <- clientes %>%
+        mutate(aleatorio = rbinom(length(prob_pred), 1 , p_tratados))
+    perdida_sin_accion <- filter(clientes, aleatorio == 1) %>%
+        mutate(costo = ifelse(rbinom(length(prob_pred), 1, prob_pred) == 1, valor, 0)) %>% 
+        summarise(total = sum(costo)) %>% 
+        pull(total)
+    perdida_aleatorio <- filter(clientes, aleatorio==1) %>%
+        mutate(costo = ifelse(rbinom(length(prob_pred), 1, 
+          prob_pred*(aleatorio*factor_ret + (1-aleatorio))) == 1, valor, 0)) %>%
+        summarise(total = sum(costo)) %>% 
+        pull(total)
+    total <- perdida_aleatorio - (perdida_sin_accion)  +
+      costo*nrow(filter(clientes, prob_pred >= corte))
+    total
+}
+calc_perdida_modelo <- function(corte, factor_ret, costo){
+    perdida_no_trata <- filter(clientes, prob_pred < corte) %>% 
+        mutate(costo = ifelse(rbinom(length(prob_pred), 1, prob_pred) == 1, valor, 0)) %>% 
+        summarise(total = sum(costo)) %>% 
+        pull(total)
+    perdida_trata <- filter(clientes, prob_pred >= corte) %>% 
+        mutate(costo = ifelse(rbinom(length(prob_pred), 1, prob_pred*factor_ret) == 1, valor, 0)) %>% 
+        summarise(total = sum(costo)) %>% 
+        pull(total)
+    perdida_cf <- filter(clientes, prob_pred >= corte) %>%  
+        mutate(costo = ifelse(rbinom(length(prob_pred), 1, prob_pred) == 1, valor, 0)) %>% 
+        summarise(total = sum(costo)) %>% 
+        pull(total)
+    total <- perdida_no_trata +  perdida_trata - (perdida_no_trata + perdida_cf) +
+      costo*nrow(filter(clientes, prob_pred >= corte)) 
+    total
+}
+perdidas_sim_aleatorio <- map_dfr(rep(seq(0,1, 0.1), 50), 
+    function(x){
+      perdida_sim <- calc_perdida_aleatorio(x, 0.6, 5000)
+      tibble(perdida = perdida_sim, corte = x)
+    }) %>% bind_rows %>% mutate(tipo = "Tratamiento aleatorio")
+perdidas_sim_modelo <-  map_dfr(rep(seq(0,1, 0.1), 50), 
+    function(x){
+      perdida_sim <- calc_perdida_modelo(x, 0.6, 5000)
+      tibble(perdida = perdida_sim, corte = x)
+    }) %>% bind_rows %>% mutate(tipo = "Tratamiento modelo")
+perdidas_sim <- bind_rows(perdidas_sim_aleatorio, perdidas_sim_modelo)
+```
+
+```{r}
+ggplot(filter(perdidas_sim, tipo=="Tratamiento modelo"),
+       aes(x = factor(corte), y = - perdida / 1e6)) + 
+  geom_boxplot() + ylab("Ganancia incremental (millones)") +
+  xlab("Corte inferior de tratamiento (probabilidad)") +
+  labs(subtitle = "Ganancia vs ninguna acción") + theme_minimal()
+```
+
+¿Dónde habría que hacer el punto de corte para tratar a los estudiantes?
+
+Si queremos separar el efecto del tratamiento con el efecto del tratamiento aplicado
+según el modelo, podemos comparar con la acción que consiste en tratar a los estudiantes
+al azar:
+
+```{r}
+ggplot(perdidas_sim, aes(x = factor(corte), y = - perdida / 1e6, 
+                         group = interaction(tipo, corte), colour = tipo)) + 
+  geom_boxplot() + ylab("Ganancia incremental (millones)") +
+  xlab("Corte inferior de tratamiento (probabilidad)") +
+  labs(subtitle = "Ganancia vs ninguna acción") + theme_minimal()
+```
+
+- La conclusión es que el modelo **ayuda considerablemente a la focalización del programa** (el área entre
+las dos curvas mostradas arriba).
+
+## Equidad con atributos protegidos
+
+El siguiente ejemplo es derivado de (@Hardt). Supongamos que tenemos un atributo protegido $A$ que
+tiene dos valores: azul y naranja. Naranja es el grupo minoritario  desaventajado.
+Usaremos datos simulados como sigue: el atributo *score* está asociado
+al atributo protegido:
+
+
+```{r}
+inv_logit <- function(x){
+  1 / (1 + exp(-x))
+}
+simular_datos <- function(n = c(10000, 2000)){
+  score_azul <- pmax(rnorm(n[1], 50, 10), 0)
+  score_naranja <- pmax(rnorm(n[2], 40, 10), 0)
+  azul <- tibble(tipo = "azul", score = score_azul)
+  naranja <- tibble(tipo = "naranja", score = score_naranja)
+  datos <- bind_rows(azul, naranja) %>% 
+    mutate(coef_0 = ifelse(tipo == "azul", 0.0, 0),
+           prob_real_pos = inv_logit(-1 + coef_0 + 0.1 * (score-40))) %>% 
+    mutate(atr_1 = rpois(nrow(.), 3))
+  datos %>% select(-coef_0) %>% 
+    mutate(paga = map_dbl(prob_real_pos, ~ rbinom(1, 1, .x))) %>% 
+    select(-prob_real_pos)
+}
+set.seed(1221)
+tbl_datos <- simular_datos()
+```
+
+Una gráfica de conteos para el score obtenemos un grupo minoritario con valores de la variable score
+más baja:
+
+```{r, fig.width = 4, fig.height = 2}
+ggplot(tbl_datos, aes(x = score, fill = tipo)) + geom_histogram()
+```
+
+Ajustamos un modelo simple de regresión logística:
+
+```{r}
+reg_log <- glm(paga ~  score + atr_1 + tipo, tbl_datos, family = "binomial")
+tbl_datos <- tbl_datos %>% mutate(prob_pos = predict(reg_log, type = "response"))
+```
+
+
+
+Las tasas reales de cumplimiento son iguales para los dos grupos. En primer lugar, consideremos
+una estrategia donde aplicamos el mismo punto de corte para todos los grupos
+
+```{r}
+resultado_cortes <- function(tbl_datos, cortes){
+  resultado <- tbl_datos %>% 
+    mutate(recibe = ifelse(tipo == "azul", prob_pos > cortes[1], prob_pos > cortes[2]),
+           decision = ifelse(recibe, "Aceptado", "Rechazado")) 
+  resultado %>% group_by(tipo, decision, paga) %>% count() %>% 
+    ungroup()
+}
+resultados_conteo <- resultado_cortes(tbl_datos, c(0.45, 0.45)) 
+resultados_conteo
+```
+
+
+```{r}
+resultados_conteo %>%
+  group_by(tipo, decision) %>%
+  summarise(n = sum(n)) %>% 
+  mutate(total = sum(n)) %>% 
+  mutate(prop = n / total) %>% 
+  filter(decision == "Aceptado")
+```
+
+Nótese que el grupo naranja ha recibido considerablemente menos aceptaciones que el grupo azul, tanto
+en total como en proporción. Más aún, con la precisión o tasa de verdaderos positivos
+podemos evaluar qué proporción de los pagarían fueron aceptados:
+
+```{r}
+resultados_conteo %>% 
+  filter(paga == 1) %>% 
+  group_by(tipo) %>% 
+  mutate(tvp = n / sum(n)) %>% 
+  filter(decision == "Aceptado")
+```
+
+y vemos que el grupo naranja también está en desventaja, pues entre los que cumplen hay menos decisiones
+de aceptación.
+
+El siguiente paso es considerar **paridad demográfica**. En este caso, decidimos dar el mismo número
+de préstamos a cada grupo, dependiendo de su tamaño.
+
+```{r}
+calcular_puntos_paridad <- function(tbl_datos, prop){
+  tbl_datos %>% group_by(tipo) %>% 
+    summarise(corte = quantile(prob_pos, 1 - prop))
+}
+cortes_paridad_tbl <- calcular_puntos_paridad(tbl_datos, 0.40)
+cortes_paridad_tbl
+```
+
+El corte para azul es más exigente que para naranja. En sí eso no es un problema pero observamos:
+
+```{r}
+cortes_paridad <- cortes_paridad_tbl %>% pull(corte)
+resultados_conteo <- resultado_cortes(tbl_datos, cortes_paridad) 
+resultados_conteo %>% 
+  filter(paga == 1) %>% 
+  group_by(tipo) %>% 
+  mutate(tvp = n / sum(n)) %>% 
+  filter(decision == "Aceptado")
+```
+
+Y así que además de ser más exigente con el grupo azul, a los que cumplen del grupo azul también
+se les otorga menos decisiones de aceptación. Adicionalmente, se aceptan considerablemente menos
+personas de la población.
+
+La solución de **igual de de oportunidad** es cortar de forma que la tasa de aceptación dentro del grupo
+de los que pagan sea similar para ambas poblaciones.
+
+```{r}
+calcular_cortes_oportunidad <- function(tbl_datos, prop){
+  tbl_datos %>% 
+    filter(paga==1) %>% 
+    group_by(tipo) %>% 
+    mutate(rank_p = rank(prob_pos) / length(prob_pos) ) %>% 
+    filter(rank_p < prop) %>% 
+    top_n(1, rank_p) %>% 
+    select(tipo, corte = prob_pos)
+}
+cortes_op <- calcular_cortes_oportunidad(tbl_datos, 0.40)
+resultados_conteo <- resultado_cortes(tbl_datos, cortes_op %>% pull(corte)) 
+resultados_conteo %>% 
+  filter(paga == 1) %>% 
+  group_by(tipo) %>% 
+  mutate(tvp = n / sum(n)) %>% 
+  filter(decision == "Aceptado")
+```
+
+
+
+
+# Retos de rendición de cuentas
+
+## Interpretabilidad
+
+## Explicación de predicciones
+
+
+# Referencias
