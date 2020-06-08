@@ -279,9 +279,7 @@ este es un estudio retrospectivo, donde **algunos pacientes con riesgo de enferm
 de corazón sufrieron intervenciones para reducir su riesgo**, entre los
 que está tomar medicinas para reducir la presión. Una interpretación
 causal de reducciones de la presión arterial como promotora de 
-enfermedades del corazón es incorrecta (ver más en @ESL).
-
-
+enfermedades del corazón es incorrecta y potencialmente peligrosa (ver más en @ESL).
 
 
 # Retos en construcción y desarrollo de predictores
