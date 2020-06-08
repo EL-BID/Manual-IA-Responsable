@@ -229,85 +229,57 @@ una focalización mediocre si buscamos identificar hogares de menores ingresos.
 
 ### Muestras naturales: comparaciones causales
 
-Supongamos que quisiéramos evaluar el efecto que tiene ir a una
-escuela pública vs una escuela privada en las calificaciones de un examen 
-estandarizado. Consideramos datos agregados por escuela
+Este ejemplo está tomado de (@ESL y @saheart). Consideramos los siguientes datos donde queremos predecir enfermedad del corazón (chd) : 
+(@saheart):
 
 ```{r}
-escuelas <- read_csv("datos/enlace.csv")
-escuelas
+sa_heart <- read_csv("datos/sa-heart.csv")
+sa_heart
 ```
-
-En este caso particular tenemos pocas covariables, pero haremos un primer
-modelo considerando estado y tipo de escuela. La respuesta es la calificación
-en matemáticas
 
 ```{r}
 library(recipes)
-escuelas_split <- rsample::initial_split(escuelas, prop = 0.5)
-escuelas_split
-receta_escuelas <- training(escuelas_split) %>%
-  recipe(mate_6 ~ estado + tipo + num_evaluados_total) %>%
-  step_dummy(all_nominal()) %>% 
+set.seed(125)
+sa_split <- rsample::initial_split(sa_heart, prop = 0.75)
+sa_split
+receta_sa <- training(sa_split) %>%
+  recipe(chd ~ .) %>%
+  step_dummy(famhist) %>% 
+  step_mutate(chd = factor(chd)) %>%  
   prep()
 ```
 
 
 
 ```{r}
-escuelas_entrena <- receta_escuelas %>% juice
-escuelas_prueba <- receta_escuelas %>% bake(testing(escuelas_split)) 
-esc_ranger <- rand_forest(trees = 250, mode = "regression") %>%
-  set_engine("ranger") %>%
-  fit(mate_6 ~ ., data = escuelas_entrena)
+sa_entrena <- receta_sa %>% juice
+sa_boosted <- boost_tree(trees = 3000, mode = "classification", 
+                        learn_rate = 0.001, tree_depth = 2, 
+                        sample_size = 0.5) %>%
+  set_engine("xgboost") %>% 
+  fit(chd ~ ., data = sa_entrena)
 ```
 
-Podemos comparar por ejemplo las predicciones por estado para cada tipo de
-escuela:
+Podemos evaluar este modelo y afinar parámetros también. Nos interesa
+aqui interpretar el efecto de las variables en este modelo. Para eso
+consideramos la gráfica de dependencia parcial de la 
+prevalencia de enfermedad de corazón y la
+variable obesidad
 
 ```{r}
-grafica_datos <- training(escuelas_split) %>% 
-  dplyr::select(estado, tipo) %>% unique %>% 
-  crossing(tibble(num_evaluados_total = c(10, 20, 50, 100)))
-grafica_baked <- receta_escuelas %>% bake(grafica_datos)
-preds <- predict(esc_ranger, grafica_baked) %>% pull(.pred)
-graf_prom <- grafica_datos %>% mutate(prediccion = preds) %>% 
-  group_by(tipo, num_evaluados_total) %>% 
-  summarise(prediccion = mean(prediccion))
-ggplot(graf_prom, 
-       aes(x = num_evaluados_total, y = prediccion, colour=tipo)) +
-  geom_line() + geom_point()
+library(pdp)
+pdp_ob <- pdp::partial(sa_boosted$fit,  pred.var = "sbp",
+  plot = TRUE, plot.engine = "ggplot2", prob = TRUE,
+  train = sa_entrena %>% dplyr::select(-chd))
+pdp_ob
 ```
 
-Estas diferencias predictivas difícilmente pueden interpetarse como 
-"efectos de la calidad de la escuela". Podemos ver eso cuando
-consideramos incluír también nivel de marginación donde está el municipio.
-En este caso, obtrenemos
-
-```{r}
-receta_escuelas <- training(escuelas_split) %>%
-  recipe(mate_6 ~ estado + tipo + num_evaluados_total + marginacion) %>%
-  step_dummy(all_nominal()) %>% 
-  prep()
-escuelas_entrena <- receta_escuelas %>% juice
-esc_ranger <- rand_forest(trees = 250, mode = "regression") %>%
-  set_engine("ranger") %>%
-  fit(mate_6 ~ ., data = escuelas_entrena)
-grafica_datos <- training(escuelas_split) %>% 
-  dplyr::select(estado, tipo, marginacion) %>% unique %>% 
-  crossing(tibble(num_evaluados_total = c(10, 20, 50, 100)))
-grafica_baked <- receta_escuelas %>% bake(grafica_datos)
-preds <- predict(esc_ranger, grafica_baked) %>% pull(.pred)
-graf_prom <- grafica_datos %>% mutate(prediccion = preds) %>% 
-  group_by(tipo, num_evaluados_total, marginacion) %>% 
-  summarise(prediccion = mean(prediccion)) %>% 
-  mutate(marginacion = fct_relevel(marginacion, c("MUY BAJO", "BAJO", "MEDIO",
-                                                  "ALTO", "MUY ALTO")))
-ggplot(graf_prom, 
-       aes(x = num_evaluados_total, y = prediccion, colour=tipo)) +
-  geom_line() + geom_point() + facet_wrap(~marginacion)
-
-```
+La interpretación correcta de este gráfica proviene del hecho de que
+este es un estudio retrospectivo, donde **algunos pacientes con riesgo de enfermedad
+de corazón sufrieron intervenciones para reducir su riesgo**, entre los
+que está tomar medicinas para reducir la presión. Una interpretación
+causal de reducciones de la presión arterial como promotora de 
+enfermedades del corazón es incorrecta (ver más en @ESL).
 
 
 
