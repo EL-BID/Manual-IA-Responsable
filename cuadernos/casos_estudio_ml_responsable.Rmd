@@ -878,7 +878,7 @@ resultado_cortes <- function(tbl_datos, cortes){
   resultado %>% group_by(tipo, decision, paga) %>% count() %>% 
     ungroup()
 }
-resultados_conteo <- resultado_cortes(tbl_datos, c(0.45, 0.45)) 
+resultados_conteo <- resultado_cortes(tbl_datos, c(0.6, 0.6)) 
 resultados_conteo
 ```
 
@@ -915,7 +915,7 @@ calcular_puntos_paridad <- function(tbl_datos, prop){
   tbl_datos %>% group_by(tipo) %>% 
     summarise(corte = quantile(prob_pos, 1 - prop))
 }
-cortes_paridad_tbl <- calcular_puntos_paridad(tbl_datos, 0.40)
+cortes_paridad_tbl <- calcular_puntos_paridad(tbl_datos, 0.45)
 cortes_paridad_tbl
 ```
 
@@ -948,7 +948,7 @@ calcular_cortes_oportunidad <- function(tbl_datos, prop){
     top_n(1, rank_p) %>% 
     select(tipo, corte = prob_pos)
 }
-cortes_op <- calcular_cortes_oportunidad(tbl_datos, 0.40)
+cortes_op <- calcular_cortes_oportunidad(tbl_datos, 0.35)
 resultados_conteo <- resultado_cortes(tbl_datos, cortes_op %>% pull(corte)) 
 resultados_conteo %>% 
   filter(paga == 1) %>% 
@@ -958,6 +958,11 @@ resultados_conteo %>%
 ```
 
 
+**Nota**: es importante notar que si la variable de resultado positivo es injustamente asignada, entonces
+este método no resuelve el problema. En este caso es importante entender cuáles son los criterios con
+los que se considera un resultado existoso dependiendo de el grupo del atributo protegido (por ejemplo,
+si a un segmento particular se le permite mayores atrasos en los pagos y a otro menos, o un grupo se
+considera un delicuente reincidente por una ofensa mucho menor que otros grupos).
 
 
 # Retos de rendición de cuentas
