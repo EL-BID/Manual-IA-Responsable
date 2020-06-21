@@ -1,30 +1,19 @@
-# Fuente de datos (retos intrínsecos a los datos)
+# Fuente y manejo de datos
 
+Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión de política pública. Censos, encuestas, registros administrativos, logs en páginas web e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen métricas que describen a la población objetivo o al fenómeno que estás buscando entender.
 
-Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión de política pública. Censos, encuestas, registros administrativos, logs en páginas web e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen métricas que describen a la población objetivo o al fenómeno que estás buscando entender. 
-
-Sin embargo, no siempre los datos recolectados tienen una frecuencia, desagregación o cobertura
-que los haga relevantes, o no tienen la calidad necesaria para ser utilizados. Por ejemplo, las encuestas diseñadas mediante muestreos probabilístico especifican el tipo de análisis que se pueden hacer con ellas pero suelen levantarse con poca frecuencia y pueden ser insuficientes para capturar el movimiento de los patrones a estudiar, la información proveniente de registros administrativos suele tener una frecuencia mucho mayor pero en pocos casos cubre a la población en su conjunto. 
+Sin embargo, no siempre los datos recolectados tienen una frecuencia, desagregación o cobertura que los haga relevantes, o no tienen la calidad necesaria para ser utilizados. Por ejemplo, las encuestas diseñadas mediante muestreo probabilístico especifican por su diseño el tipo de análisis que se pueden hacer con ellas, pero este tipo de herramientas suelen levantarse con poca frecuencia y pueden ser insuficientes para capturar el movimiento de los patrones a estudiar. por otro lado, a información proveniente de registros administrativos o data proveniente de internet (interacción en redes sociales, visitas y analíticos en páginas web, etc) y telefonía (llamadas, ubicación por GPS, etc) suele tener una frecuencia mucho mayor, pero en pocos casos cubre a la población en su conjunto o no es de buena calidad.
 
 El primer conjunto de retos que tratamos es el que tiene qué ver con entender las limitantes de los datos disponibles para aplicar métodos de aprendizaje automático. Estos retos se pueden separar en dos grandes grupos:
 
 1. Calidad y relevancia de las métricas recolectadas
 2. Información incompleta acerca de la población objetivo
 
-## Métricas: introducción
+## Calidad y relevancia de métrica objetivo
 
-En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra
-disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles 
-son las mediciones ideales para la decisión que se considera tomar. 
+En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles son las mediciones ideales para la decisión que se considera tomar: i) Aprendizaje de métricas indeseables y ii) métrica proxy débil respecto a la métrica objetivo.
 
-Consideramos dos retos a enfrentar: en primer lugar, aprendizaje de métricas que son indeseables desde el 
-punto de vista de los tomador de decisiones. Si las métricas que queremos predecir 
-son resultado de sistemas subóptimos o con inequidades o deficiencias históricos, 
-los algoritmos entrenados tenderán a aprender los mismos patrones indeseables.
-
-El segundo reto es cuando utilizamos medidas *proxy* o sucedáneas por no tener disponibilidad de la medición
-ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las métricas 
-ideales pueden producir algoritmos con consecuencias indeseables.
+Cuando las métricas objetivo son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
 
 #### Términos {-}
 
@@ -33,34 +22,31 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 
 ```{block2, type='rmdnote'}
-**Reto: especificación incorrecta de métrica objetivo**
+**Reto: Estados indeseables o subóptimos en datos recolectados**
   
-- Las métricas objetivo definidas son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés.
-- Los estados indeseables incluyen defectos y inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
-  
+- En primer lugar, aprendizaje de métricas que son indeseables desde el punto de vista de los tomadores de decisiones. Si las métricas que queremos predecir son producidas por un sistema que consideramos subóptimo ya que esconde sesgos discriminatorios el algoritmo entrenado replicará los mismos patrones que consideramos indeseables.  
+- Cuando las métricas objetivo son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
 ```
 
 #### Ejemplos {-}
-
 
 - Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf). Intentar predecir métricas respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
 
 ```{block2, type='rmdtip'}
 **Medidas: especificación incorrecta de métrica objetivo**
 
-- (Cualitativa) Debe establecerse claramente que la utilización de la métrica objetivo seleccionada
-está alineada con los propósitos o políticas de los tomadores de decisiones. 
+* (Cualitativa) Debe establecerse claramente que la utilización de la métrica objetivo seleccionada está alineada con los propósitos o políticas de los tomadores de decisiones.  
+* (Cuantitativo) Realizar un análisis exploratorio para identificar sesgos históricos o estados indeseables.
 
 ```
 
 
-En el segundo reto, consideramos métricas sustitutos de las métricas objetivo ideales:
-
+El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las métricas ideales pueden producir algoritmos con consecuencias indeseables.
 
 ```{block2, type='rmdnote'}
 **Reto: métrica proxy débil respecto a la métrica objetivo**
   
-- Las variables medidas corresponden pobremente a las métricas objetivo de interés.
+- Las variables medidas corresponden pobremente a las métricas objetivo de interés.  
 - Es indeseable desde el punto de vista de la política hacer aprendizaje automático de medidas sesgadas o poco apropiadas para la toma de decisiones.
 
 ```
@@ -80,9 +66,7 @@ cuando hay desigualdades entre los pacientes de cuánto pueden pagar por el mism
 La conclusión errónea sería que pacientes que requieren más cuidado tienden a ser pacientes de grupos económicamente más
 privilegiados.
 
-- Consideramos pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el *número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida 
-exacta de la demanda, porque puede ser que cuando los inventarios se agotan, los involucrados dejan de hacer requerimientos a los abastecedores. Pronosticar la demanda con estos datos puede incurrir en 
-subeestimación, con el resultado de que reforzamos o empeoramos la escasez de medicamentos.
+- Supongamos un proyecto de ML busca pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el *número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida exacta de la demanda, porque puede ser que cuando los inventarios se agotan, los involucrados dejan de hacer requerimientos a los abastecedores. Pronosticar la demanda con estos datos puede incurrir en subestimaciónsubestimación, con el resultado de que reforzamos o empeoramos la escasez de medicamentos.
 
 - En una encuesta preguntamos a mujeres de menos de 18 años si está embarazada actualmente o no, junto con
 otras variables socioeconómicas. Esta pregunta da una métrica pobre si nos interesa predecir la probabilidad de
@@ -132,8 +116,7 @@ tenemos qué tomar decisiones.
 
 ## Muestras naturales y diseñadas
 
-Nuestros modelos pretenden ser aplicados a la población objetivo, pero la situación
-usual es que sólo tenemos disponible una **muestra** de esta población, a partir
+Los modelos de ML pretenden generar información para tomar acciones o políticas para toda la población objetivo, la situación usual es que sólo se tenga disponible una **muestra** de esta población, a partir
 de la cual queremos desarrollar predicciones o estimaciones que ayuden en la toma
 de decisiones posterior. 
 
@@ -160,22 +143,16 @@ el más deseable aunque no siempre alcanzable:
 
 1. **Muestreo probabilístico**: Los casos son seleccionados a partir de un diseño muestral probabilístico.
 
+En este caso, todos las predicciones y estimaciones que se pretenden aplicar a la población objetivo pueden ser evaluadas en cuanto a su precisión, con **garantías probabilísticas**. Por ejemplo, podemos dar rangos de error para estimaciones de cantidades asociadas a toda la población objetivo, tasas de error calibradas correctamente a la población objetivo, etc.
+
+Por ejemplo: Una encuesta nacional de hogares, +++
+
 2. **Muestras naturales**: Los casos son seleccionados por un proceso natural mal o parcialmente conocido.
 
+En este caso, estrictamente hablando no es posible saber qué va a pasar cuando apliquemos nuestros modelos a la población general, y no es posible construir rangos de error de predicciones y estimaciones mediante métodos estadísticos que tengan garantías probabilísticas. Es decir, las cantidades y predicciones estimadas tienen error desconocido, los modelos y características útiles en la muestra pueden no aplicar en la población objetivo, y la situación puede agravarse para grupos protegidos subrepresentados.
 
-Bajo el caso 1, todos las predicciones y estimaciones que se pretenden aplicar
-a la población objetivo pueden ser evaluadas en cuanto
-a su precisión, con **garantías probabilísticas**.
-Por ejemplo, podemos dar rangos de error para estimaciones de cantidades asociadas 
-a toda la población objetivo, tasas de error calibradas
-correctamente a la población objetivo, etc.
+Por ejemplo: +++
 
-Bajo el caso 2, estrictamente hablando no es posible saber qué va a pasar cuando apliquemos
-nuestros modelos a la población general, y no es posible construir rangos de error de
-predicciones y estimaciones mediante métodos estadísticos que tengan garantías
-probabilísticas. 
-
-El primer reto es entonces:
 
 ```{block2, type='rmdnote'}
 **Reto: muestras naturales**
@@ -227,7 +204,6 @@ de datos, diseñadas o naturales,
 la validación debe llevarse a cabo idealmente con una muestra diseñada que permita 
 inferencia estadística a la población objetivo. La muestra de validación debe cubrir
 apropiadamente la población objetivo y subpoblaciones protegidas.
-
 ```
 
 
@@ -252,28 +228,15 @@ las tasas poblacionales. El diseño de la muestra determina nuestro alcance infe
 
 
 
-## Muestras y comparaciones predictivas
- 
-En muchos casos, parte de la aplicación de un modelo de predicción se concentra
-en comparaciones predictivas muy particulares. La política se aplica en función
-de hallazgos del modelo en términos de las variables incluidas en el modelo.
+## Comparación causal
+Cuando los humanos racionalizan el mundo lo buscan comprender en términos de causa y efecto - si entendemos por qué ocurrió algo, podemos cambiar nuestro comportamiento para cambiar resultados futuros.
+En un proyecto de ML se puede tener o no como objetivo crear inferencias causales. Buscar comparaciones predictivas o contrafactuales de algún tratamiento o variable con datos de muestras que no tienen algún tipo de asignación aleatoria de tal tratamiento o variable pueden ser muy lejanas de comparaciones causales al aplicar el tratamiento en la realidad. 
 
-Es necesario ser muy cuidadosos con este tipo de uso [@king]. Si las variables a considerar
-están asignadas naturalmente por un proceso desconocido, la derivación de políticas
-a partir de esos modelos puede llevar a decisiones erróneas.
-
-En este caso, aún cuando la muestra puede permitir inferencia a la población, estamos a fin
-de cuentas haciendo inferencia causal.
-
-```{block2, type='rmdnote'}
-**Reto: comparación casual**
-  
-Comparaciones predictivas o contrafactuales de algun tratamiento o variable
-con datos de muestras que no tienen algún tipo de asignación aleatoria de tal tratamiento o 
-variable pueden ser muy lejanas de comparaciones causales al aplicar el tratamiento
-en la realidad.
-
-```
+Los resultados de un modelo nos dan resultados que parecerían describir relaciones causales sin que necesariamente lo sean.
+-	“More police in precincts with higher crime; does that mean that police cause crime?” Policy decision: should we add more police to a given district?
+-	“Lots of people die in hospitals, are hospitals bad for your health?” Policy decision: should I go to hospital for treatment? 
+La política se aplica en función de hallazgos del modelo en términos de las variables incluidas en el modelo. Si las variables a considerar están asignadas naturalmente por un proceso desconocido, la derivación de políticas a partir de esos modelos puede llevar a decisiones erróneas. Por esta razón, es necesario ser muy cuidadosos con este tipo de uso
+(@king).
 
 
 ```{block2, type='rmdtip'}
