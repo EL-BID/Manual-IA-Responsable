@@ -35,4 +35,13 @@ RUN .${PYTHON_VENV_PATH}/bin/activate && \
      --no-cache-dir
 
 RUN install2.r --error \
-     reticulate tensorflow  keras \ 
+     reticulate tensorflow  keras 
+
+
+RUN install2.r --error \
+     broom dials infer parsnip recipes \
+     rsample tune workflows yardstick themis \ 
+     ranger 
+
+RUN install2.r --error patchwork
+
