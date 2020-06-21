@@ -2,31 +2,35 @@
 
 # Introducción {#intro}
 
-Los métodos de aprendizaje de máquina como un subconjunto de lo que se conoce como inteligencia artificial, que para resumir en este documento llamamos **aprendizaje automático** (ML por sus siglas en inglés) son cada vez más requeridos y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos, desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos grados de éxito, y con esto ha aparecido la preocupación creciente de cómo entender el desempeño o influencia positiva o negativa de estos métodos en el contexto de la toma de decisiones ([@Suresh], [@barocas]).
+Los métodos de aprendizaje automático, como un subconjunto de lo que se conoce como inteligencia artificial, que para resumir en este documento llamamos ML (por sus siglas en inglés) son cada vez más requeridos y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos, desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos grados de éxito, y con esto ha aparecido la preocupación creciente de cómo entender el desempeño o influencia positiva o negativa de estos métodos en el contexto de la toma de decisiones ([@Suresh], [@barocas]).
 
 
 ```{block2, type='rmdpunto'}
 
-¿Cuándo estos métodos de aprendizaje automático nos llevan a tomar decisiones que son costosas, riesgosas o pueden inducir estados
-no deseados (por ejemplo, discriminatorios o injustos) en los sistemas y decisiones en donde se utilizan?
-  
+¿Cuándo estos métodos de ML nos llevan a tomar decisiones que son costosas, riesgosas o pueden inducir estados no deseados (por ejemplo, discriminatorios o injustos) en los sistemas y decisiones en donde se utilizan?
+
 ```
 
 
 ## IA y toma de decisiones
 
-En este documento pretendemos discutir los problemas más comunes en el uso de ML para la
-toma de decisiones, cómo detectar problemas potenciales y evaluar la posiblidad de resultados indeseables
-para los tomadores de decisiones, para la sociedad o una compañía o institución particular. Consideramos
-dos arquetipos de inclusión de aprendizaje automático en el proceso de toma de decisiones:
+La OCDE describe a los sistemas de soporte de decisión como un “sistema computacional que puede, para un determinado conjunto de objetivos definidos por humanos, hacer predicciones y recomendaciones o tomar decisiones que influyen en entornos reales o virtuales.” Y que están diseñados para operar con distintos niveles de autonomía (OECD, 2019).
 
-1. **Las decisiones se toman automáticamente, sin intervención humana directa.** 
-Por ejemplo, inclusión de individuos en programas sociales, u otorgamiento de créditos al consumo.
-2. **Resultados del aprendizaje automático son insumos para decisiones que se toman de forma más tradicional.** Por ejemplo, decisiones acerca del funcionamiento o refinación de un programa social, pronósticos  de variables clave para planeación.
+En este manual se pretende discutir los problemas más comunes en el uso del aprendizaje automático (ML) como parte de un sistema de toma/soporte de decisión como detectar problemas potenciales y evaluar la posibilidad de resultados indeseables para la sociedad o una compañía o institución particular. 
 
-El primer punto que tenemos que tener presente y es guía de este documento es que
-en la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general, y **en este documento** no pretendemos hablar
-de técnicas o modelos particulares (ver por ejemplo @ESL, @kuhn, @GelmanHill). En lugar de eso:
+Aunque los métodos de aprendizaje automatizado son el único tipo de algoritmos que pueden utilizar los sistemas de IA, sí son los que han tenido más crecimiento de los últimos años. Se trata de un conjunto de técnicas para permitir que las máquinas aprendan de manera automatizada a través de patrones e inferencias en lugar de a través de instrucciones explícitas o simbólicas (OECD, 2019). 
+
+Consideramos dos arquetipos de inclusión de aprendizaje automático en el proceso 
+de toma de decisiones:
+
+1. **Sistemas de soporte de decisión**: Resultados del aprendizaje automático son insumos para decisiones que se toman de forma más tradicional. Por ejemplo, decisiones acerca del funcionamiento o refinación de un programa social, pronósticos de variables clave para planeación.
+
+2. **Sistemas de toma de decisión**: Las decisiones se toman automáticamente, sin intervención humana directa. Por ejemplo, inclusión de individuos en programas sociales, u otorgamiento de créditos al consumo.
+
+El primer punto que se tiene que presente y es guía de este documento es que en la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general que se deben de considerar para el desarrollo de un sistema de soporte/toma de decisión exitoso. **En este documento** no se describirán técnicas o modelos particulares  (ver por ejemplo @ESL, @kuhn, @GelmanHill). 
+
+La evaluación de un sistema de aprendizaje no tiene sentido fuera de su contexto, preguntas como: ¿qué es una tasa de error apropiado? o ¿cuáles son sesgos poco aceptables?, entre otras, sólo pueden considerarse dentro del contexto específico de su aplicación y de los propósitos y motivaciones de los tomadores de decisiones. Esto quiere decir que, aunque mucha de la discusión se concentra en aspectos técnicos, métricas particulares de desempeño o métodos de ML, al final ninguna de estas discusiones tiene sentido fuera del contexto de **la decisión** que se quiere tomar, ya sea una decisión automatizada totalmente o cuyo resultado se toma como insumo de una decisión tomada por páneles de expertos o tomadores de decisiones.
+
 
 ```{block2, type='rmdpunto'}
 **Principio guía 1**
@@ -39,30 +43,13 @@ en producción o utilizar para tomar decisiones.
 ```
 
 
-La evaluación de un sistema de aprendizaje no tiene sentido fuera de su contexto: qué es una tasa
-de error apropiado, cuáles son sesgos poco aceptables, y así sucesivamente, sólo pueden considerarse
-dentro de los propósitos de los tomadores de decisiones. Esto quiere decir que 
-aunque mucha de la discusión se concentra en 
-aspectos técnicos, métricas particulares de desempeño o métodos de ML, al final
-ninguna de estas discusiones tiene sentido fuera del contexto de la **decisión** que
-se quiere tomar, ya sea una decisión automatizada totalmente o como insumo de una decisión
-tomada por páneles de expertos o tomadores de decisiones.
+## Componentes de un sistema de IA y retos
+Existen tres componentes importantes para la creación de un sistema de soporte de decisión. 
+1. **(Conceptualización y diseño)** Se define una intervención o política que se está considerando aplicar a ciertas personas, unidades o procesos. Supondremos generalmente que se tiene evidencia del beneficio de esa política cuando se aplica a la población objetivo.
+2. **(Universal o focalización)** Se define si la intervención o política pretende aplicarse a toda la población o focalizarse a ciertas unidades o circunstancias para mejorar resultados u optimizar el uso de recursos limitados.
+3. **(Predicción o Estimación)** En el caso que se defina una intervención focalizada y esta  depende del conocimiento de características desconocidas de las personas, unidades o procesos. Se utilizan entonces predicciones, estimaciones o segmentaciones basadas en métodos de ML para informar variables desconocidas y hacer una recomendación de focalización.
 
-
-## Las tres componentes de la aplicación de ML
-
-Las decisiones que consideramos tienen tres partes importantes: se considera 
-alguna **intervención** que se
-planea aplicar a personas, unidades o procesos. Esta intervención se pretende utilizar en ciertos casos
-que **dependen de variables desconocidas**. Usamos aprendizaje automático para **predecir o estimar** estas variables desconocidas.
-
-Nuestra pregunta es entonces cómo la calidad o tipo de predicciones o estimaciones pueden
-influir en la focalización, y más adelante, en el resultado global de la intervención.
-
-1. (**Intervención**) Tenemos una intervención o política que estamos considerando aplicar a ciertas
-personas, unidades o procesos. Supondremos generalmente que tenemos alguna idea del beneficio de esa política cuando se aplica a distintos sectores de la población objetivo.
-2. (**Focalización**) Esta intervención o política pretende focalizarse en ciertas unidades o circunstancias para mejorar resultados o uso de recursos.
-3. (**Predicción o Estimación**) La focalización depende de algunas características desconocidas de las personas, unidades o procesos. Utilizamos entonces predicciones o estimaciones basadas en métodos de ML/AI para informar variables desconocidas y mejorar la focalización.
+Nuestra pregunta es entonces cómo la calidad o tipo de predicciones o estimaciones pueden influir en la focalización, y más adelante, en el resultado global de la intervención.
 
 Ejemplos de esto puede ser:
 
@@ -82,20 +69,18 @@ de validación puede producir resultados indeseables de **focalización**
 
 \pagebreak
 
+## Ciclo de vida de IA y retos
+El ciclo de desarrollo de un sistema de soporte de decisión con IA normalmente implica cuatro fases: i) La fase de diseño, ii) datos y modelos es una secuencia que abarca la planificación, recolección y procesamiento de datos y construcción e interpretación de modelos. A esto le sigue una etapa de verificación y validación, el despliegue y monitoreo. Estas fases suelen tener lugar de manera iterativa y no son necesariamente secuenciales. (OECD, 2019).
 
-## Ciclo de proyecto
+![Ciclo de vida y retos de sistema de soporte de decisión  (OECD, 2019).
+](images/ciclo-vida-retos.png)
 
-![Ciclo de vida de sistema de soporte de decisión](images/ciclo_proyecto.png)
+Este libro describe en cuatro secciones los problemas más comunes, diagnósticos para detectarlos, y sugerencias para mitigarlos:
 
-## Los retos de la aplicación
 
-En estos tres casos, examinaremos los problemas más comunes, diagnósticos para detectarlos, y sugerencias
-para mitigarlos, divididos en cuatro secciones:
-
-1. **Intrínsecos a los datos**: que se refieren principalmente a deficiencias, sesgos y al proceso que genera los datos utilizados [@biasdata]. Este es un punto de bloqueo para muchas aplicaciones.
-2. **Relativos a la construcción y desarrollo de los modelos**: que se refiere a métodos y principios importantes para construir modelos robustos y validados correctamente.
-3. **Relativos a la evaluación y monitoreo del modelo**: que se refiere a la interpretación del modelo, evaluación una vez puesto en producción y principios de monitoreo para evitar consecuencias inesperadas.
-4. **Rendición de cuentas**, que se refiere al entendimiento o la capacidad de explicar
-cómo es que métodos automatizados toman ciertas decisiones.
+1. **Fuente manejo de datos**: que se refieren principalmente a deficiencias, sesgos y al proceso que genera los datos utilizados (Ntoutsi et al. 2020). Este es un punto de bloqueo para muchas aplicaciones.
+2. **Construcción y desarrollo de modelos**: que se refiere a métodos y principios importantes para construir modelos robustos y validados correctamente.
+3. **Evaluación y monitoreo del modelo**: que se refiere a la interpretación del modelo, evaluación una vez puesto en producción y principios de monitoreo para evitar consecuencias inesperadas.
+4. **Rendición de cuentas**: que se refiere al entendimiento o la capacidad de explicar cómo es que métodos automatizados toman ciertas decisiones.
 
 
