@@ -43,5 +43,5 @@ RUN install2.r --error \
      rsample tune workflows yardstick themis \ 
      ranger 
 
-RUN install2.r --error patchwork
+RUN install2.r --error patchwork iml
 
