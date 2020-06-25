@@ -1,4 +1,4 @@
-# Retos en la construcción y desarrollo de los modelos
+# Construcción y desarrollo de los modelos
 
 En primer lugar, consideramos el proceso usual de construcción de métodos predictivos 
 con aprendizaje automático [@ESL], [@kuhn]:
@@ -10,9 +10,9 @@ con aprendizaje automático [@ESL], [@kuhn]:
 
 Esto generalmente involucra al menos dos muestras (1 y 2), y de preferencia tres:
 
-1. Datos de entrenamiento
-2. Datos de validación
-3. Datos de prueba
+* Datos de entrenamiento
+* Datos de validación
+* Datos de prueba
 
 ## Ausencia de validación
 
@@ -50,9 +50,9 @@ de tiempo requiere de estrategias de validación adaptadas (ver por ejemplo @hyn
 
 Las fugas de información [@kaufman] ponen en duda la validación de modelos como manera de estimar el desempeño en producción de los métodos de aprendizaje automático. Esto ocurre de dos maneras:
 
-  - La muestra de entrenamiento recibe *fugas* de los datos de validación, lo que implica el uso de datos de validación en entrenamiento e invalida la estimación del error de predicción.
-  - Muestras de validación y entrenamiento tienen agrupaciones temporales o de otro tipo que no se conservan en el proceso de entrenamiento y validación. En este caso, entrenamiento y validación recibe *fugas* de información que no estará disponible el momento de hacer predicciones.
+*	Fugas de entrenamiento-validación: La muestra de entrenamiento recibe *fugas* de los datos de validación, lo que implica el uso de datos de validación en entrenamiento e invalida la estimación del error de predicción.
 
+*	Fugas de datos no disponibles en la predicción: Muestras de validación y entrenamiento tienen agrupaciones temporales o de otro tipo que no se conservan en el proceso de entrenamiento y validación. En este caso, entrenamiento y validación recibe *fugas* de información que no estará disponible el momento de hacer predicciones.
 
 ```{block2, type = 'rmdnote'}
 **Reto: fugas entrenamiento validación**
@@ -62,6 +62,7 @@ Si alguna parte de los datos de validación/prueba se utiliza en la construcció
 ```
 
 #### Ejemplo {-}
+
 Validación cruzada con selección de variables usando todos los datos [@ESL]
 
 ```{block2, type='rmdtip'}
@@ -71,11 +72,8 @@ Cualquier procesamiento y preparación de datos de entrenamiento debe evitar usa
   
 ```  
 
-  
 Esto incluye recodificación de datos, normalizaciones, selección de variables, identificación de datos atípicos y cualquier otro tipo de preparación de cualquier variable a ser incluida en los modelos. Esto incluye también 
 ponderaciones o balance de muestras basados en sobre/sub muestreo.
-  
-El segundo tipo de filtración 
 
 
 ```{block2, type='rmdnote'}
@@ -95,7 +93,6 @@ Un modelo hace predicción de actividad criminal en distintas zonas geográficas
 tiempo $t$. En la extracción de datos se usa como variable de entrada el número de
 unidades de policía que antendieron la zona de interés al tiempo $t$. Esto representa una fuga en la predicción, pues al momento de predecir actividad criminal al tiempo $t$ no
 estará disponible las unidades de policía al tiempo $t$. El modelo puede parecer preciso, pero en producción su exactitud se verá considerablemente degradada.
-
 
 
 En el caso más extremo, aunque quizá más fácil de detectar, existen variables
@@ -239,36 +236,37 @@ Sin embargo, están expuestos a los problemas señalados arriba.
 
 #### Ejemplo: reconocimiento de imágenes {-}
 
+### Términos
+
+- **Sobreajuste**: un modelo demasiado complejo para los datos disponibles tiende a capturar características no informativas como parte de la estructura predictiva. Esto se refleja muchas veces en una brecha de error grande entre entrenamiento y validación. Estos pueden ser modelos ruidosos difíciles de interpretar, y las predicciones pueden ser inestables dependiendo del conjunto de datos particular que se utilice.
+
+-	**Subajuste**: uno modelo demasiado simple para los datos disponibles tiende a ignorar patrones sólidos en la estructura predictiva. Esto se refleja en errores sistemáticos e identificables, por ejemplo, sub/sobre predicción sistemática para ciertos grupos o valores de las variables de entrada.
+
 
 ## Equidad y desempeño diferencial de predictores
 
 Métodos basados en aprendizaje automático pueden producir predicciones, que cuando no son usadas apropiadamente
 en la toma de decisiones, pueden producir resultados injustos o discriminatorios ([@boulamwini], [@barocas], [@bolukbasi]).
 
-En primer lugar establecemos que no siempre el contexto completo del problema de decisión puede enmarcarse dentro
-de la parte correspondiente al *aprendizaje automático*. Generalmente habrá varios objetivos de los tomadores de decisiones
-que van más allá de un pronóstico dado, un sistema de clasificación, etc. 
+En primer lugar, es importante recordar que la evaluación de los resultados de un sistema de toma/soporte de decisión se realiza tomando en cuenta los objetivos del tomador de decisiones que pueden ser distintos e incluso contradictorios a los objetivos desde el punto de vista del problema de aprendizaje automático. 
 
-Un ejemplo es el de paridad demográfica (por ejemplo, que dos grupos de interés obtengan tasas de clasificación positiva 
-muy similar), que es un tipo de paridad puede ser deseable para los tomadores de decisiones, pero no necesariamente uno
-que aparece naturalmente en lso métodos predictivos. De esta forma separamos dos preocupaciones importantes:
+Por ejemplo, un tomador de decisiones podría sacrificar el desempeño global de un modelo para mejorar el desempeño del modelo en un subgrupo aunque este subgrupo sea relativamente pequeño a la población en su conjunto. De esta forma separamos dos preocupaciones importantes:
 
-- Objetivos de política pública o estrategia, orientados a la justica algorítmica, 
-que tienen que incorporarse en el proceso de toma de decisiones.
-- Fallas técnicas en los modelos que producen disparidad de resultados para grupos protegidos.
+- **Definición de justicia algorítmica**: Objetivos de política pública o estrategia, orientados a la justica algorítmica, que tienen que incorporarse en el proceso de toma de decisiones.
 
-En esta parte discutiremos principalmente el segundo punto. 
+-	**Inequidad algorítmica**: Fallas técnicas en los modelos que producen disparidad de resultados para grupos protegidos que deben de evaluarse bajo una definición de justicia determinada.
 
-### Términos
+### Términos {-}
 
 - **Atributo protegido**: una característica o variable **protegida** $A$ es una para la que queremos
 que se cumplan cierto criterio de equidad en las predicciones.
 
----
 
-Nuestro objetivo es establecer
-lineamientos para evitar que deficiencias en los modelos produzcan disparidades indeseables según los
-distintos subgrupos asociados a una variable protegida $A$ (por ejemplo, $A$ puede ser género, raza, nivel de marginación). 
+#### Definición de justicia algorítmica
+
+Lo que se entiende por "justicia" puede cambiar según la cultura y/o tradición de un grupo de población dado y puede ser también específico para un proyecto o problema de política pública. El objetivo del modelador es establecer lineamientos para evitar que deficiencias en los modelos produzcan disparidades indeseables según los distintos subgrupos asociados a una variable protegida $A$ (por ejemplo, $A$ puede ser género, raza, nivel de marginación). Para ello, es necesario tener una definición de justicia algorítmica, que puede ser una de las siguientes:
+
+##### Omisión de variables y Paridad demográfica
 
 Dos estrategias no muy útiles para prevenir disparidades entre los grupos de $A$ son: *ignorar* la variable $A$ y
 buscar *paridad demográfica* de predicciones. 
@@ -282,10 +280,11 @@ resultados similares aunque $A$ no se considere (por ejemplo, zona geográfico o
 el caso de presión arterial, existe variaciones en los grupos raciales ($A$) en cuanto a predisposición a presión alta
 (@hipertension), por lo tanto un modelo que evalúe riesgo sería más preciso y adecuado si incluye la variable $A$.
 
-
 En el segundo caso, en *paridad demográfica* de predicciones buscamos que las predicciones de los distintos grupos de $A$ sean similares: en el caso de clasificación, por ejemplo, que la tasa de positivos sea similar. Esto poco deseable 
 por sí solo: por ejemplo, si quisiéramos construir un clasificador para cierta enfermedad, consideramos que es posible que
 mujeres y hombres sean afectados de manera distinta. Sin embargo, *paridad demográfica* puede ser un objetivo de los tomadores de decisiones, y eso debe tomarse en cuenta al momento de tomar la decisión asociada a la predicción. 
+
+##### Equidad de posibilidades
 
 El concepto de **equidad de posibilidades** ([@hardt]) es uno menos dependiente de los objetivos de los tomadores de decisiones,
 y se refiere al desempeño predictivo a lo largo de distintos grupos definidos por $A$. Si $Y$ es la variable que queremos
@@ -301,7 +300,7 @@ Una primera implicación de este criterio es:
 
 - Bajo el suspuesto de equidad de posibilidades, las tasas de error predictivo sobre cada subgrupo de $A$ son similares 
 
-En problemas de clasificación binaria, el criterio es_
+En problemas de clasificación binaria, el criterio es:
 
 - En cada subgrupo, las tasas de falsos positivos y de falsos negativos son similares
 
@@ -320,8 +319,6 @@ que contiene la variable protegida $A$ acerca de la variable respuesta, con el r
 de distintos valores de la variable protegida.
 
 
----
-
 En el caso de clasificacón binaria, cuando una de las alternativas es *deseable* para los individuos
 (por ejemplo, calificar para un beneficio, crédito, candidatura de un trabajo, etc), 
 Un criterio menos exigente de equidad puede ser la **equidad de oportunidad**:
@@ -331,13 +328,19 @@ Un criterio menos exigente de equidad puede ser la **equidad de oportunidad**:
 En la práctica puede considerarse cuál es más apropiado. Equidad de oportunidad muchas veces es un criterio aceptable, que
 introduce criterios de justicia algorítmica permitiendo también optimizar otros resultados deseables.
 
+```{block2, type='rmdtip'}
+**Medidas: definición de justicia algorítmica**
+
+- (Cualitativa) Identificar grupos o atributos protegidos. (por ejemplo: género, raza, nivel de marginación, etc)
+
+- (Cualitativa) Se debe de discutir con expertos y tomadores de decisiones qué medida de justicia algorítmica se buscará seguir. 
+
+
+```
 
 #### Ejemplo {-}
-Supongamos que queremos predecir si un potencial empleado va a durar más de 2 años en cierta compañía, y que la variable
-protegida $A$ toma dos valores (que supondremos en este caso toma dos valores: se autodenomina con religión o sin religión).
-El predictor satisface **equidad de posibilidades** cuando tanto la tasa de falsos positivos como la de falsos negativos
-son iguales para personas con religión y sin religión.
 
+Supongamos que se quiere crear un sistema para la selección de beneficiarios a una beca escolar para una universidad reconocida. La institución define como como variable protegida la pertenencia a una comunidad indígena (que supondremos en este caso toma dos valores: se autodenomina indígena o no se autodenomina indígena). El predictor satisface **equidad de posibilidades** cuando tanto la tasa de falsos positivos como la de falsos negativos son iguales para personas indígenas como personas que no lo son.
 
 ```{block2, type='rmdtip'}
 **Medidas: inequidad algorítmica**
