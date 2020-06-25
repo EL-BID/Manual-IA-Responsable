@@ -1,10 +1,10 @@
-# Retos de uso durante ejecución
+# Evaluación y Monitoreo
 
 Una vez que los métodos de aprendizaje automático se comienzan utilizar para tomar decisiones, es necesario:
 
 - Monitorear, en general, desempeño y características usadas en el tiempo.
 - Monitorear en particular resultados indeseables que pueden resultar de la interacción de usuarios con algoritmos.
-- Tomar decisiones acerca del proceso generador de datos para mejorar desempeño o evaluar resultados
+- Tomar decisiones acerca del proceso generador de datos para mejorar desempeño o evaluar resultados.
 
 ## Degradación de desempeño
 
