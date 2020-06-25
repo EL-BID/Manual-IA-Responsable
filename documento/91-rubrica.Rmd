@@ -1,1 +1,42 @@
 # Rubrica para aplicación de ML/IA en toma de decisiones
+
+La rúbrica que presentamos aquí está derivada de la publicada en (@Mitchell). Consiste de los siguientes
+incisos:
+
+1. Información básica
+  - Personas que desarrollaron el modelo, fecha, versión, tipo
+  - Algoritmos que se usaron para entrenar, parámetros supuestos o restricciones
+  - Antecedentes
+2. Casos de uso
+  - Casos de uso considerados durante el desarrollo
+  - Población objetivo y horizonte de predicciones
+  - Actores y componentes que interactuarán con los resultados
+  - Usos no considerados y advertencias relacionadas
+3. Métricas de desempeño
+  - Métricas técnicas usadas para seleccionar y evaluar modelos 
+  - Análisis costo-beneficio del modelo para su caso de uso según (2)
+  - Definición de grupos protegidos y medidas de equidad seleccionadas
+4. Datos de validación
+  - Conjuntos de datos usados y su etiquetado
+  - Pasos de preprocesamiento
+  - Evaluación de adaptación de datos de validación según el caso de uso (2)
+  - Sesgos y deficiencias potenciales según el caso de uso (2)
+5. Datos de entrenamiento
+  - Conjunto de datos usados y su etiquetado
+  - Pasos de preprocesamiento
+  - Sesgos y deficiencias potenciales según el caso de uso (2)
+6. Resumen de análisis cuantitativo
+  - Error de validación reportado
+  - Resumen de análisis costo-beneficio
+  - Reporte de medidas de equidad para grupos protegidos
+7. Recomendaciones de monitoreo
+  - Estrategia de monitoreo y mejora en producción
+  - Estrategias de monitoreo humano de predicciones (si aplica)
+8. (Opcional) Explicabilidad de predicciones
+  - Estrategia para explicar predicciones particulares (si es necesario)
+  - Estrategia para entender la importancia de distintos atributos
+9. Consideraciones éticas, recomendaciones y advertencias
+
+
+### Ejemplo
+
