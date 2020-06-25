@@ -120,22 +120,6 @@ Los modelos de ML pretenden generar información para tomar acciones o política
 de la cual queremos desarrollar predicciones o estimaciones que ayuden en la toma
 de decisiones posterior. 
 
-#### Términos {-}
-
-- **Población objetivo**: son las unidades que se pretende intervenir 
-(personas, hogares, zonas geográficas, etc). Los modelos se construyen entonces
-con el fin de aplicarse a la población objetivo. 
-
-- **Estructura predictiva**: se utiliza para hablar en general 
-del tipo de modelos que
-se utiliza para hacer predicciones (lineales, bosques aleatorios, redes neuronales), 
-las características que utiliza y cómo las utiliza el modelo (interacciones, transformaciones
-no lineales). 
-
-- **Subpoblaciones de interés** o **Subpoblaciones protegidas**: subpoblaciones de la población objetivo para las cuales queremos tener evaluaciones concretas del desempeño de estimaciones o los modelos.
-
-- **Representatividad**: término alternativo a muestra probabilística bajo el caso más
-simple de muestreo autoponderado. 
 
 Cuando tenemos una muestra, consideramos dos extremos posibles, siendo el primer extremo
 el más deseable aunque no siempre alcanzable:
@@ -194,9 +178,7 @@ teléfono (por ejemplo, @anemiaapp).
 Más aún, modelos de predicción construidos para esta muestra natural
 no necesariamente generalizarán correctamente a la población total, y no es posible tener
 una estimación confiable del error. Puede ser que la estructura predictiva
-para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural (ver por
-ejemplo (ver por ejemplo @anemiaracial, donde se muestra que valores predictivos de anemia pueden
-ser distintos para distintos grupos raciales). 
+para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural (ver por ejemplo @anemiaracial, donde se muestra que valores predictivos de anemia pueden ser distintos para distintos grupos raciales). 
 
 
 
@@ -230,8 +212,6 @@ para calificar como apropiada la construcción de modelos ni la validación. Por
 La situación ideal es la de muestreo probabilístico.  En este caso, podemos entender exactamente qué 
 subpoblaciones se muestrearon, a qué tasas, y cómo se relacionan estas tasas con
 las tasas poblacionales. El diseño de la muestra determina nuestro alcance inferencial. 
-
-
 
 ## Comparación causal
 
