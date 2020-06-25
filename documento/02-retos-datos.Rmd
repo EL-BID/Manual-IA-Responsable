@@ -6,14 +6,14 @@ Sin embargo, no siempre los datos recolectados tienen una frecuencia, desagregac
 
 El primer conjunto de retos que tratamos es el que tiene qué ver con entender las limitantes de los datos disponibles para aplicar métodos de aprendizaje automático. Estos retos se pueden separar en dos grandes grupos:
 
-1. Calidad y relevancia de las métricas recolectadas
+1. Calidad y relevancia de las métricas objetivo y métricas de entrada recolectadas
 2. Información incompleta acerca de la población objetivo
 
 ## Calidad y relevancia de métrica objetivo
 
 En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles son las mediciones ideales para la decisión que se considera tomar: i) Aprendizaje de métricas indeseables y ii) métrica proxy débil respecto a la métrica objetivo.
 
-Cuando las métricas objetivo son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
+Cuando la métrica objetivo es producida por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
 
 #### Términos {-}
 
@@ -41,7 +41,7 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 ```
 
 
-El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las métricas ideales pueden producir algoritmos con consecuencias indeseables.
+El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las métricas objetivo ideales pueden producir algoritmos con consecuencias indeseables.
 
 ```{block2, type='rmdnote'}
 **Reto: métrica proxy débil respecto a la métrica objetivo**
@@ -170,6 +170,7 @@ Las muestras naturales de datos pueden resultar en:
   - Estructuras predictivas distintas a las que observaríamos en la población objetivo (modelos no válidos).
   - Extrapolaciones que no son soportadas por los datos.
   - Subrepresentación de subgrupos protegidos
+  - Sobrereprentación de subgrupos particulares o mayoritarios.
 
 Es decir: las cantidades y predicciones estimadas tienen error desconocido, los modelos
 y características útiles en la muestra pueden no aplicar en la población objetivo, y la situación puede agravarse para grupos protegidos subrepresentados.

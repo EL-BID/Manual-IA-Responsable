@@ -42,7 +42,8 @@ que son en cualquier escenario difíciles de predecir.
 
 ```
 
-Argumentos teóricos requieren cuidado adicional, y sus supuestos deben ser evaluados.
+Argumentos teóricos requieren cuidado adicional, y sus supuestos deben ser evaluados. Casos particulares como el de series
+de tiempo requiere de estrategias de validación adaptadas (ver por ejemplo @hyndman).
 
 
 ## Fugas de información
@@ -224,7 +225,8 @@ peso a características individuales de los casos, y en subajuste les damos dema
 
 ```
 
-Aunque sub y sobre ajuste puede producir resultados predictivos subóptimos, pueden producir rangos de error aceptables. Sin embargo, están expuestos a los problemas señalados arriba.
+Aunque sub y sobre ajuste puede producir resultados predictivos subóptimos, pueden producir rangos de error aceptables (según el contexto del problema, conocimiento experto, y objetivos). 
+Sin embargo, están expuestos a los problemas señalados arriba.
 
 
 ```{block2, type='rmdtip'}
