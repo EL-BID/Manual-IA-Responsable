@@ -243,7 +243,7 @@ Tenemos entonces dos problemas:
 2. Peor aún, el sesgo es mayor para hogares de menores ingresos, lo cual puede producir
 una focalización mediocre si buscamos identificar hogares de menores ingresos.
 
-### Muestras naturales: comparaciones causales
+### Muestras naturales: comparaciones causales {#natural}
 
 Este ejemplo está tomado de (@ESL y @saheart). Consideramos los siguientes datos donde queremos predecir enfermedad del corazón (chd) : 
 (@saheart):
@@ -983,7 +983,103 @@ considera un delicuente reincidente por una ofensa mucho menor que otros grupos)
 
 ## Interpretabilidad
 
+Podemos usar medidas como importancia de permutaciones para examinar modelos. En este ejemplo,
+regresamos a nuestro ejemplo de predicción de aceptación de solicitudes de crédito, y consideramos
+la importancia basada en permutaciones [@molnar2019]:
+
+```{r}
+set.seed(823)
+credito_split <- initial_split(credito)
+entrena <- training(credito_split)
+prueba <- testing(credito_split)
+# preparacion de datos
+credito_receta <- recipe(card ~ ., credito) %>%
+  step_normalize(all_numeric()) %>% 
+  step_dummy(all_nominal(), -card) 
+# modelo
+modelo_regularizado <- 
+  logistic_reg(penalty = 1) %>% 
+  set_engine("keras", epochs = 500, verbose = FALSE)  %>% 
+  set_mode("classification") 
+```
+
+```{r, message=FALSE, warning = FALSE}
+# ajustar parametros de preprocesamiento
+receta_prep <- credito_receta %>% prep(entrena)
+# preprocesar datos
+entrena_prep <- bake(receta_prep, entrena)
+prueba_prep <- bake(receta_prep, prueba)
+# ajustar modelo
+ajuste <- modelo_regularizado %>% 
+  fit(card~ expenditure + dependents + income + age + owner_yes, data = entrena_prep)
+```
+
+```{r}
+library(iml)
+modelo <- ajuste$fit
+entrena_x <- entrena_prep %>% dplyr::select(expenditure, dependents, income, age, owner_yes) 
+predictor <- Predictor$new(modelo, data = entrena_x, y = ifelse(entrena_prep$card == "yes",2,1) ,
+                           type = "prob")
+imp <- FeatureImp$new(predictor, loss = "ce", compare = "difference")
+plot(imp) + theme_minimal()
+```
+
+- Vemos claramente que para esta red sin capas ocultas, la importancia se concentra en un solo
+predictor, *expenditure*, que como vimos representa una fuga de información. Este diagnóstico es útil en general,
+y aunque no tan dramático como este ejemplo, puede señalar cuáles variables es importante considerar con cuidado.
+
+- Es importante considerar también el efecto de variables asociadas a grupos protegidos, y de ser necesario, examinar
+con cuidado cómo afectan las predicciones.
+
+
 ## Explicación de predicciones
+
+Para explicar predicciones individuales podemos usar los valores de Shapley (ver [@molnar2019], [@shapley]). Estas gráficas indican
+la contribución asignada de cada atributo a una predicción individual, bajo la idea de considerar efectos marginales sobre la predicción
+dependiendo de la presencia o ausencia de otros atributos. **Las contribuciones obtenidas** suman la diferencia que
+hay entre la predicción particular y la predicción promedio.
+
+Pueden examinarse también promedios a lo largo de grupos de interés.
+
+
+Consideramos el ejemplo de factores para detectar enfermedad del corazón en el estudio de sudáfrica que vimos
+en esta [sección](#natural)
+
+```{r}
+modelo_sa <- sa_boosted$fit
+sa_entrena_x <- sa_entrena %>% dplyr::select(-chd)
+predict_fun <- function(object, newdata){
+  new_data_x = xgb.DMatrix(data.matrix(newdata), missing = NA)
+  results<-predict(modelo_sa, new_data_x)
+  return(results)
+}
+predictor <- Predictor$new(modelo_sa, data = sa_entrena_x, y = sa_entrena$chd ,
+                           type = "prob", predict.function = predict_fun)
+
+# el caso de interés es el caso 15
+valores_shapley <- Shapley$new(predictor, x.interest = (sa_entrena_x[15, ]))
+valores_shapley$plot() + theme_minimal()
+```
+
+En este caso, varias medidas contribuyen positivamente a la probabilidad de enfermedad del corazon, como
+es uso de tabaco, edad, y mediciones de colesterol. Estas constribuciones explican la probabiidad tan alta de este individuo particular.
+
+En contraste, la siguiente persona está cerca del promedio, aumentando positivamente la probabiidad la edad y medida
+de colesterol, pero negativamente el no uso de tabaco y ninguna historia familiar de diabetes:
+
+```{r}
+# el caso de interés es el caso 24
+valores_shapley <- Shapley$new(predictor, x.interest = (sa_entrena_x[24, ]))
+valores_shapley$plot() + theme_minimal()
+```
+
+**Observación**: igual que en el modelo y en las gráficas de dependencia parcial que discutimos arriba, 
+estos coeficientes **no** deben interpretarse de manera causal (por ejemplo: es necesario bajar el colesterol
+para estos dos individuos). Esta es la información que usa el modelo para construir la predicción a partir de la predicción
+promedio sobre la población.
+
+
+Podemos calcular los valores de shapley para dos grupos de edad, por ejemplo.
 
 
 # Referencias
