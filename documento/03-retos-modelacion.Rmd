@@ -238,6 +238,51 @@ Sin embargo, están expuestos a los problemas señalados arriba.
 -	**Subajuste**: uno modelo demasiado simple para los datos disponibles tiende a ignorar patrones sólidos en la estructura predictiva. Esto se refleja en errores sistemáticos e identificables, por ejemplo, sub/sobre predicción sistemática para ciertos grupos o valores de las variables de entrada.
 
 
+## Errores no cuantificados y evaluación humana
+
+En muchos casos, existirán aspectos del modelo que no son medidos por las métricas de desempeño que hemos
+escogido, relacionado con sesgo particular de las predicciones o desviaciones sistemáticas en las predicciones
+que nos deseables para la toma de decisiones.
+
+Por ejemplo, en un sistema de búsqueda en documento que aunque tenga buen desempeño de validación
+en las métricas, seleccione documentos que tiendan a ser demasiado cortos, 
+produzcan resultados poco útiles o imparciales para búsquedas particulares, 
+o prefiera documentos de tipo promocional o propagandístico. Las razones pueden ir desde
+errores de preprocesamiento (algunos atributos mal calculados), selección de atributos para
+hacer las predicciones que consideran sólo una parte del problema.
+
+```{block2, type='rmdnote'}
+**Reto: fallas no medidas por el modelo**
+
+Algoritmos o métodos predictivos producen resultados que de mala calidad según aspectos no medidos
+por las métricas de validación, o que tienen mal desempeño para ciertos subconjuntos de datos no predefinidos. Esto puede
+ser por varias razones:
+  
+- Errores de preprocesamiento en el momento de calcular predicciones.
+- Tratamiento de los datos que excluyen métricas importantes para hacer predicciones de calidad o no injustas.
+- Ausencia de métricas que midan cierto tipo de errores particulares graves
+
+```
+
+Este puede ser un problema difícil, pues por su naturaleza son errores no visibles o medidos directamente. Es necesario
+descubrir estos sesgos o errores fuera del contexto técnico de evaluación, y de ser posible incluir métricas adicionales
+de evaluación que consideren estos problemas.
+
+```{block2, type='rmdtip'}
+**Medidas: errores no medidos y revisión humana**
+
+- (Cualitativa) Análisis experto de la construcción del sistema puede revelar sesgos o errores conocidos
+en el área pero desconocidos para el modelador.
+   
+- (Cuantitiva) Esquemas de monitoreo de predicciones que permitan identificación de errores
+o sesgos no medidos. Por ejemplo, se pueden usar páneles de revisores que examinen predicciones particulares 
+y consideren si son razonables o no. Estos páneles deben ser balanceados en cuanto al tipo de usuarios que
+se preveen, incluyendo tomadores de decisiones si es necesario.
+
+```
+
+
+
 ## Equidad y desempeño diferencial de predictores
 
 Métodos basados en aprendizaje automático pueden producir predicciones, que cuando no son usadas apropiadamente
