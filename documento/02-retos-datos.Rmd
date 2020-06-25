@@ -208,14 +208,15 @@ en particular sesgos de selección no medidos. Utilizar literatura relacionada c
 
 - (Cuantitativa) Aunque los modelos pueden construirse con varias fuentes 
 de datos, diseñadas o naturales, 
-la validación debe llevarse a cabo idealmente con una muestra diseñada que permita 
+la **validación** debe llevarse a cabo idealmente con una muestra diseñada que permita 
 inferencia estadística a la población objetivo. La muestra de validación debe cubrir
 apropiadamente la población objetivo y subpoblaciones protegidas.
+
 ```
 
 
-- La construcción de la muestra de validación debe ser producida bajo un diseño muestral que permita
-inferencia a la población objetivo (@lohr).
+- La construcción de la muestra de validación debe ser producida idealmente bajo un diseño muestral que permita
+inferencia a la población objetivo (@lohr). 
 - La muestra de validación debe cubrir a subgrupos de interés y protegidos, de manera que
 sea posible hacer inferencia a sus subpoblaciones. Eso incluye tamaños de muestras adecuados según
 metodología de muestreo (ver @lohr).
@@ -223,25 +224,24 @@ metodología de muestreo (ver @lohr).
 la muestra naturales, conducida por expertos y personas que conozcan el proceso
 que generó esos datos muestrales.
 - Muestras equilibradas en términos de características de la población no son condición ni necesaria ni suficiente
-para calificar como apropiada la construcción de modelos ni la validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, 
-pero acotado por cuotas. Esto produce balance en las tasas a la que aparecen ciertos grupos, 
-sin embargo, sigue siendo una
-muestra natural (en este caso a la muestra natural se le llama también *de conveniencia*).
+para calificar como apropiada la construcción de modelos ni la validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, pero acotado por cuotas. Esto produce balance en las tasas a la que aparecen ciertos grupos, sin embargo, sigue siendo una muestra natural (en este caso a la muestra natural se le llama también *de conveniencia*).
 
-La situación ideal es la de muestreo probabilístico.  
-En este caso, podemos entender exactamente qué 
+La situación ideal es la de muestreo probabilístico.  En este caso, podemos entender exactamente qué 
 subpoblaciones se muestrearon, a qué tasas, y cómo se relacionan estas tasas con
 las tasas poblacionales. El diseño de la muestra determina nuestro alcance inferencial. 
 
 
 
 ## Comparación causal
+
 Cuando los humanos racionalizan el mundo lo buscan comprender en términos de causa y efecto - si entendemos por qué ocurrió algo, podemos cambiar nuestro comportamiento para cambiar resultados futuros.
 En un proyecto de ML se puede tener o no como objetivo crear inferencias causales. Buscar comparaciones predictivas o contrafactuales de algún tratamiento o variable con datos de muestras que no tienen algún tipo de asignación aleatoria de tal tratamiento o variable pueden ser muy lejanas de comparaciones causales al aplicar el tratamiento en la realidad. 
 
 Los resultados de un modelo nos dan resultados que parecerían describir relaciones causales sin que necesariamente lo sean.
+
 -	“More police in precincts with higher crime; does that mean that police cause crime?” Policy decision: should we add more police to a given district?
 -	“Lots of people die in hospitals, are hospitals bad for your health?” Policy decision: should I go to hospital for treatment? 
+
 La política se aplica en función de hallazgos del modelo en términos de las variables incluidas en el modelo. Si las variables a considerar están asignadas naturalmente por un proceso desconocido, la derivación de políticas a partir de esos modelos puede llevar a decisiones erróneas. Por esta razón, es necesario ser muy cuidadosos con este tipo de uso
 (@king).
 
@@ -253,6 +253,10 @@ La política se aplica en función de hallazgos del modelo en términos de las v
 correlacionada con variables conocidas y no conocidas. 
 Describir sesgos posibles basados en análisis y conocimiento experto. Considerar qué variables
 control serían importantes para que la comparación predictiva tenga interpretación causal
+
+- (Cuantitativa) En el caso de intentar inferencia causal con modelos, debe describirse
+cuáles fueron las hipótesisi, consideraciones o métodos usados para soportar una interpretación
+causal (métodos de matching, balanceo de muestras, etc.)
 
 - (Cuantitativa) Producir datos diseñados que incluyan la consideración causal. Esto incluye
 experimentos aleatorios y otras técnicas. Esto puede hacerse antes de construir los modelos, o incluir
