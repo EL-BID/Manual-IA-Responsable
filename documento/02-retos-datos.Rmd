@@ -30,7 +30,7 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 #### Ejemplos {-}
 
-- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf). Intentar predecir métricas respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
+- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir métricas respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
 
 ```{block2, type='rmdtip'}
 **Medidas: especificación incorrecta de métrica objetivo**
@@ -145,13 +145,20 @@ el más deseable aunque no siempre alcanzable:
 
 En este caso, todos las predicciones y estimaciones que se pretenden aplicar a la población objetivo pueden ser evaluadas en cuanto a su precisión, con **garantías probabilísticas**. Por ejemplo, podemos dar rangos de error para estimaciones de cantidades asociadas a toda la población objetivo, tasas de error calibradas correctamente a la población objetivo, etc.
 
-Por ejemplo: Una encuesta nacional de hogares, +++
+Por ejemplo: Una encuesta nacional de hogares con diseño probabilístico generalmente consiste de definición de 
+estratificación, unidades de selección aleatoria a distintos niveles (unidades primarias, secundarias, etc.). Cada hogar
+es seleccionado con una probabilidad conocida. Aunque la muestra se diseñe de manera no representativa (por ejemplo, más
+hogares en zonas rurales o de ingresos bajos), es posible hacer inferencia para toda la población con ciertas garantías
+acerca del tamaño de error de estimación.
 
 2. **Muestras naturales**: Los casos son seleccionados por un proceso natural mal o parcialmente conocido.
 
 En este caso, estrictamente hablando no es posible saber qué va a pasar cuando apliquemos nuestros modelos a la población general, y no es posible construir rangos de error de predicciones y estimaciones mediante métodos estadísticos que tengan garantías probabilísticas. Es decir, las cantidades y predicciones estimadas tienen error desconocido, los modelos y características útiles en la muestra pueden no aplicar en la población objetivo, y la situación puede agravarse para grupos protegidos subrepresentados.
 
-Por ejemplo: +++
+Por ejemplo: en una encuesta nacional de hogares, seleccionamos hogares a través de la selección de personas de
+que encontramos en puntos de afluencia (mercados o lugares públicos). Es muy difícil saber las probabilidades de selección
+de los hogares bajo este esquema, pues necesitaríamos saber quién va a esos lugares y con qué probabilidad, e incluso algunos
+hogares con características particulares (por ejemplo, hogares de personas mayores) pueden tener probabilidad cero de ser seleccionados.
 
 
 ```{block2, type='rmdnote'}
