@@ -229,7 +229,12 @@ Sin embargo, están expuestos a los problemas señalados arriba.
 
 ```
 
-#### Ejemplo: reconocimiento de imágenes {-}
+**Ejemplo (sesgo en procesamiento de caras)**: Algunos algoritmos de preprocesamiento o afinación de fotos de caras tienden a producir
+caras del tipo racial que domina las datos. Este es un ejemplo de subajuste, donde en ciertos grupos raciales con menor representatividad
+den los datos toman demasiada información de las caras dominantes, lo cual produce sesgo para grupos de menor representatividad: las 
+imágenes procesadas tienden a parecerse más a la del grupo dominante. 
+
+
 
 ### Términos {-}
 
