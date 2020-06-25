@@ -15,7 +15,7 @@ Los puntos 1 y 2 son más difíciles de definir, y advertimos que cualquier téc
 los modelos con estos dos fines tienen varias dificultades que superar. El *aprendizaje automático*, como se usa
 tipicamente hoy en día, dificilmente se acerca a explicaciones causales o mecanísticas. 
 
-El punto 3 y 4, que veremos más abajo, son más suceptibles de análisis técnico. Los sesgos potenciales pueden ocurrir cuando en el proceso
+Los puntos 3 y 4, que veremos más abajo, son más suceptibles de análisis técnico. Los sesgos potenciales pueden ocurrir cuando en el proceso
 de aprendizaje se aprenden de características que son irrelevantes, pero caracterizan a los conjuntos de entrenamiento
 y validación/prueba que fueron utilizados.
 
@@ -61,10 +61,6 @@ variables problemáticas que reciben mucho peso en la predicción, en contra de 
 ```
 
 
-#### Ejemplo {-}
-
-
-
 
 ## Explicabilidad de predicciones individuales
 
@@ -93,5 +89,42 @@ Para modelos más simples (por ejemplo, lineales), pueden construirse explicacio
 
 ```
 
-#### Ejemplo {-}
+
+
+
+## Transparencia y auditabilidad
+
+En algunos casos, será necesario transparentar el funcionamiento de tanto datos usados, modelos predictivos particulares,
+objetivos de las políticas y la aplicación de las predicciones para alcanzar los objetivos de las políticas. Esto varía
+de aplicación a aplicación: por ejemplo, en el caso de acceso a un programa social, puede ser necesario que las 
+decisiones basadas en datos sean explicadas y documentadas en su totalidad, o al menos explicar cuáles son los
+datos que se están usando para tomar la decisiones acerca del acceso. En otros casos, será necesario explicar
+cómo fueron recogidos los datos, pero no necesariamente tienen que compartirse los datos o todos los detalles de procesamiento
+por razones de privacidad.
+
+```{block2, type='rmdnote'}
+**Reto: decisiones que no son transparentes**
+
+Dependiendo de la aplicación, distintas partes de la construcción y utilización pueden no estar explicadas
+y justificadas correctamente, de frente a usuarios, tomadores de decisiones, o población objetivo. Esto produce
+poca confianza en cuanto al funcionamiento de sistemas basados en datos.
+
+```
+
+
+
+```{block2, type='rmdtip'}
+**Medidas: transparencia**
+
+Los requisitos de transparencia deben ser definidos claramente y cumplidos con la documentación y datos correspondientes, pero
+pueden variar según el tipo de proyecto:
+
+- De ser necesario, los datos deben ser publicados en formatos abiertos, o debe explicarse cómo fueron recolectados
+y procesados.
+- De ser necesario, el código debe estar documentado y versionado. 
+- De ser necesario, deben proveerse herramientas o instrucciones para reproducir resultados con los que se tomaron decisiones.
+
+```
+
+
 
