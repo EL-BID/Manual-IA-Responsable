@@ -8,7 +8,7 @@ a hacer inteligible para humanos el funcionamiento de un algoritmo ([@molnar2019
 por las que tener cierto grado de interpretabilidad en los algoritmos que se usan para tomar decisiones es importante ([@molnar2019]):
 
 1. Aprendizaje acerca del dominio del problema.
-2. Aceptación social.
+2. Aspectos legales y aceptación social (tomadores de decisiones y afectados).
 3. Detección de sesgos potenciales de los algoritmos.
 4. Depuración y mejora de modelos.
 
