@@ -1,5 +1,4 @@
-# Retos de rendición de cuentas
-
+# Rendición de cuentas
 
 ## Interpretabilidad y explicación de predicciones.
 
