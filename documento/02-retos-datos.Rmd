@@ -24,8 +24,8 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 ```{block2, type='rmdnote'}
 **Reto: Estados indeseables o subóptimos en datos recolectados**
   
-- En primer lugar, aprendizaje de métricas que son indeseables desde el punto de vista de los tomadores de decisiones. Si las métricas que queremos predecir son producidas por un sistema que consideramos subóptimo ya que esconde sesgos discriminatorios el algoritmo entrenado replicará los mismos patrones que consideramos indeseables.  
 - Cuando las métricas objetivo son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
+
 ```
 
 #### Ejemplos {-}
