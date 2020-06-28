@@ -22,12 +22,13 @@ Uno de los primeros errores graves en este proceso es la no consideración de
 etapas robustas de validación y prueba de los modelos
 
 ```{block2, type='rmdnote'}
-**Reto: ausencia de muestras de validación**
+**Reto: ausencia o tamaño inadecuado de muestras de validación**
 
 Los resultados de la construcción de modelos se presentan según su desempeño
 con el conjunto de datos que se usó para entrenarlos. Las métricas de desempeño, en 
 este caso, en general no pueden utilizarse para evaluar el verdadero comportamiento del
-modelo para las nuevas muestras con las que se pretende usar.
+modelo para las nuevas muestras con las que se pretende usar. Muestras de validación muy chicas
+pueden ser inadecuadas para medir apropiadamente el desempeño.
   
 ```
 
@@ -40,7 +41,7 @@ que son en cualquier escenario difíciles de predecir.
 
 - (Cuantitativa 1) Construir muestras de validación y prueba preparadas adecuadamente, como discutiremos más adelante. Esto incluye tamaño apropiado para estimar el error con precisión razonable.
 
-- (Cuantitativa 2) Existen estrategias de remuestreo o consideraciones estadísticas teóricas fundamentadas para justificar la generalización del desempeño en entrenamiento.
+- (Cuantitativa 2) Estimar el error de estimación para las medidas de desempeño sobre validación y prueba. Existen estrategias de remuestreo o consideraciones estadísticas teóricas fundamentadas para justificar la generalización del desempeño en entrenamiento.
 
 ```
 
