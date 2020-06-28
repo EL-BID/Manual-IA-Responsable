@@ -1,52 +1,52 @@
 # Fuente y manejo de datos
 
-Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión de política pública. Censos, encuestas, registros administrativos, logs en páginas web e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen métricas que describen a la población objetivo o al fenómeno que estás buscando entender.
+Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión de política pública. Censos, encuestas, registros administrativos, logs en páginas web e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen mediciones que describen a la población objetivo o al fenómeno que estás buscando entender.
 
 Sin embargo, no siempre los datos recolectados tienen una frecuencia, desagregación o cobertura que los haga relevantes, o no tienen la calidad necesaria para ser utilizados. Por ejemplo, las encuestas diseñadas mediante muestreo probabilístico especifican por su diseño el tipo de análisis que se pueden hacer con ellas, pero este tipo de herramientas suelen levantarse con poca frecuencia y pueden ser insuficientes para capturar el movimiento de los patrones a estudiar. por otro lado, a información proveniente de registros administrativos o data proveniente de internet (interacción en redes sociales, visitas y analíticos en páginas web, etc) y telefonía (llamadas, ubicación por GPS, etc) suele tener una frecuencia mucho mayor, pero en pocos casos cubre a la población en su conjunto o no es de buena calidad.
 
 El primer conjunto de retos que tratamos es el que tiene qué ver con entender las limitantes de los datos disponibles para aplicar métodos de aprendizaje automático. Estos retos se pueden separar en dos grandes grupos:
 
-1. Calidad y relevancia de las métricas objetivo y métricas de entrada recolectadas
+1. Calidad y relevancia de las variable respuesta y atributos de entrada recolectadas
 2. Información incompleta acerca de la población objetivo
 
-## Calidad y relevancia de métrica objetivo
+## Calidad y relevancia de variable respuesta
 
-En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles son las mediciones ideales para la decisión que se considera tomar: i) Aprendizaje de métricas indeseables y ii) métrica proxy débil respecto a la métrica objetivo.
+En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles son las mediciones ideales para la decisión que se considera tomar: i) Aprendizaje de variables respuesta indeseables y ii) medición proxy débil respecto a la variable respuesta.
 
-Cuando la métrica objetivo es producida por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
+Cuando la variable respuesta es producida por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la variable respuesta, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
 
 #### Términos {-}
 
-- **Métrica objetivo**: medición que se considera ideal para tomar la decisión relevante. 
+- **Variable respuesta**: medición que se considera ideal para tomar la decisión relevante. 
 En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 
 ```{block2, type='rmdnote'}
 **Reto: Estados indeseables o subóptimos en datos recolectados**
   
-- Cuando las métricas objetivo son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la métrica objetivo, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
+- Cuando las variables respuesta son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la variable respuesta, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
 
 ```
 
 #### Ejemplos {-}
 
-- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir métricas respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
+- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir variables respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
 
 ```{block2, type='rmdtip'}
-**Medidas: especificación incorrecta de métrica objetivo**
+**Medidas: especificación incorrecta de variable respuesta**
 
-* (Cualitativa) Debe establecerse claramente que la utilización de la métrica objetivo seleccionada está alineada con los propósitos o políticas de los tomadores de decisiones.  
+* (Cualitativa) Debe establecerse claramente que la utilización de la variable respuesta seleccionada está alineada con los propósitos o políticas de los tomadores de decisiones.  
 * (Cuantitativo) Realizar un análisis exploratorio para identificar sesgos históricos o estados indeseables.
 
 ```
 
 
-El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las métricas objetivo ideales pueden producir algoritmos con consecuencias indeseables.
+El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las variable respuesta ideales pueden producir algoritmos con consecuencias indeseables.
 
 ```{block2, type='rmdnote'}
-**Reto: métrica proxy débil respecto a la métrica objetivo**
+**Reto: médición proxy débil respecto a la variable respuesta**
   
-- Las variables medidas corresponden pobremente a las métricas objetivo de interés.  
+- Las variables medidas corresponden pobremente a las variables respuesta de interés.  
 - Es indeseable desde el punto de vista de la política hacer aprendizaje automático de medidas sesgadas o poco apropiadas para la toma de decisiones.
 
 ```
@@ -69,21 +69,21 @@ privilegiados.
 - Supongamos un proyecto de ML busca pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el *número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida exacta de la demanda, porque puede ser que cuando los inventarios se agotan, los involucrados dejan de hacer requerimientos a los abastecedores. Pronosticar la demanda con estos datos puede incurrir en subestimaciónsubestimación, con el resultado de que reforzamos o empeoramos la escasez de medicamentos.
 
 - En una encuesta preguntamos a mujeres de menos de 18 años si está embarazada actualmente o no, junto con
-otras variables socioeconómicas. Esta pregunta da una métrica pobre si nos interesa predecir la probabilidad de
-embarazo adolescente según características socioeconómicas. Esta métrica puede ser pobre por incentivos de las
+otras variables socioeconómicas. Esta pregunta da una medición pobre si nos interesa predecir la probabilidad de
+embarazo adolescente según características socioeconómicas. Esta medición puede ser pobre por incentivos de las
 personas a no contestar verazmente la pregunta, lo cual puede ocurrir de manera diferencial en distintos grupos
 de vulnerabilidad.
 
 ---
 
 ```{block2, type='rmdtip'}
-**Medidas: mala correspondencia de métricas y objetivos**
+**Medidas: mala correspondencia de variables respuesta y objetivos**
 
-- (Cualitativa) Las métricas objetivo deben plantearse claramente, aunque sean ideales. Las métricas
-recogidas deben ser analizadas para entender qué tan adecuadas son para sustituir la métrica objetivo. 
-Se deben identificar sesgos sistemáticos o validez sobre de la métrica sustituto.
+- (Cualitativa) Las variables respuesta deben plantearse claramente, aunque sean ideales. Las mediciones
+recogidas deben ser analizadas para entender qué tan adecuadas son para sustituir la variable respuesta. 
+Se deben identificar sesgos sistemáticos o validez sobre de la medición sustituto.
 
-- (Cuantitativa) Estudios adicionales diseñados para capturar métrica objetivo y métrica seleccionada permiten comparar las dos, y entender si hay sesgos que corregir y con qué variables puede lograrse esto. 
+- (Cuantitativa) Estudios adicionales diseñados para capturar variable respuesta y medición seleccionada permiten comparar las dos, y entender si hay sesgos que corregir y con qué variables puede lograrse esto. 
 
 ```
 
