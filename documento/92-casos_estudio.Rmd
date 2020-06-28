@@ -9,7 +9,7 @@ Se utiliza el lenguaje de programación R, y los siguientes paquetes: @tidyverse
 @recipes, @themis, @rsample, @parsnip, @yardstick, @workflows, @tune, @knitr, 
 @patchwork.
 
-```{r}
+```{r, message=FALSE, warning = FALSE}
 library(tidyverse)
 library(recipes)
 library(themis)
