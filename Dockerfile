@@ -43,5 +43,6 @@ RUN install2.r --error \
      rsample tune workflows yardstick themis \ 
      ranger 
 
-RUN install2.r --error patchwork iml
+RUN install2.r --error patchwork iml xgboost pdp
+
 
