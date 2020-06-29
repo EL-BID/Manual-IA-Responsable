@@ -48,7 +48,7 @@ Este tipo de sesgo es difícil de detectar, pero principios de parsimonia y cono
 
 
 ```{block2, type='rmdtip'}
-**Medidas: sesgos potenciales y depuración**
+**Medidas de mitigación: sesgos potenciales y depuración**
 
 - (Cualitativa) Incluir todas las características disponibles para construir modelos aumenta el riesgo de
 que esto suceda. Las variables a incluirse en el proceso de aprendizaje deben tener algún sustento teórico o explicación 
@@ -81,7 +81,7 @@ robustas son:
 
 
 ```{block2, type='rmdtip'}
-**Medida: explicaciones individuales**
+**Medidas de mitigación: explicaciones individuales**
   
 Para explicar las predicciones pueden utilizarse métodos como el de explicaciones contrafactuales ([@wachter]),
 valores de Shapley ([@shapley]) o gradientes integrados para redes profundas ([@gradient]).
@@ -114,7 +114,7 @@ poca confianza en cuanto al funcionamiento de sistemas basados en datos.
 
 
 ```{block2, type='rmdtip'}
-**Medidas: transparencia**
+**Medidas de mitigación: transparencia**
 
 Los requisitos de transparencia deben ser definidos claramente y cumplidos con la documentación y datos correspondientes, pero
 pueden variar según el tipo de proyecto:

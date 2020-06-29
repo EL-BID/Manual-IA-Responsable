@@ -21,7 +21,7 @@ Cantidades con tasa total de positivos y negativos (incluyendo desagregaciones p
 distribución de predicciones y atributos o variables deben monitorearse en cada ronda de predicción.
 
 ```{block2, type='rmdtip'}
-**Medidas: degradación de predicciones**
+**Medidas de mitigación: degradación de predicciones**
 
 - Monitorear varias métricas asociadas a las predicciones, en subgrupos definidos con antelación 
 (incluyendo variables protegidas).
@@ -50,7 +50,7 @@ el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso d
 Pruebas con diseño experimental pueden planearse (pruebas de tipo A/B, o ver por ejemplo [@vaver]), cuando sea posible, para entender qué cambios particulares, deseables o indeseables, introduce el uso de los algoritmos.
 
 ```{block2, type='rmdtip'}
-**Medidas: evaluación de efectividad**
+**Medidas de mitigación: evaluación de efectividad**
 
 - Cuando sea posible, planear asignar bajo diseños experimentales tratamientos al azar (o según el status-quo) a algunas unidades. Hacer comparaciones de
 desempeño y comportamiento entre esta muestra y los resultados bajo el régimen algorítmico. 
