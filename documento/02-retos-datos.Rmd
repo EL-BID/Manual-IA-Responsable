@@ -15,8 +15,6 @@ En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra di
 
 Cuando la variable respuesta es producida por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la variable respuesta, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
 
-#### Términos {-}
-
 - **Variable respuesta**: medición que se considera ideal para tomar la decisión relevante. 
 En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
@@ -28,17 +26,18 @@ En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
 
 ```
 
-#### Ejemplos {-}
-
-- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir variables respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
-
 ```{block2, type='rmdtip'}
-**Medidas: especificación incorrecta de variable respuesta**
+**Medidas de mitigación: especificación incorrecta de variable respuesta**
 
 * (Cualitativa) Debe establecerse claramente que la utilización de la variable respuesta seleccionada está alineada con los propósitos o políticas de los tomadores de decisiones.  
 * (Cuantitativo) Realizar un análisis exploratorio para identificar sesgos históricos o estados indeseables.
 
 ```
+
+#### Ejemplos {-}
+
+- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir variables respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
+
 
 
 El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las variable respuesta ideales pueden producir algoritmos con consecuencias indeseables.
@@ -52,7 +51,20 @@ El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener di
 ```
 
 
-#### Ejemplos {-}
+```{block2, type='rmdtip'}
+**Medidas: mala correspondencia de variables respuesta y objetivos**
+
+- (Cualitativa) Las variables respuesta deben plantearse claramente, aunque sean ideales. Las mediciones
+recogidas deben ser analizadas para entender qué tan adecuadas son para sustituir la variable respuesta. 
+Se deben identificar sesgos sistemáticos o validez sobre de la medición sustituto.
+
+- (Cuantitativa) Estudios adicionales diseñados para capturar variable respuesta y medición seleccionada permiten comparar las dos, y entender si hay sesgos que corregir y con qué variables puede lograrse esto. 
+
+```
+
+
+
+#### Ejemplos (retos) {-}
 
 - Supongamos que una política se considera aplicar a personas de ingresos bajos. En nuestro conjunto de datos de entrenamiento/validación usamos una medición obtenida en una encuesta,
 según la pregunta, *¿cuánto estima usted que es el ingreso mensual de su familia?*, o algo similar.
@@ -74,21 +86,9 @@ embarazo adolescente según características socioeconómicas. Esta medición pu
 personas a no contestar verazmente la pregunta, lo cual puede ocurrir de manera diferencial en distintos grupos
 de vulnerabilidad.
 
----
-
-```{block2, type='rmdtip'}
-**Medidas: mala correspondencia de variables respuesta y objetivos**
-
-- (Cualitativa) Las variables respuesta deben plantearse claramente, aunque sean ideales. Las mediciones
-recogidas deben ser analizadas para entender qué tan adecuadas son para sustituir la variable respuesta. 
-Se deben identificar sesgos sistemáticos o validez sobre de la medición sustituto.
-
-- (Cuantitativa) Estudios adicionales diseñados para capturar variable respuesta y medición seleccionada permiten comparar las dos, y entender si hay sesgos que corregir y con qué variables puede lograrse esto. 
-
-```
 
 
-#### Ejemplos {-}
+#### Ejemplos (mitigación) {-}
 
 - En la estimación de ingreso, generalmente se utilizan fuentes de datos oficiales con
 metodología bien establecida para estimar el ingreso de un hogar. Tal metodología
@@ -104,7 +104,7 @@ construyendo experimentos que nos permitan observar la demanda en ciertas unidad
 
 
 
-## Información incompleta
+## Muestras naturales y diseñadas
 
 Cuando buscamos aplicar un método del aprendizaje automático en nuestro contexto, 
 la información puede ser incompleta de distintas maneras:
@@ -114,9 +114,8 @@ la información puede ser incompleta de distintas maneras:
 3. Tenemos datos del pasado y presente, pero no del futuro, que es cuando
 tenemos qué tomar decisiones.
 
-## Muestras naturales y diseñadas
 
-Los modelos de ML pretenden generar información para tomar acciones o políticas para toda la población objetivo, la situación usual es que sólo se tenga disponible una **muestra** de esta población, a partir
+En particular, los modelos de ML pretenden generar información para tomar acciones o políticas para toda la población objetivo, la situación usual es que sólo se tenga disponible una **muestra** de esta población, a partir
 de la cual queremos desarrollar predicciones o estimaciones que ayuden en la toma
 de decisiones posterior. 
 
@@ -161,7 +160,22 @@ y características útiles en la muestra pueden no aplicar en la población obje
 
 ```
 
-#### Ejemplo {-}
+```{block2, type='rmdtip'}
+**Medidas de mitigación: muestras naturales**
+
+- (Cualitativa) Entender y describir las dimensiones importantes en las cuales nuestra muestra puede ser diferente a la población,
+en particular sesgos de selección no medidos. Utilizar literatura relacionada con el tema, información de expertos. 
+
+- (Cuantitativa) Aunque los modelos pueden construirse con varias fuentes 
+de datos, diseñadas o naturales, 
+la **validación** debe llevarse a cabo idealmente con una muestra diseñada que permita 
+inferencia estadística a la población objetivo. La muestra de validación debe cubrir
+apropiadamente la población objetivo y subpoblaciones protegidas.
+
+```
+
+
+#### Ejemplo (muestras naturales) {-}
 
 Supongamos que nos interesa predecir la prevalencia de anemia en niños de una población objetivo
 dada. Decidimos 
@@ -180,22 +194,6 @@ no necesariamente generalizarán correctamente a la población total, y no es po
 una estimación confiable del error. Puede ser que la estructura predictiva
 para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural (ver por ejemplo @anemiaracial, donde se muestra que valores predictivos de anemia pueden ser distintos para distintos grupos raciales). 
 
-
-
-
-```{block2, type='rmdtip'}
-**Medidas: muestras naturales**
-
-- (Cualitativa) Entender y describir las dimensiones importantes en las cuales nuestra muestra puede ser diferente a la población,
-en particular sesgos de selección no medidos. Utilizar literatura relacionada con el tema, información de expertos. 
-
-- (Cuantitativa) Aunque los modelos pueden construirse con varias fuentes 
-de datos, diseñadas o naturales, 
-la **validación** debe llevarse a cabo idealmente con una muestra diseñada que permita 
-inferencia estadística a la población objetivo. La muestra de validación debe cubrir
-apropiadamente la población objetivo y subpoblaciones protegidas.
-
-```
 
 
 - La construcción de la muestra de validación debe ser producida idealmente bajo un diseño muestral que permita
@@ -269,10 +267,6 @@ razón por la que las observaciones son incompletas.
 
 ```
 
-Muchos proyectos de aprendizaje automático están destinados a fallar por ignorar variables o atributos que
-son importantes para predecir la variable objetivo. Adicionalmente, cuando existe información parcial acerca
-de los atributos, generalmente la ausencia de esa información muchas veces está asociado a características relevantes
-de la unidades para las que se quiere predecir.
 
 ```{block2, type='rmdtip'}
 **Medidas: atributos incompletos**
@@ -287,5 +281,11 @@ se deben utilizar métodos de imputación múltiple que permitan evaluar incerti
 
 ```
 
+
+
+Muchos proyectos de aprendizaje automático están destinados a fallar por ignorar variables o atributos que
+son importantes para predecir la variable objetivo. Adicionalmente, cuando existe información parcial acerca
+de los atributos, generalmente la ausencia de esa información muchas veces está asociado a características relevantes
+de la unidades para las que se quiere predecir.
 
 

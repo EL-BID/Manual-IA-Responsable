@@ -32,18 +32,19 @@ pueden ser inadecuadas para medir apropiadamente el desempeño.
   
 ```
 
-Este problema de validación inexistente o pobre ocurre muchas veces con **pronósticos de series de tiempo**, donde 
-generalmente tenemos poca información a futuro para garantizar buen desempeño, o se trata de procesos altamente dinámicos
-que son en cualquier escenario difíciles de predecir.
 
 ```{block2, type='rmdtip'}
-**Medida: ausencia de muestras de validación**
+**Medidas de mitigación: ausencia de muestras de validación**
 
 - (Cuantitativa 1) Construir muestras de validación y prueba preparadas adecuadamente, como discutiremos más adelante. Esto incluye tamaño apropiado para estimar el error con precisión razonable.
 
 - (Cuantitativa 2) Estimar el error de estimación para las medidas de desempeño sobre validación y prueba. Existen estrategias de remuestreo o consideraciones estadísticas teóricas fundamentadas para justificar la generalización del desempeño en entrenamiento.
 
 ```
+
+Este problema de validación inexistente o pobre ocurre muchas veces con **pronósticos de series de tiempo**, donde 
+generalmente tenemos poca información a futuro para garantizar buen desempeño, o se trata de procesos altamente dinámicos
+que son en cualquier escenario difíciles de predecir.
 
 Argumentos teóricos requieren cuidado adicional, y sus supuestos deben ser evaluados. Casos particulares como el de series
 de tiempo requiere de estrategias de validación adaptadas (ver por ejemplo @hyndman).
@@ -64,20 +65,24 @@ Si alguna parte de los datos de validación/prueba se utiliza en la construcció
 
 ```
 
-#### Ejemplo {-}
-
-Validación cruzada con selección de variables usando todos los datos [@ESL].
-
 ```{block2, type='rmdtip'}
-**Medidas: fugas entrenamiento validación**
+**Medidas de mitigación: fugas entrenamiento validación**
 
 Cualquier procesamiento y preparación de datos de entrenamiento debe evitar usar los datos de validación o prueba de ninguna manera. Se debe mantener una barrera sólida entre entrenamiento vs validación y prueba.
   
 ```  
 
+
 Esto incluye recodificación de datos, normalizaciones, selección de variables, identificación de datos atípicos y cualquier otro tipo de preparación de cualquier variable a ser incluida en los modelos. Esto incluye también 
 ponderaciones o balance de muestras basados en sobre/sub muestreo.
 
+
+
+#### Ejemplo {-}
+
+Validación cruzada con selección de variables usando todos los datos [@ESL] (ver ejemplo de apéndice)
+
+Las fugas de datos pueden ocurrir también al momento de poner en producción:
 
 ```{block2, type='rmdnote'}
 **Reto: fugas de datos no disponbiles en la predicción**
@@ -89,8 +94,19 @@ tiene ver con temporalidad de los datos o agrupaciones particulares.
 
 ```
 
+```{block2, type='rmdtip'}
+**Medida: fugas de datos no disponbiles en la predicción**
 
-#### Ejemplo {-}
+El esquema de validación debe **replicar tan cerca como sea posible** el esquema
+bajo el cual se aplicarán las predicciones. Esto incluye que hay que replicar
+  
+- Ventanas temporales de observación y registro de variables y ventanas de predicción
+- Si existen grupos en los datos, considerar si tendremos información disponible de cada grupo cuando hacemos la predicción, o es necesario predecir para nuevos grupos.
+
+```
+
+
+#### Ejemplo (retos) {-}
 
 Un modelo hace predicción de actividad criminal en distintas zonas geográficas para el 
 tiempo $t$. En la extracción de datos se usa como variable de entrada el número de
@@ -111,19 +127,10 @@ las predicciones. La variable a predecir ocurre en el futuro.
 Este tipo de error generalmente produce modelos que parecen muy optimistas,
 y ocurre de muchas maneras. 
 
-```{block2, type='rmdtip'}
-**Medida: fugas de datos no disponbiles en la predicción**
-
-El esquema de validación debe **replicar tan cerca como sea posible** el esquema
-bajo el cual se aplicarán las predicciones. Esto incluye que hay que replicar
-  
-- Ventanas temporales de observación y registro de variables y ventanas de predicción
-- Si existen grupos en los datos, considerar si tendremos información disponible de cada grupo cuando hacemos la predicción, o es necesario predecir para nuevos grupos.
-
-```
 
 
-#### Ejemplo {-}
+
+#### Ejemplo (mitgación) {-}
 
 Supongamos que queremos predecir, en varias regiones o ciudades, el daño de edificios a partir de fotos aéreas después de un temblor, usando como variable respuesta peritajes de los edificios seleccionados. En la validación podríamos cometer el error de no respetar la agrupación regional, y el modelo podría parecer dar buenas predicciones. En la realidad, aplicaríamos para una región sobre la cual no tenemos información. La validación debe considerar la necesidad de predecir para puntos en regiones enteras sin tener información adicional de tal región (es decir, la validación debe estratificar por región). 
 
@@ -144,12 +151,9 @@ se toman con criterios vagamente relacionados con el contexto de la decisión
 
 ```
 
-Muchas veces
-se toma erróneamente un punto de corte de 1/2 para clasificación binaria, por ejemplo. Esta decisión se toma fuera del contexto de la decisión que se quiere tomar.
-
 
 ```{block2, type='rmdtip'}
-**Medida: puntos de corte arbitrario**
+**Medida de mitigación: puntos de corte arbitrario**
 
 - En problemas de clasificación ruidosos (no es posible acercarse a tener certidumbre para muchos casos), las **probabilidades de clasificación** en cada clase son instrumentos más apropiados para la toma de decisiones.
 - Costos y utilidades pueden utilizarse, en combinación con las probabilidades, para tomar mejores decisiones caso por caso.
@@ -158,7 +162,8 @@ se toma erróneamente un punto de corte de 1/2 para clasificación binaria, por 
 
 
 
-#### Ejemplo: churn de clientes, evaluación de alumnos {-}
+Muchas veces
+se toma erróneamente un punto de corte de 1/2 para clasificación binaria, por ejemplo. Esta decisión se toma fuera del contexto de la decisión que se quiere tomar.
 
 ## Clasificación: Datos desbalanceados
 
@@ -180,7 +185,7 @@ En datos con desbalance grande, **predictores de clase** pueden tener desempeño
 La solución es considerar las probabilidades de clase como salida principal:
 
 ```{block2, type='rmdtip'}
-**Medidas: desbalance de clases**
+**Medidas de mitigación: desbalance de clases**
 
   
 - Hacer **predicciones de probabilidad** en lugar de clase. Estas probabilidades pueden ser incorporadas al proceso de decisión posterior como tales. Evitar puntos de corte estándar de probabilidad como 0.5, o predecir según máxima probabilidad.
@@ -195,9 +200,6 @@ La solución es considerar las probabilidades de clase como salida principal:
 - Consideremos que tenemos 1 millón de datos, 999 mil negativos y mil positivos. Puede ser buena idea submuestrar los negativos por una fracción dada (por ejemplo 10%) ponderando cada caso muestreado por 10 en el ajuste y el postproceso. 
 
 - Consideremos que tenemos 1 millón de datos, 999,950 mil negativos y 50 positivos. Puede ser imposible discriminar apropiadamente los 50 datos positivos. Construir conjuntos de validación empeora la situación: no es posible validar el desempeño predictivo ni construir un modelo con buen desempeño.
-
-#### Ejemplo: CTR en ligas  (Google) {-}
-
 
 **Observaciones**:
 
@@ -375,7 +377,7 @@ En la práctica puede considerarse cuál es más apropiado. Equidad de oportunid
 introduce criterios de justicia algorítmica permitiendo también optimizar otros resultados deseables.
 
 ```{block2, type='rmdtip'}
-**Medidas: definición de justicia algorítmica**
+**Medidas de mitigación: definición de justicia algorítmica**
 
 - (Cualitativa) Identificar grupos o atributos protegidos. (por ejemplo: género, raza, nivel de marginación, etc)
 
@@ -384,12 +386,8 @@ introduce criterios de justicia algorítmica permitiendo también optimizar otro
 
 ```
 
-#### Ejemplo {-}
-
-Supongamos que se quiere crear un sistema para la selección de beneficiarios a una beca escolar para una universidad reconocida. La institución define como como variable protegida la pertenencia a una comunidad indígena (que supondremos en este caso toma dos valores: se autodenomina indígena o no se autodenomina indígena). El predictor satisface **equidad de posibilidades** cuando tanto la tasa de falsos positivos como la de falsos negativos son iguales para personas indígenas como personas que no lo son.
-
 ```{block2, type='rmdtip'}
-**Medidas: inequidad algorítmica**
+**Medidas de mitigación: inequidad algorítmica**
 
 - Cuando existen atributos protegidos, debe evaluarse qué tanto se alejan las predicciones de la **equidad de posibilidades
 o de oportunidad**
@@ -403,4 +401,11 @@ predictivo en grupos minoritarios.
 
 Esto en general implica que además de la decisión tomada en función de las predicciones depende de esta métrica adicional 
 de equidad, y no solo del análisis costo-beneficio.
+
+
+
+#### Ejemplo {-}
+
+Supongamos que se quiere crear un sistema para la selección de beneficiarios a una beca escolar para una universidad reconocida. La institución define como como variable protegida la pertenencia a una comunidad indígena (que supondremos en este caso toma dos valores: se autodenomina indígena o no se autodenomina indígena). El predictor satisface **equidad de posibilidades** cuando tanto la tasa de falsos positivos como la de falsos negativos son iguales para personas indígenas como personas que no lo son.
+
 
