@@ -1,3 +1,53 @@
+# Lista de verificación de IA robusta y responsable
+
+## . Fuente y manejo de datos
+
+ - [ ] **.1 Calidad y relevancia de las variables**:  
+ 
+  - ¿Hemos justificado claramente la utilización de la variable respuesta seleccionada bajo los propósitos de la intervención?
+  - ¿Hemos examinado los datos en busca de posibles sesgos históricos o estados indeseables?
+  - ¿Nos hemos asegurado de que el modelo no se base en variables o en indicadores sustitutivos de variables que sean injustamente discriminatorias?
+  
+ - [ ] **.2 Información incompleta y comparación causal**:
+  - ¿Hemos analizado y descrito las posibles diferencias entre nuestra muestra y la población a la que le queremos aplicar la intervención? ¿en particular tomar en cuenta sesgos de selección no medidos?
+
+
+## . Desarrollo de modelos
+
+ - [ ] **. Ausencia y errores de validación**:
+  ¿Hemos identificado posibles fuentes de fugas de información entre el set de entrenamiento y evaluación?
+  ¿Hemos considerado un tamaño apropiado para la muestra de validación para estimar el error con precisión razonable?
+  
+ - [ ] **. Datos desbalanceados y clases**: 
+ 
+
+ - [ ] **. Sobre y subajuste**: 
+
+ - [ ] **. Equidad y desempeño diferencial**: ¿Hemos comprobado la equidad de los resultados del modelo con respecto a los diferentes grupos afectados (por ejemplo, hemos comprobado la existencia de tasas de error dispares)?
+ 
+ 
+## . Uso y monitoreo
+
+ - [ ] **. Comunicar el sesgo**: ¿Hemos comunicado las deficiencias, limitaciones y sesgos del modelo a las partes interesadas pertinentes de manera que se pueda comprender en general?
+ 
+ - [ ] **. Degradación de desempeño**: ¿Existe un plan para monitorear el desempeño del modelo y la recolección de información a lo largo del tiempo?
+
+ - [ ] **.  **: ¿Hemos discutido con nuestra organización un plan de respuesta en caso de que los usuarios se vean perjudicados por los resultados (por ejemplo, cómo evalúa el equipo de ciencias de los datos estos casos y actualiza los análisis y modelos para prevenir futuros daños)?
+ - [ ] **. **: ¿Hay alguna manera de apagar o hacer retroceder el modelo en producción si es necesario?
+
+ - [ ] **. Uso no intencional**: ¿Hemos tomado medidas para identificar y prevenir los usos no intencionados y el abuso del modelo y tenemos un plan para monitorear estos una vez que el modelo sea desplegado?
+
+
+## Rendición de cuentas
+
+ - [ ] **. Interpretabilidad**: ¿Podemos explicar en términos comprensibles una decisión que el modelo tomó en los casos en que se necesita una justificación?
+
+ - [ ] **. Explicabilidad**: ¿Existe algún proceso para dar explicaciones a un individuo en particual sobre por qué se tomó una decisión?
+ 
+  - [ ] **. Transparencia y auditabilidad**: ¿Está bien documentado el proceso de ingesta, transformación y modelado?
+
+
+
 # Rubrica para aplicación de ML/IA en toma de decisiones
 
 La rúbrica que presentamos aquí está derivada de la publicada en (@Mitchell). Consiste de los siguientes
