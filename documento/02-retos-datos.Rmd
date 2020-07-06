@@ -1,4 +1,4 @@
-# 1. Fuente y manejo de datos
+# Fuente y manejo de datos
 
 Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión de política pública. Censos, encuestas, registros administrativos, logs en páginas web e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen mediciones que describen a la población objetivo o al fenómeno que estás buscando entender.
 
@@ -9,13 +9,13 @@ El primer conjunto de retos que tratamos es el que tiene qué ver con entender l
 1. Calidad y relevancia de las variable respuesta y atributos de entrada recolectadas
 2. Información incompleta acerca de la población objetivo
 
-## 1.1 Calidad y relevancia de variable respuesta
+## Calidad y relevancia de variable respuesta
 
 Se debe considerar qué tipo de mediciones tenemos a nuestra disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles son las mediciones ideales para la decisión que se considera tomar: i) Aprendizaje de variables respuesta indeseables y ii) medición proxy débil respecto a la variable respuesta.
 
 - **Variable respuesta**: medición que se considera ideal para tomar la decisión relevante. En la aplicación, esa variable ideal puede no existir o no ser viable de obtener y se suele utilizar una variable proxy. 
 
-### 1.1.1 Reto: Estados indeseables o subóptimos en datos recolectados
+### Reto: Estados indeseables o subóptimos en datos recolectados
 
 ```{block2, type='rmdnote'}
 - Cuando las variables respuesta son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la variable respuesta, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
@@ -34,7 +34,7 @@ Se debe considerar qué tipo de mediciones tenemos a nuestra disposición para a
 
 - Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir variables respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
 
-### 1.1.2 Reto: médición proxy débil respecto a la variable respuesta
+### Reto: médición proxy débil respecto a la variable respuesta
 
 El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las variable respuesta ideales pueden producir algoritmos con consecuencias indeseables.
 
@@ -79,7 +79,7 @@ construyendo experimentos que nos permitan observar la demanda en ciertas unidad
 
 
 
-## 1.2 Muestras naturales y diseñadas
+## Muestras naturales y diseñadas
 
 Cuando buscamos aplicar un método del aprendizaje automático en nuestro contexto, 
 la información puede ser incompleta de distintas maneras:
@@ -125,7 +125,7 @@ para calificar como apropiada la construcción de modelos ni la validación. Por
 La situación ideal es la de muestreo probabilístico.  En este caso, podemos entender exactamente qué subpoblaciones se muestrearon, a qué tasas, y cómo se relacionan estas tasas con las tasas poblacionales. El diseño de la muestra determina nuestro alcance inferencial. Sin embargo, tener una muestra probabilistica no es siempre posible. 
 
 
-### 1.2.1 Reto: muestras naturales
+### Reto: muestras naturales
 
 Modelos de predicción construidos para muestras naturales no necesariamente generalizarán correctamente a la población total, y no es posible tener una estimación confiable del error. Puede ser que la estructura predictiva para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural (ver por ejemplo @anemiaracial, donde se muestra que valores predictivos de anemia pueden ser distintos para distintos grupos raciales). 
 
@@ -171,7 +171,7 @@ metodología de muestreo (ver @lohr).
 Supongamos que nos interesa predecir la prevalencia de anemia en niños de una población objetivo dada. Decidimos acudir a hospitales que "corresponden" a la población objetivo para aplicar las pruebas correspondientes a pacientes en el rango de edad de interés.  La prevalencia de anemia que encontremos en esta muestra tendrá error desconocido, posiblemente grande, como estimación de la prevalencia en la población objetivo. 
 
 
-## 1.3 Comparación causal
+## Comparación causal
 
 Cuando los humanos racionalizan el mundo lo intentan comprender en términos de causa y efecto - si entendemos por qué ocurrió algo, podemos alterar nuestro comportamiento para cambiar resultados futuros. Buscar comparaciones predictivas o contrafactuales de algún tratamiento o variable con datos de muestras que no tienen algún tipo de diseño experimental del tratamiento o variable pueden ser muy lejanas de comparaciones causales al aplicarse en la realidad. 
 
@@ -198,9 +198,9 @@ ser poco apropiadas para hacer inferencia causal, y a la inversa, datos experime
 causales correctas en la muestra seleccionada, pero tener dificultades para generalizar a una población objetivo.
 
 
-## 1.4 Atributos incompletos
+## Atributos incompletos
 
-### 1.4.1 Reto: atributos faltantes o incompletos
+### Reto: atributos faltantes o incompletos
 
 ```{block2, type='rmdnote'}
 

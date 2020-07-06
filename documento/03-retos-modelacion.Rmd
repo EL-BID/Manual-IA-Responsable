@@ -1,4 +1,4 @@
-# 2. Desarrollo de modelos
+# Desarrollo de modelos
 
 En primer lugar, consideramos el proceso usual de construcción de métodos predictivos 
 con aprendizaje automático [@ESL], [@kuhn]:
@@ -16,12 +16,12 @@ Esto generalmente involucra al menos dos muestras (1 y 2), y de preferencia tres
 
 ![](images/etapas-modelo.png)
 
-## 2.1 Ausencia de validación
+## Ausencia de validación
 
 Uno de los primeros errores graves en este proceso es la no consideración de
 etapas robustas de validación y prueba de los modelos
 
-### 2.1.1 Ausencia o tamaño inadecuado de muestras de validación
+### Ausencia o tamaño inadecuado de muestras de validación
 ```{block2, type='rmdnote'}
 Los resultados de la construcción de modelos se presentan según su desempeño
 con el conjunto de datos que se usó para entrenarlos. Las métricas de desempeño, en 
@@ -46,7 +46,7 @@ generalmente tenemos poca información a futuro para garantizar buen desempeño,
 que son en cualquier escenario difíciles de predecir. Argumentos teóricos requieren cuidado adicional, y sus supuestos deben ser evaluados. Casos particulares como el de series de tiempo requiere de estrategias de validación adaptadas (ver por ejemplo @hyndman).
 
 
-## 2.2 Fugas de información
+## Fugas de información
 
 Las fugas de información [@kaufman] ponen en duda la validación de modelos como manera de estimar el desempeño en producción de los métodos de aprendizaje automático. Esto ocurre de dos maneras:
 
@@ -79,7 +79,7 @@ ponderaciones o balance de muestras basados en sobre/sub muestreo.
 Validación cruzada con selección de variables usando todos los datos [@ESL] (ver ejemplo de apéndice) 
 Las fugas de datos pueden ocurrir también al momento de poner en producción:
 
-### 2.2.1 Fugas de datos no disponbiles en la predicción
+### Fugas de datos no disponbiles en la predicción
 
 ```{block2, type='rmdnote'}
 Algunos modelos son riesgosos de poner en producción 
@@ -129,13 +129,13 @@ Supongamos que queremos predecir, en varias regiones o ciudades, el daño de edi
 
 
 
-## 2.3 Clasificación: probabilidades y clases
+## Clasificación: probabilidades y clases
 
 En muchos problemas de clasificación, por su naturaleza, es difícil acercarse
 a tener certidumbre acerca de la clase de una observación según sus covariables. En
 estos casos, es más útil usar probabilidades 
 
-### 2.3.1 Puntos de corte arbitrario
+### Puntos de corte arbitrario
 
 En problemas de clasificación, los puntos de corte o decisiones de clasificación se toman con criterios vagamente relacionados con el contexto de la decisión. 
 
@@ -176,7 +176,7 @@ Aún utilizando estos criterios se termina no teniendo información completa par
 ```
 
 
-### 2.3.2 Clasificación: Datos desbalanceados
+### Clasificación: Datos desbalanceados
 
 En problemas de clasificación muchas veces se presenta el problema de que algunas
 clases tienen representación relativamente baja (por ejemplo, clases con menos de 1% de los
@@ -212,7 +212,7 @@ La solución es considerar las probabilidades de clase como salida principal:
 - Es importante recordar que los procesos de sub y sobre muestreo se tienen que realizar de forma posterior a la separación de la muestra en (entrenamiento, evaluación y validación) ya que de otra forma se puede tener fuga de información.
 
 
-## 2.4 Subajuste y sobreajuste
+## Subajuste y sobreajuste
 
 Subajuste y sobreajuste ocurren cuando la información predictiva en los datos es usada de manera poco apropiada para el objetivo final del aprendizaje automatizado que es la generalización del aprendizaje y su uso en conjuntos de datos no observados en el entrenamiento. 
 
@@ -245,7 +245,7 @@ Aunque sub y sobre ajuste puede producir resultados predictivos subóptimos, pue
 **Ejemplo (sesgo en procesamiento de caras)**: Algunos algoritmos de preprocesamiento o afinación de fotos de caras tienden a producir caras del tipo racial que domina las datos. Este es un ejemplo de subajuste, donde en ciertos grupos raciales con menor representatividad den los datos toman demasiada información de las caras dominantes, lo cual produce sesgo para grupos de menor representatividad: las imágenes procesadas tienden a parecerse más a la del grupo dominante. 
 
 
-## 2.5 Errores no cuantificados y evaluación humana
+## Errores no cuantificados y evaluación humana
 
 En muchos casos, existirán aspectos del modelo que no son medidos por las métricas de desempeño que hemos
 escogido, relacionado con sesgo particular de las predicciones o desviaciones sistemáticas en las predicciones
@@ -258,7 +258,7 @@ o prefiera documentos de tipo promocional o propagandístico. Las razones pueden
 errores de preprocesamiento (algunos atributos mal calculados), selección de atributos para
 hacer las predicciones que consideran sólo una parte del problema.
 
-## 2.5.1 Fallas no medidas por el modelo
+## Fallas no medidas por el modelo
 ```{block2, type='rmdnote'}
 
 Algoritmos o métodos predictivos producen resultados que de mala calidad según aspectos no medidos
@@ -290,7 +290,7 @@ se preveen, incluyendo tomadores de decisiones si es necesario.
 
 
 
-## 2.6 Equidad y desempeño diferencial de predictores
+## Equidad y desempeño diferencial de predictores
 
 Métodos basados en aprendizaje automático pueden generar predicciones, que cuando no son usadas apropiadamente
 en la toma de decisiones, pueden producir resultados injustos o discriminatorios ([@boulamwini], [@barocas], [@bolukbasi]). Que pueden estar ocasionadas por todos los retos antes mencionados, tanto de la fuente y manejo de datos como de errores en el desarrollo del modelo.
@@ -299,7 +299,7 @@ En primer lugar, es importante recordar que la evaluación de los resultados de 
 
 Aunque el análisis de las implicaciones éticas en los modelos de aprendizaje automatizado y la relación que estas tienen con una definición de justicia es aún un campo de estudio abierto, existe una importante literatura que busca operacionalizar definiciones matemáticas de equidad en los modelos para describir su imparcialidad o discriminación entre subgrupos y tomar decisiones que mitiguen resultados no deseados. 
 
-### 2.6.1 Definición de justicia algorítmica
+### Definición de justicia algorítmica
 
 ```{block2, type='rmdnote'}
 Aún conociendo el verdadero valor de la variable que queremos predecir, las predicciones de un método dado dependen

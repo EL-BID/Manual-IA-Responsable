@@ -50,9 +50,8 @@ Por otra parte, la evaluación de un sistema de aprendizaje automatizado no tien
 
 La IA no sustituye a la política pública ya que por sí misma no soluciona el problema social, su función es asistir en la toma de decisión proveyendo información para segmentar, clasificar, asociar o predecir. 
 
-1. **(Identificación del problema)** Se debe iniciar identificando correctamente el problema social en el que la política pública busca impactar, identificando sus posbiles causas y consecuencias. 
+1. **(Identificación del problema)** Se debe iniciar identificando correctamente el problema social en el que la política pública busca impactar, identificando sus posibles causas y consecuencias. 
 1. **(Formulación de intervención)**  Se formula la intervención o política que se está considerando aplicar a ciertas personas, unidades o procesos. Supondremos generalmente que se tiene evidencia del beneficio de esa política cuando se aplica a la población objetivo.
-2. **(Universal o focalización)** Se define si la intervención o política pretende aplicarse a toda la población o focalizarse a ciertas unidades o circunstancias para mejorar resultados u optimizar el uso de recursos limitados.
 3. **(Sistema de toma/soporte de decisión)** Una vez definida la intervención y los criterios de su implementación si esta  depende del conocimiento de características desconocidas de las personas, unidades o procesos. Se utilizan entonces sistemas de soporte de decisión basados en métodos de ML para su correcta implementación.
 
 4. **(Implementación de política)** Lorem
