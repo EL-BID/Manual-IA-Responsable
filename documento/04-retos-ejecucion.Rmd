@@ -8,17 +8,14 @@ Una vez que los métodos de aprendizaje automático se comienzan utilizar para t
 
 ## Degradación de desempeño
 
- 
-```{block2, type='rmdnote'}
-**Reto: degradación de predicciones **
+### Reto: degradación de predicciones 
 
-  El desempeño de un modelo puede degradarse en el tiempo, debido a cambios en la población sobre la que se
-hacen predicciones
+```{block2, type='rmdnote'}
+  El desempeño de un modelo puede degradarse en el tiempo debido a cambios en la población sobre la que se hacen predicciones o por el cambio en la metodología de levantamiento o la calidad de los datos recolectados. 
 
 ```
 
-Cantidades con tasa total de positivos y negativos (incluyendo desagregaciones por otras variables protegidas o de interés), 
-distribución de predicciones y atributos o variables deben monitorearse en cada ronda de predicción.
+Cantidades con tasa total de positivos y negativos (incluyendo desagregaciones por otras variables protegidas o de interés), distribución de predicciones y atributos o variables deben monitorearse en cada ronda de predicción.
 
 ```{block2, type='rmdtip'}
 **Medidas de mitigación: degradación de predicciones**
@@ -36,8 +33,9 @@ según alguna rúbrica o mediciones de las variable que se busca predecir.
 
 ## Experimentos y recopilación de datos
 
-La forma y los datos que se recopilan para mantenimiento de los algoritmos de predicción debe planearse con 
-el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso de los algoritmos
+### Reto: evaluación de efectividad
+
+La forma y los datos que se recopilan para mantenimiento de los algoritmos de predicción debe planearse con el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso de los algoritmos
 
 ```{block2, type='rmdnote'}
 **Reto: evaluación de efectividad**

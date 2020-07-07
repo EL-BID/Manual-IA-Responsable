@@ -27,9 +27,11 @@ de toma de decisiones:
 
 2. **Sistemas de toma de decisión**: Las decisiones se toman automáticamente, sin intervención humana directa. Por ejemplo, inclusión de individuos en programas sociales, u otorgamiento de créditos al consumo.
 
-Debe notarse que el primer esquema es el más apropiada para decisiones individuales de alto riesgo o beneficio. 
 
-Esta guía no pretende discutir métodos particulares de aprendizaje automático. En la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general que se deben de considerar para el desarrollo de un sistema de soporte/toma de decisión exitoso. **En este documento** no se describirán técnicas o modelos particulares  (ver por ejemplo @ESL, @kuhn, @GelmanHill). 
+El primer punto que se tiene que presente y es guía de este documento es que en la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general que se deben de considerar para el desarrollo de un sistema de soporte/toma de decisión exitoso. 
+
+En la construcción y en los métodos particulares de los sistemas de aprendizaje automático existen una gran variedad de técnicas, conocimiento experto del tema y de modelación en general que se deben de considerar para el desarrollo de un sistema de soporte/toma de decisión exitoso. 
+En esta guía no pretende discutir métodos particulares de aprendizaje automático (ver por ejemplo @ESL, @kuhn, @GelmanHill).
 
 Por otra parte, la evaluación de un sistema de aprendizaje automatizado no tiene sentido fuera de su contexto, preguntas como: ¿Cuál es una tasa de error apropiado? o ¿cuáles son sesgos poco aceptables?, entre otras, sólo pueden considerarse dentro del contexto específico de su aplicación y de los propósitos y motivaciones de los tomadores de decisiones. Esto quiere decir que, aunque mucha de la discusión se concentra en aspectos técnicos, métricas particulares de desempeño o métodos de ML, al final ninguna de estas discusiones tiene sentido fuera del contexto de **la decisión** que se quiere tomar
 
@@ -37,7 +39,7 @@ Por otra parte, la evaluación de un sistema de aprendizaje automatizado no tien
 ```{block2, type='rmdpunto'}
 **Principio guía 1**
 
-- El manual se concentrará en los retos de los sistemas de toma/soporte de decisión que se dan durante las fases de "fuente de datos y su manejo", "desarrollo del modelo", "uso y evaluación" y "rendición de cuentas". 
+- El manual se concentrará en la **evaluación** técnica de los sistemas de toma/soporte de decisión durante su ciclo de vida, desde el procesamiento de datos hasta la evaluación y monitoreo.
 
 - La evaluación sólo tiene sentido en términos del contexto de la decisión, y de los
 **resultados que son deseables para los tomadores de decisiones**, instituciones o compañías involucradas.
@@ -47,12 +49,14 @@ Por otra parte, la evaluación de un sistema de aprendizaje automatizado no tien
 
 ## Componentes de un sistema de IA y retos
 
+La IA no sustituye a la política pública, su función es unicamente asistir en la toma de decisiones proveyendo información para segmentar, clasificar, asociar o predecir. El ciclo de política pública asistido por IA está compuesto por las siguientes etapas: 
 
-La IA no sustituye a la política pública ya que por sí misma no soluciona el problema social, su función es asistir en la toma de decisión proveyendo información para segmentar, clasificar, asociar o predecir. 
-
-1. **(Identificación del problema)** Se debe iniciar identificando correctamente el problema social en el que la política pública busca impactar, identificando sus posibles causas y consecuencias. 
-1. **(Formulación de intervención)**  Se formula la intervención o política que se está considerando aplicar a ciertas personas, unidades o procesos. Supondremos generalmente que se tiene evidencia del beneficio de esa política cuando se aplica a la población objetivo.
-3. **(Sistema de toma/soporte de decisión)** Una vez definida la intervención y los criterios de su implementación si esta  depende del conocimiento de características desconocidas de las personas, unidades o procesos. Se utilizan entonces sistemas de soporte de decisión basados en métodos de ML para su correcta implementación.
+1. **(Identificación del problema)** Todo proyecto de IA debe iniciar identificando correctamente el problema social en el que la política pública busca impactar, identificando sus posibles causas y consecuencias. 
+2. **(Formulación de intervención)**  Se formula la intervención o política que se está considerando aplicar a ciertas personas, unidades o procesos. Supondremos generalmente que se tiene evidencia del beneficio de esa política cuando se aplica a la población objetivo.
+3. **(Sistema de toma/soporte de decisión)** Una vez definida la intervención, se pueden utilizar entonces sistemas de toma/soporte de decisión para estimar o predecir variables desconocidas de la población.  Ejemplos de esto puede ser:
+  - a.	Sistemas de alerta temprana. Por ejemplo, actividad criminal, fenómenos meteorológicos o enfermedades.
+  - b.	Predicción del desempeño de alumnos en un sistema educativo, Modelos de generación de scoring para créditos
+  - c.	Sistemas de recomendación para vacantes laborales o personalización de materiales educativos.
 
 4. **(Implementación de política)** Lorem
 
@@ -60,19 +64,13 @@ La IA no sustituye a la política pública ya que por sí misma no soluciona el 
 
 ![Ciclo de diseño de política pública](images/ciclo_politica.png)
 
-Este manual se enfoca en el diseño del sistema de toma o soporte de decisión. Ejemplos de esto puede ser:
-
-- Predicción y alerta temprana de deserción escolar  (unidad individuo)
-- Predicción de ingresos trimestrales para hogares (unidad hogar)
-- Predicción de eventos riesgosos, por ejemplo actividad criminal (unidad zona geográfica)
-- Predicción de qué documentos o artículos sería útil sugerir dada una búsqueda (unidad
-usuario-búsqueda)
+El objetivo es entonces entender cómo la calidad, tipo de predicciones o estimaciones pueden influir en la toma de decisiones, y más adelante, en el resultado global de la intervención.
 
 
 ```{block2, type='rmdpunto'}
 **Principio guía 2**
 
-En este documento, nos concentramos en la parte de **Sistema de toma/soporte de decisión**, y cómo deficiencias o lagunas en el proceso de validación puede producir resultados indeseables en la **toma de decisión**
+Este manual, se concentra en el **Sistema de toma/soporte de decisión**, y cómo deficiencias o lagunas en el proceso de validación puede producir resultados indeseables en la **toma de decisiones**.
 ```
 
 \pagebreak
@@ -85,7 +83,7 @@ El ciclo de desarrollo de un sistema de soporte de decisión con IA normalmente 
 
 Este libro describe en cuatro secciones los problemas más comunes dentro del ciclo de vida de la IA, presenta diagnósticos para detectarlos y sugerencias para mitigarlos:
 
-1. **Fuente y manejo de datos**: que se refieren principalmente a deficiencias, sesgos y al proceso que genera los datos utilizados (Ntoutsi et al. 2020). Este es un punto de bloqueo para muchas aplicaciones.
+1. **Fuente y manejo de datos**: que se refieren principalmente a deficiencias, sesgos y al proceso que genera los datos utilizados (Ntoutsi et al. 2020). 
 2. **Desarrollo de modelos**: que se refiere a métodos y principios importantes para construir modelos robustos y validados correctamente.
 3. **Uso y monitoreo**: que se refiere a la interpretación del modelo, evaluación una vez puesto en producción y principios de monitoreo para evitar consecuencias inesperadas.
 4. **Rendición de cuentas**: que se refiere al entendimiento o la capacidad de explicar cómo es que métodos automatizados toman ciertas decisiones.

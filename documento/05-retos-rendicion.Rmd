@@ -39,7 +39,7 @@ dañar el desempeño conforme observamos desplazamiento en datos futuros.
 
 - Algoritmos o métodos predictivos que usan una gran cantidad de atributos poco importantes tienen más riesgo de fallar
 tanto explícitamente como de forma silenciosa cuando las fuentes de datos o los procesos generadores de datos cambian. 
-Ambas fallas pueden ser difíciles de diagnosticar y depurar. Fallas silenciosas representar riesgos adicionales.
+Ambas fallas pueden ser difíciles de diagnosticar y depurar. Fallas silenciosas representan riesgos adicionales.
 
 ```
 
