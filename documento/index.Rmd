@@ -27,12 +27,12 @@ Si te interesa conocer más sobre esta iniciativa visita [fAIr LAC](https://fair
 
 ## ¿Por qué este manual?
 
-A pesar de que existe un número importante de principios que buscan una IA "ética" y que que proporcionan una orientación de alto nivel sobre lo que debe o no hacerse en su desarrollo, existe muy poca claridad sobre cuáles son las normas técnicas y las mejores prácticas necesarias para operacionalizarlas.  [@Jobin]
+A pesar de que existe un número importante de principios que buscan una IA “ética” y que proporcionan una orientación de alto nivel sobre lo que debe o no hacerse en su desarrollo, existe muy poca claridad sobre cuáles son las normas técnicas y las mejores prácticas necesarias para operacionalizarlas.   [@Jobin]
 
-Este manual busca eso y se concentra en el sesgo y errores técnicos ocasionados por la "fuente de datos y su manejo", el "desarrollo del modelo" y en su "uso y evaluación", así como las responsabilidades de "rendición de cuentas" que puede tener el sistema.
-
-*El manual incluye un checklist de riesgos y el diseño de una rúbrica.* *Pendiente definir*
-
+Este manual se concentra en la mitigación de las fuentes de sesgo y los errores técnicos que se pueden cometer a lo largo del ciclo de vida de los sistemas de IA. Proponiendo dos herramientas: 
+-	Lista de verificación (Checklist) para que tomadores de decisiones de política pública puedan ir marcando las principales preocupaciones que deben tener en cuenta al desarrollar o comprar un sistema de IA. 
+-	Rúbrica (Scorecard) para que los equipos técnicos tengan un formato que seguir para el correcto reporte de las medidas de mitigación aplicadas para lograr una IA robusta. 
+El manual acompaña estas dos herramientas dando explicaciones detalladas de cada dimensión y ejemplos replicables de su implementación. 
 
 
 ## ¿Para quién es este manual?
