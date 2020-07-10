@@ -332,7 +332,7 @@ Para ello, es necesario tener una definición de justicia algorítmica, que pued
 #### Omisión de variables y Paridad demográfica {-}
 
 Dos estrategias no muy útiles para prevenir disparidades entre los grupos de $A$ son: *ignorar* la variable $A$ y
-buscar *paridad demográfica* de predicciones. 
+buscar *paridad demográfica* de predicciones, ya sea en términos proporcionales o absolutos. 
 
 En el primer caso, se pretende eliminar la posibilidad de disparidad **no** incluyendo
 la variable $A$ en el proceso de construcción de predictores. Este enfoque no resuelve el problema ya que:
@@ -347,7 +347,14 @@ el caso de presión arterial, existe variaciones en los grupos raciales ($A$) en
 
 En el segundo caso, en *paridad demográfica* de predicciones se busca que las predicciones de los distintos grupos de $A$ sean similares: en el caso de clasificación, por ejemplo, que la tasa de positivos sea similar. Esto es poco deseable 
 por sí solo: por ejemplo, si quisiéramos construir un clasificador para cierta enfermedad, consideramos que es posible que
-mujeres y hombres sean afectados de manera distinta. Sin embargo, *paridad demográfica* puede ser un objetivo de los tomadores de decisiones, y eso debe tomarse en cuenta al momento de tomar la decisión asociada a la predicción. 
+mujeres y hombres sean afectados de manera distinta. 
+
+Sin embargo, *paridad demográfica* puede ser un objetivo de los tomadores de decisiones, y eso debe tomarse en cuenta al momento de tomar la decisión asociada a la predicción, o incluso puede ser un requisito legal que debe cumplirse.
+En este caso, técnicas como entrenamiento adversarial (ver por ejemplo [https://aif360.mybluemix.net/]) puede ser útil, así como ajuste de puntos de corte con el fin
+de alcanzar paridad demográfica (proporcional o absoluta).
+
+
+
 
 #### Equidad de posibilidades {-}
 
@@ -397,3 +404,9 @@ predictivo en grupos minoritarios.
 ```
 
 Esto en general implica que además de la decisión tomada en función de las predicciones depende de esta métrica adicional de equidad, y no solo del análisis costo-beneficio.
+
+
+Finalmente, estas herramientas abiertas pueden ayudar en el trabajo de medición y mitigación de sesgo:
+
+- Python: https://github.com/IBM/AIF360
+- R: https://github.com/IBM/AIF360/tree/master/aif360/aif360-r
