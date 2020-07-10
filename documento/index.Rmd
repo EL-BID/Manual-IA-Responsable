@@ -20,12 +20,19 @@ biblio-style: apalike
 ## Iniciativa fAIr LAC
 
 El Banco Interamericano de Desarrollo (BID), en colaboración con socios y aliados estratégicos, lidera la iniciativa fAIr LAC mediante la cual se busca promover la adopción responsable de la Inteligencia Artificial (IA) y los sistemas de soporte de decisión para mejorar la prestación de servicios sociales y crear oportunidades de desarrollo en aras de reducir las brechas y atenuar la desigualdad social.
-Este manual es parte de un grupo de herramientas y manuales para equipos técnicos y responsables de la formulación de políticas públicas para guiarles en la mitigación de los retos de los sistemas de soporte de decisión para lograr una adopción responsable de la IA. los
-El manual se concentra en los retos de: i) “Fuente y manejo de datos”, ii) “Desarrollo de modelo”, iii) “Uso y evaluación” y iv) “Rendición de cuentas”. 
-
-![Retos de los sistema de toma/soporte de decisión](images/retos_ia.png)
+Este manual es parte de un grupo de herramientas y manuales para equipos técnicos y responsables de la formulación de políticas públicas para guiarles en la mitigación de los retos de los sistemas de soporte de decisión para promover una adopción responsable de la IA. 
 
 Si te interesa conocer más sobre esta iniciativa visita [fAIr LAC](https://fairlac.iadb.org/).
+
+
+## ¿Por qué este manual?
+
+A pesar de que existe un número importante de principios que buscan una IA “ética” y que proporcionan una orientación de alto nivel sobre lo que debe o no hacerse en su desarrollo, existe muy poca claridad sobre cuáles son las normas técnicas y las mejores prácticas necesarias para operacionalizarlas.   [@Jobin]
+
+Este manual se concentra en la mitigación de las fuentes de sesgo y los errores técnicos que se pueden cometer a lo largo del ciclo de vida de los sistemas de IA. Proponiendo dos herramientas: 
+-	Lista de verificación (Checklist) para que tomadores de decisiones de política pública puedan ir marcando las principales preocupaciones que deben tener en cuenta al desarrollar o comprar un sistema de IA. 
+-	Rúbrica (Scorecard) para que los equipos técnicos tengan un formato que seguir para el correcto reporte de las medidas de mitigación aplicadas para lograr una IA robusta. 
+El manual acompaña estas dos herramientas dando explicaciones detalladas de cada dimensión y ejemplos replicables de su implementación. 
 
 
 ## ¿Para quién es este manual?

@@ -9,50 +9,37 @@ El primer conjunto de retos que tratamos es el que tiene qué ver con entender l
 1. Calidad y relevancia de las variable respuesta y atributos de entrada recolectadas
 2. Información incompleta acerca de la población objetivo
 
-## Calidad y relevancia de variable respuesta
+## Calidad de datos recolectados y relevancia de variable respuesta
 
-En primer lugar, debemos considerar qué tipo de mediciones tenemos a nuestra disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles son las mediciones ideales para la decisión que se considera tomar: i) Aprendizaje de variables respuesta indeseables y ii) medición proxy débil respecto a la variable respuesta.
+Se debe considerar qué tipo de mediciones tenemos a nuestra disposición para aplicar métodos cuantitativos, incluyendo aprendizaje automático, y cuáles son las mediciones ideales para la decisión que se considera tomar: i) Aprendizaje de variables respuesta indeseables y ii) medición proxy débil respecto a la variable respuesta.
 
-Cuando la variable respuesta es producida por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la variable respuesta, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
+- **Variable respuesta**: medición que se considera ideal para tomar la decisión relevante. En la aplicación, esa variable ideal puede no existir o no ser viable de obtener y se suele utilizar una variable proxy. 
 
-- **Variable respuesta**: medición que se considera ideal para tomar la decisión relevante. 
-En la aplicación, ese ideal es tipicamente solo alcanzado en parte.
-
-
-```{block2, type='rmdnote'}
-**Reto: Estados indeseables o subóptimos en datos recolectados**
-  
-- Cuando las variables respuesta son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la variable respuesta, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
-
-```
-
-```{block2, type='rmdtip'}
-**Medidas de mitigación: especificación incorrecta de variable respuesta**
-
-* (Cualitativa) Debe establecerse claramente que la utilización de la variable respuesta seleccionada está alineada con los propósitos o políticas de los tomadores de decisiones.  
-* (Cuantitativo) Realizar un análisis exploratorio para identificar sesgos históricos o estados indeseables.
-
-```
-
-#### Ejemplos {-}
-
-- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir variables respuesta producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión reproduce esa misma discriminación.
-
-
+### Reto: Mala correspondencia entre variables disponibles y métricas objetivo.
 
 El segundo reto es cuando utilizamos medidas proxy o sucedáneas por no tener disponibilidad de la medición ideal para tomar decisiones. Medidas sistemáticamente sesgadas o sucedáneos pobres de las variable respuesta ideales pueden producir algoritmos con consecuencias indeseables.
 
 ```{block2, type='rmdnote'}
-**Reto: médición proxy débil respecto a la variable respuesta**
-  
 - Las variables medidas corresponden pobremente a las variables respuesta de interés.  
 - Es indeseable desde el punto de vista de la política hacer aprendizaje automático de medidas sesgadas o poco apropiadas para la toma de decisiones.
 
 ```
 
 
+#### Ejemplos (retos) {-}
+
+- Supongamos que una política se considera aplicar a personas de ingresos bajos. En nuestro conjunto de datos de entrenamiento/validación usamos una medición obtenida en una encuesta, según la pregunta, *¿cuánto estima usted que es el ingreso mensual de su familia?*, o algo similar.  Esta medición está sujeta a sesgos ya que existen incentivos para sobre o subreportar el ingresos por parte de los participantes. Por esta razón, predictores de ingreso construidos con estos datos tienen el riesgo de replicar el sesgo de las mediciones, afectando negativamente los resultados de la asignación de la intervención.
+  - Mitigación: En la estimación de ingreso, generalmente se utilizan fuentes de datos oficiales con metodología bien establecida para estimar el ingreso de un hogar. Tal metodología debe ser sostenida por validaciones de distinto tipo que muestra posibles sesgos en la medición y de ser posible cuantificaciones del error de medición.
+
+- Ver [@Obermeyer4]: donde se buscaba predecir necesidades de cuidado médico, usando como
+variable a predecir los costos médicos de cada paciente. Esta es una *medida pobre de necesidad de cuidado médico* cuando hay desigualdades entre los pacientes de cuánto pueden pagar por el mismo tipo de condiciones médicas.  La conclusión errónea sería que pacientes que requieren más cuidado tienden a ser pacientes de grupos económicamente más privilegiados.
+  - Mitigación: Usar gasto en salud como medida *sucedánea* de necesidad de cuidado médico es poco apropiado en situaciones donde existe desigualdad económica. Otras medidas asociadas a la salud de los individuos serían más apropiadas (por ejemplo evaluaciones médicas).
+
+- Supongamos un proyecto de ML busca pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el *número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida exacta de la demanda, porque puede ser que cuando los inventarios se agotan, los involucrados dejan de hacer requerimientos a los abastecedores. Pronosticar la demanda con estos datos puede incurrir en subestimaciónsubestimación, con el resultado de que reforzamos o empeoramos la escasez de medicamentos.
+  - Mitigación: Para los pronósticos de demanda, es posible que sea necesario identificar fuentes adicionales de datos que indiquen mejor la demanda, ya sea con estudios indirectos (fuentes de datos de los compradores) oconstruyendo experimentos que nos permitan observar la demanda en ciertas unidades.
+
 ```{block2, type='rmdtip'}
-**Medidas: mala correspondencia de variables respuesta y objetivos**
+**Medidas de mitigación: Mala correspondencia entre variables disponibles y métricas objetivo.**
 
 - (Cualitativa) Las variables respuesta deben plantearse claramente, aunque sean ideales. Las mediciones
 recogidas deben ser analizadas para entender qué tan adecuadas son para sustituir la variable respuesta. 
@@ -63,90 +50,67 @@ Se deben identificar sesgos sistemáticos o validez sobre de la medición sustit
 ```
 
 
+### Reto: Estados indeseables o subóptimos en datos recolectados
 
-#### Ejemplos (retos) {-}
+Si las variables que queremos predecir son producidas por un sistema que consideramos subóptimo (porque esconde sesgos discriminatorios) se tiene que tener cuidado ya que el sistema replicará los mismos patrones que consideramos indeseables.
 
-- Supongamos que una política se considera aplicar a personas de ingresos bajos. En nuestro conjunto de datos de entrenamiento/validación usamos una medición obtenida en una encuesta,
-según la pregunta, *¿cuánto estima usted que es el ingreso mensual de su familia?*, o algo similar.
-Esta medición está sujeta a sesgos desconocidos, y existen incentivos para ocultar fuentes de ingresos
-por parte de los participantes. Predictores de ingreso construidos con estos datos tienen el riesgo
-de replicar el sesgo de las mediciones, afectando negativamente los resultados de la asignación de la intervención.
+```{block2, type='rmdnote'}
+- Cuando las variables respuesta son producidas por sistemas en estados indeseables desde el punto de vista de la política de interés. Los estados indeseables incluyen defectos e inequidades históricas capturados en la variable respuesta, y generalmente es difícil tener información detallada acerca de esos defectos o inequidades.
 
-- Ver [@Obermeyer4]: donde se buscaba predecir necesidades de cuidado médico, usando como
-variable a predecir los costos médicos de cada paciente. Esta es una *medida pobre de necesidad de cuidado médico*
-cuando hay desigualdades entre los pacientes de cuánto pueden pagar por el mismo tipo de condiciones médicas. 
-La conclusión errónea sería que pacientes que requieren más cuidado tienden a ser pacientes de grupos económicamente más
-privilegiados.
+```
 
-- Supongamos un proyecto de ML busca pronosticar los niveles de demanda de medicamentos, de manera que pueda satisfacerse la demanda adecuadamente sin incurrir en inventario que caduca. Utilizamos el *número de unidades que fueron requeridas en el sistema* para el medicamento X. Ésta no es una medida exacta de la demanda, porque puede ser que cuando los inventarios se agotan, los involucrados dejan de hacer requerimientos a los abastecedores. Pronosticar la demanda con estos datos puede incurrir en subestimaciónsubestimación, con el resultado de que reforzamos o empeoramos la escasez de medicamentos.
+```{block2, type='rmdtip'}
+**Medidas de mitigación: especificación incorrecta de variable respuesta**
 
-- En una encuesta preguntamos a mujeres de menos de 18 años si está embarazada actualmente o no, junto con
-otras variables socioeconómicas. Esta pregunta da una medición pobre si nos interesa predecir la probabilidad de
-embarazo adolescente según características socioeconómicas. Esta medición puede ser pobre por incentivos de las
-personas a no contestar verazmente la pregunta, lo cual puede ocurrir de manera diferencial en distintos grupos
-de vulnerabilidad.
+* (Cualitativa) Debe establecerse claramente que la utilización de la variable respuesta seleccionada está alineada con los propósitos o políticas de los tomadores de decisiones.
+* (Cuantitativo) Realizar un análisis exploratorio para identificar sesgos históricos o estados indeseables.
 
+```
 
+#### Ejemplos {-}
 
-#### Ejemplos (mitigación) {-}
-
-- En la estimación de ingreso, generalmente se utilizan fuentes de datos oficiales con
-metodología bien establecida para estimar el ingreso de un hogar. Tal metodología
-debe ser sostenida por validaciones de distinto tipo que muestra posibles sesgos en la medición y de ser posible cuantificaciones del error de medición.
-
-- Usar gasto en salud como medida *sucedánea* de necesidad de cuidado médico es poco apropiado en situaciones
-donde existe desigualdad económica. Otras medidas asociadas a la salud de los individuos serían más apropiadas (por ejemplo
-evaluaciones médicas).
-
-- Para los pronósticos de demanda, es posible que sea necesario identificar fuentes adicionales
-de datos que indiquen mejor la demanda, ya sea con estudios indirectos (fuentes de datos de los compradores) o 
-construyendo experimentos que nos permitan observar la demanda en ciertas unidades.
-
-
+- Algunos sistemas judiciales tienden detener, procesar y castigar a las personas de menores ingresos, menos educación y menos contactos sociales (ver por ejemplo [este reporte de Conapred](https://www.conapred.org.mx/userfiles/files/Reporte_2012_ProcesoCivil.pdf)). Intentar predecir “variables respuesta” producidas por un sistema discriminatorio para tomar decisiones automáticas o como soporte en la decisión puede reproducir esa misma discriminación.
 
 ## Muestras naturales y diseñadas
 
-Cuando buscamos aplicar un método del aprendizaje automático en nuestro contexto, 
-la información puede ser incompleta de distintas maneras:
+Cuando buscamos aplicar un método del aprendizaje automático en nuestro contexto, la información puede ser incompleta de distintas maneras:
 
-1. Solo tenemos datos para una muestra de una población.
-2. No tenemos todas las mediciones importantes para la toma de decisiones.
-3. Tenemos datos del pasado y presente, pero no del futuro, que es cuando
-tenemos qué tomar decisiones.
+1. Solo se tienen disponibles datos para una muestra de una población.
+2. No se tienen todas las mediciones importantes para la toma de decisiones.
+3. Se tienen datos del pasado y presente, pero no del futuro, que es cuando se tiene que tomar una decisión.
 
+Los modelos de ML pretenden generar información para tomar acciones o políticas para toda la población objetivo, la situación usual es que sólo se tenga disponible una muestra de esta población, a partir de la cual se busca desarrollar extrapolaciones, predicciones o estimaciones que ayuden en la toma de decisiones posterior.
 
-En particular, los modelos de ML pretenden generar información para tomar acciones o políticas para toda la población objetivo, la situación usual es que sólo se tenga disponible una **muestra** de esta población, a partir
-de la cual queremos desarrollar predicciones o estimaciones que ayuden en la toma
-de decisiones posterior. 
-
-
-Cuando tenemos una muestra, consideramos dos extremos posibles, siendo el primer extremo
-el más deseable aunque no siempre alcanzable:
-
+Cuando se tiene una muestra, se consideran dos extremos posibles, siendo el primer caso el más deseable, aunque no siempre alcanzable:
 
 1. **Muestreo probabilístico**: Los casos son seleccionados a partir de un diseño muestral probabilístico.
 
-En este caso, todos las predicciones y estimaciones que se pretenden aplicar a la población objetivo pueden ser evaluadas en cuanto a su precisión, con **garantías probabilísticas**. Por ejemplo, podemos dar rangos de error para estimaciones de cantidades asociadas a toda la población objetivo, tasas de error calibradas correctamente a la población objetivo, etc.
+En este caso, todos las predicciones y estimaciones que se pretenden aplicar a la población objetivo pueden ser evaluadas en cuanto a su precisión con **garantías probabilísticas**. Es decir, podemos dar rangos de error para estimaciones de cantidades asociadas a toda la población objetivo, tasas de error calibradas correctamente a la población objetivo, etc.
 
-Por ejemplo: Una encuesta nacional de hogares con diseño probabilístico generalmente consiste de definición de 
-estratificación, unidades de selección aleatoria a distintos niveles (unidades primarias, secundarias, etc.). Cada hogar
-es seleccionado con una probabilidad conocida. Aunque la muestra se diseñe de manera no representativa (por ejemplo, más
-hogares en zonas rurales o de ingresos bajos), es posible hacer inferencia para toda la población con ciertas garantías
-acerca del tamaño de error de estimación.
+Por ejemplo: Una encuesta nacional de hogares con diseño probabilístico generalmente consiste de definición de estratificación, unidades de selección aleatoria a distintos niveles (unidades primarias, secundarias, etc.). Cada hogar 
+es seleccionado con una probabilidad conocida. Aunque la muestra se diseñe de manera no representativa (por ejemplo, más hogares en zonas rurales o de ingresos bajos), es posible hacer inferencia para toda la población con ciertas garantías acerca del tamaño de error de estimación.
 
-2. **Muestras naturales**: Los casos son seleccionados por un proceso natural mal o parcialmente conocido.
+2. **Muestras naturales (no probabilísticas)**: Los casos son seleccionados por un proceso natural mal o parcialmente conocido.
 
 En este caso, estrictamente hablando no es posible saber qué va a pasar cuando apliquemos nuestros modelos a la población general, y no es posible construir rangos de error de predicciones y estimaciones mediante métodos estadísticos que tengan garantías probabilísticas. Es decir, las cantidades y predicciones estimadas tienen error desconocido, los modelos y características útiles en la muestra pueden no aplicar en la población objetivo, y la situación puede agravarse para grupos protegidos subrepresentados.
 
-Por ejemplo: en una encuesta nacional de hogares, seleccionamos hogares a través de la selección de personas de
-que encontramos en puntos de afluencia (mercados o lugares públicos). Es muy difícil saber las probabilidades de selección
-de los hogares bajo este esquema, pues necesitaríamos saber quién va a esos lugares y con qué probabilidad, e incluso algunos
-hogares con características particulares (por ejemplo, hogares de personas mayores) pueden tener probabilidad cero de ser seleccionados.
+Pongamos como ejemplo una encuesta que identifica hogares a través de la selección de personas encontradas en puntos de afluencia (mercados o lugares públicos). Es muy difícil saber las probabilidades de selección bajo este esquema, pues necesitaríamos saber quién va a esos lugares y con qué probabilidad, e incluso algunos hogares con características particulares (por ejemplo, hogares de personas mayores) pueden tener probabilidad cero de ser seleccionados. Otro caso usual es cuando la información es auto reportada o cuando, por el canal de captura de la información,  se excluyen subgrupos particulares de población (sesgo de selección). Por ejemplo, con aplicaciones o redes sociales en donde la población que no tenga acceso a internet o un teléfono inteligente será excluida (por ejemplo, @anemiaapp) 
+
+Esto no quiere decir que las muestras naturales no sean útiles, en muchas ocasiones son la única fuente de datos disponible para la toma de decisiones, sin embargo es importante entender y tomar en cuenta las dimensiones importantes en las cuales la muestra de datos será diferente a la población y qué efectos indeseables una decisión de política pública puede causar.
+
+Muestras equilibradas en términos de características de la población no son condición ni necesaria ni suficiente
+para calificar como apropiada la construcción de modelos ni la validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, pero acotado por cuotas. Esto produce balance en las tasas a la que aparecen ciertos grupos, sin embargo, sigue siendo una muestra natural (en este caso a la muestra natural se le llama también *de conveniencia*).
+
+La situación ideal es la de muestreo probabilístico.  En este caso, podemos entender exactamente qué subpoblaciones se muestrearon, a qué tasas, y cómo se relacionan estas tasas con las tasas poblacionales. El diseño de la muestra determina nuestro alcance inferencial. Sin embargo, tener una muestra probabilistica no es siempre posible. 
+
+
+### Reto: muestras naturales
+
+Modelos de predicción construidos para muestras naturales no necesariamente generalizarán correctamente a la población total, y no es posible tener una estimación confiable del error. Puede ser que la estructura predictiva para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural (ver por ejemplo @anemiaracial, donde se muestra que valores predictivos de anemia pueden ser distintos para distintos grupos raciales). 
+
 
 
 ```{block2, type='rmdnote'}
-**Reto: muestras naturales**
-
 Las muestras naturales de datos pueden resultar en:
 
   - Errores de estimación y de predicción incorrectamente estimados
@@ -160,91 +124,42 @@ y características útiles en la muestra pueden no aplicar en la población obje
 
 ```
 
+
+#### Ejemplo (muestras naturales) {-}
+
+Supongamos que nos interesa predecir la prevalencia de anemia en niños de una población objetivo dada. Decidimos acudir a hospitales que "corresponden" a la población objetivo para aplicar las pruebas correspondientes a pacientes en el rango de edad de interés.  La prevalencia de anemia que encontremos en esta muestra tendrá error desconocido, posiblemente grande, como estimación de la prevalencia en la población objetivo. 
+
+
 ```{block2, type='rmdtip'}
 **Medidas de mitigación: muestras naturales**
 
 - (Cualitativa) Entender y describir las dimensiones importantes en las cuales nuestra muestra puede ser diferente a la población,
 en particular sesgos de selección no medidos. Utilizar literatura relacionada con el tema, información de expertos. 
-
-- (Cuantitativa) Aunque los modelos pueden construirse con varias fuentes 
-de datos, diseñadas o naturales, 
-la **validación** debe llevarse a cabo idealmente con una muestra diseñada que permita 
-inferencia estadística a la población objetivo. La muestra de validación debe cubrir
-apropiadamente la población objetivo y subpoblaciones protegidas.
-
 ```
 
 
-#### Ejemplo (muestras naturales) {-}
-
-Supongamos que nos interesa predecir la prevalencia de anemia en niños de una población objetivo
-dada. Decidimos 
-acudir a hospitales que "corresponden" a la población 
-objetivo para aplicar las pruebas correspondientes a pacientes en el rango de edad de interés. 
-La prevalencia de anemia que encontremos en esta
-muestra tendrá error desconocido, posiblemente grande, como estimación de la prevalencia
-en la población objetivo. 
-Otro caso usual es cuando la información es autoreportada, en particular en plataformas
-que pueden excluir grupos particulares de población, por ejemplo, con aplicaciones de 
-teléfono (por ejemplo, @anemiaapp). 
-
-
-Más aún, modelos de predicción construidos para esta muestra natural
-no necesariamente generalizarán correctamente a la población total, y no es posible tener
-una estimación confiable del error. Puede ser que la estructura predictiva
-para la población objetivo sea muy distinta de la que obtenemos con nuestra muestra natural (ver por ejemplo @anemiaracial, donde se muestra que valores predictivos de anemia pueden ser distintos para distintos grupos raciales). 
-
-
-
-- La construcción de la muestra de validación debe ser producida idealmente bajo un diseño muestral que permita
-inferencia a la población objetivo (@lohr). 
-- La muestra de validación debe cubrir a subgrupos de interés y protegidos, de manera que
-sea posible hacer inferencia a sus subpoblaciones. Eso incluye tamaños de muestras adecuados según
-metodología de muestreo (ver @lohr).
-- Si no está disponible tal muestra, es **indispensable** un análisis de riesgos y limitaciones de
-la muestra naturales, conducida por expertos y personas que conozcan el proceso
-que generó esos datos muestrales.
-- Muestras equilibradas en términos de características de la población no son condición ni necesaria ni suficiente
-para calificar como apropiada la construcción de modelos ni la validación. Por ejemplo, en muestreo de personas muchas veces se usan esquemas de selección desconocidos, pero acotado por cuotas. Esto produce balance en las tasas a la que aparecen ciertos grupos, sin embargo, sigue siendo una muestra natural (en este caso a la muestra natural se le llama también *de conveniencia*).
-
-La situación ideal es la de muestreo probabilístico.  En este caso, podemos entender exactamente qué 
-subpoblaciones se muestrearon, a qué tasas, y cómo se relacionan estas tasas con
-las tasas poblacionales. El diseño de la muestra determina nuestro alcance inferencial. 
-
 ## Comparación causal
 
-Cuando los humanos racionalizan el mundo lo buscan comprender en términos de causa y efecto - si entendemos por qué ocurrió algo, podemos cambiar nuestro comportamiento para cambiar resultados futuros.
-En un proyecto de ML se puede tener o no como objetivo crear inferencias causales. Buscar comparaciones predictivas o contrafactuales de algún tratamiento o variable con datos de muestras que no tienen algún tipo de asignación aleatoria de tal tratamiento o variable pueden ser muy lejanas de comparaciones causales al aplicar el tratamiento en la realidad. 
+Cuando los humanos racionalizan el mundo lo intentan comprender en términos de causa y efecto - si entendemos por qué ocurrió algo, podemos alterar nuestro comportamiento para cambiar resultados futuros. Buscar comparaciones predictivas o contrafactuales de algún tratamiento o variable con datos de muestras que no tienen algún tipo de diseño experimental del tratamiento o variable pueden ser muy lejanas de comparaciones causales al aplicarse en la realidad. 
 
-Los resultados de un modelo nos dan resultados que parecerían describir relaciones causales sin que necesariamente lo sean.
+Un modelo de ML nos puede dar resultados que parecerían describir relaciones causales sin que necesariamente lo sean. Si la política se aplica en función de hallazgos en términos de las variables incluidas en el modelo, la derivación de políticas a partir de esos modelos puede llevar a decisiones erróneas. 
 
--	“More police in precincts with higher crime; does that mean that police cause crime?” Policy decision: should we add more police to a given district?
--	“Lots of people die in hospitals, are hospitals bad for your health?” Policy decision: should I go to hospital for treatment? 
+Técnicas econométricas como los RCTs (randomized controlled trials), experimentos naturales, diferencia en diferencias y variables instrumentales son utilizadas con estos objetivos para controlar por fenómenos como sesgo por selección, endogeneidad por variables omitidas, entre otros. En los últimos años trabajos como (@Athey) han comenzado en introducir en algoritmos de ML estas técnicas y procesos experimentales tipo A/B testing se han empezado a utilizar de forma masiva en contextos digitales por la facilidad de crear experimentos en contextos digitales.
 
-La política se aplica en función de hallazgos del modelo en términos de las variables incluidas en el modelo. Si las variables a considerar están asignadas naturalmente por un proceso desconocido, la derivación de políticas a partir de esos modelos puede llevar a decisiones erróneas. Por esta razón, es necesario ser muy cuidadosos con este tipo de uso
-(@king).
+Sin embargo, en la mayoría de los casos los algoritmos de ML no buscan describir relaciones causales y es necesario ser muy cuidadosos con este tipo de uso (@king).
 
 
 ```{block2, type='rmdtip'}
 **Medidas: comparación causal**
 
-- (Cualitativa) Entender y describir las razones por las que la variable tratamiento está
-correlacionada con variables conocidas y no conocidas. 
-Describir sesgos posibles basados en análisis y conocimiento experto. Considerar qué variables
-control serían importantes para que la comparación predictiva tenga interpretación causal
+- (Cualitativa) Entender y describir las razones por las que la variable tratamiento está correlacionada con variables conocidas y no conocidas. Describir sesgos posibles basados en análisis y conocimiento experto. 
 
-- (Cuantitativa) En el caso de intentar inferencia causal con modelos, debe describirse
-cuáles fueron las hipótesisi, consideraciones o métodos usados para soportar una interpretación
-causal (métodos de matching, balanceo de muestras, etc.)
+- (Cuantitativa) En el caso de intentar inferencia causal con modelos, debe describirse cuáles fueron las hipótesis, consideraciones o métodos usados para soportar una interpretación causal.
 
-- (Cuantitativa) Producir datos diseñados que incluyan la consideración causal. Esto incluye
-experimentos aleatorios y otras técnicas. Esto puede hacerse antes de construir los modelos, o incluir
-gradualmente estos datos en el proceso de monitoreo y reajuste.
-
+- (Cuantitativa) Producir datos diseñados que incluyan la consideración causal. Esto incluye experimentos aleatorios y otras técnicas. 
 ```
 
-En muchos casos, suplir con modelación datos creados experimentalmente puede ser muy difícil, y los 
-resultados pueden depender fuertemente del decisiones del modelador, con consecuente incertidumbre rara vez medida.
+En muchos casos, suplir con modelación datos creados experimentalmente puede ser muy difícil, y los resultados pueden depender fuertemente de las decisiones del equipo técnico o modelador. Como consecuencia, la incertidumbre rara vez medida.
 
 **Observación**: este problema es ortogonal al de la representatividad o diseño
 muestral. Muestras bien diseñadas desde el punto de vista de la población objetivo pueden
@@ -254,15 +169,17 @@ causales correctas en la muestra seleccionada, pero tener dificultades para gene
 
 ## Atributos incompletos
 
+### Reto: atributos faltantes o incompletos
+
+Muchos proyectos de aprendizaje automático están destinados a fallar por ignorar variables o atributos que son importantes para predecir la variable objetivo. Adicionalmente, cuando existe información parcial acerca de los atributos, generalmente la ausencia de esa información muchas veces está asociado a características relevantes de la unidades para las que se quiere predecir.
+
 ```{block2, type='rmdnote'}
-**Reto: atributos faltantes o incompletos**
-  
-- Cuando información crucial acerca de las unidades es totalmente desconocida, esto puede resultar en
+
+  - Cuando información crucial acerca de las unidades es totalmente desconocida, esto puede resultar en
 modelos de desempeño pobre, con poca utilidad para la toma de decisiones. Comparaciones predictivas pueden ser 
 poco útiles y a veces engañosas cuando existen variables omitidas importantes.
 
-- Información parcial
-completada con procesos de imputación puede producir sesgos, dependiendo de la
+- Información parcial completada con procesos de imputación puede producir sesgos, dependiendo de la
 razón por la que las observaciones son incompletas.
 
 ```
@@ -282,10 +199,5 @@ se deben utilizar métodos de imputación múltiple que permitan evaluar incerti
 ```
 
 
-
-Muchos proyectos de aprendizaje automático están destinados a fallar por ignorar variables o atributos que
-son importantes para predecir la variable objetivo. Adicionalmente, cuando existe información parcial acerca
-de los atributos, generalmente la ausencia de esa información muchas veces está asociado a características relevantes
-de la unidades para las que se quiere predecir.
 
 

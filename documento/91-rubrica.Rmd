@@ -1,3 +1,62 @@
+# Lista de verificación de IA robusta y responsable
+
+## 1. Fuente y manejo de datos
+
+- [ ] **Calidad de datos recolectados y relevancia de variable respuesta**:  
+  - (Cualitativa) ¿Hemos justificado claramente la utilización de la variable respuesta seleccionada bajo los propósitos de la intervención?
+  - ¿Hemos examinado los datos en busca de posibles sesgos históricos o estados indeseables que no queramos replicar?
+- [ ] **Muestras naturales y diseñadas**:
+  - (Cualitativa) Entender y describir las dimensiones importantes en las cuales la muestra de datos puede ser diferente a la población, en particular sesgos de selección no medidos. Utilizar literatura relacionada con el tema, información de expertos.
+- [ ] **Comparación causal**:
+  - (Cualitativa) Entender y describir las razones por las que la variable tratamiento está correlacionada con variables conocidas y no conocidas. Describir sesgos posibles basados en análisis y conocimiento experto. 
+- [ ] **Atributos incompletos**:
+  - (Cualitativa) Identificar si existen variables omitidas importantes para las cuáles no se tiene mediciones asociadas. Identificar razones por las que existen datos faltantes: si la falta de datos está fuertemente asociada con la variable a predecir será difícil obtener buenos resultados.
+
+## 2. Desarrollo de modelos
+
+- [ ] **Ausencia y errores de validación**:
+  - Construir muestras de validación y prueba preparadas adecuadamente. Considerando un tamaño apropiado para estimar el error con precisión razonable, cubrir a subgrupos de interés y protegidos
+  - Cualquier procesamiento y preparación de datos de entrenamiento debe evitar usar los datos de validación o prueba de ninguna manera. Se debe mantener una barrera sólida entre entrenamiento vs validación y prueba. 
+- [ ] **Datos desbalanceados y clases**: 
+  - Cuestionar las implicaciones de los diferentes tipos de errores, así como la forma correcta de evaluarlos.
+  - Implementar un análisis costo-beneficio que ponga al sistema y sus errores en contexto. 
+- [ ] **Equidad y desempeño diferencial**: 
+  - (Cualitativa) ¿Se identificaron los distintos grupos o atributos protegidos dentro del proyecto? (por ejemplo: género, raza, nivel de marginación, etc)
+  - (Cualitativa) Se debe de discutir con expertos y tomadores de decisiones qué medida de justicia algorítmica se buscará seguir. 
+  - ¿Hemos comprobado la equidad de los resultados del modelo con respecto a los diferentes grupos de interés?
+
+- [ ] **Errores no cuantificados y evaluación humana**: 
+  - (Cualitativa) Análisis experto de la construcción del sistema puede revelar sesgos o errores conocidos por el caso de uso, pero desconocidos para el modelador.
+  - (Cuantitiva) Esquemas de monitoreo de predicciones que permitan identificación de errores o sesgos no medidos. Por ejemplo, se pueden usar paneles de revisores que examinen predicciones particulares y consideren si son razonables o no. Estos paneles deben ser balanceados en cuanto al tipo de usuarios que se prevén, incluyendo tomadores de decisiones si es necesario.
+
+
+## 3. Uso y monitoreo
+
+- [ ] **Degradación de desempeño**:
+  - ¿Existe un plan para monitorear el desempeño del modelo y la recolección de información a lo largo del tiempo?
+
+- [ ] **Comunicar el sesgo**: 
+  - ¿Hemos comunicado las deficiencias, limitaciones y sesgos del modelo a las partes interesadas pertinentes de manera que estos se consideren en la toma/soporte de decisiones?
+  
+- [ ] **Uso no intencional**: 
+  - ¿Hemos tomado medidas para identificar y prevenir los usos no intencionados y el abuso del modelo y tenemos un plan para monitorear estos una vez que el modelo sea desplegado?
+
+- [ ] **Atención a errores **: 
+  - ¿Hemos discutido con nuestra organización un plan de respuesta en caso de que los usuarios se vean perjudicados por los resultados (por ejemplo, cómo evalúa el equipo de ciencias de los datos estos casos y actualiza los análisis y modelos para prevenir futuros daños)?
+
+## Rendición de cuentas
+
+- [ ] **Interpretabilidad del modelo**: 
+  - ¿Hemos analizado el nivel de interpretabilidad del modelo que es necesario para el caso de uso?
+  - ¿Hemos discutido los pros y contras de los algoritmos según su nivel de interpretabilidad?
+
+- [ ] **Explicabilidad de predicciones individuales**: 
+  - ¿Existe algún proceso para dar explicaciones a un individuo en particual sobre por qué se tomó una decisión?
+
+- [ ] **Transparencia y auditabilidad**: 
+  - ¿Está bien documentado el proceso de ingesta, transformación y modelado?
+
+
 # Rubrica para aplicación de ML/IA en toma de decisiones
 
 La rúbrica que presentamos aquí está derivada de la publicada en (@Mitchell). Consiste de los siguientes
