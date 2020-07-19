@@ -166,8 +166,10 @@ Adicionalmente el criterio que se debe de priorizar siempre deberá de ser anali
 
 ```{block2, type='rmdtip'}
 **Medida de mitigación: Métricas de evaluación engañosas**
+
 - Cuestionar las implicaciones de los diferentes tipos de errores, así como la forma correcta de evaluarlos.
 
+- Implementar un análisis costo-beneficio que ponga al sistema y sus errores en contexto. 
 ```
 
 
@@ -181,7 +183,8 @@ Muchas veces se toma erróneamente un punto de corte de 1/2 para clasificación 
 **Medida de mitigación: puntos de corte arbitrario**
 
 - En problemas de clasificación ruidosos (no es posible acercarse a tener certidumbre para muchos casos), las **probabilidades de clasificación** en cada clase son instrumentos más apropiados para la toma de decisiones.
-- Análisis de costo beneficio pueden utilizarse, en combinación con las probabilidades, para tomar mejores decisiones caso por caso.
+
+- Costos y utilidades pueden utilizarse, en combinación con las probabilidades, para tomar mejores decisiones caso por caso.
 
 ```
 
@@ -192,14 +195,13 @@ Muchas veces se toma erróneamente un punto de corte de 1/2 para clasificación 
 En problemas de clasificación muchas veces se presenta el fenómeno de que algunas clases tienen representación relativamente baja (por ejemplo, clases con menos de 1% de los casos totales). Estas clases presentan dificultades considerables en los modelos predictivos, pues puede ser que tengamos poca información acerca de esas clases y sea difícil discriminarlas exitosamente de otras clases, aun cuando contemos con la información correcta.
 
 ```{block2, type='rmdnote'}
-En datos con desbalance grande, los **predictores de clase** pueden tener un mal desempeño para la clase minoritaria. 
+En datos con desbalance grande, **predictores de clase** pueden tener desempeño malo (por ejemplo, nunca hacen predicciones de la clase minoritaria).
 ```
-
 
 La solución es considerar las probabilidades de clase como salida principal:
 
 ```{block2, type='rmdtip'}
-**Medidas de mitigación: desbalance de clases**
+**Medidas: desbalance de clases**
 - Hacer **predicciones de probabilidad** en lugar de clase. Estas probabilidades pueden ser incorporadas al proceso de decisión posterior. Evitar puntos de corte estándar de probabilidad como 0.5, o predecir según máxima probabilidad.
 - Cuando el número absoluto de casos minoritarios es muy chico, puede ser muy dificil encontrar información apropiada para discriminar esa clase. Se requiere **recolectar** más datos de la clase minoritaria. 
 - Submuestrar la clase dominante (ponderando hacia arriba los casos para no perder calibración) puede ser una estrategia exitosa para reducir el tamaño de los datos y tiempo de entrenamiento.
@@ -218,6 +220,10 @@ La solución es considerar las probabilidades de clase como salida principal:
 - Sub y sobremuestreo alteran la proporción natural de positivos y negativos en los datos. Esto quiere decir que las probabilidades obtenidas están mal calibradas y tienen menos utilidad para la toma de decisiones. 
 
 - Es importante recordar que los procesos de sub y sobre muestreo se tienen que realizar de forma posterior a la separación de la muestra en (entrenamiento, evaluación y validación) ya que de otra forma se puede tener fuga de información.
+
+**Observaciones:**
+
+-	Sub y sobre muestreo alteran la proporción natural de positivos y negativos en los datos. Esto quiere decir que las probabilidades obtenidas están mal calibradas y tienen menos utilidad para la toma de decisiones.
 
 
 ## Subajuste y sobreajuste
@@ -263,6 +269,7 @@ errores de preprocesamiento (algunos atributos mal calculados), selección de at
 hacer las predicciones que consideran sólo una parte del problema.
 
 ### Fallas no medidas por el modelo
+
 ```{block2, type='rmdnote'}
 
 Algoritmos o métodos predictivos producen resultados que de mala calidad según aspectos no medidos
