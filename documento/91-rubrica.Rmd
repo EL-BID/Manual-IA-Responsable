@@ -1,6 +1,8 @@
-# Lista de verificación de IA robusta y responsable
+# Evaluación de proyectos 
 
-## 1. Fuente y manejo de datos
+## Lista de verificación de IA robusta y responsable
+
+### 1. Fuente y manejo de datos
 
 - [ ] **Calidad de datos recolectados y relevancia de variable respuesta**:  
   - (Cualitativa) ¿Hemos justificado claramente la utilización de la variable respuesta seleccionada bajo los propósitos de la intervención?
@@ -12,7 +14,7 @@
 - [ ] **Atributos incompletos**:
   - (Cualitativa) Identificar si existen variables omitidas importantes para las cuáles no se tiene mediciones asociadas. Identificar razones por las que existen datos faltantes: si la falta de datos está fuertemente asociada con la variable a predecir será difícil obtener buenos resultados.
 
-## 2. Desarrollo de modelos
+### 2. Desarrollo de modelos
 
 - [ ] **Ausencia y errores de validación**:
   - Construir muestras de validación y prueba preparadas adecuadamente. Considerando un tamaño apropiado para estimar el error con precisión razonable, cubrir a subgrupos de interés y protegidos
@@ -30,7 +32,7 @@
   - (Cuantitiva) Esquemas de monitoreo de predicciones que permitan identificación de errores o sesgos no medidos. Por ejemplo, se pueden usar paneles de revisores que examinen predicciones particulares y consideren si son razonables o no. Estos paneles deben ser balanceados en cuanto al tipo de usuarios que se prevén, incluyendo tomadores de decisiones si es necesario.
 
 
-## 3. Uso y monitoreo
+### 3. Uso y monitoreo
 
 - [ ] **Degradación de desempeño**:
   - ¿Existe un plan para monitorear el desempeño del modelo y la recolección de información a lo largo del tiempo?
@@ -44,20 +46,20 @@
 - [ ] **Atención a errores **: 
   - ¿Hemos discutido con nuestra organización un plan de respuesta en caso de que los usuarios se vean perjudicados por los resultados (por ejemplo, cómo evalúa el equipo de ciencias de los datos estos casos y actualiza los análisis y modelos para prevenir futuros daños)?
 
-## Rendición de cuentas
+### Rendición de cuentas
 
 - [ ] **Interpretabilidad del modelo**: 
   - ¿Hemos analizado el nivel de interpretabilidad del modelo que es necesario para el caso de uso?
   - ¿Hemos discutido los pros y contras de los algoritmos según su nivel de interpretabilidad?
 
 - [ ] **Explicabilidad de predicciones individuales**: 
-  - ¿Existe algún proceso para dar explicaciones a un individuo en particual sobre por qué se tomó una decisión?
+  - ¿Existe algún proceso para dar explicaciones a un individuo en particular sobre por qué se tomó una decisión?
 
 - [ ] **Transparencia y auditabilidad**: 
   - ¿Está bien documentado el proceso de ingesta, transformación y modelado?
 
 
-# Rubrica para aplicación de ML/IA en toma de decisiones
+## Rubrica técnica para aplicación de ML/IA en toma de decisiones
 
 La rúbrica que presentamos aquí está derivada de la publicada en (@Mitchell). Consiste de los siguientes
 incisos:
@@ -97,5 +99,5 @@ incisos:
 9. Consideraciones éticas, recomendaciones y advertencias
 
 
-### Ejemplo
+## Ejemplo (rúbrica técnica)
 

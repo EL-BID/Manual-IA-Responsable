@@ -1,0 +1,406 @@
+---
+title: "Ejemplo: procesamiento para producir rúbrica"
+output: html_notebook
+bibliography: refs.bib
+---
+
+#  {.tabset}
+
+## Preprocesamiento para rúbrica
+
+```{r, message=FALSE, warning = FALSE}
+library(tidyverse)
+library(recipes)
+library(themis)
+library(rsample)
+library(parsnip)
+library(yardstick)
+library(workflows)
+library(tune)
+library(knitr)
+library(patchwork)
+```
+
+
+```{r}
+adult_train <- read_csv("adult.csv", col_names = FALSE)
+adult_test <- read_csv("adult_test.csv", col_names = FALSE, comment = ".")
+```
+
+
+
+```{r}
+preprocesar <- function(adult){
+  colnames(adult) <- c('edad', 'tipo_trabajo', 'pond', 'educacion', 
+                     'educacion_num', 'estado_civil', 'ocupacion', 'relacion', 'info_racial', 'sexo', 
+                     'ganancias_capital', 'perdidas_capital', 'horas_por_semana', 'pais_origen', 
+                     'ingreso')
+  adulto <- adult %>% 
+    mutate(pais_origen = ifelse(pais_origen == "?", "Desconocido", pais_origen)) %>% 
+    mutate(ocupacion = ifelse(ocupacion == "?", "Desconocido", ocupacion)) %>%
+    mutate(ingreso = fct_recode(ingreso, bajo = "<=50K", alto = ">50K")) %>% 
+    mutate(tipo_trabajo = ifelse(tipo_trabajo == "?", "Desconocido", tipo_trabajo)) %>% 
+    mutate(bajo_auto = ifelse(str_detect(tipo_trabajo, "Self") & (ingreso == "bajo"), "bajo_auto", "otro")) %>%
+    mutate(bajo_auto = as.factor(bajo_auto)) %>% 
+    select(-educacion, -pond, -ingreso)
+  adulto
+}
+adulto_entrena <- preprocesar(adult_train)
+adulto_prueba <- preprocesar(adult_test)
+```
+
+```{r}
+adulto_entrena
+```
+
+```{r}
+adulto_entrena %>% group_by(bajo_auto) %>% 
+  summarise(conteo = n())
+```
+
+
+### Modelo
+
+```{r}
+entrena <- adulto_entrena
+prueba <- adulto_prueba
+```
+
+```{r}
+receta_adulto <- recipe(bajo_auto ~  educacion_num + info_racial + sexo +
+                          horas_por_semana + estado_civil , data = entrena) %>%
+  prep()
+entrena_prep <- juice(receta_adulto)
+```
+
+```{r}
+bosque_1 <- 
+  rand_forest(trees = 500, mtry = 2, mode = "classification") %>%
+  set_engine("ranger") %>%
+  fit(bajo_auto ~ . , data = entrena_prep)
+```
+
+
+```{r}
+#bosque_1 %>%
+#  predict(prueba) %>%
+#  bind_cols(prueba) %>% 
+#  class_metrics(truth = bajo_auto, estimate=.pred_class) %>% 
+#  kable()
+predictions_prob <- bosque_1 %>%
+  predict(new_data = prueba, type = "prob") %>%
+  bind_cols(prueba %>% select(bajo_auto)) %>% 
+  select(.pred_bajo_auto, bajo_auto)
+datos_roc <- roc_curve(predictions_prob, bajo_auto, .pred_bajo_auto)
+autoplot(datos_roc)
+```
+
+
+```{r}
+predictions_prob <- predictions_prob %>%
+  mutate(sexo = prueba$sexo, info_racial = prueba$info_racial) %>% 
+  mutate(info_racial = as.character(info_racial)) %>% 
+  mutate(info_racial = 
+    fct_recode(info_racial, Other = "Amer-Indian-Eskimo", Other = "Other")) %>% 
+  mutate(info_racial = as.character(info_racial))
+# bootstrap
+boot_metricas <- function(predictions_prob, i){
+  preds_boot <- sample_frac(predictions_prob %>% group_by(sexo, info_racial), replace = T) %>% 
+    ungroup
+  roc_total <- roc_auc(preds_boot, bajo_auto, .pred_bajo_auto) %>% 
+    mutate(grupo = "Total", atributo = "Total")
+  log_perdida_total <- mn_log_loss(preds_boot, bajo_auto, .pred_bajo_auto)
+  roc_grupos <- roc_auc(preds_boot %>% group_by(sexo), bajo_auto, .pred_bajo_auto) %>% 
+    rename(grupo = sexo) %>% mutate(atributo = "género")
+  log_perdida_grupos <- mn_log_loss(preds_boot %>% group_by(sexo), bajo_auto, .pred_bajo_auto)
+  roc_grupos_2 <- roc_auc(preds_boot %>% group_by(info_racial), bajo_auto, .pred_bajo_auto) %>% 
+    rename(grupo = info_racial) %>% mutate(atributo = "racial")
+  log_perdida_grupos_2 <- mn_log_loss(preds_boot %>% group_by(info_racial), bajo_auto, .pred_bajo_auto)
+  resumen <- bind_rows(roc_total, roc_grupos, roc_grupos_2)
+  resumen$id <- i
+  resumen
+}
+set.seed(2321)
+sim_metricas <- map(1:100, ~ boot_metricas(predictions_prob, .x)) %>% 
+  bind_rows
+resumen <- sim_metricas %>% group_by(.metric, .estimator, grupo, atributo) %>% 
+  summarise(estimador = mean(.estimate), ee = sd(.estimate)/sqrt(length(.estimate))) %>% 
+  select(-.estimator) %>% ungroup
+
+```
+
+```{r}
+ggplot(resumen %>% mutate(grupo = fct_reorder(grupo, estimador)), aes(x = grupo, y = estimador, 
+  ymin = estimador - 2*ee, ymax = estimador + 2*ee, colour = atributo)) +
+  geom_point() + geom_linerange() + coord_flip() +
+  ylab("AUC")
+```
+
+Como medidas de equidad utilizaremos la igualdad de oportunidad (equilibrar probablidad de
+estar en el grupo de interés dentro de cada grupo protegido), o misma tasa de positivos verdaderos. 
+
+```{r}
+resultado_cortes <- function(tbl_datos, cortes){
+  resultado <- tbl_datos %>% 
+    left_join(cortes, by = c("sexo", "info_racial")) %>% 
+    mutate(recibe = .pred_bajo_auto > corte)
+  resultado %>% group_by(info_racial, sexo, recibe, bajo_auto, prop_total) %>% count() %>% 
+    ungroup()
+}
+```
+
+
+```{r}
+calcular_cortes_oportunidad <- function(tbl_datos, prop){
+  tbl_datos %>% 
+    filter(bajo_auto=="bajo_auto") %>% 
+    group_by(info_racial, sexo) %>% 
+    mutate(rank_p = rank(.pred_bajo_auto) / length(.pred_bajo_auto) ) %>% 
+    filter(rank_p < prop) %>% 
+    top_n(1, rank_p) %>% 
+    unique() %>% 
+    select(info_racial, sexo, corte = .pred_bajo_auto) %>% 
+    mutate(prop_total = prop)
+}
+cortes_op <- 
+  map(seq(0.01, 1, 0.01), ~ calcular_cortes_oportunidad(predictions_prob, .x))
+cortes_op[[10]]
+```
+
+
+```{r}
+resultados_conteo <- map(cortes_op, ~ resultado_cortes(predictions_prob, .x)) %>% 
+  bind_rows()
+```
+
+
+```{r}
+resumen_tvp <- resultados_conteo %>% 
+  filter(bajo_auto == "bajo_auto") %>% 
+  group_by(info_racial, sexo, prop_total) %>% 
+  mutate(tvp = n / sum(n), total = sum(n)) %>% 
+  filter(recibe == TRUE) %>% 
+  mutate(ee = sqrt(tvp * (1-tvp) / total ))
+resumen_tvp
+```
+
+
+```{r}
+ggplot(resumen_tvp, aes(x = prop_total, y = tvp, colour = info_racial, 
+                        group = info_racial)) +
+  geom_line() + facet_wrap(~sexo)
+```
+
+Las tasas de verdaderos positivos son consistentes, como se puede comprobar
+examinando algunas de ellas. Por ejemplo, si queremos una tasa de
+positivos correctos el alrededor del 75%, 
+
+
+
+```{r}
+ggplot(resumen_tvp %>% filter(prop_total == 0.25), 
+  aes(x = info_racial, y = tvp, 
+      ymin = pmax(0, tvp - 2*ee), ymax = pmin(1, tvp + 2*ee), colour = sexo)) + 
+  geom_point(position = position_dodge(width = 0.5)) + 
+  geom_linerange(position = position_dodge(width = 0.5)) + 
+  ylab("Tasa de verdaderos positivos") + ylim(c(0,1))
+```
+
+Y las tasas de verdaderos positivos son consistentes.  Para el punto de corte
+seleccionado
+
+```{r}
+resumen_tvp %>% filter(prop_total == 0.25) %>% select()
+```
+
+```{r}
+# seleccionar cortes finales según analisis costo-beneficio
+cortes_finales <- cortes_op[[60]]
+cortes_finales
+```
+
+```{r, message=FALSE, warning=FALSE}
+costos_mat <- tibble(bajo_auto = c("bajo_auto", "bajo_auto", "otro", "otro"),
+                 califica = c(TRUE, FALSE, TRUE, FALSE),
+                 beneficio = c(60000 - 20000, 0, -2000, 0) - 1000)
+costos <- predictions_prob %>%
+  left_join(cortes_finales) %>%
+  mutate(corte = ifelse(is.na(corte), 0.063, corte)) %>% # corte White Male
+  mutate(califica = .pred_bajo_auto > corte) %>% 
+  group_by(bajo_auto, califica) %>% 
+  summarise(n = n()) %>% left_join(costos_mat)
+costos <- costos %>% mutate(total = n * beneficio) %>% 
+  ungroup %>% 
+  left_join(predictions_prob %>% group_by(bajo_auto) %>% summarise(pob = n())) %>% 
+  filter(califica == TRUE) %>% 
+  mutate(cobertura = n / pob)
+costos
+```
+
+
+
+
+
+## Rubrica
+
+
+### 1. Información básica
+
+  - Personas que desarrollaron el modelo, fecha, versión, tipo
+  - Algoritmos que se usaron para entrenar, parámetros supuestos o restricciones
+  - Antecedentes
+  
+Modelo de predicción de ingresos bajos para personas autoempleadas versión 0.1,  `r format(Sys.time(), '%d %B, %Y')`,
+construido por LFG. 
+
+Se utilizó un bosque aleatorio construido con *ranger* 0.12.1 de R.
+Modelos para predecir la categoría de ingreso y estatus de autoempleo basados en datos similares 
+con los se han construido
+en varias ocasiones con diversos propósitos. En este caso particular los datos utilizados son
+un ejemplo común para ilustrar métodos de aprendizaje automático y equidad de predicciones (ver por ejemplo
+[@adult]). 
+
+
+### 2. Casos de uso 
+
+  - Casos de uso considerados durante el desarrollo
+  - Población objetivo y horizonte de predicciones
+  - Actores y componentes que interactuarán con los resultados
+  - Usos no considerados y advertencias relacionadas
+
+El modelo predictivo de ingreso tiene como fin indentificar personas 
+autoempleadas de ingresos bajos con el fin de seleccionarlos como candidatos para un programa 
+de mejora en sus condiciones de trabajo. Este modelo será utilizado en complemento de encuestas
+operadas por terceros, que tendrán disponible una predicción de identificar con menor costo
+personas autoempleadas de ingresos bajos.
+
+La población objetivo es el total de la población de EUA (1994) mayor a 16 años y empleados en algún trabajo
+(mínimo de 1 hora a la semana) con una remuneración mínima de 100 dólares anuales. Buscamos hacer
+predicciones en 1994-1995
+
+El modelo será utilizado después de que un tercero levante encuestas en zonas de interés para
+producir un *scoring* de probabilidades de autoempleo de ingreso bajo. Los operadores del programa
+decidirán entonces, dependiendo de presupuesto y alcances, qué personas entrevistadas en esa encuesta
+se integrarán al programa. 
+
+Recomendamos no usar esté modelo más allá del periodo 1995-1996. Las probabilidades no 
+son indicadoras de mayores o menores ingresos. 
+
+### 3. Métricas de desempeño
+  - Métricas técnicas usadas para seleccionar y evaluar modelos 
+  - Análisis costo-beneficio del modelo para su caso de uso según (2)
+  - Definición de grupos protegidos y medidas de equidad seleccionadas
+
+Las métricas usadas para la selección de modelos fue el AUC, 
+que considera las probablidades de
+estar en la categoría de autoempleo con bajos ingresos. 
+Consideramos como atributos
+protegidos *sexo* e *info_racial*, y buscamos equidad de oportunidad
+(igualar tasas de aceptación entre aquellos que califican al programa).
+
+Supondremos los siguientes parámetros para el análisis
+costo-beneficio:
+
+- Cada aplicación del cuestionario de focalización tiene un costo de 1500
+- Cada aplicación del programa requiere una inversión total de 20000.
+- Se estima que el beneficio del programa a los que aplican es de 60000
+- Los falsos positivos deberán ser filtrados posteriormente de manera manual. El costo administrativo de cada asignación errónea es de 2000
+
+
+### 4. Datos de validación
+  - Conjuntos de datos usados y su etiquetado
+  - Pasos de preprocesamiento
+  - Evaluación de adaptación de datos de validación según el caso de uso (2)
+
+Los datos utilizados para seleccionar y evaluar el modelo fueron
+extraidos aleatoriamente (mismas probabilidades) de los datos
+del censo de Estados Unidos (1994, agregar referencia). Se descartaron
+6 registros con datos inconsistentes (valores fuera de rango). 
+
+En total se escogieron 16281 casos para la evaluación, y alrededor
+del 7.6% están en la categoria de autoempleo con ingresos bajos.
+
+En el preprocesamiento se codificaron los valores faltantes de
+variables categóricas con "Desconocido"- El ingreso reportado se
+cortó en más de 50 mil y menos de 50 mil dólares al año. La variable de
+autoempleo fue extraída directamente de los datos reportados en el censo.
+
+**No se utilizaron los ponderadores de la muestra de evaluación**. Estos ponderadores están basados en sexo, edad, estado y raza. Sin embargo,
+reportamos errores individuales para sexo y raza.
+
+### 5. Datos de entrenamiento
+  - Conjunto de datos usados y su etiquetado
+  - Pasos de preprocesamiento
+  - Sesgos y deficiencias potenciales según el caso de uso (2)
+
+El mismo proceso se utilizó para los datos de entrenamiento, 
+con un total de 32561 casos y 7.1% con autoempleo de ingresos bajos.
+
+### 6. Resumen de análisis cuantitativo
+  - Error de validación reportado
+  - Resumen de análisis costo-beneficio
+  - Reporte de medidas de equidad para grupos protegidos
+
+El auc del modelo seleccionado, en el conjunto de prueba y sin ecualización de oportunidad, fue de
+
+```{r}
+autoplot(datos_roc)
+```
+
+Aunque encontramos diferencias importantes en el desempeño dependiendo
+de atributos protegidos:
+
+```{r}
+resumen %>% knitr::kable(digits = 3)
+```
+
+Las tasas de verdaderos positivos para grupos protegidos son consistentes:
+
+```{r}
+ggplot(resumen_tvp %>% filter(prop_total == 0.6), 
+  aes(x = info_racial, y = tvp, 
+      ymin = pmax(0, tvp - 2*ee), ymax = pmin(1, tvp + 2*ee), colour = sexo)) + 
+  geom_point(position = position_dodge(width = 0.5)) + 
+  geom_linerange(position = position_dodge(width = 0.5)) + 
+  ylab("Tasa de verdaderos positivos") + ylim(c(0,1))
+```
+
+
+En cuanto al costo beneficio, utilizamos los puntos de corte
+
+```{r}
+cortes_finales %>% select(-prop_total)
+```
+
+Esto implica que esperamos una proporción de alrededor de 5 a 1 de falsos positivos vs falsos negativos, una cobertura de 40% de los individuos de interés, y un costo total de 
+
+```{r}
+costos
+```
+
+Y el beneficio total por beneficiario del programa es de:
+
+```{r, message=FALSE, warning=FALSE}
+costos %>% 
+  summarise(beneficio_total = sum(total) / first(n))
+```
+
+### 7. Recomendaciones de monitoreo
+  - Estrategia de monitoreo y mejora en producción
+  - Estrategias de monitoreo humano de predicciones (si aplica)
+
+Monitorear la tasa de personas que califica (positivos) en el tiempo, pues
+cambios en inflación e ingreso en el tiempo pueden requerir ajuste de puntos de corte.
+
+Considerar sobremuestras en los datos de grupos minoritarios, que puede
+dar más certidumbre acerca de la equidad de oportunidad en las predicciones.
+
+### 8. (Opcional) Explicabilidad de predicciones
+
+Valores de Shapley serán usados si los beneficiarios requieren explicación
+del estado de solicitud. Es posible incluir la revisión humana para 
+aceptar una solicitud, pero **deberá ser contabilizado en los costos**.
+
+
+
+# References
