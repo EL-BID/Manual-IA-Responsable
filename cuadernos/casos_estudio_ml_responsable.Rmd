@@ -192,9 +192,13 @@ datos_ingreso <- encuesta_ingreso %>%
   mutate(num_focos = FOCOS) %>%
   mutate(ingreso_miles = (INGCOR / 1000)) %>% 
   mutate(tel_celular = ifelse(SERV_2 == 1, "Sí", "No")) %>% 
+  mutate(piso_firme = ifelse(PISOS != 1 | is.na(PISOS), "Sí", "No")) %>% 
+  mutate(automovil = VEHI1_N > 0) %>% 
   mutate(marginacion = fct_reorder(marginación, ingreso_miles, median)) %>% 
   rename(ocupadas = PEROCU) %>% 
-  select(ingreso_miles, num_focos, tel_celular, marginacion, ocupadas)
+  rename(educacion_jef = NIVELAPROB) %>% 
+  select(ingreso_miles, num_focos, tel_celular, 
+         marginacion, ocupadas, piso_firme, automovil, educacion_jef)
 ```
 
 ```{r}
@@ -208,34 +212,44 @@ una encuesta por teléfono celular, más aún, supongamos que solo accedimos a
 zonas que no tienen marginación muy alta.
 
 ```{r}
-entrena_sesgada <- filter(entrena, tel_celular == "Sí", marginacion=="Muy bajo")
-sesgados_split <- initial_split(entrena_sesgada)
+muestra_sesgada <- filter(entrena, 
+                          tel_celular == "Sí", 
+                          marginacion=="Muy bajo")
+sesgados_split <- initial_split(muestra_sesgada)
 entrena_sesgo <- training(sesgados_split)
-validacion <- testing(sesgados_split)
+validacion_sesgo <- testing(sesgados_split)
 ```
 
 Construimos un modelo lineal para el logaritmo de ingresos con los datos disponibles.
 
 ```{r}
-mod_1 <- lm(log(1 + ingreso_miles) ~ num_focos + ocupadas, data = entrena_sesgo)
+library(splines)
+formula <- as.formula("log(1 + ingreso_miles) ~ ns(num_focos, 3) + 
+              ns(ocupadas, 3) + automovil + piso_firme +
+              ns(educacion_jef, 3)")
+mod_sesgo <- lm(formula, data = entrena_sesgo)
+# tomamos una muestra representativa para comparar, del mismo tamaño que la sesgada
+mod_representativa <- lm(formula, data = sample_n(entrena, nrow(entrena_sesgo)))
 ```
 
 Y evaluamos el error en una muestra de prueba construida con datos con las mismas
-características que los datos de entrenamiento (hogares con teléfono celular y 
+características sesgadas que los datos de entrenamiento (hogares con teléfono celular y 
 grado de marginación no muy alto).
 
 ```{r}
-preds_val <- predict(mod_1, newdata = validacion)
-mean(abs(preds_val - log(1 + validacion$ingreso_miles))) %>% round(2)
+preds_val <- predict(mod_sesgo, newdata = validacion_sesgo)
+mean(abs(preds_val - log(1 + validacion_sesgo$ingreso_miles))) %>% round(2)
 ```
 
 El error en una muestra más similar a la población que se pretende aplicar el 
 algoritmo es mayor:
 
 ```{r}
-preds_prueba <- predict(mod_1, newdata = prueba)
-mean(abs(preds_prueba - log(1 + prueba$ingreso_miles))) %>% round(2)
-prueba$pred <- preds_prueba
+preds_prueba_sesgo <- predict(mod_sesgo, newdata = prueba)
+preds_prueba <- predict(mod_representativa, newdata = prueba)
+prueba$pred_sesgada <- preds_prueba_sesgo
+prueba$pred_rep <- preds_prueba
+mean(abs(preds_prueba_sesgo - log(1 + prueba$ingreso_miles))) %>% round(2)
 ```
 
 Sin embargo, el principal problema se refleja en la siguiente gráfica, donde
@@ -245,22 +259,47 @@ representa un hogar, la muestra es más similar a la población donde se aplicar
 metodología, y en el 
 eje horizontal graficamos la predicción de los hogares utilizando el modelo,
 mientras que el eje vertical corresponde al ingreso de cada hogar. Como referencia
-agregamos la recta $y = x$, y un suavizador (ver por ejemplo [aquí](https://en.wikipedia.org/wiki/Local_regression)).
+agregamos la recta $y = x$, y un suavizador (ver por ejemplo [aquí](https://en.wikipedia.org/wiki/Local_regression)). Nos concetramos
+en vel el desempeño para los hogares de ingresos relativamente bajos
+(menos de 10 mil pesos al mes):
 
-```{r, fig.width = 5, fig.height = 4}
-ggplot(prueba %>% filter(pred < log(100)), 
-  aes(x = exp(pred) - 1, y = ingreso_miles, group=1)) + geom_jitter() +
-  geom_abline() + geom_smooth(method = "loess", se = FALSE) +
-  scale_x_log10() + scale_y_log10() +
+```{r, fig.width = 9, fig.height = 4}
+breaks_y <- c(3, 5, 10, 20, 40, 80)
+g_sesgo <- ggplot(prueba %>% filter(pred_sesgada < log(30)), 
+  aes(x = exp(pred_sesgada) - 1, y = ingreso_miles)) + 
+  geom_point(alpha = 0.5) +
+  geom_abline() + geom_smooth(method = "loess", span = 1) +
+  scale_x_log10(limits=c(5, 30)) + scale_y_log10(breaks = breaks_y) +
   xlab("Predicción (miles al trimestre)") +
-  ylab("Ingreso corriente (miles al trimestre)") 
+  ylab("Ingreso corriente (miles al trimestre)") +
+  labs(subtitle = "Desempeño en prueba \ncon sesgo en entrenamiento") 
+g_representativa <- ggplot(prueba %>% filter(pred_sesgada < log(30)), 
+  aes(x = exp(pred_rep) - 1, y = ingreso_miles)) + 
+  geom_point(alpha = 0.5) +
+  geom_abline() + geom_smooth(method = "loess", span = 1) +
+  scale_x_log10(limits = c(5, 30)) + scale_y_log10(breaks = breaks_y) +
+  xlab("Predicción (miles al trimestre)") +
+  ylab("Ingreso corriente (miles al trimestre)") +
+  labs(subtitle = "Desempeño en prueba \ncon muestra representativa en entrenamiento") 
+g_sesgo + g_representativa
 ```
+
+Por ejemplo, para los que tienen ingresos de menos de 20 mil pesos trimestrales,
+el modelo sesgado sobrepredice el ingreso verdadero por más del 20%:
+
+```{r}
+prueba_bajo <- prueba %>% filter(pred_sesgada < log(20))
+sesgo <- mean(exp(prueba_bajo$pred_sesgada))/mean(prueba_bajo$ingreso_miles) - 1
+round(sesgo,3)
+```
+
+
 
 Tenemos entonces dos problemas:
 
-1. El sesgo produce un error considerablemente más grande en la implementación que en la validación
-2. Peor aún, el sesgo es mayor para hogares de menores ingresos, lo cual puede producir
-una focalización mediocre si buscamos identificar hogares de menores ingresos.
+1. El sesgo produce un error considerablemente más grande en la implementación que en la validación.
+2. Peor aún, el sesgo es mayor para hogares de menores ingresos (las predicciones son altas), 
+lo cual puede producir una focalización mediocre si buscamos identificar hogares de menores ingresos.
 
 ### Muestras naturales: comparaciones causales {#natural}
 
