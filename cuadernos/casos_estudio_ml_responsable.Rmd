@@ -285,7 +285,9 @@ g_representativa <- ggplot(prueba %>% filter(pred_sesgada < log(30)),
 g_sesgo + g_representativa
 ```
 
-Por ejemplo, para los que tienen ingresos de menos de 10 mil pesos mensuales,
+Aunque comunmente esperamos sobrepredecir valores observados relativamente bajos, y lo
+contrario para valores relativamente altos, 
+para los que tienen ingresos de menos de 10 mil pesos mensuales,
 el modelo sesgado sobrepredice el ingreso verdadero por alrededor del 40%:
 
 ```{r}
@@ -294,7 +296,8 @@ sesgo <- mean(exp(prueba_bajo$pred_sesgada))/mean(prueba_bajo$ingreso_miles) - 1
 round(sesgo,3)
 ```
 
-Que comparamos con el mismo modelo entrenado con una muestra representativa:
+Que comparamos con el mismo modelo entrenado con una muestra representativa, donde
+el efecto es considerablemente menor:
 
 ```{r}
 prueba_bajo <- prueba %>% filter(ingreso_miles < 3*10)
