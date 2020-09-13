@@ -355,7 +355,7 @@ consideramos la gráfica de dependencia parcial de la
 prevalencia de enfermedad de corazón y la
 variable obesidad
 
-```{r}
+```{r, fig.width=5, fig.height=3.5}
 library(pdp)
 pdp_ob <- pdp::partial(sa_boosted$fit,  pred.var = "presion_arterial",
   plot = TRUE, plot.engine = "ggplot2", prob = TRUE,
@@ -364,7 +364,7 @@ pdp_ob + xlab("Presión arterial sistólica") + ylab("Predicción promedio")
 ```
 
 La interpretación correcta de este gráfica de **dependencia parcial** (ver @ESL) 
-deémde del hecho de que
+depende del hecho de que
 este es un estudio retrospectivo, donde **algunos pacientes con riesgo de enfermedad
 de corazón sufrieron intervenciones para reducir su riesgo**, entre los
 que está tomar medicinas para reducir la presión. Una interpretación
@@ -521,8 +521,8 @@ bosque <- rand_forest(trees = 500, mtry = 20, mode = "classification") %>%
 bosque %>%
   predict(prueba_smote) %>%
   bind_cols(prueba_smote) %>% 
-  metricas(truth = y, estimate = .pred_class) %>% 
-  kable()
+  metricas(truth = y, estimate = .pred_class) %>%
+  mutate_if(is.numeric, round, 3) %>% kable
 ```
 
 En primera instancia parece ser que el desempeño es muy bueno. Sabemos que esto 
@@ -556,6 +556,7 @@ bosque_1 %>%
   predict(prueba) %>%
   bind_cols(prueba) %>% 
   metricas(truth = y, estimate=.pred_class) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
   kable()
 ```
 
@@ -574,7 +575,8 @@ credito <- read_csv("datos/AER_credit_card_data.csv") %>%
   rename(gasto = expenditure, dependientes = dependents, ingreso = income,
          edad = age, propietario = owner) %>% 
   mutate(propietario = fct_recode(propietario, c(si = "yes")))
-credito %>% head %>% kable()
+credito %>% head %>% 
+  mutate_if(is.numeric, round, 1) %>% kable()
 ```
 
 Queremos construir un modelo para predecir que solicitudes fueron aceptadas y automatizar
@@ -615,7 +617,9 @@ ajuste <- modelo_regularizado %>%
 metricas <- metric_set(accuracy, recall, precision)
 ajuste %>% predict(prueba_prep) %>%
   bind_cols(prueba) %>% 
-  metricas(truth = factor(card), estimate = .pred_class)
+  metricas(truth = factor(card), estimate = .pred_class) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
+  kable()
 ```
 
 Y parece tener un desempeño razonable. Si quitamos la variable *expenditure* se
@@ -627,10 +631,13 @@ ajuste_2 <- modelo_regularizado %>%
 ajuste_2 %>% predict(prueba_prep) %>%
   bind_cols(prueba) %>% 
   metricas(truth = factor(card), estimate = .pred_class) %>% 
+  mutate_if(is.numeric, round, 3) %>% 
   kable()
 ```
 
-La razón es que *gasto* se refiere a uso de tarjetas de crédito. Esto incluye
+La sensibilidad es muy mala y la precisión no se puede calcular pues el modelo no hace predicciones positivas para el conjunto de prueba. 
+
+La razón de esta degradación en el desempeño es que *gasto* se refiere a uso de tarjetas de crédito. Esto incluye
 la tarjeta para la que queremos hacer predicción de aceptación:
 
 ```{r}
@@ -761,8 +768,7 @@ que originalmente es muy alta. Por ejemplo, cortando en 0.05 podemos obtener esp
 que posiblemente sean adecuadas para el problema:
 
 ```{r}
-datos_roc %>% filter(abs(.threshold - 0.04) < 1e-4) %>% round(4) %>% 
-  rename(punto_de_corte = .threshold, espeficidad = specificity, sensibilidad = sensitivity)
+datos_roc %>% filter(abs(.threshold - 0.04) < 1e-4) %>% round(4)
 ```
 
 **¿Qué pasa si hacemos sub/sobremuestreo? **
