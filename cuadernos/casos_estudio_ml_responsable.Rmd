@@ -193,12 +193,13 @@ datos_ingreso <- encuesta_ingreso %>%
   mutate(ingreso_miles = (INGCOR / 1000)) %>% 
   mutate(tel_celular = ifelse(SERV_2 == 1, "Sí", "No")) %>% 
   mutate(piso_firme = ifelse(PISOS != 1 | is.na(PISOS), "Sí", "No")) %>% 
+  mutate(lavadora = ifelse(LAVAD != 1 | is.na(LAVAD), "Sí", "No")) %>% 
   mutate(automovil = VEHI1_N > 0) %>% 
   mutate(marginacion = fct_reorder(marginación, ingreso_miles, median)) %>% 
   rename(ocupadas = PEROCU) %>% 
   rename(educacion_jef = NIVELAPROB) %>% 
   select(ingreso_miles, num_focos, tel_celular, 
-         marginacion, ocupadas, piso_firme, automovil, educacion_jef)
+         marginacion, ocupadas, piso_firme, lavadora, automovil, educacion_jef)
 ```
 
 ```{r}
@@ -224,8 +225,8 @@ Construimos un modelo lineal para el logaritmo de ingresos con los datos disponi
 
 ```{r}
 library(splines)
-formula <- as.formula("log(1 + ingreso_miles) ~ ns(num_focos, 3) + 
-              ns(ocupadas, 3) + automovil + piso_firme +
+formula <- as.formula("log(ingreso_miles) ~ ns(num_focos, 3) + 
+              ns(ocupadas, 3) +  lavadora + automovil + piso_firme +
               ns(educacion_jef, 3)")
 mod_sesgo <- lm(formula, data = entrena_sesgo)
 # tomamos una muestra representativa para comparar, del mismo tamaño que la sesgada
@@ -234,7 +235,7 @@ mod_representativa <- lm(formula, data = sample_n(entrena, nrow(entrena_sesgo)))
 
 Y evaluamos el error en una muestra de prueba construida con datos con las mismas
 características sesgadas que los datos de entrenamiento (hogares con teléfono celular y 
-grado de marginación no muy alto).
+grado de marginación muy bajo).
 
 ```{r}
 preds_val <- predict(mod_sesgo, newdata = validacion_sesgo)
@@ -266,7 +267,7 @@ en vel el desempeño para los hogares de ingresos relativamente bajos
 ```{r, fig.width = 9, fig.height = 4}
 breaks_y <- c(3, 5, 10, 20, 40, 80)
 g_sesgo <- ggplot(prueba %>% filter(pred_sesgada < log(30)), 
-  aes(x = exp(pred_sesgada) - 1, y = ingreso_miles)) + 
+  aes(x = exp(pred_sesgada), y = ingreso_miles)) + 
   geom_point(alpha = 0.5) +
   geom_abline() + geom_smooth(method = "loess", span = 1) +
   scale_x_log10(limits=c(5, 30)) + scale_y_log10(breaks = breaks_y) +
@@ -274,7 +275,7 @@ g_sesgo <- ggplot(prueba %>% filter(pred_sesgada < log(30)),
   ylab("Ingreso corriente (miles al trimestre)") +
   labs(subtitle = "Desempeño en prueba \ncon sesgo en entrenamiento") 
 g_representativa <- ggplot(prueba %>% filter(pred_sesgada < log(30)), 
-  aes(x = exp(pred_rep) - 1, y = ingreso_miles)) + 
+  aes(x = exp(pred_rep), y = ingreso_miles)) + 
   geom_point(alpha = 0.5) +
   geom_abline() + geom_smooth(method = "loess", span = 1) +
   scale_x_log10(limits = c(5, 30)) + scale_y_log10(breaks = breaks_y) +
@@ -284,15 +285,22 @@ g_representativa <- ggplot(prueba %>% filter(pred_sesgada < log(30)),
 g_sesgo + g_representativa
 ```
 
-Por ejemplo, para los que tienen ingresos de menos de 20 mil pesos trimestrales,
-el modelo sesgado sobrepredice el ingreso verdadero por más del 20%:
+Por ejemplo, para los que tienen ingresos de menos de 10 mil pesos mensuales,
+el modelo sesgado sobrepredice el ingreso verdadero por alrededor del 40%:
 
 ```{r}
-prueba_bajo <- prueba %>% filter(pred_sesgada < log(20))
+prueba_bajo <- prueba %>% filter(ingreso_miles < 3*10)
 sesgo <- mean(exp(prueba_bajo$pred_sesgada))/mean(prueba_bajo$ingreso_miles) - 1
 round(sesgo,3)
 ```
 
+Que comparamos con el mismo modelo entrenado con una muestra representativa:
+
+```{r}
+prueba_bajo <- prueba %>% filter(ingreso_miles < 3*10)
+sesgo <- mean(exp(prueba_bajo$pred_rep))/mean(prueba_bajo$ingreso_miles) - 1
+round(sesgo,3)
+```
 
 
 Tenemos entonces dos problemas:
