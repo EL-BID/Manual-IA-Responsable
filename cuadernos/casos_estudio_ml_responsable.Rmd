@@ -59,40 +59,42 @@ A veces el problema es claro, cuando la métrica sustituto tiene deficiencias ob
 puede ser más sutil.
 
 En este ejemplo se busca predecir la demanda de cierto producto, y se cuenta
-con datos históricos de inventario, ventas y una covariable indicadora de ventas:
+con datos históricos de inventario, ventas y una covariable *predictor* 
+asociada a ventas:
 
 ```{r, echo=FALSE, include=FALSE}
 set.seed(124)
 semana <- 1:100
 indicador <- rnorm(100, 0, 20)
-inventario <- 100 + 7*sqrt(1:100) + rpois(100, 50)
-demanda <- 30 + 1.2*1:100 + indicador + rpois(100, 100)
+inventario <- 100 + 7*sqrt(1:100) + rpois(100, 50) 
+demanda <- 30 + 1.2*1:100 + indicador + rpois(100, 100) 
 ventas <- tibble(
     semana = 1:100,
-    inventario = inventario, 
-    demanda = demanda, 
+    inventario = round(inventario), 
+    demanda = round(demanda), 
     ventas = pmin(inventario, demanda),
-    indicador = indicador, 
+    predictor = indicador, 
     agotamiento = ifelse(ventas==inventario, 1, 0))
 ventas %>% select(-demanda)
 ```
 
-Separamos los datos en entrenamiento y prueba, ajustando el modelo con el 
+
+Se cuenta con datos históricos de inventario (80 semanas), ventas y una variable *predictor* asociada a ventas y otra de agotamiento del inventario. Separamos los datos en entrenamiento y prueba, ajustando el modelo con el 
 subconjunto de datos de entrenamiento. En este caso se utiliza un modelo lineal
-con variable dependiente ventas y covariables de semana y una variable indicador.
+con variable dependiente ventas y covariables de semana y la covariable *predictor*.
 
 ```{r}
-entrena <- ventas %>% filter(semana < 80)
-prueba <- ventas %>% filter(semana >= 80)
+entrena <- ventas %>% filter(semana < 60)
+prueba <- ventas %>% filter(semana >= 60, semana <= 80)
 entrena %>% select(-demanda) %>%  head() %>% kable()
-mod_lineal <- lm(ventas ~ semana + indicador, data = ventas)
+mod_lineal <- lm(ventas ~ semana + predictor, data = ventas)
 mod_lineal
 ```
 Evaluamos el error de predicción.
 
 ```{r}
 preds <- predict(mod_lineal, newdata = prueba)
-mean(abs(preds - prueba$ventas))/mean(prueba$ventas)
+round(mean(abs(preds - prueba$ventas))/mean(prueba$ventas), 3)
 ```
 
 El error porcentual es bajo. Los datos ajustados y predicciones se ven como sigue:
@@ -104,7 +106,10 @@ ventas_larga <- ventas %>% mutate(pred = preds) %>%
 ggplot(ventas_larga %>% mutate(unidades = ifelse(tipo=="ventas" & semana > 80, NA, unidades)), 
        aes(x = semana, y = unidades, group = tipo, colour = tipo)) + 
   geom_line() +
-  geom_vline(xintercept = 80)
+  geom_vline(xintercept = 80) +
+  geom_vline(xintercept = 60) +
+  annotate("text", x = 25, y=105, label = "entrena") +
+  annotate("text", x = 69, y=105, label = "prueba")
 ```
 
 Pero tomar decisiones de demanda o inventario es equivocado. La razón es que 
@@ -117,31 +122,40 @@ ventas_larga <- ventas %>% mutate(pred = preds) %>%
 ggplot(ventas_larga %>% mutate(unidades = ifelse(tipo=="ventas" & semana > 80, NA, unidades)), aes(x = semana)) + 
   geom_line(aes(group = tipo, colour = tipo, y = unidades)) +
   geom_point(data = filter(ventas, agotamiento==1, semana < 80), aes(y = ventas), colour = "red") + 
-  geom_vline(xintercept = 80)
+  geom_vline(xintercept = 80) +
+  geom_vline(xintercept = 60) +
+  annotate("text", x = 25, y=105, label = "entrena") +
+  annotate("text", x = 69, y=105, label = "prueba")
 ```
 
 Si usáramos la política sugerida por las predicciones (por ejemplo 5% más), 
 veríamos las ventas de la primera gráfica a continuación. Sin embargo, si 
-usáramos una política de inventario con 250 unidades, observaríamos:
+usáramos una política de inventario con 280 unidades, observaríamos:
 
 
 ```{r, fig.width = 5, fig.height=2.5}
 preds <- predict(mod_lineal, newdata = ventas)
-ventas_larga <- ventas %>% mutate(pred = preds) %>% 
-  mutate(ventas = ifelse(semana > 80, pmin(1.02*pred, demanda), ventas)) %>% 
+ventas_obs <- ventas %>% mutate(pred = preds) %>%
+  mutate(inventario = 1.05 *  pred) %>% 
+  mutate(ventas = ifelse(semana > 80, pmin(inventario, demanda), ventas)) 
+ventas_larga <- ventas_obs %>% 
   pivot_longer(cols = all_of(c("ventas","pred")), names_to = "tipo", values_to = "unidades")
 g1 <- ggplot(ventas_larga, aes(x = semana)) + 
   geom_line(aes(group = tipo, colour = tipo, y = unidades)) +
-  geom_vline(xintercept = 80) + labs(subtitle = "Inventario: Predicciones + 2%")
+  geom_point(data = filter(ventas_obs, ventas == inventario, semana > 80), aes(y = ventas), colour = "red") +
+  geom_vline(xintercept = 80) + labs(subtitle = "Inventario: Predicciones + 5%")
 ```
 
 ```{r, fig.width = 5, fig.height=2.5}
 preds <- predict(mod_lineal, newdata = ventas)
-ventas_larga <- ventas %>% mutate(pred = preds) %>% 
-  mutate(ventas = ifelse(semana > 80, pmin(300, demanda), ventas)) %>% 
+ventas_obs <- ventas %>% mutate(pred = preds) %>% 
+  mutate(inventario = 280) %>% 
+  mutate(ventas = ifelse(semana > 80, pmin(inventario, demanda), ventas)) 
+ventas_larga <- ventas_obs %>% 
   pivot_longer(cols = all_of(c("ventas","pred")), names_to = "tipo", values_to = "unidades")
 g2 <- ggplot(ventas_larga, aes(x = semana)) + 
   geom_line(aes(group = tipo, colour = tipo, y = unidades)) +
+  geom_point(data = filter(ventas_obs, ventas == inventario, semana > 80), aes(y = ventas), colour = "red") +
   geom_vline(xintercept = 80)+ labs(subtitle = "Inventario: 300 unidades cte")
 ```
 
@@ -153,10 +167,12 @@ Entonces,
 
 - La política basada en las predicciones **exacerba** el problema de los agotamientos.
 - Un uso no pensado de datos sin considerar el proceso generador de los mismos puede producir 
-errores grandes en la decisión de políticas
+errores grandes en las decisiones
 - En este caso, la confusión proviene de no separar los conceptos de demanda y ventas. Otros
 indicadores de demanda o modelos más adecuados ayudarían a resolver el problema.
-
+- Soluciones simplistas como sólo tomar los datos donde no ocurren agotamientos pueden empeorar aún más
+la situación: incrementan el sesgo (seleccionamos semanas donde las ventas tienden a ser bajas) y reducen
+la precisión (usamos menos datos).
 
 ## Muestras naturales y sesgo
 
@@ -198,7 +214,7 @@ entrena_sesgo <- training(sesgados_split)
 validacion <- testing(sesgados_split)
 ```
 
-Construimos nuestro modelo de ingreos con los datos disponibles.
+Construimos un modelo lineal para el logaritmo de ingresos con los datos disponibles.
 
 ```{r}
 mod_1 <- lm(log(1 + ingreso_miles) ~ num_focos + ocupadas, data = entrena_sesgo)
@@ -222,18 +238,21 @@ mean(abs(preds_prueba - log(1 + prueba$ingreso_miles))) %>% round(2)
 prueba$pred <- preds_prueba
 ```
 
-Sin embargo, el principal problema se refleja en la siguiente gráfica: cada punto 
+Sin embargo, el principal problema se refleja en la siguiente gráfica, donde
+usamos escalas logarítmicas para hacer comparaciones multiplicativas, que nos interesan
+por la naturaleza del ingreso. Cada punto 
 representa un hogar, la muestra es más similar a la población donde se aplicará la
 metodología, y en el 
 eje horizontal graficamos la predicción de los hogares utilizando el modelo,
 mientras que el eje vertical corresponde al ingreso de cada hogar. Como referencia
-agregamos la recta $y = x$, y un suavizador.
+agregamos la recta $y = x$, y un suavizador (ver por ejemplo [aquí](https://en.wikipedia.org/wiki/Local_regression)).
 
 ```{r, fig.width = 5, fig.height = 4}
 ggplot(prueba %>% filter(pred < log(100)), 
   aes(x = exp(pred) - 1, y = ingreso_miles, group=1)) + geom_jitter() +
   geom_abline() + geom_smooth(method = "loess", se = FALSE) +
-  scale_x_log10() + scale_y_log10() + xlab("Predicción (miles al trimestre)") +
+  scale_x_log10() + scale_y_log10() +
+  xlab("Predicción (miles al trimestre)") +
   ylab("Ingreso corriente (miles al trimestre)") 
 ```
 
@@ -250,6 +269,10 @@ Este ejemplo está tomado de (@ESL y @saheart). Consideramos los siguientes dato
 
 ```{r}
 sa_heart <- read_csv("datos/sa-heart.csv")
+sa_heart <- sa_heart %>% 
+  rename(presion_arterial = sbp, tabaco = tobacco, colesterol_ldl = ldl, 
+         adiposidad = adiposity, historia_fam = famhist, tipo_a = typea, obesidad = obesity, 
+         edad = age, enf_coronaria = chd)
 sa_heart
 ```
 
@@ -259,9 +282,9 @@ set.seed(125)
 sa_split <- rsample::initial_split(sa_heart, prop = 0.75)
 sa_split
 receta_sa <- training(sa_split) %>%
-  recipe(chd ~ .) %>%
-  step_dummy(famhist) %>% 
-  step_mutate(chd = factor(chd)) %>%  
+  recipe(enf_coronaria ~ .) %>%
+  step_dummy(historia_fam) %>% 
+  step_mutate(enf_coronaria = factor(enf_coronaria)) %>%  
   prep()
 ```
 
@@ -273,7 +296,7 @@ sa_boosted <- boost_tree(trees = 3000, mode = "classification",
                         learn_rate = 0.001, tree_depth = 2, 
                         sample_size = 0.5) %>%
   set_engine("xgboost") %>% 
-  fit(chd ~ ., data = sa_entrena)
+  fit(enf_coronaria ~ ., data = sa_entrena)
 ```
 
 Podemos evaluar este modelo y afinar parámetros también. Nos interesa
@@ -284,13 +307,14 @@ variable obesidad
 
 ```{r}
 library(pdp)
-pdp_ob <- pdp::partial(sa_boosted$fit,  pred.var = "sbp",
+pdp_ob <- pdp::partial(sa_boosted$fit,  pred.var = "presion_arterial",
   plot = TRUE, plot.engine = "ggplot2", prob = TRUE,
-  train = sa_entrena %>% dplyr::select(-chd))
-pdp_ob
+  train = sa_entrena %>% dplyr::select(-enf_coronaria))
+pdp_ob + xlab("Presión arterial sistólica") + ylab("Predicción promedio")
 ```
 
-La interpretación correcta de este gráfica proviene del hecho de que
+La interpretación correcta de este gráfica de **dependencia parcial** (ver @ESL) 
+deémde del hecho de que
 este es un estudio retrospectivo, donde **algunos pacientes con riesgo de enfermedad
 de corazón sufrieron intervenciones para reducir su riesgo**, entre los
 que está tomar medicinas para reducir la presión. Una interpretación
@@ -305,7 +329,7 @@ enfermedades del corazón es incorrecta y potencialmente peligrosa (ver más en 
 Veremos varios ejemplos de cómo las fugas de entrenamiento a validación producen estimaciones
 sesgadas del desempeño de predictores.
 
-### Selección de variables antes de particionar
+### Selección de variables antes de dividir los datos
 
 
 ```{block2, type='resumen'}
@@ -358,13 +382,16 @@ seleccionar <- function(datos, num_var = 10){
 
 #### Método erróneo {-}
 
-Para cualquier corte de validación cruzada el error parece ser menor a 0.5:
+Aquí vemos las variables que fueron seleccionadas:
 
 ```{r}
 datos_filtrados <- seleccionar(datos_entrena)
-datos_filtrados %>% head %>% kable()
+datos_filtrados %>% head %>% 
+  mutate_if(is.numeric, round, 3) %>% kable()
 ```
 
+Para cualquier corte de validación que hagamos (ya sea que separemos un conjunto de datos, o hagamos
+validación cruzada), el porcentaje de aciertos parece ser mayor a 0.5:
 
 ```{r, message = FALSE}
 corte_validacion <- datos_filtrados %>% sample_frac(0.7)
@@ -434,28 +461,29 @@ entrena_smote <- training(sep_datos_smote)
 prueba_smote <- testing(sep_datos_smote)
 ```
 
-Y usamos nuestro método de clasificación:
+Y ajustamos un bosque aleatorio para clasificación:
 
 ```{r}
-class_metrics <- metric_set(accuracy, recall, precision, kap)
+metricas <- metric_set(accuracy, recall, precision)
 bosque <- rand_forest(trees = 500, mtry = 20, mode = "classification") %>%
   set_engine("ranger") %>%
   fit(y ~ ., data = entrena_smote)
 bosque %>%
   predict(prueba_smote) %>%
   bind_cols(prueba_smote) %>% 
-  class_metrics(truth = y, estimate = .pred_class) %>% 
+  metricas(truth = y, estimate = .pred_class) %>% 
   kable()
 ```
 
 En primera instancia parece ser que el desempeño es muy bueno. Sabemos que esto 
-es fictico, pues no hay relación de $y$ con el resto de las covariables.
+es ficticio, pues no hay relación de $y$ con el resto de las covariables.
 
 
 #### Manera correcta {-}
 
-Antes de hacer el rebalance de clases separamos entrenamiento y validación. Es 
-posible hacer el muestro estratificado, por ejemplo:
+Antes de hacer el rebalanceo de clases separamos entrenamiento y validación. Si se
+quiere, esta parte puede hacerse usando muestreo estratificado, por ejemplo, pero aquí
+la construimos con muestreo aleatorio simple:
 
 ```{r}
 sep_datos <- initial_split(datos_desbalance, prop = 0.5)
@@ -477,11 +505,12 @@ bosque_1 <- rand_forest(trees = 500, mtry = 20, mode = "classification") %>%
 bosque_1 %>%
   predict(prueba) %>%
   bind_cols(prueba) %>% 
-  class_metrics(truth = y, estimate=.pred_class) %>% 
+  metricas(truth = y, estimate=.pred_class) %>% 
   kable()
 ```
 
-Aunque el accuracy parece alto, la precisión y la exhaustividad son cero.
+Aunque el accuracy parece alto, la precisión y la sensibilidad son cero. Un clasificador trivial
+que siempre predice la clase dominante puede tener mejor exactitud que el que hemos construido.
 
 ## Fugas en implementación
 
@@ -491,7 +520,10 @@ En este caso mostramos un ejemplo donde se utiliza erróneamente una variable qu
 no estará disponible al momento de hacer las predicciones (datos de [@greene]).
 
 ```{r}
-credito <- read_csv("datos/AER_credit_card_data.csv") 
+credito <- read_csv("datos/AER_credit_card_data.csv") %>% 
+  rename(gasto = expenditure, dependientes = dependents, ingreso = income,
+         edad = age, propietario = owner) %>% 
+  mutate(propietario = fct_recode(propietario, c(si = "yes")))
 credito %>% head %>% kable()
 ```
 
@@ -525,7 +557,7 @@ entrena_prep <- bake(receta_prep, entrena)
 prueba_prep <- bake(receta_prep, prueba)
 # ajustar modelo
 ajuste <- modelo_regularizado %>% 
-  fit(card~ expenditure + dependents + income + age + owner_yes, data = entrena_prep)
+  fit(card~ gasto + dependientes + ingreso + edad + propietario_si, data = entrena_prep)
 ```
 
 ```{r}
@@ -541,29 +573,29 @@ degrada totalmente el desempeño del modelo:
 
 ```{r}
 ajuste_2 <- modelo_regularizado %>% 
-  fit(card~ dependents + income + age + owner_yes, data = entrena_prep)
+  fit(card~ dependientes + ingreso + edad + propietario_si, data = entrena_prep)
 ajuste_2 %>% predict(prueba_prep) %>%
   bind_cols(prueba) %>% 
   metricas(truth = factor(card), estimate = .pred_class) %>% 
   kable()
 ```
 
-La razón es que *expenditure* es gasto en tarjetas de crédito. Esto incluye
+La razón es que *gasto* se refiere a uso de tarjetas de crédito. Esto incluye
 la tarjeta para la que queremos hacer predicción de aceptación:
 
 ```{r}
 entrena %>% 
-  mutate(algun_gasto = expenditure > 0) %>% 
+  mutate(algun_gasto = gasto > 0) %>% 
   group_by(algun_gasto, card) %>% 
   tally() %>% 
   kable()
 ```
 
 Lo que nos indica que algún gasto probablemente incluye el gasto en la tarjeta actual,
-y la variable *expenditure* es medida posteriormente a la entrega de la tarjeta:
+y la variable *gasto* es medida posteriormente a la entrega de la tarjeta:
 
 - El desempeño de este modelo para nuevas aplicaciones será muy malo, pues la variable
-*expenditure*, en el momento de la aplicación, evidentemente no cuenta cuánto va a gastar
+*gasto*, en el momento de la aplicación, evidentemente no cuenta cuánto va a gastar
 cada cliente en el futuro.
 
 ## Desbalance de clases
@@ -571,10 +603,10 @@ cada cliente en el futuro.
 Cuando tenemos desbalance severo de clases podemos enfrentar dos problemas:
 existen en términos absolutos muy pocos elementos de una clase para poder
 discriminarla de manera efectiva (aún cuando tengamos los atributos
-o *features* correctas), o métodos usuales de evaluación de predicción 
-son deficientes para evaluar el desempeño de predicciones. 
+o *features* correctos), o métodos usuales de evaluación de predicción 
+son deficientes para evaluar el desempeño de predicciones.  
 
-Consideremos los siguientes datos (del paquete @ISLR):
+Consideremos los siguientes datos (del paquete de @ISLR):
 
 The data contains 5822 real customer records. Each record consists of 86 variables, containing sociodemographic data (variables 1-43) and product ownership (variables 44-86). The sociodemographic data is derived from zip codes. All customers living in areas with the same zip code have the same sociodemographic attributes. Variable 86 (Purchase) indicates whether the customer purchased a caravan insurance policy. Further information on the individual variables can be obtained at http://www.liacs.nl/~putten/library/cc2000/data.html
 
@@ -584,38 +616,44 @@ Queremos predecir la variable *Purchase*:
 ```{r}
 caravan <- read_csv("datos/caravan.csv") %>% 
   mutate(MOSTYPE = factor(MOSTYPE),
-         MOSHOOFD = factor(MOSHOOFD))
+         MOSHOOFD = factor(MOSHOOFD)) %>% 
+  mutate(Compra = fct_recode(Purchase, si = "Yes", no = "No")) %>%
+  mutate(Compra = fct_rev(Compra)) %>% 
+  select(-Purchase)
 nrow(caravan)
-caravan %>% count(Purchase) %>% 
+caravan %>% count(Compra) %>% 
   mutate(pct = 100 * n / sum(n)) %>% 
   mutate(pct = round(pct, 2))
 ```
 
 Esta es la distribución natural de respuesta que vemos en los datos, y tenemos relativamente pocos
-datos en la categoría "Yes".
+datos en la categoría "Si".
 
 Usaremos muestreo estratificado para obtener proporciones similares en conjuntos de entrenamiento y prueba
 
 ```{r}
 set.seed(823)
-caravan_split = initial_split(caravan, strata = Purchase, prop = 0.8)
+caravan_split = initial_split(caravan, strata = Compra, prop = 0.9)
 caravan_split
+entrena <- training(caravan_split)
+prueba <- testing(caravan_split)
 ```
 
-Y usaremos regresión logística (podemos usar bosques, xgboost, keras, etc.)
+Y usaremos regresión logística (lo mismo aplica para otros método que produzcan probabilidades
+de clase, como boosting, árboles aleatorios o redes neuronales):
 
 ```{r}
 library(tune)
 # preparacion de datos
-caravan_receta <- recipe(Purchase ~ ., caravan) %>%
-  step_dummy(all_nominal(), -Purchase) %>% 
-  prep()
+caravan_receta <- recipe(Compra ~ ., entrena) %>%
+  step_dummy(all_nominal(), -Compra)
+caravan_receta_prep <- caravan_receta %>% prep
 # modelo
 modelo_log <- 
   logistic_reg() %>% 
   set_engine("glm")  %>% 
   set_mode("classification") %>% 
-  fit(Purchase ~ ., data = caravan_receta %>% juice)
+  fit(Compra ~ ., data = caravan_receta_prep %>% juice)
 ```
 
 #### Análisis incorrecto {-}
@@ -623,28 +661,28 @@ modelo_log <-
 La matriz de confusión de prueba es:
 
 ```{r, message=FALSE, warning = FALSE}
-prueba_procesado <- bake(caravan_receta, testing(caravan_split))
+prueba_procesado <- bake(caravan_receta_prep, prueba)
 predictions_glm <- modelo_log %>%
   predict(new_data = prueba_procesado) %>%
-  bind_cols(prueba_procesado %>% select(Purchase))
+  bind_cols(prueba_procesado %>% select(Compra))
 predictions_glm %>%
-  conf_mat(Purchase, .pred_class)
+  conf_mat(Compra, .pred_class)
 ```
 
 Y la de entrenamiento:
 
 ```{r, message=FALSE, warning = FALSE}
 predictions_ent_glm <- modelo_log %>%
-  predict(new_data = juice(caravan_receta)) %>%
-  bind_cols(juice(caravan_receta) %>% select(Purchase))
+  predict(new_data = juice(caravan_receta_prep)) %>%
+  bind_cols(juice(caravan_receta_prep) %>% select(Compra))
 predictions_ent_glm %>%
-  conf_mat(Purchase, .pred_class)
+  conf_mat(Compra, .pred_class)
 ```
 
 
 Y obtenemos desempeño pobre según esta matriz de confusión (prueba y entrenamiento).
 La sensibilidad es muy baja, aunque
-la especificidad sea alta. Una conclusión típica es que 
+la especificidad (tasa de correctos negativos) sea alta. Una conclusión típica es que 
 *el modelo no tiene valor predictivo*, o que
 *es necesario sobre muestrear la
 clase de ocurrencia baja*.
@@ -655,17 +693,17 @@ En lugar de empezar con sobre/sub muestreo,
 que modifica lsas proporciones naturales de las categorías en los datos, podemos trabajar con probabilidades
 en lugar de predicciones de clase con punto de corte de 0.5.
 
-Por ejemplo, podemos visualizar con una curva ROC (o curva lift, precisión recall, o alguna otra similar que
+Por ejemplo, podemos visualizar con una curva ROC (o curva lift, precisión-recall, o alguna otra similar que
 tome en cuenta probabilidades):
 
 ```{r, fig.width = 5, fig.height = 4}
-library(yardstick)
 predictions_prob <- modelo_log %>%
   predict(new_data = prueba_procesado, type = "prob") %>%
-  bind_cols(prueba_procesado %>% select(Purchase)) %>% 
-  select(.pred_Yes, Purchase)
-datos_roc <- roc_curve(predictions_prob, Purchase, .pred_Yes)
-autoplot(datos_roc)
+  bind_cols(prueba_procesado %>% select(Compra)) %>% 
+  select(.pred_si, Compra)
+datos_roc <- roc_curve(predictions_prob, Compra, .pred_si)
+autoplot(datos_roc) +
+  xlab("1 - especificidad") + ylab("sensibilidad")
 ```
 
 Donde vemos que podemos alcanzar buenos niveles de sensibilidad si aceptamos alguna degradación en la especificidad,
@@ -673,46 +711,65 @@ que originalmente es muy alta. Por ejemplo, cortando en 0.05 podemos obtener esp
 que posiblemente sean adecuadas para el problema:
 
 ```{r}
-datos_roc %>% filter(abs(.threshold - 0.05) < 1e-4) %>% round(3)
+datos_roc %>% filter(abs(.threshold - 0.04) < 1e-4) %>% round(4) %>% 
+  rename(punto_de_corte = .threshold, espeficidad = specificity, sensibilidad = sensitivity)
 ```
 
 **¿Qué pasa si hacemos sub/sobremuestreo? **
 
-Sobremuetreamos:
-
+Sobremuestreamos: 
 ```{r}
-caravan_receta <- recipe(Purchase ~ ., caravan) %>%
-  step_dummy(all_nominal(), -Purchase) 
+caravan_receta_smote <- recipe(Compra ~ ., entrena) %>%
+  step_dummy(MOSTYPE, MOSHOOFD) %>% 
+  step_smote(Compra)
+smote_prep <- prep(caravan_receta_smote)
 # modelo
-entrena <- caravan_receta %>% step_smote(Purchase) %>% prep() %>% juice
-entrena %>% count(Purchase)
+entrena_1 <- juice(smote_prep)
+entrena_1 %>% count(Compra)
 modelo_log_smote <- 
   logistic_reg() %>% 
   set_engine("glm")  %>% 
   set_mode("classification") %>% 
-  fit(Purchase ~ ., data = entrena)
+  fit(Compra ~ ., data = entrena_1)
 ```
 
 En entrenamiento la matriz de confusión es *aparentemente* mejor:
 ```{r, message=FALSE, warning = FALSE}
 predictions_ent_glm <- modelo_log_smote %>%
-  predict(new_data = entrena) %>%
-  bind_cols(entrena %>% select(Purchase))
+  predict(new_data = entrena_1) %>%
+  bind_cols(entrena_1 %>% select(Compra))
 predictions_ent_glm %>%
-  conf_mat(Purchase, .pred_class)
+  conf_mat(Compra, .pred_class)
 ```
 
 
-Pero en prueba los resultados son muy similares:
+Pero en prueba los resultados son muy similares. Agregamos también el 
+modelo construido submuestreando la clase dominante:
+
+```{r}
+entrena_sub <- caravan_receta %>% step_downsample(Compra) %>% prep() %>% juice
+modelo_log_sub <- 
+  logistic_reg() %>% 
+  set_engine("glm")  %>% 
+  set_mode("classification") %>% 
+  fit(Compra ~ ., data = entrena_sub)
+```
+
 
 ```{r}
 predictions_prob <- modelo_log_smote %>%
   predict(new_data = prueba_procesado, type = "prob") %>%
-  bind_cols(prueba_procesado %>% select(Purchase)) %>% 
-  select(.pred_Yes, Purchase)
-datos_roc_smote <- roc_curve(predictions_prob, Purchase, .pred_Yes)
+  bind_cols(prueba_procesado %>% select(Compra)) %>% 
+  select(.pred_si, Compra)
+predictions_prob_sub <- modelo_log_sub %>% 
+  predict(new_data = prueba_procesado, type = "prob") %>%
+  bind_cols(prueba_procesado %>% select(Compra)) %>% 
+  select(.pred_si, Compra)
+datos_roc_smote <- roc_curve(predictions_prob, Compra, .pred_si)
+datos_roc_sub <- roc_curve(predictions_prob_sub, Compra, .pred_si)
 datos_roc_comp <- bind_rows(datos_roc %>% mutate(tipo = "natural"),
-                            datos_roc_smote %>% mutate(tipo = "con sub-sobre muestreo")
+                            datos_roc_smote %>% mutate(tipo = "con sobre muestreo"),
+                            datos_roc_sub %>% mutate(tipo = "con sub muestreo")
 )
 ggplot(datos_roc_comp,
        aes(x = 1 - specificity, y = sensitivity, colour = tipo)) +
@@ -733,7 +790,8 @@ tasas de respuesta que esperamos observar en producción.
 ## Evaluación de punto de corte 
 
 Las mejores decisiones de punto de corte pueden hacerse con análisis de costo beneficio,
-con curvas tipo *lift*. Aunque esta información muchas veces no está disponible, es la
+con curvas tipo *lift* basadas en ganancias y pérdidas de cada decisión. 
+Aunque esta información muchas veces no está disponible, es la
 situación ideal para evaluar cómo ayuda el modelo y cuánto valen las acciones que pretendemos
 tomar. Es posible hacer este análisis con valores inciertos de costo beneficio.
 
@@ -748,8 +806,8 @@ en un 60\%,
 Podemos evaluar a nuestro modelo en el contexto del problema de las siguiente 
 forma:
 
-- Suponemos que trataremos a un u % de los estudiantes con mayor probabilidad de rotar.
-- Calculamos el costos esperado si tratamos a u % de los estudiantes: 
+- Suponemos que trataremos a un porcentaje de los estudiantes con mayor probabilidad de rotar.
+- Calculamos el costos esperado si tratamos a un porcentaje de los estudiantes: 
 simulamos reduciendo su probabilidad de abandono por el tratamiento y sumamos los costos de tratarlos.
 - Comparamos contra el escenario de no aplicar ningún tratamiento
 
@@ -819,7 +877,8 @@ ggplot(filter(perdidas_sim, tipo=="Tratamiento modelo"),
   labs(subtitle = "Ganancia vs ninguna acción") + theme_minimal()
 ```
 
-¿Dónde habría que hacer el punto de corte para tratar a los estudiantes?
+Podemos escoger un punto de corte entre 0.2 y 0.3, por ejemplo, o hacer más simulaciones
+para refinar la elección. 
 
 Si queremos separar el efecto del tratamiento con el efecto del tratamiento aplicado
 según el modelo, podemos comparar con la acción que consiste en tratar a los estudiantes
@@ -908,7 +967,8 @@ resultados_conteo %>%
 
 Nótese que el grupo naranja ha recibido considerablemente menos aceptaciones que el grupo azul, tanto
 en total como en proporción. Más aún, con la precisión o tasa de verdaderos positivos
-podemos evaluar qué proporción de los pagarían fueron aceptados:
+podemos evaluar qué proporción de los que cumplirían si fueran aceptados fueron 
+aceptados según nuestro punto de corte:
 
 ```{r}
 resultados_conteo %>% 
@@ -950,7 +1010,7 @@ se les otorga menos decisiones de aceptación. Adicionalmente, se aceptan consid
 personas de la población.
 
 La solución de **igual de de oportunidad** es cortar de forma que la tasa de aceptación dentro del grupo
-de los que pagan sea similar para ambas poblaciones.
+de los que pagan sea similar para ambas poblaciones, lo que ocurre aproximadamente en 0.35:
 
 ```{r}
 calcular_cortes_oportunidad <- function(tbl_datos, prop){
@@ -973,7 +1033,7 @@ resultados_conteo %>%
 
 
 **Nota**: es importante notar que si la variable de resultado positivo es injustamente asignada, entonces
-este método no resuelve el problema. En este caso es importante entender cuáles son los criterios con
+este método no resuelve el problema. En este caso es relevante entender cuáles son los criterios con
 los que se considera un resultado existoso dependiendo de el grupo del atributo protegido (por ejemplo,
 si a un segmento particular se le permite mayores atrasos en los pagos y a otro menos, o un grupo se
 considera un delicuente reincidente por una ofensa mucho menor que otros grupos).
@@ -1011,13 +1071,13 @@ entrena_prep <- bake(receta_prep, entrena)
 prueba_prep <- bake(receta_prep, prueba)
 # ajustar modelo
 ajuste <- modelo_regularizado %>% 
-  fit(card~ expenditure + dependents + income + age + owner_yes, data = entrena_prep)
+  fit(card~ gasto + dependientes + ingreso + edad + propietario_si, data = entrena_prep)
 ```
 
 ```{r}
 library(iml)
 modelo <- ajuste$fit
-entrena_x <- entrena_prep %>% dplyr::select(expenditure, dependents, income, age, owner_yes) 
+entrena_x <- entrena_prep %>% dplyr::select(gasto, dependientes, ingreso, edad, propietario_si)
 predictor <- Predictor$new(modelo, data = entrena_x, y = ifelse(entrena_prep$card == "yes",2,1) ,
                            type = "prob")
 imp <- FeatureImp$new(predictor, loss = "ce", compare = "difference")
@@ -1025,12 +1085,15 @@ plot(imp) + theme_minimal()
 ```
 
 - Vemos claramente que para esta red sin capas ocultas, la importancia se concentra en un solo
-predictor, *expenditure*, que como vimos representa una fuga de información. Este diagnóstico es útil en general,
+predictor, *gasto*, que como vimos representa una fuga de información. Este diagnóstico es útil en general,
 y aunque no tan dramático como este ejemplo, puede señalar cuáles variables es importante considerar con cuidado.
 
 - Es importante considerar también el efecto de variables asociadas a grupos protegidos, y de ser necesario, examinar
 con cuidado cómo afectan las predicciones.
 
+- Modelos parsimoniosos, que usan menos atributos, facilitan el análisis, el mantenimiento
+del flujo de datos, y reducen
+exponernos a problemas de fugas o efectos indeseables.
 
 ## Explicación de predicciones
 
@@ -1042,12 +1105,12 @@ hay entre la predicción particular y la predicción promedio.
 Pueden examinarse también promedios a lo largo de grupos de interés.
 
 
-Consideramos el ejemplo de factores para detectar enfermedad del corazón en el estudio de sudáfrica que vimos
-en esta [sección](#natural)
+Consideramos el ejemplo de factores para detectar una enfermedad del corazón en el estudio de Sudáfrica que vimos
+en este [ejemplo](#natural)
 
 ```{r}
 modelo_sa <- sa_boosted$fit
-sa_entrena_x <- sa_entrena %>% dplyr::select(-chd)
+sa_entrena_x <- sa_entrena %>% dplyr::select(-enf_coronaria)
 predict_fun <- function(object, newdata){
   new_data_x = xgb.DMatrix(data.matrix(newdata), missing = NA)
   results<-predict(modelo_sa, new_data_x)
