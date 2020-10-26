@@ -185,6 +185,3 @@ Por ejemplo, estudios clínicos para medir la efectividad de una medicina realiz
 * Se recomienda el llenado del Perfil de Datos durante la fase de Conocimiento y preparación de datos del ciclo de vida de IA.  
 * Al terminar esta fase se recomienda el llenado de la sección de Fuente y Manejo de datos del Perfil de Modelo y llevar a cabo una discusión con el tomador de decisiones de políticas públicas.
 
-
-
-
