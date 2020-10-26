@@ -111,6 +111,7 @@ Las muestras naturales de datos pueden resultar en:
 ```
 
 **Términos**
+
 * Población objetivo: son los elementos que se pretende intervenir (personas, hogares, zonas geográficas, etc.). Los modelos se construyen entonces con el fin de aplicarse a la población objetivo.  
 * Estructura predictiva: se utiliza para hablar en general del tipo de modelos que se utiliza para hacer predicciones (lineales, bosques aleatorios, redes neuronales), las características que utiliza y cómo las utiliza el modelo (interacciones, transformaciones no lineales).  
 * Subpoblaciones de interés o Subpoblaciones protegidas: subpoblaciones de la población objetivo para las cuales queremos tener evaluaciones concretas del desempeño de estimaciones o los modelos.
@@ -118,7 +119,7 @@ Las muestras naturales de datos pueden resultar en:
 * Garantías probabilísticas: bajo muestras diseñadas con aleatorización, es posible, bajo ciertos supuestos, caracterizar comportamiento de estimadores y procedimientos (con alta probabilidad). Por ejemplo, un intervalo de confianza del 95% para las métricas de desempeño que contiene al valor real que será observado.
 
 
-### Atributos faltantes o incompletos
+### Reto: Atributos faltantes o incompletos
 
 Muchos proyectos de aprendizaje automático están destinados a fallar por la poca calidad de los datos con los que se cuenta. Cuando se recolectan datos del mundo real a través de muestras no probabilísticas es muy común que algunas observaciones tengan datos faltantes, es decir observaciones para las que no se tienen todos los atributos.
 
