@@ -12,8 +12,6 @@ En esta sección del manual se exponen retos que aparecen durante los procesos d
 Uno de los primeros errores graves en este proceso es la no consideración de
 etapas robustas de validación y prueba de los modelos
 
-### Reto: Ausencia o uso no apropiado de muestras de validación
-
 Los modelos de aprendizaje automático se entrenan principalmente para crear predicciones en casos no observados. De nada sirve evaluar un sistema en su desempeño de predicción de las observaciones con las que se entrenó, pues el sistema podría únicamente memorizar cada respuesta^[Este fenómeno está relacionado con el sobreajuste que se verá más adelante.]. Su utilidad se encuentra en la medida en la que el sistema logra generalizar un aprendizaje para predecir con datos fuera del conjunto de entrenamiento (*out-of-sample*).
 
 La validación generalmente involucra al menos dos muestras (1 y 2), y de preferencia tres:
@@ -24,7 +22,7 @@ La validación generalmente involucra al menos dos muestras (1 y 2), y de prefer
 
 Para evitar que una partición aleatoria en datos de entrenamiento y validación favorezca o perjudique la evaluación, en general se hace una validación cruzada. Esto consiste en dividir los datos en *k* pedazos, calculando el promedio de *k* evaluaciones, donde los datos de validación son cada uno de los pedazos y los k-1 restantes son los datos de entrenamiento. Esto en inglés se llama *k-fold evaluation* y normalmente se escoge *k=5* o *k=10*.
 
-```{r ciclo, fig.cap="Etapas de evaluación. Construcción propia.", echo=FALSE}
+```{r ciclo, fig.cap="Etapas de evaluación. Construcción propia.", echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/etapas-modelo.png")
 ```
 
@@ -119,7 +117,6 @@ La mayoría se construye mediante el análisis de la matriz de confusión de cla
 |                           ||                      Real                      ||
 |:-------|:------------------|-----------------------:|-----------------------:|
 |                           ||      Positivos         |        Negativos       |
-|:-------|:------------------|-----------------------:|-----------------------:|
 |Predicho|    Positivo       | Verdadero Positivo (VP)|   Falso Positivo   (FP)|
 |        |    Negativo       | Falso Negativo     (FN)| Verdadero Negativo (VN)|
 
@@ -147,7 +144,7 @@ Adicionalmente el criterio que se debe de priorizar siempre deberá de ser anali
 
 
 ```{block2, type='rmdtip'}
-**Medida: Métricas de evaluación engañosas**
+**Medida: Métricas de evaluación fuera de contexto**
 
 *	(Cualitativa) ¿Se cuestionaron las implicaciones de los diferentes tipos de errores para el caso de uso específico, así como la forma correcta de evaluarlos?  
 *	(Cualitativa) ¿Se explicó de forma clara las limitantes del modelo? Identificando tanto los falsos positivos como falsos negativos y las implicaciones que una decisión del sistema tendría en la vida de la población beneficiaria.  
@@ -211,7 +208,10 @@ Sub y sobreajuste ocurren cuando la información predictiva en los datos es usad
 
 -	**Subajuste**: Se da cuando agrupamos de más y damos poco peso a características individuales de los casos. Un modelo con subajuste tiende a ignorar patrones sólidos en la estructura predictiva. Esto se refleja en errores sistemáticos e identificables, por ejemplo, sub/sobre predicción sistemática para ciertos grupos o valores de las variables de entrada. 
 
-![Sub y sobre ajuste](images/under_over_fit.png)
+```{r sub-sobre-ajuste, fig.cap="Sub y sobre ajuste", echo=FALSE, out.width="90%"}
+knitr::include_graphics("images/under_over_fit.png")
+```
+
 
 ```{block2, type='rmdnote'}
 **Reto: sub y sobreajuste**
@@ -342,7 +342,7 @@ Supongamos que se quiere crear un sistema para la selección de beneficiarios a 
 
 
 
-#### c) Justicia contrafactual:
+#### c) Justicia contrafactual: {-} 
 
 Esta medida considera que un predictor es “justo” si su resultado sigue siendo el mismo cuando se toma el valor del atributo protegido y se cambia a otro valor posible del atributo protegido (como por ejemplo introducir un cambio de raza, género u otra condición).
 

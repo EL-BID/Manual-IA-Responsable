@@ -41,17 +41,22 @@ El primer reto es no tomar en cuenta que los datos con los que entrenamos un mod
 
 ```
 
+### Mala correspondencia entre variables disponibles y variables ideales
+
+Cuando se toman decisiones de política pública, se toman a partir de la definición de una o varias variables objetivo “ideales” que tiene en mente el tomador de decisiones.  Sin embargo, las variables ideales pueden o no estar disponibles en los datos a los que se tiene acceso. En muchas ocasiones es necesario el uso de *variables sustitutas o sucedáneas (proxy)* que nos ayude a aproximarnos a la variable ideal. Cuando introducimos este tipo de variables dentro de modelos de ML podemos estar aprendiendo sesgos implícitos que pueden no ser deseables. Por ejemplo, una beca escolar que busque beneficiar a los estudiantes más inteligentes (variable ideal) se encontrará con el problema de definir ese concepto y encontrar una variable que pueda describirlo. Un examen de IQ asigna un valor mediante una prueba estandarizada que se describe como una variable proxy de la inteligencia. Sin embargo, el examen mide únicamente algunas dimensiones de la inteligencia por lo que subestimará la inteligencia de algunas personas (@wilson). 
+
+
 ```{block2, type='rmdnote'}
+**Reto: Mala correspondencia entre variables disponibles y variables ideales**
+  
 - Las variables medidas corresponden pobremente a las variables respuesta de interés.  
 - Es indeseable desde el punto de vista de la política hacer aprendizaje automático de medidas sesgadas o poco apropiadas para la toma de decisiones.
 
 ```
 
-### Reto: Mala correspondencia entre variables disponibles y variables ideales
-
-Cuando se toman decisiones de política pública, se toman a partir de la definición de una o varias variables objetivo “ideales” que tiene en mente el tomador de decisiones.  Sin embargo, las variables ideales pueden o no estar disponibles en los datos a los que se tiene acceso. En muchas ocasiones es necesario el uso de *variables sustitutas o sucedáneas (proxy)* que nos ayude a aproximarnos a la variable ideal. Cuando introducimos este tipo de variables dentro de modelos de ML podemos estar aprendiendo sesgos implícitos que pueden no ser deseables. Por ejemplo, una beca escolar que busque beneficiar a los estudiantes más inteligentes (variable ideal) se encontrará con el problema de definir ese concepto y encontrar una variable que pueda describirlo. Un examen de IQ asigna un valor mediante una prueba estandarizada que se describe como una variable proxy de la inteligencia. Sin embargo, el examen mide únicamente algunas dimensiones de la inteligencia por lo que subestimará la inteligencia de algunas personas (@wilson). 
 
 Las variables objetivo deben plantearse claramente, aunque sean ideales. Las variables disponibles deben ser analizadas para entender qué tan adecuadas son para utilizarse como proxy de la variable ideal. Se deben identificar sesgos sistemáticos dentro del contexto de su uso.^[Ver ejemplo de cuadernillo.]
+
 
 #### Ejemplos {-}
 
@@ -91,10 +96,10 @@ Esto no quiere decir que las muestras naturales no sean útiles, en muchas ocasi
 
 Algo importante a tomar en cuenta es que tener muestras equilibradas en términos de características de la población no es tampoco una condición ni necesaria ni suficiente para calificar como apropiada la base de datos para la construcción de modelos de ML. Por ejemplo, en el caso de información recolectada por redes sociales, el que se tenga una muestra que contenga 50% hombres y 50% mujeres no te dice nada sobre el tipo de conclusiones que se pueden tomar con esos datos, ya que la selección de esas observaciones, al no darse mediante un proceso probabilístico, podría presentar un sesgo en alguna otra dimensión y no necesariamente generalizarán a la población total. 
 
-### Reto: muestras naturales
-
 
 ```{block2, type='rmdnote'}
+**Reto: muestras naturales**
+
 Las muestras naturales de datos pueden resultar en:
 
   - Errores de estimación y de predicción incorrectamente estimados
@@ -112,20 +117,22 @@ Las muestras naturales de datos pueden resultar en:
 
 **Términos**
 
-* Población objetivo: son los elementos que se pretende intervenir (personas, hogares, zonas geográficas, etc.). Los modelos se construyen entonces con el fin de aplicarse a la población objetivo.  
-* Estructura predictiva: se utiliza para hablar en general del tipo de modelos que se utiliza para hacer predicciones (lineales, bosques aleatorios, redes neuronales), las características que utiliza y cómo las utiliza el modelo (interacciones, transformaciones no lineales).  
-* Subpoblaciones de interés o Subpoblaciones protegidas: subpoblaciones de la población objetivo para las cuales queremos tener evaluaciones concretas del desempeño de estimaciones o los modelos.
-* Representatividad: término alternativo a muestra probabilística bajo el caso más simple de muestreo autoponderado.  
-* Garantías probabilísticas: bajo muestras diseñadas con aleatorización, es posible, bajo ciertos supuestos, caracterizar comportamiento de estimadores y procedimientos (con alta probabilidad). Por ejemplo, un intervalo de confianza del 95% para las métricas de desempeño que contiene al valor real que será observado.
+* **Población objetivo**: son los elementos que se pretende intervenir (personas, hogares, zonas geográficas, etc.). Los modelos se construyen entonces con el fin de aplicarse a la población objetivo.  
+* **Estructura predictiva**: se utiliza para hablar en general del tipo de modelos que se utiliza para hacer predicciones (lineales, bosques aleatorios, redes neuronales), las características que utiliza y cómo las utiliza el modelo (interacciones, transformaciones no lineales).  
+* **Subpoblaciones de interés o Subpoblaciones protegidas**: subpoblaciones de la población objetivo para las cuales queremos tener evaluaciones concretas del desempeño de estimaciones o los modelos.
+* **Representatividad**: término alternativo a muestra probabilística bajo el caso más simple de muestreo autoponderado.  
+* **Garantías probabilísticas**: bajo muestras diseñadas con aleatorización, es posible, bajo ciertos supuestos, caracterizar comportamiento de estimadores y procedimientos (con alta probabilidad). Por ejemplo, un intervalo de confianza del 95% para las métricas de desempeño que contiene al valor real que será observado.
 
 
-### Reto: Atributos faltantes o incompletos
+### Atributos faltantes o incompletos
 
 Muchos proyectos de aprendizaje automático están destinados a fallar por la poca calidad de los datos con los que se cuenta. Cuando se recolectan datos del mundo real a través de muestras no probabilísticas es muy común que algunas observaciones tengan datos faltantes, es decir observaciones para las que no se tienen todos los atributos.
 
 Los atributos faltantes o incompletos son un fenómeno que pueden tener un efecto significativo en las conclusiones que pueden extraerse de los datos.  
 
 ```{block2, type='rmdnote'}
+**Reto: Atributos faltantes o incompletos**
+  
 * Por un lado, cuando información crucial acerca de las unidades es totalmente desconocida, esto puede resultar en modelos de desempeño pobre, con poca utilidad para la toma de decisiones y, por otro lado, la ausencia de información puede también estar asociada a características relevantes de las unidades para las que se quiere predecir.  
 * Cuando existen observaciones faltantes se pueden implementar distintos métodos de imputación, pero es importante explorar las razones o el “mecanismo de censura” por el que una observación puede tener valores faltantes.
 
