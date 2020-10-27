@@ -909,7 +909,7 @@ tasas de respuesta que esperamos observar en producción.
 
 ## Equidad con atributos protegidos
 
-El siguiente ejemplo es derivado de (@Hardt). Supongamos que tenemos un atributo protegido $A$ que
+El siguiente ejemplo es derivado de (@hardt). Supongamos que tenemos un atributo protegido $A$ que
 tiene dos valores: azul y naranja. Naranja es el grupo minoritario  desaventajado.
 Usaremos datos simulados como sigue: el atributo *score* está asociado
 al atributo protegido:

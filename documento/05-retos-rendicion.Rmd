@@ -52,7 +52,7 @@ Existe en muchos casos la necesidad legal y/o ética de dar explicaciones indivi
 
 En áreas de investigación como visión artificial y procesamiento del lenguaje natural, las implementaciones más exitosas suelen estar desarrolladas con modelos de alta complejidad, como redes neuronales profundas, que son en principio poco transparentes en cuanto a cómo se hacen las predicciones subyacentes (@carrillo).
 
-Existen varias formas de explicar predicciones (@molnar2019). Pueden utilizarse métodos como el de explicaciones contrafactuales (@wachter), valores de Shapley (@shapely) o gradientes integrados para redes profundas (@gradient). 
+Existen varias formas de explicar predicciones (@molnar2019). Pueden utilizarse métodos como el de explicaciones contrafactuales (@wachter), valores de Shapley (@shapley) o gradientes integrados para redes profundas (@gradient). 
 
 
 
