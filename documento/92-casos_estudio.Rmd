@@ -1,13 +1,17 @@
-# Apéndice: casos de estudio
+# Cuadernillos de trabajo
 
-En este cuaderno mostraremos varios ejemplos de los retos y soluciones explicadas
-en el documento principal. Usamos distintos tipos de modelos (lineales, basados en árboles y otros) y distintas implementaciones (R, keras, xgboost) para mostrar
-que estos problemas se presentan independientemente de la elección de herramientas
-particulares.
+En esta sección se muestran varios ejemplos de los retos y soluciones explicadas en el documento principal. Se utilizan distintos tipos de modelos (lineales, basados en árboles y otros) y distintas implementaciones (R, keras, xgboost) para mostrar que estos problemas se presentan independientemente de la elección de herramientas particulares.
 
-Se utiliza el lenguaje de programación R, y los siguientes paquetes: @tidyverse, 
+Los cuadernillos utilizan notación con punto decimal para mantener consistencia con los paquetes que así lo usan. Se utiliza el lenguaje de programación R, y los siguientes paquetes:  @tidyverse, 
 @recipes, @themis, @rsample, @parsnip, @yardstick, @workflows, @tune, @knitr, 
 @patchwork.
+
+Todo el material es reproducible según instrucciones en este [repositorio](https://github.com/EL-BID/Manual-IA-Responsable). El repositorio contiene un archivo Dockerfile que describe las dependencias de infraestructura para su replicación. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
 
 ```{r, message=FALSE, warning = FALSE}
 library(tidyverse)
@@ -31,8 +35,9 @@ Usar modelos que predicen la métrica incorrecta puede llevar a tomar decisiones
 A veces el problema es claro, cuando la métrica sustituto tiene deficiencias obvias, y en otras
 puede ser más sutil.
 
-En este ejemplo se busca predecir la demanda de cierto producto, y se cuenta
-con datos históricos de inventario, ventas y una covariable indicadora de ventas:
+En el ejemplo que se muestra a continuación se busca predecir la demanda de cierto producto (pensemos en vacunas o alguna medicina) para poder tomar decisiones de abastecimiento. 
+
+Se cuenta con datos históricos de inventario (80 semanas), ventas y una variable *predictor* asociada a ventas (en el caso de las vacunas podría ser temperatura) y otra de agotamiento del inventario. Separamos los datos en entrenamiento y prueba, ajustando el modelo con el subconjunto de datos de entrenamiento. En este caso se utiliza un modelo lineal con variable dependiente ventas y covariables de semana y la covariable *predictor*.
 
 ```{r, echo=FALSE, include=FALSE}
 set.seed(124)
@@ -80,8 +85,7 @@ ggplot(ventas_larga %>% mutate(unidades = ifelse(tipo=="ventas" & semana > 80, N
   geom_vline(xintercept = 80)
 ```
 
-Pero tomar decisiones de demanda o inventario es equivocado. La razón es que 
-existen agotamientos de inventario, que marcamos con rojo en la siguiente gráfica.
+Pero tomar decisiones de demanda o inventario es equivocado. La razón es que existe una diferencia entre la variable ideal (demanda real de medicinas) y la variable observada (venta de medicinas). La diferencia radica en que existen agotamientos de inventario, es decir periodos en los que, aunque existía demanda no había suficiente inventario para todos los compradores. Se ve marcado esto con rojo en la siguiente gráfica.  
 
 ```{r, fig.width = 5, fig.height=2.5}
 preds <- predict(mod_lineal, newdata = ventas)
@@ -125,10 +129,9 @@ g1 / g2
 Entonces, 
 
 - La política basada en las predicciones **exacerba** el problema de los agotamientos.
-- Un uso no pensado de datos sin considerar el proceso generador de los mismos puede producir 
-errores grandes en la decisión de políticas
-- En este caso, la confusión proviene de no separar los conceptos de demanda y ventas. Otros
-indicadores de demanda o modelos más adecuados ayudarían a resolver el problema.
+-	Un uso no pensado de datos sin considerar el proceso generador de los mismos puede producir errores grandes en las decisiones  
+-	En este caso, la confusión proviene de no separar los conceptos de demanda y ventas. Otros indicadores de demanda o modelos más adecuados ayudarían a resolver el problema.  
+-	Soluciones simplistas como sólo tomar los datos donde no ocurren agotamientos pueden empeorar aún más la situación: incrementan el sesgo (seleccionamos semanas donde las ventas tienden a ser bajas) y reducen la precisión.
 
 
 ### Muestras naturales y sesgo
@@ -160,7 +163,7 @@ entrena <- training(ingreso_split)
 prueba <- testing(ingreso_split)
 ```
 
-Supongamos que nos interesa estimar el ingreso de los hogares, para ello usamos 
+Supongamos que interesa estimar el ingreso de los hogares, para ello usamos 
 una encuesta por teléfono celular, más aún, supongamos que solo accedimos a 
 zonas que no tienen marginación muy alta.
 
@@ -171,15 +174,13 @@ entrena_sesgo <- training(sesgados_split)
 validacion <- testing(sesgados_split)
 ```
 
-Construimos nuestro modelo de ingreos con los datos disponibles.
+Se construye un modelo lineal para el logaritmo de ingresos con los datos disponibles.
 
 ```{r}
 mod_1 <- lm(log(1 + ingreso_miles) ~ num_focos + ocupadas, data = entrena_sesgo)
 ```
 
-Y evaluamos el error en una muestra de prueba construida con datos con las mismas
-características que los datos de entrenamiento (hogares con teléfono celular y 
-grado de marginación no muy alto).
+Y se evalúa el error en una muestra de prueba construida con datos con las mismas características sesgadas que los datos de entrenamiento (hogares con teléfono celular y grado de marginación muy bajo).
 
 ```{r}
 preds_val <- predict(mod_1, newdata = validacion)
@@ -195,12 +196,7 @@ mean(abs(preds_prueba - log(1 + prueba$ingreso_miles))) %>% round(2)
 prueba$pred <- preds_prueba
 ```
 
-Sin embargo, el principal problema se refleja en la siguiente gráfica: cada punto 
-representa un hogar, la muestra es más similar a la población donde se aplicará la
-metodología, y en el 
-eje horizontal graficamos la predicción de los hogares utilizando el modelo,
-mientras que el eje vertical corresponde al ingreso de cada hogar. Como referencia
-agregamos la recta $y = x$, y un suavizador.
+Sin embargo, el principal problema se refleja en la siguiente gráfica, donde se usan escalas logarítmicas para hacer comparaciones multiplicativas, que interesan por la naturaleza del ingreso. Cada punto representa un hogar, la muestra es más similar a la población donde se aplicará la metodología, y en el eje horizontal se grafica la predicción de los hogares utilizando el modelo, mientras que el eje vertical corresponde al ingreso de cada hogar. Como referencia se agrega la recta y=x, y un suavizador (ver por ejemplo [aquí](https://en.wikipedia.org/wiki/Local_regression)). El foco es en el desempeño para los hogares de ingresos relativamente bajos (menos de 10 mil pesos al mes):
 
 ```{r, fig.width = 5, fig.height = 4}
 ggplot(prueba %>% filter(pred < log(100)), 
