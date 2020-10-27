@@ -2,12 +2,9 @@
 title: "Casos de estudio"
 link-citations: yes
 output:
-  html_document:
-    css: ./css/style.css
-    number_sections: yes
-    theme: cerulean
+  word_document:
     toc: yes
-    toc_depth: 3
+    toc_depth: '3'
   pdf_document:
     toc: yes
     toc_depth: '3'
@@ -15,9 +12,12 @@ output:
       in_header: ../documento/preamble.tex
     latex_engine: xelatex
     citation_package: natbib
-  word_document:
+  html_document:
+    css: ./css/style.css
+    number_sections: yes
+    theme: cerulean
     toc: yes
-    toc_depth: '3'
+    toc_depth: 3
 bibliography:
 - ../documento/referencias.bib
 - ../documento/packages.bib
