@@ -10,76 +10,40 @@ Una vez que los métodos de aprendizaje automático se comienzan utilizar para t
 
 
 ```{block2, type='rmdnote'}
-**Reto: degradación de predicciones en el tiempo**
+**Reto: degradación de predicciones**
 
- El desempeño de un modelo puede degradarse en el tiempo debido a cambios 
-en la población o proceso sobre la que se hacen predicciones.
+El desempeño de un modelo puede degradarse con el tiempo por múltiples razones.
+
+-	Los modelos de ML que asumen una relación estática entre las variables de entrada y de salida pueden degradar la calidad de sus predicciones por cambios en las relaciones subyacentes del contexto de estudio. 
+-	También se puede deber a un cambio en la calidad de datos por la forma de recolección o incluso redefiniciones metodológicas utilizadas para recolectar información. Por ejemplo, en registros administrativos un ministerio o secretaría podría cambiar los procesos de recolección de datos, digitalizar sistemas, sistematizar limpieza o procesamiento que haga que el aprendizaje de un sistema ya no sea relevante.  
+- También esto ocurre en sistemas interactivos donde el sistema y sus usuarios forman un ciclo de realimentación cerrado, con lo cual el sistema se va degradando ya que los usuarios sólo pueden interactuar con elementos que son decididos por el sistema.
+
 ```
 
-Una primera medida de deseable es entender cuáles son los requisitos de actualización de datos para
-la aplicación, es decir: para mantener el desempeño, ¿es suficiente actualizar cada año, mes, semana?
+Para mitigar estos posibles errores es necesario monitorear el comportamiento de las variables de entrada y actualizar supuestos con tomadores de decisión y conocimiento experto. 
+
+También se debe vigilar el comportamiento de las métricas de error en el tiempo. Cantidades con tasa total de positivos y negativos (incluyendo desagregaciones por otras variables protegidas o de interés), distribución de predicciones y atributos.
 
 ```{block2, type='rmdtip'}
-**Medidas de mitigación: requisitos de actualización**
+**Medidas: degradación de predicciones**
 
-- Es deseable estimar desde el proceso de validación cuáles son los requisitos de actualización (tiempos)
-para mantener el desempeño estimado, y planear para recolectar datos para reajustar modelos.
+- [x]	Degradación de desempeño:
+  
+* ¿Existe un plan para monitorear el desempeño del modelo y la recolección de información a lo largo del tiempo?
+* (Cuantitativa) Monitorear varias métricas asociadas a las predicciones, en subgrupos definidos con antelación (incluyendo variables protegidas).
+* (Cuantitativa) Monitorear deriva en distribuciones de características con respecto al conjunto de entrenamiento.
+* (Cuantitativa) Monitorear cambios en la metodología de levantamiento y procesamiento de datos que pueden reducir calidad de las predicciones.
+* (Cuantitativa) Idealmente, planear para recolectar datos de la variable no observada para reajustar modelos y mantener el desempeño.
+* (Cualitativa) Cuando sea aplicable y factible, una fracción de las predicciones deberán ser examinadas por humanos y calificadas según alguna rúbrica o mediciones de las variables que se busca predecir.
+* (Cuantitativa) Reentrenar periódicamente los modelos agregando nuevos datos. ```
 ```
 
-Durante el despliegue deben monitorearse medidas de error a lo largo de rondas de predicción para alertar
-sobre este tipo de degradación
-
-## Cambios de metodología y errores de implementación
-
-Es común que al pasar de validación a despliegue del modelo ocurran errores silenciosos que posiblemente
-tengan efectos grandes sobre las predicciones. Razones comunes son:
-
-- Cambios en la metodología de recopilación de datos
-- Procesamiento diferente de atributos una vez que se despliega el modelo
-- Errores generales en la implementación de producción de los modelos.
-
-```{block2, type='rmdnote'}
-El desempeño de un modelo puede degradarse severamente por cambios de metodología en la recolección o procesamiento de datos, o
-diferencias entre datos de entremiento/validación y datos que se usan en el despliegue del modelo.
-```
-
-Mitigamos este problema instrumentando apropiadamente el sistema para monitorear degradaciones no esperadas
-en el desempeño:
-
-```{block2, type='rmdtip'}
-**Medidas de mitigación**
-
-- Monitorear cambios en la metodología de levantamiento y procesamiento de datos que pueden reducir calidad de las predicciones.
-- Monitorear varias métricas asociadas a las predicciones, en subgrupos definidos con antelación 
-(incluyendo variables protegidas).
-- Monitorear deriva en distribuciones de características con respecto al conjunto de entrenamiento.
-```
-
-## Errores no medidos
-
-Es posible que algunas predicciones tengan problemas o errores particulares que pueden ser difíciles de detectar 
-con métricas agregadas (por ejemplo, ciertas búsquedas dan resultados muy pobres, o cierto tipo de personas tienden
-a ser descalificadas de algún programa debido a un atributo ruidoso). 
-
-```{block2, type='rmdnote'}
-Aunque un modelo tenga desempeño aceptable en las métricas seleccionadas, es posible que produzca
-decisiones indeseables o errores grandes en ciertos casos
-```
-
-En este caso, 
-
-```{block2, type='rmdtip'}
-**Medidas de mitigación: errores no medidos**
-
-- Evaluaciones de expertos de casos particulares y desempeño general puede ser útil para detectar deficiencias.
-
-```
-
-
+## Experimentos y recopilación de datos
 
 ## Evaluación de efectividad
 
-La forma y los datos que se recopilan para mantenimiento de los algoritmos de predicción debe planearse con el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso de los algoritmos
+La forma y los datos que se recopilan para el mantenimiento de los algoritmos de predicción debe planearse con el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso de los modelos.
+
 
 ```{block2, type='rmdnote'}
 **Reto: evaluación de efectividad**
@@ -88,19 +52,15 @@ Las mejoras que esperamos en el proceso pueden ser dificíles de evaluar sin con
 
 ```
 
-Pruebas con diseño experimental pueden planearse (pruebas de tipo A/B, o ver por ejemplo [@vaver]), cuando sea posible, para entender qué cambios particulares, deseables o indeseables, introduce el uso de los algoritmos. Es necesario también, al menos,
-considerar efectos a mediano plazo, aunque estos pueden ser difíciles de definir por adelantado.
+Pruebas con diseño experimental pueden planearse (pruebas de tipo A/B, o ver por ejemplo [@vaver]), cuando sea posible, para entender qué cambios particulares, deseables o indeseables, introduce el uso de los modelos.
 
 ```{block2, type='rmdtip'}
-**Medidas de mitigación: evaluación de efectividad**
+**Medidas: evaluación de efectividad**
 
-- Cuando sea posible, planear asignar bajo diseños experimentales tratamientos al azar (o según el status-quo) a algunas unidades. Hacer comparaciones de
-desempeño y comportamiento entre esta muestra y los resultados bajo el régimen algorítmico. 
-- Al considerar estos diseños, deben considerarse no sólo mejoras a corto plazo en métricas de desempeño, sino también
-comportamiento en otro tipo de medidas relacionadas con los objetivos de los tomadores de decisiones.
+* (Cuantitativa) Cuando sea posible, planear asignar bajo diseños experimentales tratamientos al azar (o según el status-quo) a algunas unidades. Hacer comparaciones de desempeño y comportamiento entre esta muestra y los resultados bajo el régimen algorítmico.
 
 ```
 
-Por ejemplo, un algoritmo de recomendación que no incorpora nuevos documentos al ser entrenado puede parecer efectivo
-en el corto plazo según métricas de desempeño. Sin embargo, esto es deficiente desde el punto de vista de los
-tomadores de decisiones, que requieren que nuevo contenido sea mostrado cuando es relevante.
+
+#### Actividad: {-}
+Al terminar esta fase se recomienda el llenado de la sección de Uso y monitoreo del Perfil de Modelo y llevar a cabo una discusión con el tomador de decisiones de políticas públicas.
