@@ -2,44 +2,28 @@
 
 ## Interpretabilidad y explicación de predicciones.
 
-Es difícil dar una definición técnica de **interpretabilidad** o **explicabilidad**, que en general se refieren 
-a hacer inteligible para humanos el funcionamiento de un algoritmo ([@molnar2019], [@miller]). Hay varias razones
-por las que tener cierto grado de interpretabilidad en los algoritmos que se usan para tomar decisiones es importante ([@molnar2019]):
+Es difícil dar una definición técnica de **interpretabilidad** o **explicabilidad**, que en general se refieren a hacer inteligible para humanos el funcionamiento de un algoritmo y sus resultados ([@molnar2019], [@miller]). Hay varias razones por las que tener cierto grado de interpretabilidad en los modelos que se usan para tomar decisiones es importante  (@molnar2019):
 
 1. Aprendizaje acerca del dominio del problema.
 2. Aspectos legales y aceptación social (tomadores de decisiones y afectados).
 3. Detección de sesgos potenciales de los algoritmos.
 4. Depuración y mejora de modelos.
 
-Los puntos 1 y 2 son más difíciles de definir, y advertimos que cualquier técnica aplicada a interpretar 
-los modelos con estos dos fines tienen varias dificultades que superar. El *aprendizaje automático*, como se usa
-tipicamente hoy en día, dificilmente se acerca a explicaciones causales o mecanísticas. 
+Los puntos 1 y 2 son un campo aún abierto en ML, y que cualquier técnica aplicada a interpretar los modelos con estos dos fines tienen varias dificultades que superar. El *aprendizaje automático*, como se usa típicamente hoy en día, difícilmente se acerca a explicaciones causales.
 
-Los puntos 3 y 4, que veremos más abajo, son más suceptibles de análisis técnico. Los sesgos potenciales pueden ocurrir cuando en el proceso
-de aprendizaje se aprenden de características que son irrelevantes, pero caracterizan a los conjuntos de entrenamiento
-y validación/prueba que fueron utilizados.
-
-Por otra parte, existe en muchos casos la necesidad de dar **explicaciones individuales** de cómo fueron tomadas ciertas decisiones
-(por ejemplo, por qué a una persona no se le otorgó un crédito, o por qué alguien no califica para un programa social). 
+El punto 3 y 4, que se exploran más abajo, son más susceptibles de análisis técnico. Los sesgos potenciales pueden ocurrir cuando en el proceso de aprendizaje se aprenden de características que son irrelevantes, pero caracterizan a los conjuntos de entrenamiento y validación/prueba que fueron utilizados.
 
 
-## Interpretabilidad: sesgos y depuración
+## Sesgos potenciales y depuración
 
-Sesgos potenciales pueden ocurrir cuando se usan características o variables de los datos que aunque válidos para 
-un momento y conjunto de datos dado, son suceptibles de cambiar fácilmente con intervenciones en el proceso generador de datos. Ejemplos
-pueden ser el uso de variables que están siendo influenciadas activamente por alguna política particular que no continuará en el futuro,
-o aprendizaje de características particulares de un conjunto de entrenamiento no exhaustivo (por ejemplo, en reconocimento de 
-imágenes reconocer especies animales por el contexto en el que se recolectó la información: zoológico, trampa cámara, etc).
+Sesgos potenciales pueden ocurrir cuando se usan características o variables de los datos que, aunque válidos para un momento y conjunto de datos dado, son susceptibles de cambiar fácilmente con intervenciones en el proceso generador de datos. Ejemplos pueden ser el uso de variables que están siendo influenciadas activamente por alguna política particular que no continuará en el futuro, o aprendizaje de características particulares de un conjunto de entrenamiento no exhaustivo (por ejemplo, en reconocimiento de imágenes reconocer especies animales por el contexto en el que se recolectó la información: zoológico, trampa cámara, paisaje, etc.).
+mágenes reconocer especies animales por el contexto en el que se recolectó la información: zoológico, trampa cámara, etc).
 
 ```{block2, type='rmdnote'}
 **Reto: sesgos potenciales y depuración**
 
-- Algoritmos o métodos predictivos utilizan atributos poco relevantes, con validez temporal,  más adelante pueden 
-dañar el desempeño conforme observamos desplazamiento en datos futuros.
-
-- Algoritmos o métodos predictivos que usan una gran cantidad de atributos poco importantes tienen más riesgo de fallar
-tanto explícitamente como de forma silenciosa cuando las fuentes de datos o los procesos generadores de datos cambian. 
-Ambas fallas pueden ser difíciles de diagnosticar y depurar. Fallas silenciosas representan riesgos adicionales.
+- Algoritmos o métodos predictivos utilizan atributos poco relevantes, con validez temporal, más adelante pueden dañar el desempeño conforme observamos desplazamiento en datos futuros.  
+-	Algoritmos o métodos predictivos que usan una gran cantidad de atributos poco importantes tienen más riesgo de fallar tanto explícitamente como de forma silenciosa cuando las fuentes de datos o los procesos generadores de datos cambian. Ambas fallas pueden ser difíciles de diagnosticar y depurar, y las fallas silenciosas representan riesgos adicionales.
 
 ```
 
@@ -50,11 +34,11 @@ Este tipo de sesgo es difícil de detectar, pero principios de parsimonia y cono
 ```{block2, type='rmdtip'}
 **Medidas de mitigación: sesgos potenciales y depuración**
 
-- (Cualitativa) Incluir todas las características disponibles para construir modelos aumenta el riesgo de
-que esto suceda. Las variables a incluirse en el proceso de aprendizaje deben tener algún sustento teórico o explicación 
-de por qué pueden ayudar en la tarea de predicción.
-- (Cuantitativa) Métodos más parsimoniosos, que usan menos características, son preferibles a modelos que utilizan
-muchas características.
+- (Cualitativa)¿Se han comunicado las deficiencias, limitaciones y sesgos del modelo a las partes interesadas de manera que estos se consideren en la toma/soporte de decisiones?  
+- (Cualitativa)¿Se han tomado medidas para identificar y prevenir los usos no intencionados y el abuso del modelo y tenemos un plan para monitorear estos una vez que el modelo sea desplegado?  
+- (Cuantitativa) ¿Se han definido un plan de respuesta en caso de que algún usuario se vean perjudicado por los resultados? 
+- (Cualitativa) Incluir todas las características disponibles para construir modelos aumenta el riesgo de que esto suceda. Las variables por incluirse en el proceso de aprendizaje deben tener algún sustento teórico o explicación de por qué pueden ayudar en la tarea de predicción.  
+- (Cuantitativa) Métodos más parsimoniosos, que usan menos características son preferibles a modelos que utilizan muchas características.  
 - (Cuantitativa) Métodos como gráficas de dependencia parcial ([@friedman]) o  importancia basada en permutaciones ([@breimanrandom], [@molnar2019]) pueden señalar
 variables problemáticas que reciben mucho peso en la predicción, en contra de observaciones pasadas o conocimiento experto.
 
@@ -64,67 +48,57 @@ variables problemáticas que reciben mucho peso en la predicción, en contra de 
 
 ## Explicabilidad de predicciones individuales
 
-Explicaciones individuales pueden ser importantes para rendir cuentas a usuarios o poder explicar decisiones tomadas
-con aprendizaje automático:
-
 ```{block2, type='rmdnote'}
-**Reto: explicaciones individuales**
+**Reto: Explicaciones individuales**
 
-  En muchos casos, es necesario dar explicaciones de por qué se tomó una decisión particular. Métodos predictivos complejos
-son en principio poco transparentes en cuanto a cómo se hacen las predicciones subyacentes.
-
+Existe en muchos casos la necesidad legal y/o ética de dar explicaciones individuales de cómo fueron tomadas ciertas decisiones (por ejemplo, por qué a una persona no se le otorgó un crédito, o por qué alguien no califica para un programa social).^[En la Unión Europea, por ejemplo, el Artículo 22 de GDPR describe el derecho de una persona a rebatir la decisión de un sistema, especialmente cuando es automática.] 
 ```
 
+En áreas de investigación como visión artificial y procesamiento del lenguaje natural, las implementaciones más exitosas suelen estar desarrolladas con modelos de alta complejidad, como redes neuronales profundas, que son en principio poco transparentes en cuanto a cómo se hacen las predicciones subyacentes (@carrillo).
 
-Existen varias formas de explicar predicciones [@molnar2019]. Algunas de ellas actualmente en uso y con implementaciones
-robustas son:
+Existen varias formas de explicar predicciones (@molnar2019). Pueden utilizarse métodos como el de explicaciones contrafactuales (@wachter), valores de Shapley (@shapely) o gradientes integrados para redes profundas (@gradient). 
+
 
 
 ```{block2, type='rmdtip'}
-**Medidas de mitigación: explicaciones individuales**
-  
-Para explicar las predicciones pueden utilizarse métodos como el de explicaciones contrafactuales ([@wachter]),
-valores de Shapley ([@shapley]) o gradientes integrados para redes profundas ([@gradient]).
-Para modelos más simples (por ejemplo, lineales), pueden construirse explicaciones ad-hoc.
+**Medidas: explicaciones individuales**
 
+-	(Cualitativo) ¿Se analizaron los requerimientos legales y éticos de explicabilidad e interpretabilidad necesarios para el caso de uso?  
+-	.(Cualitativo) ¿Se han definido un plan de respuesta en caso de que algún usuario se vea perjudicado por los resultados?  
+-	(Cualitativo) ¿Existe algún proceso para dar explicaciones a un individuo en particular sobre por qué se tomó una decisión?  
+-	(Cualitativo) ¿Se discutieron los pros y contras de los algoritmos según su nivel de interpretabilidad y explicabilidad para elegir el más apropiado?  
+-	(Cuantitativo) Para modelos más simples (por ejemplo, lineales o árboles de decisión), pueden construirse explicaciones ad-hoc.  
+- (Cuantitativo) Utilizar métodos como: explicaciones contrafactuales, valores de Shapley o gradientes integrados para redes profundas. 
 ```
 
 
+## Trazabilidad
+Un proceso de datos a decisiones que es poco trazable es uno que contiene pasos con documentación deficiente acerca de su ejecución: incluyen procesos manuales o decisiones de operadores pobremente especificados, extraen datos de fuentes no documentadas o no accesibles, omiten códigos o materiales necesarios, o no explican los ambientes de cómputo para garantizar resultados reproducibles. 
 
-
-## Transparencia y auditabilidad
-
-En algunos casos, será necesario transparentar el funcionamiento de tanto datos usados, modelos predictivos particulares,
-objetivos de las políticas y la aplicación de las predicciones para alcanzar los objetivos de las políticas. Esto varía
-de aplicación a aplicación: por ejemplo, en el caso de acceso a un programa social, puede ser necesario que las 
-decisiones basadas en datos sean explicadas y documentadas en su totalidad, o al menos explicar cuáles son los
-datos que se están usando para tomar la decisiones acerca del acceso. En otros casos, será necesario explicar
-cómo fueron recogidos los datos, pero no necesariamente tienen que compartirse los datos o todos los detalles de procesamiento
-por razones de privacidad.
 
 ```{block2, type='rmdnote'}
-**Reto: decisiones que no son transparentes**
+**Reto: trazabilidad**
 
-Dependiendo de la aplicación, distintas partes de la construcción y utilización pueden no estar explicadas
-y justificadas correctamente, de frente a usuarios, tomadores de decisiones, o población objetivo. Esto produce
-poca confianza en cuanto al funcionamiento de sistemas basados en datos.
-
+Cuando existe poca trazabilidad, todos los riesgos mencionados en este documento pueden ser difíciles de identificar, y generalmente se exacerban. Por el contrario, en un proyecto trazable todos los pasos de datos a decisiones están claramente documentados y especificados sin ambigüedad.
 ```
 
 
 
 ```{block2, type='rmdtip'}
-**Medidas de mitigación: transparencia**
+**Medidas: trazabilidad**
 
-Los requisitos de transparencia deben ser definidos claramente y cumplidos con la documentación y datos correspondientes, pero
-pueden variar según el tipo de proyecto:
-
-- De ser necesario, los datos deben ser publicados en formatos abiertos, o debe explicarse cómo fueron recolectados
-y procesados.
-- De ser necesario, el código debe estar documentado y versionado. 
-- De ser necesario, deben proveerse herramientas o instrucciones para reproducir resultados con los que se tomaron decisiones.
-
+- (Cuantitativa) ¿Está bien documentado el proceso de ingesta, transformación, modelado y toma de decisión? (incluyendo fuente de datos, infraestructura y dependencias, código, métricas e interpretación de resultados)
+  - Fuentes de datos (localizadas en el tiempo y en su repositorio), procesos de extracción y su preprocesamiento.
+  - Código completo y documentado apropiadamente, definiendo librerías necesarias, versiones de las  mismas e infraestructura, de forma que un tercero pueda entender el propósito de cada parte de ese código.  
+  - Cómo debe ejecutarse el código para obtener los insumos de la decisión, incluyendo documentación de parámetros de cada ejecución, y documentación detallada acerca del ambiente de cómputo. Todo esto debe garantizar reproducibilidad de los resultados originales por un tercero.  
+  - Cómo se utilizaron e incluyeron resultados del proceso computacional en el proceso de toma de decisiones.
+  - Documentación acerca del diseño del monitoreo, incluyendo detalles acerca de cuáles son los comportamientos previstos y cuáles requieren acciones de mitigación.  
+  - Idealmente, estos pasos deberían poder ejecutarlos un tercero con intervención mínima de los creadores y operadores originales.
 ```
+
+#### Actividad:{-}
+Al terminar esta fase se recomienda el llenado de la sección de Rendición de cuentas del Perfil de Modelo y llevar a cabo una discusión con el tomador de decisiones de políticas públicas.
+
 
 
 

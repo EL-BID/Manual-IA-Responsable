@@ -19,26 +19,14 @@ biblio-style: apalike
 
 ## Iniciativa fAIr LAC
 
-El Banco Interamericano de Desarrollo (BID), en colaboración con socios y aliados estratégicos, lidera la iniciativa fAIr LAC mediante la cual se busca promover la adopción responsable de la Inteligencia Artificial (IA) y los sistemas de soporte de decisión para mejorar la prestación de servicios sociales y crear oportunidades de desarrollo en aras de reducir las brechas y atenuar la desigualdad social.
-Este manual es parte de un grupo de herramientas y manuales para equipos técnicos y responsables de la formulación de políticas públicas para guiarles en la mitigación de los retos de los sistemas de soporte de decisión para promover una adopción responsable de la IA. 
-
-Si te interesa conocer más sobre esta iniciativa visita [fAIr LAC](https://fairlac.iadb.org/).
+El Banco Interamericano de Desarrollo (BID), en colaboración con socios y aliados estratégicos, lidera la iniciativa fAIr LAC mediante la cual se busca promover la adopción responsable de la Inteligencia Artificial (IA) y los sistemas de soporte de decisión para mejorar la prestación de servicios sociales y crear oportunidades de desarrollo en aras de atenuar la desigualdad social. Este manual es parte de un grupo de documentos y herramientas para equipos técnicos y responsables de la formulación de políticas públicas para guiarles en la mitigación de los retos de los sistemas de soporte de decisión y promover una adopción responsable de la IA (@fair). 
 
 
 ## ¿Por qué este manual?
 
-A pesar de que existe un número importante de principios que buscan una IA “ética” y que proporcionan una orientación de alto nivel sobre lo que debe o no hacerse en su desarrollo, existe muy poca claridad sobre cuáles son las normas técnicas y las mejores prácticas necesarias para operacionalizarlas.   [@Jobin]
-
-Este manual se concentra en la mitigación de las fuentes de sesgo y los errores técnicos que se pueden cometer a lo largo del ciclo de vida de los sistemas de IA. Proponiendo dos herramientas: 
--	Lista de verificación (Checklist) para que tomadores de decisiones de política pública puedan ir marcando las principales preocupaciones que deben tener en cuenta al desarrollar o comprar un sistema de IA. 
--	Rúbrica (Scorecard) para que los equipos técnicos tengan un formato que seguir para el correcto reporte de las medidas de mitigación aplicadas para lograr una IA robusta. 
-El manual acompaña estas dos herramientas dando explicaciones detalladas de cada dimensión y ejemplos replicables de su implementación. 
+A pesar de que existe un número importante de principios que buscan una IA ética, solo proporcionan una orientación de alto nivel sobre lo que debe o no hacerse en su desarrollo y existe muy poca claridad sobre cuáles son las mejores prácticas para ponerlas en funcionamiento [@Jobin]. El objetivo de este manual es proveer esas recomendaciones y buenas prácticas técnicas con el fin de evitar resultados contrarios (muchas veces inesperados) a los objetivos de los tomadores de decisiones.  Esos fines son variados: pueden referirse a consecuencias no deseables desde el punto de vista de los tomadores de decisiones, desaprovechamiento de recursos debido a focalizaciones inadecuadas o cualquier otro objetivo que el tomador de decisiones esté buscando lograr. ^[ Este manual no pretende reglamentar o explicar cuáles deben ser los fines y objetivos de organismos y actores que toman las decisiones.]
 
 
 ## ¿Para quién es este manual?
 
-Este manual está pensado para equipos técnicos trabajando en la aplicación de algoritmos de aprendizaje automático para política pública. Sin embargo, todos los retos que cubre son comunes a cualquier aplicación. 
-
-Aunque los códigos y ejemplos se desarrollaron en R, todos los temas y metodologías aplicadas y descritas en este manual se pueden implementar en cualquier otro lenguaje de programación. Se asume que el lector cuenta con conocimientos básicos de estadística, cuando se nombran conceptos se incluyen descripciones breves y se comparte bibliografía adicional.
-
-Este material es reproducible según instrucciones en [este repositorio](https://github.com/EL-BID).
+Este manual está pensado para equipos técnicos trabajando en la aplicación de algoritmos de aprendizaje automático para políticas públicas. Sin embargo, todos los retos que cubre son comunes a cualquier aplicación de esta tecnología.  Se asume que el lector cuenta con conocimientos básicos de estadística y programación, aunque cuando se nombran conceptos se incluyen descripciones breves y se comparte bibliografía adicional. El manual incluye cuadernillos de trabajo con varios ejemplos de los retos y soluciones explicadas. Se usan distintos tipos de modelos (lineales, basados en árboles y otros) y distintas implementaciones (R, Keras, Xgboost) para mostrar que estos problemas se presentan independientemente de la elección de herramientas particulares. Aunque los códigos y ejemplos se desarrollaron en R, todos los temas y metodologías aplicadas y descritas en este manual se pueden implementar en cualquier otro lenguaje de programación. ^[Todo el material de este documento es reproducible según instrucciones en el repositorio https://github.com/EL-BID/Manual-IA-Responsable, que contiene un archivo Dockerfile describiendo las dependencias de infraestructura para su replicación. Se utiliza el lenguaje de programación R, y los siguientes paquetes: tidyverse, recipes, themis, rsample, parsnip, yardstick, workflows, tune, knitr, patchwork.]
