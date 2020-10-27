@@ -46,7 +46,7 @@ La IA no sustituye a la política pública ya que por sí misma no soluciona el 
 4. **Implementación de política:** Se implementa la política pública ya sea como proyecto piloto y/o con una escala mayor.  
 5. **Evaluación de política:** Se evalúa la eficacia, la fiabilidad, el costo, las consecuencias previstas y no previstas y otras características pertinentes de la medida de política en cuestión, si sus resultados son positivos se escala o continúa la intervención.
 
-```{r ciclo, fig.cap="Ciclo de diseño de política pública. Construcción propia.", echo=FALSE}
+```{r ciclo2, fig.cap="Ciclo de diseño de política pública. Construcción propia.", echo=FALSE}
 knitr::include_graphics("images/ciclo-politica.png")
 ```
 

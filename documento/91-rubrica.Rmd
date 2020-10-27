@@ -1,103 +1,198 @@
-# Evaluación de proyectos 
+# Herramientas
 
-## Lista de verificación de IA robusta y responsable
+## Lista de verificación (Checklist) de IA robusta y responsable
 
-### 1. Fuente y manejo de datos
+Herramienta que consolida las principales preocupaciones por dimensión de riesgo del ciclo de vida de IA. El checklist debe revisarse de forma continua por el equipo técnico acompañado por el tomador de decisiones [@frit], [@drivendata2019].
 
-- [ ] **Calidad de datos recolectados y relevancia de variable respuesta**:  
-  - (Cualitativa) ¿Hemos justificado claramente la utilización de la variable respuesta seleccionada bajo los propósitos de la intervención?
-  - ¿Hemos examinado los datos en busca de posibles sesgos históricos o estados indeseables que no queramos replicar?
-- [ ] **Muestras naturales y diseñadas**:
-  - (Cualitativa) Entender y describir las dimensiones importantes en las cuales la muestra de datos puede ser diferente a la población, en particular sesgos de selección no medidos. Utilizar literatura relacionada con el tema, información de expertos.
-- [ ] **Comparación causal**:
-  - (Cualitativa) Entender y describir las razones por las que la variable tratamiento está correlacionada con variables conocidas y no conocidas. Describir sesgos posibles basados en análisis y conocimiento experto. 
-- [ ] **Atributos incompletos**:
-  - (Cualitativa) Identificar si existen variables omitidas importantes para las cuáles no se tiene mediciones asociadas. Identificar razones por las que existen datos faltantes: si la falta de datos está fuertemente asociada con la variable a predecir será difícil obtener buenos resultados.
+```{block2, type='resumen1'}
 
-### 2. Desarrollo de modelos
+**Conceptualización y diseño de políticas públicas**
 
-- [ ] **Ausencia y errores de validación**:
-  - Construir muestras de validación y prueba preparadas adecuadamente. Considerando un tamaño apropiado para estimar el error con precisión razonable, cubrir a subgrupos de interés y protegidos
-  - Cualquier procesamiento y preparación de datos de entrenamiento debe evitar usar los datos de validación o prueba de ninguna manera. Se debe mantener una barrera sólida entre entrenamiento vs validación y prueba. 
-- [ ] **Datos desbalanceados y clases**: 
-  - Cuestionar las implicaciones de los diferentes tipos de errores, así como la forma correcta de evaluarlos.
-  - Implementar un análisis costo-beneficio que ponga al sistema y sus errores en contexto. 
-- [ ] **Equidad y desempeño diferencial**: 
-  - (Cualitativa) ¿Se identificaron los distintos grupos o atributos protegidos dentro del proyecto? (por ejemplo: género, raza, nivel de marginación, etc)
-  - (Cualitativa) Se debe de discutir con expertos y tomadores de decisiones qué medida de justicia algorítmica se buscará seguir. 
-  - ¿Hemos comprobado la equidad de los resultados del modelo con respecto a los diferentes grupos de interés?
+&#x2611;  Definición correcta del problema y de la respuesta de política pública:  
 
-- [ ] **Errores no cuantificados y evaluación humana**: 
-  - (Cualitativa) Análisis experto de la construcción del sistema puede revelar sesgos o errores conocidos por el caso de uso, pero desconocidos para el modelador.
-  - (Cuantitiva) Esquemas de monitoreo de predicciones que permitan identificación de errores o sesgos no medidos. Por ejemplo, se pueden usar paneles de revisores que examinen predicciones particulares y consideren si son razonables o no. Estos paneles deben ser balanceados en cuanto al tipo de usuarios que se prevén, incluyendo tomadores de decisiones si es necesario.
+  - (Cualitativo)¿Se definió claramente el problema de política pública que se está buscando resolver?
+  - (Cualitativo) Describa cómo se da respuesta a este problema actualmente, considerando a las instituciones relacionadas y cuál es su propuesta para solucionar dicho problema usando IA.
+  - (Cualitativo) ¿Se definieron las acciones o intervenciones que se realizarán a partir del resultado del sistema de Inteligencia Artificial?
 
+&#x2611; Necesidad y proporcionalidad
 
-### 3. Uso y monitoreo
-
-- [ ] **Degradación de desempeño**:
-  - ¿Existe un plan para monitorear el desempeño del modelo y la recolección de información a lo largo del tiempo?
-
-- [ ] **Comunicar el sesgo**: 
-  - ¿Hemos comunicado las deficiencias, limitaciones y sesgos del modelo a las partes interesadas pertinentes de manera que estos se consideren en la toma/soporte de decisiones?
+  - (Cualitativo) ¿Afectará su proyecto de forma directa o indirecta a la vida de personas o de personas o grupos vulnerables?
+  - (Cualitativo) Para la implementación de estas tecnologías, ¿se han revisado casos de proyectos similares anteriores?
+  - (Cualitativa) ¿Se identificaron los distintos grupos o atributos protegidos dentro del proyecto? (por ejemplo: edad, género, raza, nivel de marginación, etc.)
   
-- [ ] **Uso no intencional**: 
-  - ¿Hemos tomado medidas para identificar y prevenir los usos no intencionados y el abuso del modelo y tenemos un plan para monitorear estos una vez que el modelo sea desplegado?
+**Gobernanza y seguridad**
 
-- [ ] **Atención a errores **: 
-  - ¿Hemos discutido con nuestra organización un plan de respuesta en caso de que los usuarios se vean perjudicados por los resultados (por ejemplo, cómo evalúa el equipo de ciencias de los datos estos casos y actualiza los análisis y modelos para prevenir futuros daños)?
+&#x2611; (Cuantitativa) El Proyecto que desarrolla cuenta con estructuras y mecanismos concretos de gobernanza y ciberseguridad?
 
-### Rendición de cuentas
+&#x2611; (Cuantitativa) ¿Se ha definido de forma clara la finalidad del tratamiento de los datos que va a recopilar y/o procesar?
 
-- [ ] **Interpretabilidad del modelo**: 
-  - ¿Hemos analizado el nivel de interpretabilidad del modelo que es necesario para el caso de uso?
-  - ¿Hemos discutido los pros y contras de los algoritmos según su nivel de interpretabilidad?
+&#x2611; (Cuantitativa) Su Proyecto ¿ha alcanzado los acuerdos legales de transferencia de información?
 
-- [ ] **Explicabilidad de predicciones individuales**: 
-  - ¿Existe algún proceso para dar explicaciones a un individuo en particular sobre por qué se tomó una decisión?
+&#x2611; (Cuantitativa) ¿Se han considerado formas de reducir al mínimo la exposición de información personal identificable? (por ejemplo, mediante la anonimización o la no recopilación de información que no sea pertinente para el análisis)
 
-- [ ] **Transparencia y auditabilidad**: 
-  - ¿Está bien documentado el proceso de ingesta, transformación y modelado?
+**Fuente y manejo de datos** 
+
+&#x2611; Calidad de datos recolectados y relevancia de variable respuesta:  
+
+  - (Cualitativa) ¿Se ha justificado claramente la utilización de la variable respuesta seleccionada bajo los propósitos de la intervención?
+  - (Cuantitativa) ¿Se han examinado los datos en busca de posibles sesgos históricos o estados indeseables que no queramos replicar?
+
+&#x2611; Muestras naturales y diseñadas:
+
+  - (Cualitativa) ¿Se ha analizado las posibles diferencias entre la base de datos y la población para la que se busca desarrollar el sistema de IA? (Utilizar literatura relacionada con el tema, información de expertos. Estudiar en particular sesgos de selección no medidos)
+
+&#x2611; Atributos incompletos
+
+  - (Cualitativa) ¿Se ha realizado un análisis de valores faltantes y de variables omitidas?
+  - (Cualitativa) ¿Se ha identificado si existen variables omitidas importantes para las cuales no se tiene mediciones asociadas?
+  - (Cualitativa) ¿Se ha identificado las razones por las que existen observaciones faltantes? (En caso de existir)
+
+&#x2611; Comparación Causal
+
+  - (Cualitativa) ¿Se manifestó de forma explícita las limitaciones de los resultados al tomador de decisiones de política pública? (En caso de que no se haya trabajado en asegurar causalidad en los resultados)
+  
+**Desarrollo de modelos**
+
+&#x2611; Ausencia y errores de validación:
+
+  - (Cuantitativa) ¿Se construyeron las muestras de validación y prueba adecuadamente?  Considerando un tamaño apropiado, cubriendo a subgrupos de interés y protegidos y evitando fugas de información durante su implementación. 
+  
+&#x2611; Métricas de evaluación engañosas: 
+
+  - (Cualitativa) ¿Se cuestionaron las implicaciones de los diferentes tipos de errores para el caso de uso específico, así como la forma correcta de evaluarlos?
+  - (Cualitativa) ¿Se explicó de forma clara las limitantes del modelo? Identificando tanto los falsos positivos como falsos negativos y las implicaciones que una decisión del sistema tendría en la vida de la población beneficiaria.
+  - (Cuantitativa) ¿Se implementó un análisis costo-beneficio del sistema contra el status quo u otras estrategias de toma/soporte de decisión? (Cuando es posible) 
+
+&#x2611; Errores no cuantificados y evaluación humana: 
+
+  - (Cualitativa) Se realizó una evaluación humana con expertos del caso de uso para buscar sesgos o errores conocidos? (Por ejemplo, se pueden usar paneles de revisores que examinen predicciones particulares y consideren si son razonables o no. Estos paneles deben ser balanceados en cuanto al tipo de usuarios que se prevén, incluyendo tomadores de decisiones si es necesario).
+  
+&#x2611; Equidad y desempeño diferencial: 
+
+  - (Cualitativa) ¿Se definió con expertos y tomadores de decisiones la medida de justicia algorítmica a usarse en el proyecto? 
+  - (Cuantitativo) ¿Se ha comprobado la equidad de los resultados del modelo con respecto a los diferentes grupos de interés?
+  
+**Uso y monitoreo**
+
+&#x2611; Degradación de desempeño:
+
+  - (Cualitativo) ¿Existe un plan para monitorear el desempeño del modelo y la recolección de información a lo largo del tiempo?
+  - (Cualitativa) ¿Se han tomado medidas para identificar y prevenir los usos no intencionados y el abuso del modelo y tenemos un plan para monitorear estos una vez que el modelo sea desplegado? 
+
+**Rendición de cuentas**
+
+&#x2611; Sesgos potenciales y depuración
+
+  - (Cualitativa) ¿Se han comunicado las deficiencias, limitaciones y sesgos del modelo a las partes interesadas de manera que estos se consideren en la toma/soporte de decisiones?
+
+&#x2611; Interpretabilidad y explicabilidad
+
+  - (Cualitativo) ¿Se analizaron los requerimientos legales y éticos de explicabilidad e interpretabilidad necesarios para el caso de uso?
+  - (Cualitativo) ¿Se discutieron los pros y contras de los algoritmos según su nivel de interpretabilidad y explicabilidad para elegir el más apropiado?
+  - (Cualitativo) ¿Se han definido un plan de respuesta en caso de que algún usuario se vea perjudicado por los resultados?
+  - (Cualitativo) ¿Existe algún proceso para dar explicaciones a un individuo en particular sobre por qué se tomó una decisión?
+
+&#x2611; Transparencia y trazabilidad
+
+  - (Cuantitativa) ¿Está bien documentado el proceso de ingesta, transformación, modelado y toma de decisión? (incluyendo fuente de datos, infraestructura y dependencias, código, métricas e interpretación de resultados)
+
+```
+  
+## Herramienta 2: Perfil de Datos
+
+El perfil de datos es un análisis exploratorio que brinda información para evaluar la calidad, integridad, temporalidad, consistencia, posibles sesgos de un conjunto de datos que será utilizado para entrenar un modelo de aprendizaje automático [@gebru].
 
 
-## Rubrica técnica para aplicación de ML/IA en toma de decisiones
+```{block2, type='resumen2'}
 
-La rúbrica que presentamos aquí está derivada de la publicada en (@Mitchell). Consiste de los siguientes
-incisos:
+**Descripción general de datos y motivación**
+
+- Nombre de conjunto de datos usados
+- ¿Qué institución creó el dataset?
+- ¿Con qué objetivo la institución creó el dataset utilizado?
+- ¿Qué mecanismos o procedimientos se utilizaron para recopilar los datos (por ejemplo, encuesta en vivienda, sensor, software, API)? 
+- ¿Número de individuos presentes en los datos?
+- Frecuencia de captura (semanal, mensual, diaria) o ¿Número de observaciones promedio por individuo? ¿Se actualizará el conjunto de datos (por ejemplo, añadir nuevas instancias, eliminar instancias)? 
+
+**Controles esenciales:**
+
+- Obtener documentación para cada variable dentro del conjunto de datos. breve descripción que incluya su nombre y tipo, lo que representa, cómo se mide su valor, etc. 
+- Realizar un análisis exploratorio de los datos calcular estadísticas descriptivas identificando porcentaje de valores faltantes y distribución de cada variable dentro de la base de datos.
+- Analizar cobertura espacial y temporal de los datos. 
+- Analizar cobertura de grupos protegidos (sexo, raza, edad, etc.)
+- Describir las dimensiones importantes en las cuales la muestra de datos puede ser diferente a la población en particular sesgos de selección no medidos. Utilizar literatura relacionada con el tema, información de expertos.
+- Identificar posibles “estados indeseables” en los datos, pueden ser sesgos e inequidades perjudiciales para subgrupos, pero también puede ser cualquier otro patrón que se considere subóptimo o no deseable desde un punto de vista de política social.
+- ¿Existen valores faltantes? En caso afirmativo, explique las razones por las que no se tiene esa información. (Esto incluye información eliminada intencionalmente) Identificar razones por las que existen datos faltantes y piense si la falta de datos está asociada con la variable a predecir. 
+
+```
+    
+## Herramienta 3: Perfil del Modelo
+
+La rúbrica presentada aquí, es una tarjeta de seguimiento que resume las características principales de un sistema de toma/soporte de decisiones basado en ML y destaca los principales supuestos, las características más importantes del sistema y las medidas de mitigación implementadas  [@Mitchell].
+
+```{block2, type='resumen3'}
+
+**Conceptualización y diseño de política pública**
 
 1. Información básica
+  
   - Personas que desarrollaron el modelo, fecha, versión, tipo
-  - Algoritmos que se usaron para entrenar, parámetros supuestos o restricciones
-  - Antecedentes
+        
 2. Casos de uso
-  - Casos de uso considerados durante el desarrollo
+  
+  - Antecedentes
   - Población objetivo y horizonte de predicciones
   - Actores y componentes que interactuarán con los resultados
+  - Casos de uso considerados durante el desarrollo
   - Usos no considerados y advertencias relacionadas
-3. Métricas de desempeño
+  - Definición de grupos protegidos
+  
+**Fuente y manejo de datos**
+
+3. Datos de entrenamiento
+
+  - Conjunto de datos usados y su etiquetado
+  - Pasos de preprocesamiento o preparación de datos.
+  - Sesgos y deficiencias potenciales según el caso de uso (2)
+
+**Desarrollo de Modelo**
+
+4. Modelación
+  
+  - Algoritmos que se usaron para entrenar, parámetros supuestos o restricciones
+      
+5. Métricas de desempeño
+  
   - Métricas técnicas usadas para seleccionar y evaluar modelos 
   - Análisis costo-beneficio del modelo para su caso de uso según (2)
   - Definición de grupos protegidos y medidas de equidad seleccionadas
-4. Datos de validación
+      
+6. Datos de validación
+  
   - Conjuntos de datos usados y su etiquetado
   - Pasos de preprocesamiento
   - Evaluación de adaptación de datos de validación según el caso de uso (2)
   - Sesgos y deficiencias potenciales según el caso de uso (2)
-5. Datos de entrenamiento
-  - Conjunto de datos usados y su etiquetado
-  - Pasos de preprocesamiento
-  - Sesgos y deficiencias potenciales según el caso de uso (2)
-6. Resumen de análisis cuantitativo
+      
+7. Resumen de análisis cuantitativo
+  
   - Error de validación reportado
   - Resumen de análisis costo-beneficio
   - Reporte de medidas de equidad para grupos protegidos
-7. Recomendaciones de monitoreo
+
+**Uso y monitoreo**
+
+8. Recomendaciones de monitoreo
+  
   - Estrategia de monitoreo y mejora en producción
   - Estrategias de monitoreo humano de predicciones (si aplica)
-8. (Opcional) Explicabilidad de predicciones
+
+**Rendición de cuentas**
+
+9. (Opcional) Explicabilidad de predicciones
   - Estrategia para explicar predicciones particulares (si es necesario)
   - Estrategia para entender la importancia de distintos atributos
-9. Consideraciones éticas, recomendaciones y advertencias
+        
+10. Otras consideraciones éticas, recomendaciones y advertencias
 
-
-## Ejemplo (rúbrica técnica)
-
+```

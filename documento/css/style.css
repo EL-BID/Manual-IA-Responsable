@@ -38,3 +38,21 @@ pre code {
   background: #ffe4e1;
   position:relative;
 }
+.resumen1 {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #fde9d9;
+  position:relative;
+}
+.resumen2 {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #eaf1dd;
+  position:relative;
+}
+.resumen3 {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #dbe5f1;
+  position:relative;
+}
