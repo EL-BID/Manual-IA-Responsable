@@ -40,8 +40,6 @@ También se debe vigilar el comportamiento de las métricas de error en el tiemp
 
 ## Experimentos y recopilación de datos
 
-## Evaluación de efectividad
-
 La forma y los datos que se recopilan para el mantenimiento de los algoritmos de predicción debe planearse con el objeto de mejorar en lo posible, y entender mejor las consecuencias del uso de los modelos.
 
 
