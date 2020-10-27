@@ -46,7 +46,7 @@ La IA no sustituye a la política pública ya que por sí misma no soluciona el 
 4. **Implementación de política:** Se implementa la política pública ya sea como proyecto piloto y/o con una escala mayor.  
 5. **Evaluación de política:** Se evalúa la eficacia, la fiabilidad, el costo, las consecuencias previstas y no previstas y otras características pertinentes de la medida de política en cuestión, si sus resultados son positivos se escala o continúa la intervención.
 
-```{r ciclo, fig.cap="Ciclo de diseño de política pública. Construcción propia.", echo=FALSE}
+```{r ciclo, fig.cap="Ciclo de diseño de política pública. Construcción propia.", echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/ciclo-politica.png")
 ```
 
@@ -54,7 +54,7 @@ Paralelamente al ciclo de política pública, el desarrollo de un sistema de IA 
 
 En la interrelación de estos dos ciclos se genera un importante grupo de retos para obtener una IA robusta y responsable que tienen que ser evaluados y considerados durante el desarrollo y uso de estos sistemas (Ilustración \@ref(fig:retos)): Existen retos transversales (rendición de cuentas, gobernanza y seguridad) como son la transparencia, el consentimiento y la protección de datos personales; retos relacionados con el diseño de política pública, la definición de la intervención, así como criterios de necesidad y proporcionalidad en el uso de la IA; retos que se dan durante el ciclo de vida la IA, por sesgos en los datos, errores de implementación en el modelado, validación y monitoreo. . 
 
-```{r retos, fig.cap=paste("Retos de los sistemas de toma/soporte de decisión. Fuente:", "@fair"), echo=FALSE}
+```{r retos, fig.cap=paste("Retos de los sistemas de toma/soporte de decisión. Fuente:", "@fair"), echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/retos.png")
 ```
 
@@ -68,7 +68,7 @@ Por ejemplo, en algunos casos el objetivo de un sistema puede estar orientado a 
 
 Existen distintas **fuentes de sesgo**, algunos causados por problemas intrínsecos a los datos: Por ejemplo:  Sesgos históricos o estados indeseable, cuando existen patrones en el mundo que no se quieren replicar o propagar en el modelo; sesgo de representación, se produce cuando existe información incompleta, ya sea por atributos faltantes, diseño de la muestra o ausencia total o parcial de subpoblaciones; Y sesgos de medición, que surgen por el uso u omisión de variables a ser utilizadas en los modelos. (@Suresh)
 
-```{r sesgos, fig.cap=paste("Fuentes de sesgo en un sistema de IA. Fuente:", "@Suresh"), echo=FALSE}
+```{r sesgos, fig.cap=paste("Fuentes de sesgo en un sistema de IA. Fuente:", "@Suresh"), echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/suresh.png")
 ```
 
@@ -90,10 +90,11 @@ Para lograrlo, este manual presenta los retos y errores usuales en la construcci
 
 Para acompañar su desarrollo se proponen tres herramientas que deberán contestarse a lo largo del desarrollo del sistema: 
 
-* [Lista de verificación](#rubrica) (Checklist): Herramienta que consolida las principales preocupaciones por dimensión de riesgo del ciclo de vida de IA. El checklist debe revisarse de forma continua por el equipo técnico acompañado por el tomador de decisiones. *	Perfil de Datos: El perfil de datos es un análisis exploratorio inicial durante la fase de Conocimiento y preparación de datos del ciclo de vida de IA. Brinda información para evaluar la calidad, integridad, temporalidad, consistencia y posibles sesgos, daños potenciales y las implicaciones de su uso.  
+* [Lista de verificación](#rubrica) (Checklist): Herramienta que consolida las principales preocupaciones por dimensión de riesgo del ciclo de vida de IA. El checklist debe revisarse de forma continua por el equipo técnico acompañado por el tomador de decisiones.  
+*	Perfil de Datos: El perfil de datos es un análisis exploratorio inicial durante la fase de Conocimiento y preparación de datos del ciclo de vida de IA. Brinda información para evaluar la calidad, integridad, temporalidad, consistencia y posibles sesgos, daños potenciales y las implicaciones de su uso.  
 * Perfil de Modelo: Descripción final de un sistema de IA, reporta los principales supuestos, las características más importantes del sistema y las medidas de mitigación implementadas. 
 
-```{r retos-tecnicos, fig.cap="Retos técnicos del ciclo de vida del ML. Construcción propia.", echo=FALSE}
+```{r retos-tecnicos, fig.cap="Retos técnicos del ciclo de vida del ML. Construcción propia.", echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/retos-tecnicos.png")
 ```
 
