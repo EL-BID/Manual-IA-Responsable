@@ -1,5 +1,9 @@
 ### IA responsable
 
+This repository contains the source of the document: "IA Responsable:  Manual técnico - Ciclo de vida de la inteligencia artificial":
+- [Bookdown](http://iadb.s3-us-west-2.amazonaws.com/ia-responsable/index.html). 
+- [PDF](https://publications.iadb.org/es/ia-responsable-manual-tecnico-ciclo-de-vida-de-la-inteligencia-artificial) 
+
 ### Description and Context
 ---
 
@@ -28,7 +32,7 @@ Build image
 Run container
 
 ```
-    docker run -d -p 8787:8787 -e PASSWORD=mipass -e ROOT=TRUE -v $PWD/:/home/rstudio/ ia-responsable
+    docker run -d -p 8787:8787 -e PASSWORD=yourpassword -e ROOT=TRUE -v $PWD/:/home/rstudio/ ia-responsable
 ```
 
 Visit `localhost:8787` in your browser and log in with username `rstudio` and the password you set. **NB: Setting a password is now REQUIRED.**  Container will error otherwise.
