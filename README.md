@@ -20,20 +20,19 @@ Using the rocker/rstudio container
 ##### Quickstart
 
 Build image
+
+```
     docker build -t ia-responsable . 
+```
 
 Run container
+
+```
     docker run -d -p 8787:8787 -e PASSWORD=mipass -e ROOT=TRUE -v $PWD/:/home/rstudio/ ia-responsable
+```
 
 Visit `localhost:8787` in your browser and log in with username `rstudio` and the password you set. **NB: Setting a password is now REQUIRED.**  Container will error otherwise.
 
-
-
-#### Dependencies
----
-
-### License 
----
 
 ### Limitation of responsibilities
 ---
