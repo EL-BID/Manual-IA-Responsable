@@ -1,4 +1,4 @@
-# Cuadernillos de trabajo
+# Cuadernillos de trabajo {-}
 
 En esta sección se muestran varios ejemplos de los retos y soluciones explicadas en el documento principal. Se utilizan distintos tipos de modelos (lineales, basados en árboles y otros) y distintas implementaciones (R, keras, xgboost) para mostrar que estos problemas se presentan independientemente de la elección de herramientas particulares.
 
@@ -27,9 +27,7 @@ library(patchwork)
 ```
 
 
-## Fuente y manejo de datos
-
-### Reto: mala correspondencia de métrica y objetivos
+## Mala correspondencia de métrica y objetivos {-}
 
 Usar modelos que predicen la métrica incorrecta puede llevar a tomar decisiones incorrectas.
 A veces el problema es claro, cuando la métrica sustituto tiene deficiencias obvias, y en otras
@@ -146,7 +144,7 @@ indicadores de demanda o modelos más adecuados ayudarían a resolver el problem
 la situación: incrementan el sesgo (seleccionamos semanas donde las ventas tienden a ser bajas) y reducen
 la precisión (usamos menos datos).
 
-## Muestras naturales y sesgo
+## Muestras naturales y sesgo {-}
 
 Cuando las muestras de entrenamiento son diferentes a las poblaciones, donde
 se van a aplicar los modelos, existen dificultades en validar correctamente las
@@ -335,9 +333,9 @@ causal de reducciones de la presión arterial como promotora de
 enfermedades del corazón es incorrecta y potencialmente peligrosa (ver más en @ESL).
 
 
-## Desarrollo de los modelos
+## Desarrollo de los modelos  {-}
 
-## Fugas Entrenamiento Validación
+## Fugas Entrenamiento Validación  {-}
 
 Se presentarán varios ejemplos de cómo las fugas de entrenamiento a validación producen estimaciones sesgadas del desempeño de predictores.
 
@@ -522,7 +520,7 @@ bosque_1 %>%
 Aunque el *accuracy* parece alto, la precisión y la sensibilidad son cero. Un clasificador trivial
 que siempre predice la clase dominante puede tener mejor exactitud que el que hemos construido.
 
-## Fugas en implementación
+## Fugas en implementación  {-}
 
 ### Variables no disponibles al momento de predicción
 
@@ -614,7 +612,7 @@ y la variable *gasto* es medida posteriormente a la entrega de la tarjeta:
 cada cliente en el futuro.
 
 
-## Evaluación de punto de corte 
+## Evaluación de punto de corte  {-}
 
 Las mejores decisiones de punto de corte pueden hacerse con análisis de costo beneficio,
 con curvas tipo *lift* basadas en ganancias y pérdidas de cada decisión. 
@@ -723,7 +721,7 @@ ggplot(perdidas_sim, aes(x = factor(corte), y = - perdida / 1e6,
 las dos curvas mostradas arriba).
 
 
-## Desbalance de clases
+## Desbalance de clases {-}
 
 Cuando se tiene un desbalance severo de clases podemos enfrentar dos problemas:
 existen en términos absolutos muy pocos elementos de una clase para poder
@@ -907,7 +905,7 @@ tasas de respuesta que esperamos observar en producción.
 
 
 
-## Equidad con atributos protegidos
+## Equidad con atributos protegidos {-}
 
 El siguiente ejemplo es derivado de (@hardt). Supongamos que tenemos un atributo protegido $A$ que
 tiene dos valores: azul y naranja. Naranja es el grupo minoritario  desaventajado.
@@ -1048,9 +1046,7 @@ si a un segmento particular se le permite mayores atrasos en los pagos y a otro 
 considera un delicuente reincidente por una ofensa mucho menor que otros grupos).
 
 
-# Retos de rendición de cuentas
-
-## Interpretabilidad
+## Interpretabilidad {-}
 
 Se pueden usar medidas como importancia de permutaciones para examinar modelos. En este ejemplo, se regresa al ejercicio de predicción de aceptación de solicitudes de crédito, y consideramos la importancia basada en permutaciones (@molnar2019):
 
@@ -1102,7 +1098,7 @@ con cuidado cómo afectan las predicciones.
 del flujo de datos, y reducen
 exponernos a problemas de fugas o efectos indeseables.
 
-## Explicación de predicciones
+## Explicación de predicciones {-}
 
 Para explicar predicciones individuales se pueden usar los valores de Shapley (@molnar2019), (@shapley). Estas gráficas indican
 la contribución asignada de cada atributo a una predicción individual, bajo la idea de considerar efectos marginales sobre la predicción

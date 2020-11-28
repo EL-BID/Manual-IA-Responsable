@@ -1,0 +1,49 @@
+# Conceptualización y diseño 
+La implementación de una solución de IA no puede ir separada del ciclo de vida de la política pública con IA^[ Ver sección “Componentes de un sistema de IA para políticas públicas”.] La IA es una herramienta, que debe estar condicionada a un buen diseño de la intervención o acción que se tomará con los resultados del sistema. La IA en ningún momento sustituye a la política pública. Esto implica que cualquier proyecto de IA robusto y responsable debe partir del problema y no desde la tecnología. 
+
+##  Definición correcta del problema y de la respuesta de política pública
+En este manual se asume que existen, al menos, dos actores involucrados en el desarrollo de los sistemas, el tomador de decisiones de políticas públicas y el equipo técnico que lo implementará. La definición de la intervención siempre debe ser responsabilidad del tomador de decisiones quien es quien tiene un conocimiento del problema social. 
+
+Sin embargo, el equipo técnico debe poder entender el problema para que pueda vincular los resultados del modelo a la intervención deseada. Así mismo, es responsable de guiar y orientar en el diseño del sistema explicando lo que es viable y definiendo claramente las limitantes y riesgos del sistema, por lo que se requiere una comunicación constante entre ambos actores. 
+
+Un caso de esto es la definición de la población donde se aplicará el sistema, la definición de grupos protegidos, así como las medidas de justicia algorítmica a aplicarse^[En la sección 2 de este manual se discutirá a profundidad distintas definiciones de justicia algorítmica y sus implicaciones.]
+. Estas definiciones tienen un impacto directo a la forma en la que se puede evaluar la calidad y cobertura de los datos o el posible sesgo en los resultados del modelo.
+
+## Necesidad y Proporcionalidad
+
+Una vez que se tiene identificado el problema y la intervención es necesario replantearse el uso de la IA bajo criterios de necesidad y proporcionalidad. Aunque la IA tiene el potencial suficiente para hacer más eficiente algunos procesos y expandir la capacidad del estado, también se debe tener en cuenta que no es la respuesta para todo.
+
+En este punto es importante considerar también estándares y leyes que pueden regular el caso de uso donde se quiere implementar el sistema. Por ejemplo, requisitos de explicabilidad en las predicciones podrían limitar el uso de algunos algoritmos para los que es muy difícil dar interpretabilidad a los resultados.^[El punto de explicabilidad e interpretabilidad se describe en la sección de este manual.] 
+
+
+
+```{block2, type='rmdtip'}
+**Medidas: Conceptualización y diseño de políticas públicas**
+
+- Definición correcta del problema y de la respuesta de política pública:  
+  
+  *	(Cualitativo) ¿Se definió claramente el problema de política pública que se está buscando resolver?   *	(Cualitativo) Describa cómo se da respuesta a este problema actualmente, considerando a las instituciones relacionadas y cuál es su propuesta para solucionar dicho problema usando IA.
+  * (Cualitativo)¿Se definieron las acciones o intervenciones que se realizarán a partir del resultado del sistema de Inteligencia Artificial?
+
+- Necesidad y proporcionalidad 
+
+  * (Cualitativo) ¿Afectará su proyecto de forma directa o indirecta a la vida de personas o de personas o grupos vulnerables?  
+  * (Cualitativo) Para la implementación de estas tecnologías, ¿se han revisado casos de proyectos similares anteriores?  
+  * (Cualitativa) ¿Se identificaron los distintos grupos o atributos protegidos dentro del proyecto? (por ejemplo: edad, género, raza, nivel de marginación, etc.)  
+
+```
+
+
+```{block2, type='rmdtip'}
+**Medidas: Gobernanza y seguridad^[La dimensión de Gobernanza y seguridad es una dimensión separada de la dimensión de conceptualización y diseño según el marco de retos de la IA de fAIr LAC: (@fair). Por los objetivos de este manual y para mantenerlo lo más conciso posible se incluyen en esta sección. (@fair)]**
+
+- Consentimiento informado y límites de privacidad: 
+  * (Cuantitativa) ¿Se ha definido de forma clara la finalidad del tratamiento de los datos que va a recopilar y/o procesar?
+  * (Cuantitativa) ¿Su proyecto cuenta con los acuerdos legales de transferencia de información necesarios?
+  
+- Gobernanza y ciberseguridad 
+  * (Cuantitativa) El Proyecto cuenta con estructuras y mecanismos concretos de gobernanza y ciberseguridad?
+  * (Cuantitativa) ¿Se han considerado formas de reducir al mínimo la exposición de información personal identificable? (por ejemplo, mediante la anonimización o la no recopilación de información que no sea pertinente para el análisis)
+
+
+```

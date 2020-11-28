@@ -1,6 +1,12 @@
-# Herramientas
+# Herramientas {-}
 
-## Lista de verificación (Checklist) de IA robusta y responsable
+Para acompañar el ciclo de vida de IA se proponen las siguientes tres herramientas que deberán contestarse a lo largo del desarrollo del sistema, la [lista de verificación](#herramienta-1-lista-de-verificación-checklist-de-ia-robusta-y-responsable) (Checklist), el [perfil de Datos](#herramienta-2-perfil-de-datos) y el [perfil de Modelo](#herramienta-3-perfil-del-modelo).
+
+```{r herramientas-ciclo-IA, fig.cap="Retos técnicos del ciclo de vida del ML. Construcción propia.", echo=FALSE, out.width="50%", fig.align='center'}
+knitr::include_graphics("images/herramientas_ciclo_IA.png")
+```  
+
+## Herramienta 1: Lista de verificación (Checklist) de IA robusta y responsable {-}
 
 Herramienta que consolida las principales preocupaciones por dimensión de riesgo del ciclo de vida de IA. El checklist debe revisarse de forma continua por el equipo técnico acompañado por el tomador de decisiones [@frit], [@drivendata2019].
 
@@ -21,14 +27,16 @@ Herramienta que consolida las principales preocupaciones por dimensión de riesg
   - (Cualitativa) ¿Se identificaron los distintos grupos o atributos protegidos dentro del proyecto? (por ejemplo: edad, género, raza, nivel de marginación, etc.)
   
 **Gobernanza y seguridad**
+  
+&#x2611; Consentimiento informado y límites de privacidad: 
+  
+  - (Cuantitativa) ¿Se ha definido de forma clara la finalidad del tratamiento de los datos que va a recopilar y/o procesar?
+  - (Cuantitativa) ¿Su proyecto cuenta con los acuerdos legales de transferencia de información necesarios?
 
-&#x2611; (Cuantitativa) El Proyecto que desarrolla cuenta con estructuras y mecanismos concretos de gobernanza y ciberseguridad?
-
-&#x2611; (Cuantitativa) ¿Se ha definido de forma clara la finalidad del tratamiento de los datos que va a recopilar y/o procesar?
-
-&#x2611; (Cuantitativa) Su Proyecto ¿ha alcanzado los acuerdos legales de transferencia de información?
-
-&#x2611; (Cuantitativa) ¿Se han considerado formas de reducir al mínimo la exposición de información personal identificable? (por ejemplo, mediante la anonimización o la no recopilación de información que no sea pertinente para el análisis)
+&#x2611; Gobernanza y ciberseguridad 
+  
+  - (Cuantitativa) El Proyecto cuenta con estructuras y mecanismos concretos de gobernanza y ciberseguridad?
+  - (Cuantitativa) ¿Se han considerado formas de reducir al mínimo la exposición de información personal identificable? (por ejemplo, mediante la anonimización o la no recopilación de información que no sea pertinente para el análisis)
 
 **Fuente y manejo de datos** 
 
@@ -98,7 +106,7 @@ Herramienta que consolida las principales preocupaciones por dimensión de riesg
 
 ```
   
-## Herramienta 2: Perfil de Datos
+## Herramienta 2: Perfil de Datos {-}
 
 El perfil de datos es un análisis exploratorio que brinda información para evaluar la calidad, integridad, temporalidad, consistencia, posibles sesgos de un conjunto de datos que será utilizado para entrenar un modelo de aprendizaje automático [@gebru].
 
@@ -126,7 +134,7 @@ El perfil de datos es un análisis exploratorio que brinda información para eva
 
 ```
     
-## Herramienta 3: Perfil del Modelo
+## Herramienta 3: Perfil del Modelo {-}
 
 La rúbrica presentada aquí, es una tarjeta de seguimiento que resume las características principales de un sistema de toma/soporte de decisiones basado en ML y destaca los principales supuestos, las características más importantes del sistema y las medidas de mitigación implementadas  [@Mitchell].
 
@@ -196,3 +204,6 @@ La rúbrica presentada aquí, es una tarjeta de seguimiento que resume las carac
 10. Otras consideraciones éticas, recomendaciones y advertencias
 
 ```
+
+
+La siguiente [página](https://iadb.s3-us-west-2.amazonaws.com/ia-responsable-cuadernillos/model_card.html){target="_blank"} muestra estas herramientas completadas para un caso de uso ejemplo.
