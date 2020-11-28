@@ -1,20 +1,16 @@
 bookdown::gitbook:
   css: [css/style.css, css/toc.css]
+  split_bib: FALSE
   config:
     toc:
+      collapse: section
+      scroll_highlight: yes
+      toolbar:
+        position: fixed      
       before: |
-        <li><a href="./">AI responsable</a></li>
+        <li><a href="./index.html">IA Responsable</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+        <li><a href="http://fairlac.iadb.org/" target="blank">fAIr LAC, IADB Bookdown</a></li>
+    edit: 
+        link: https://github.com/EL-BID/Manual-IA-Responsable/edit/master/%s        
     download: ["pdf"]
-#bookdown::pdf_book:
-#  includes:
-#    in_header: preamble.tex
-#  latex_engine: xelatex
-#  citation_package: natbib
-#  keep_tex: yes
-#  pandoc_args: --top-level-division=chapter
-#  toc_depth: 3
- # toc_unnumbered: no
-#bookdown::word_document2:
-#  toc: true
