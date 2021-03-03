@@ -1,6 +1,0 @@
-# Pruebas
-
-
-```{r}
-knitr::kable(head(mtcars), booktabs = TRUE)
-```

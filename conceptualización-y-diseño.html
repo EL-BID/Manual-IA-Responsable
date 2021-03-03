@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sección 1 Conceptualización y diseño | IA Responsable (Ciclo de vida de IA)</title>
+  <meta name="description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sección 1 Conceptualización y diseño | IA Responsable (Ciclo de vida de IA)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sección 1 Conceptualización y diseño | IA Responsable (Ciclo de vida de IA)" />
+  
+  <meta name="twitter:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introducción.html"/>
+<link rel="next" href="fuente-y-manejo-de-datos.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">IA Responsable</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Manual Técnico</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a><ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>ML y sistemas de toma/soporte de decisiones</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a><ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ciclo-de-vida-de-la-política-pública-con-ia"><i class="fa fa-check"></i>Ciclo de vida de la política pública con IA</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#retos-del-ciclo-de-vida-del-ml"><i class="fa fa-check"></i>Retos del ciclo de vida del ML</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a><ul>
+<li class="chapter" data-level="1.1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#definición-correcta-del-problema-y-de-la-respuesta-de-política-pública"><i class="fa fa-check"></i><b>1.1</b> Definición correcta del problema y de la respuesta de política pública</a></li>
+<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#necesidad-y-proporcionalidad"><i class="fa fa-check"></i><b>1.2</b> Necesidad y Proporcionalidad</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html"><i class="fa fa-check"></i><b>2</b> Fuente y manejo de datos</a><ul>
+<li class="chapter" data-level="2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#reto-estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Reto: Estados indeseables o subóptimos en datos recolectados</a></li>
+<li class="chapter" data-level="2.1.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#información-incompleta-acerca-de-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Información incompleta acerca de la población objetivo</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="2.2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html"><i class="fa fa-check"></i><b>3</b> Desarrollo de modelos</a><ul>
+<li class="chapter" data-level="3.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#ausencia-y-errores-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia y errores de validación</a></li>
+<li class="chapter" data-level="3.2" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-datos---variables-no-disponbiles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.1</b> Fugas de datos - Variables no disponbiles en la predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Clasificación: probabilidades y clases</a></li>
+<li class="chapter" data-level="3.4" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
+<li class="chapter" data-level="3.5" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a></li>
+<li class="chapter" data-level="3.6" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a><ul>
+<li class="chapter" data-level="4.1" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#degradación-de-desempeño"><i class="fa fa-check"></i><b>4.1</b> Degradación de desempeño</a></li>
+<li class="chapter" data-level="4.2" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#experimentos-y-recopilación-de-datos"><i class="fa fa-check"></i><b>4.2</b> Experimentos y recopilación de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a><ul>
+<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a></li>
+<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.2</b> Explicabilidad de predicciones individuales</a></li>
+<li class="chapter" data-level="5.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.3</b> Trazabilidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a><ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-checklist-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación (Checklist) de IA robusta y responsable</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a><ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-de-métrica-y-objetivos"><i class="fa fa-check"></i>Mala correspondencia de métrica y objetivos</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-y-sesgo"><i class="fa fa-check"></i>Muestras naturales y sesgo</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-mala-representatividad"><i class="fa fa-check"></i><b>5.3.1</b> Muestras naturales: mala representatividad</a></li>
+<li class="chapter" data-level="5.3.2" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#natural"><i class="fa fa-check"></i><b>5.3.2</b> Muestras naturales: comparaciones causales</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-los-modelos"><i class="fa fa-check"></i>Desarrollo de los modelos</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-entrenamiento-validación"><i class="fa fa-check"></i>Fugas Entrenamiento Validación</a><ul>
+<li class="chapter" data-level="5.3.3" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#selección-de-variables-antes-de-dividir-los-datos"><i class="fa fa-check"></i><b>5.3.3</b> Selección de variables antes de dividir los datos</a></li>
+<li class="chapter" data-level="5.3.4" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i><b>5.3.4</b> Sobremuestrear antes de particionar</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-en-implementación"><i class="fa fa-check"></i>Fugas en implementación</a><ul>
+<li class="chapter" data-level="5.3.5" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-al-momento-de-predicción"><i class="fa fa-check"></i><b>5.3.5</b> Variables no disponibles al momento de predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#evaluación-de-punto-de-corte"><i class="fa fa-check"></i>Evaluación de punto de corte</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desbalance-de-clases"><i class="fa fa-check"></i>Desbalance de clases</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#equidad-con-atributos-protegidos"><i class="fa fa-check"></i>Equidad con atributos protegidos</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad"><i class="fa fa-check"></i>Interpretabilidad</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#explicación-de-predicciones"><i class="fa fa-check"></i>Explicación de predicciones</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="http://fairlac.iadb.org/" target="blank">fAIr LAC, IADB Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">IA Responsable (Ciclo de vida de IA)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conceptualización-y-diseño" class="section level1">
+<h1><span class="header-section-number">Sección 1</span> Conceptualización y diseño</h1>
+<p>La implementación de una solución de IA no puede ir separada del ciclo de vida de la política pública con IA<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> La IA es una herramienta, que debe estar condicionada a un buen diseño de la intervención o acción que se tomará con los resultados del sistema. La IA en ningún momento sustituye a la política pública. Esto implica que cualquier proyecto de IA robusto y responsable debe partir del problema y no desde la tecnología.</p>
+<div id="definición-correcta-del-problema-y-de-la-respuesta-de-política-pública" class="section level2">
+<h2><span class="header-section-number">1.1</span> Definición correcta del problema y de la respuesta de política pública</h2>
+<p>En este manual se asume que existen, al menos, dos actores involucrados en el desarrollo de los sistemas, el tomador de decisiones de políticas públicas y el equipo técnico que lo implementará. La definición de la intervención siempre debe ser responsabilidad del tomador de decisiones quien es quien tiene un conocimiento del problema social.</p>
+<p>Sin embargo, el equipo técnico debe poder entender el problema para que pueda vincular los resultados del modelo a la intervención deseada. Así mismo, es responsable de guiar y orientar en el diseño del sistema explicando lo que es viable y definiendo claramente las limitantes y riesgos del sistema, por lo que se requiere una comunicación constante entre ambos actores.</p>
+<p>Un caso de esto es la definición de la población donde se aplicará el sistema, la definición de grupos protegidos, así como las medidas de justicia algorítmica a aplicarse<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
+. Estas definiciones tienen un impacto directo a la forma en la que se puede evaluar la calidad y cobertura de los datos o el posible sesgo en los resultados del modelo.</p>
+</div>
+<div id="necesidad-y-proporcionalidad" class="section level2">
+<h2><span class="header-section-number">1.2</span> Necesidad y Proporcionalidad</h2>
+<p>Una vez que se tiene identificado el problema y la intervención es necesario replantearse el uso de la IA bajo criterios de necesidad y proporcionalidad. Aunque la IA tiene el potencial suficiente para hacer más eficiente algunos procesos y expandir la capacidad del estado, también se debe tener en cuenta que no es la respuesta para todo.</p>
+<p>En este punto es importante considerar también estándares y leyes que pueden regular el caso de uso donde se quiere implementar el sistema. Por ejemplo, requisitos de explicabilidad en las predicciones podrían limitar el uso de algunos algoritmos para los que es muy difícil dar interpretabilidad a los resultados.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+
+<div class="rmdtip">
+<p><strong>Medidas: Conceptualización y diseño de políticas públicas</strong></p>
+<ul>
+<li><p>Definición correcta del problema y de la respuesta de política pública:</p>
+<ul>
+<li>(Cualitativo) ¿Se definió claramente el problema de política pública que se está buscando resolver? * (Cualitativo) Describa cómo se da respuesta a este problema actualmente, considerando a las instituciones relacionadas y cuál es su propuesta para solucionar dicho problema usando IA.</li>
+<li>(Cualitativo)¿Se definieron las acciones o intervenciones que se realizarán a partir del resultado del sistema de Inteligencia Artificial?</li>
+</ul></li>
+<li><p>Necesidad y proporcionalidad</p>
+<ul>
+<li>(Cualitativo) ¿Afectará su proyecto de forma directa o indirecta a la vida de personas o de personas o grupos vulnerables?<br />
+</li>
+<li>(Cualitativo) Para la implementación de estas tecnologías, ¿se han revisado casos de proyectos similares anteriores?<br />
+</li>
+<li>(Cualitativa) ¿Se identificaron los distintos grupos o atributos protegidos dentro del proyecto? (por ejemplo: edad, género, raza, nivel de marginación, etc.)<br />
+</li>
+</ul></li>
+</ul>
+</div>
+
+
+<div class="rmdtip">
+<p><strong>Medidas: Gobernanza y seguridad<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></strong></p>
+<ul>
+<li>Consentimiento informado y límites de privacidad:
+<ul>
+<li>(Cuantitativa) ¿Se ha definido de forma clara la finalidad del tratamiento de los datos que va a recopilar y/o procesar?</li>
+<li>(Cuantitativa) ¿Su proyecto cuenta con los acuerdos legales de transferencia de información necesarios?</li>
+</ul></li>
+<li>Gobernanza y ciberseguridad
+<ul>
+<li>(Cuantitativa) El Proyecto cuenta con estructuras y mecanismos concretos de gobernanza y ciberseguridad?</li>
+<li>(Cuantitativa) ¿Se han considerado formas de reducir al mínimo la exposición de información personal identificable? (por ejemplo, mediante la anonimización o la no recopilación de información que no sea pertinente para el análisis)</li>
+</ul></li>
+</ul>
+</div>
+
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p> Ver sección “Componentes de un sistema de IA para políticas públicas”.<a href="conceptualización-y-diseño.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>En la sección 2 de este manual se discutirá a profundidad distintas definiciones de justicia algorítmica y sus implicaciones.<a href="conceptualización-y-diseño.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>El punto de explicabilidad e interpretabilidad se describe en la sección de este manual.<a href="conceptualización-y-diseño.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>La dimensión de Gobernanza y seguridad es una dimensión separada de la dimensión de conceptualización y diseño según el marco de retos de la IA de fAIr LAC: (<span class="citation">Cristina Pombo (<a href="referencias.html#ref-fair">2020</a>)</span>). Por los objetivos de este manual y para mantenerlo lo más conciso posible se incluyen en esta sección. (<span class="citation">Cristina Pombo (<a href="referencias.html#ref-fair">2020</a>)</span>)<a href="conceptualización-y-diseño.html#fnref10" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introducción.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fuente-y-manejo-de-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/EL-BID/Manual-IA-Responsable/edit/master/02-retos-conceptualizacion.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["IA-responsable.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true,
+"toolbar": {
+"position": "fixed"
+}
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

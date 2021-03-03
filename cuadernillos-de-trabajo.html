@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Cuadernillos de trabajo | IA Responsable (Ciclo de vida de IA)</title>
+  <meta name="description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Cuadernillos de trabajo | IA Responsable (Ciclo de vida de IA)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Cuadernillos de trabajo | IA Responsable (Ciclo de vida de IA)" />
+  
+  <meta name="twitter:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="herramientas.html"/>
+<link rel="next" href="referencias.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">IA Responsable</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Manual Técnico</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a><ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>ML y sistemas de toma/soporte de decisiones</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a><ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ciclo-de-vida-de-la-política-pública-con-ia"><i class="fa fa-check"></i>Ciclo de vida de la política pública con IA</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#retos-del-ciclo-de-vida-del-ml"><i class="fa fa-check"></i>Retos del ciclo de vida del ML</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a><ul>
+<li class="chapter" data-level="1.1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#definición-correcta-del-problema-y-de-la-respuesta-de-política-pública"><i class="fa fa-check"></i><b>1.1</b> Definición correcta del problema y de la respuesta de política pública</a></li>
+<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#necesidad-y-proporcionalidad"><i class="fa fa-check"></i><b>1.2</b> Necesidad y Proporcionalidad</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html"><i class="fa fa-check"></i><b>2</b> Fuente y manejo de datos</a><ul>
+<li class="chapter" data-level="2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#reto-estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Reto: Estados indeseables o subóptimos en datos recolectados</a></li>
+<li class="chapter" data-level="2.1.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#información-incompleta-acerca-de-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Información incompleta acerca de la población objetivo</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="2.2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html"><i class="fa fa-check"></i><b>3</b> Desarrollo de modelos</a><ul>
+<li class="chapter" data-level="3.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#ausencia-y-errores-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia y errores de validación</a></li>
+<li class="chapter" data-level="3.2" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-datos---variables-no-disponbiles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.1</b> Fugas de datos - Variables no disponbiles en la predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Clasificación: probabilidades y clases</a></li>
+<li class="chapter" data-level="3.4" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
+<li class="chapter" data-level="3.5" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a></li>
+<li class="chapter" data-level="3.6" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a><ul>
+<li class="chapter" data-level="4.1" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#degradación-de-desempeño"><i class="fa fa-check"></i><b>4.1</b> Degradación de desempeño</a></li>
+<li class="chapter" data-level="4.2" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#experimentos-y-recopilación-de-datos"><i class="fa fa-check"></i><b>4.2</b> Experimentos y recopilación de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a><ul>
+<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a></li>
+<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.2</b> Explicabilidad de predicciones individuales</a></li>
+<li class="chapter" data-level="5.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.3</b> Trazabilidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a><ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-checklist-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación (Checklist) de IA robusta y responsable</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a><ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-de-métrica-y-objetivos"><i class="fa fa-check"></i>Mala correspondencia de métrica y objetivos</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-y-sesgo"><i class="fa fa-check"></i>Muestras naturales y sesgo</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-mala-representatividad"><i class="fa fa-check"></i><b>5.3.1</b> Muestras naturales: mala representatividad</a></li>
+<li class="chapter" data-level="5.3.2" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#natural"><i class="fa fa-check"></i><b>5.3.2</b> Muestras naturales: comparaciones causales</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-los-modelos"><i class="fa fa-check"></i>Desarrollo de los modelos</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-entrenamiento-validación"><i class="fa fa-check"></i>Fugas Entrenamiento Validación</a><ul>
+<li class="chapter" data-level="5.3.3" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#selección-de-variables-antes-de-dividir-los-datos"><i class="fa fa-check"></i><b>5.3.3</b> Selección de variables antes de dividir los datos</a></li>
+<li class="chapter" data-level="5.3.4" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i><b>5.3.4</b> Sobremuestrear antes de particionar</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-en-implementación"><i class="fa fa-check"></i>Fugas en implementación</a><ul>
+<li class="chapter" data-level="5.3.5" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-al-momento-de-predicción"><i class="fa fa-check"></i><b>5.3.5</b> Variables no disponibles al momento de predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#evaluación-de-punto-de-corte"><i class="fa fa-check"></i>Evaluación de punto de corte</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desbalance-de-clases"><i class="fa fa-check"></i>Desbalance de clases</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#equidad-con-atributos-protegidos"><i class="fa fa-check"></i>Equidad con atributos protegidos</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad"><i class="fa fa-check"></i>Interpretabilidad</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#explicación-de-predicciones"><i class="fa fa-check"></i>Explicación de predicciones</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="http://fairlac.iadb.org/" target="blank">fAIr LAC, IADB Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">IA Responsable (Ciclo de vida de IA)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cuadernillos-de-trabajo" class="section level1 unnumbered">
+<h1>Cuadernillos de trabajo</h1>
+<p>En esta sección se muestran varios ejemplos de los retos y soluciones explicadas en el documento principal. Se utilizan distintos tipos de modelos (lineales, basados en árboles y otros) y distintas implementaciones (R, keras, xgboost) para mostrar que estos problemas se presentan independientemente de la elección de herramientas particulares.</p>
+<p>Los cuadernillos utilizan notación con punto decimal para mantener consistencia con los paquetes que así lo usan. Se utiliza el lenguaje de programación R, y los siguientes paquetes: <span class="citation">Wickham (<a href="referencias.html#ref-tidyverse">2017</a>)</span>,
+<span class="citation">Max Kuhn and Wickham (<a href="referencias.html#ref-recipes">2020</a>)</span>, <span class="citation">Hvitfeldt (<a href="referencias.html#ref-themis">2020</a>)</span>, <span class="citation">Max Kuhn, Chow, and Wickham (<a href="referencias.html#ref-rsample">2020</a>)</span>, <span class="citation">Max Kuhn and Vaughan (<a href="referencias.html#ref-parsnip">2020</a><a href="referencias.html#ref-parsnip">a</a>)</span>, <span class="citation">Max Kuhn and Vaughan (<a href="referencias.html#ref-yardstick">2020</a><a href="referencias.html#ref-yardstick">b</a>)</span>, <span class="citation">Vaughan (<a href="referencias.html#ref-workflows">2020</a>)</span>, <span class="citation">Max Kuhn (<a href="referencias.html#ref-tune">2020</a>)</span>, <span class="citation">Xie (<a href="referencias.html#ref-knitr">2019</a>)</span>,
+<span class="citation">Pedersen (<a href="referencias.html#ref-patchwork">2019</a>)</span>.</p>
+<p>Todo el material es reproducible según instrucciones en este <a href="https://github.com/EL-BID/Manual-IA-Responsable">repositorio</a>. El repositorio contiene un archivo Dockerfile que describe las dependencias de infraestructura para su replicación.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(recipes)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(themis)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(rsample)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">library</span>(parsnip)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">library</span>(yardstick)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">library</span>(workflows)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw">library</span>(tune)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">library</span>(knitr)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">library</span>(patchwork)</a></code></pre></div>
+<div id="mala-correspondencia-de-métrica-y-objetivos" class="section level2 unnumbered">
+<h2>Mala correspondencia de métrica y objetivos</h2>
+<p>Usar modelos que predicen la métrica incorrecta puede llevar a tomar decisiones incorrectas.
+A veces el problema es claro, cuando la métrica sustituto tiene deficiencias obvias, y en otras
+puede ser más sutil.</p>
+<p>En el ejemplo que se muestra a continuación se busca predecir la demanda de cierto producto (pensemos en vacunas o alguna medicina) para poder tomar decisiones de abastecimiento.</p>
+<p>Se cuenta con datos históricos de inventario (80 semanas), ventas y una variable <em>predictor</em> asociada a ventas (en el caso de las vacunas podría ser temperatura) y otra de agotamiento del inventario. Separamos los datos en entrenamiento y prueba, ajustando el modelo con el subconjunto de datos de entrenamiento. En este caso se utiliza un modelo lineal con variable dependiente ventas y covariables de semana y la covariable <em>predictor</em>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">entrena &lt;-<span class="st"> </span>ventas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(semana <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">prueba &lt;-<span class="st"> </span>ventas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(semana <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span>, semana <span class="op">&lt;=</span><span class="st"> </span><span class="dv">80</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">entrena <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>demanda) <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">semana</th>
+<th align="right">inventario</th>
+<th align="right">ventas</th>
+<th align="right">predictor</th>
+<th align="right">agotamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">153</td>
+<td align="right">110</td>
+<td align="right">-27.7014124</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">170</td>
+<td align="right">148</td>
+<td align="right">0.7664636</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">158</td>
+<td align="right">130</td>
+<td align="right">-15.2606032</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">162</td>
+<td align="right">142</td>
+<td align="right">4.2461227</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">159</td>
+<td align="right">159</td>
+<td align="right">28.5107593</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">162</td>
+<td align="right">162</td>
+<td align="right">14.8895964</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">mod_lineal &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>semana <span class="op">+</span><span class="st"> </span>predictor, <span class="dt">data =</span> ventas)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">mod_lineal</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ventas ~ semana + predictor, data = ventas)
+## 
+## Coefficients:
+## (Intercept)       semana    predictor  
+##    140.9935       0.8166       0.5535</code></pre>
+<p>Evaluamos el error de predicción.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_lineal, <span class="dt">newdata =</span> prueba)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">round</span>(<span class="kw">mean</span>(<span class="kw">abs</span>(preds <span class="op">-</span><span class="st"> </span>prueba<span class="op">$</span>ventas))<span class="op">/</span><span class="kw">mean</span>(prueba<span class="op">$</span>ventas), <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 0.04</code></pre>
+<p>El error porcentual es bajo. Los datos ajustados y predicciones se ven como sigue:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_lineal, <span class="dt">newdata =</span> ventas)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">ventas_larga &lt;-<span class="st"> </span>ventas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred =</span> preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">all_of</span>(<span class="kw">c</span>(<span class="st">&quot;ventas&quot;</span>,<span class="st">&quot;pred&quot;</span>)), <span class="dt">names_to =</span> <span class="st">&quot;tipo&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;unidades&quot;</span>)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw">ggplot</span>(ventas_larga <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">unidades =</span> <span class="kw">ifelse</span>(tipo<span class="op">==</span><span class="st">&quot;ventas&quot;</span> <span class="op">&amp;</span><span class="st"> </span>semana <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>, <span class="ot">NA</span>, unidades)), </a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">       <span class="kw">aes</span>(<span class="dt">x =</span> semana, <span class="dt">y =</span> unidades, <span class="dt">group =</span> tipo, <span class="dt">colour =</span> tipo)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">80</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">60</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">25</span>, <span class="dt">y=</span><span class="dv">105</span>, <span class="dt">label =</span> <span class="st">&quot;entrena&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">69</span>, <span class="dt">y=</span><span class="dv">105</span>, <span class="dt">label =</span> <span class="st">&quot;prueba&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning: Removed 20 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-49-1.png" width="480" /></p>
+<p>Pero tomar decisiones de demanda o inventario es equivocado. La razón es que existe una diferencia entre la variable ideal (demanda real de medicinas) y la variable observada (venta de medicinas). La diferencia radica en que existen agotamientos de inventario, es decir periodos en los que, aunque existía demanda no había suficiente inventario para todos los compradores. Se ve marcado esto con rojo en la siguiente gráfica.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_lineal, <span class="dt">newdata =</span> ventas)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">ventas_larga &lt;-<span class="st"> </span>ventas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred =</span> preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">all_of</span>(<span class="kw">c</span>(<span class="st">&quot;ventas&quot;</span>,<span class="st">&quot;pred&quot;</span>)), <span class="dt">names_to =</span> <span class="st">&quot;tipo&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;unidades&quot;</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">ggplot</span>(ventas_larga <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">unidades =</span> <span class="kw">ifelse</span>(tipo<span class="op">==</span><span class="st">&quot;ventas&quot;</span> <span class="op">&amp;</span><span class="st"> </span>semana <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>, <span class="ot">NA</span>, unidades)), <span class="kw">aes</span>(<span class="dt">x =</span> semana)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> tipo, <span class="dt">colour =</span> tipo, <span class="dt">y =</span> unidades)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">filter</span>(ventas, agotamiento<span class="op">==</span><span class="dv">1</span>, semana <span class="op">&lt;</span><span class="st"> </span><span class="dv">80</span>), <span class="kw">aes</span>(<span class="dt">y =</span> ventas), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">80</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">60</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">25</span>, <span class="dt">y=</span><span class="dv">105</span>, <span class="dt">label =</span> <span class="st">&quot;entrena&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">69</span>, <span class="dt">y=</span><span class="dv">105</span>, <span class="dt">label =</span> <span class="st">&quot;prueba&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning: Removed 20 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-50-1.png" width="480" /></p>
+<p>Si usáramos la política sugerida por las predicciones (por ejemplo 5% más),
+veríamos las ventas de la primera gráfica a continuación. Sin embargo, si
+usáramos una política de inventario con 280 unidades, observaríamos:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_lineal, <span class="dt">newdata =</span> ventas)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">ventas_obs &lt;-<span class="st"> </span>ventas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred =</span> preds) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">inventario =</span> <span class="fl">1.05</span> <span class="op">*</span><span class="st">  </span>pred) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ventas =</span> <span class="kw">ifelse</span>(semana <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>, <span class="kw">pmin</span>(inventario, demanda), ventas)) </a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">ventas_larga &lt;-<span class="st"> </span>ventas_obs <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">all_of</span>(<span class="kw">c</span>(<span class="st">&quot;ventas&quot;</span>,<span class="st">&quot;pred&quot;</span>)), <span class="dt">names_to =</span> <span class="st">&quot;tipo&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;unidades&quot;</span>)</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(ventas_larga, <span class="kw">aes</span>(<span class="dt">x =</span> semana)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> tipo, <span class="dt">colour =</span> tipo, <span class="dt">y =</span> unidades)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">filter</span>(ventas_obs, ventas <span class="op">==</span><span class="st"> </span>inventario, semana <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>), <span class="kw">aes</span>(<span class="dt">y =</span> ventas), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">80</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Inventario: Predicciones + 5%&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_lineal, <span class="dt">newdata =</span> ventas)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">ventas_obs &lt;-<span class="st"> </span>ventas <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">pred =</span> preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">inventario =</span> <span class="dv">280</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ventas =</span> <span class="kw">ifelse</span>(semana <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>, <span class="kw">pmin</span>(inventario, demanda), ventas)) </a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">ventas_larga &lt;-<span class="st"> </span>ventas_obs <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">all_of</span>(<span class="kw">c</span>(<span class="st">&quot;ventas&quot;</span>,<span class="st">&quot;pred&quot;</span>)), <span class="dt">names_to =</span> <span class="st">&quot;tipo&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;unidades&quot;</span>)</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">g2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(ventas_larga, <span class="kw">aes</span>(<span class="dt">x =</span> semana)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> tipo, <span class="dt">colour =</span> tipo, <span class="dt">y =</span> unidades)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">filter</span>(ventas_obs, ventas <span class="op">==</span><span class="st"> </span>inventario, semana <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>), <span class="kw">aes</span>(<span class="dt">y =</span> ventas), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">80</span>)<span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Inventario: 300 unidades cte&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">g1 <span class="op">/</span><span class="st"> </span>g2</a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>Entonces,</p>
+<ul>
+<li>La política basada en las predicciones <strong>exacerba</strong> el problema de los agotamientos.</li>
+<li>Un uso no pensado de datos sin considerar el proceso generador de los mismos puede producir
+errores grandes en las decisiones</li>
+<li>En este caso, la confusión proviene de no separar los conceptos de demanda y ventas. Otros
+indicadores de demanda o modelos más adecuados ayudarían a resolver el problema.</li>
+<li>Soluciones simplistas como sólo tomar los datos donde no ocurren agotamientos pueden empeorar aún más
+la situación: incrementan el sesgo (seleccionamos semanas donde las ventas tienden a ser bajas) y reducen
+la precisión (usamos menos datos).</li>
+</ul>
+</div>
+<div id="muestras-naturales-y-sesgo" class="section level2 unnumbered">
+<h2>Muestras naturales y sesgo</h2>
+<p>Cuando las muestras de entrenamiento son diferentes a las poblaciones, donde
+se van a aplicar los modelos, existen dificultades en validar correctamente las
+predicciones.</p>
+<div id="muestras-naturales-mala-representatividad" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Muestras naturales: mala representatividad</h3>
+<p>Para este ejemplo utilizaremos datos de la encuesta nacional de ingresos y gastos
+en hogares de México <span class="citation">(INEGI <a href="referencias.html#ref-enigh">2014</a>)</span>, para simular un escenario que queremos ejemplificar.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">128</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">encuesta_ingreso &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/enigh-ejemplo.csv&quot;</span>)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   FOLIOVIV = col_character(),
+##   UBICA_GEO..5 = col_character(),
+##   EST_DIS..134 = col_character(),
+##   UPM..135 = col_character(),
+##   TENEN_NR1 = col_character(),
+##   TENEN_NR2 = col_character(),
+##   VEHI1_A = col_character(),
+##   VEHI2_A = col_character(),
+##   VEHI3_A = col_character(),
+##   VEHI4_A = col_character(),
+##   VEHI5_A = col_character(),
+##   VEHI6_A = col_character(),
+##   VEHI7_A = col_character(),
+##   VEHI8_A = col_logical(),
+##   VEHI9_A = col_character(),
+##   EQH1_A = col_character(),
+##   EQH2_A = col_character(),
+##   EQH3_A = col_character(),
+##   EQH4_A = col_character(),
+##   EQH5_A = col_character()
+##   # ... with 26 more columns
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>## Warning: 2 parsing failures.
+##  row     col           expected actual                      file
+## 1192 VEHI8_A 1/0/T/F/TRUE/FALSE     07 &#39;datos/enigh-ejemplo.csv&#39;
+## 1398 VEHI8_A 1/0/T/F/TRUE/FALSE     07 &#39;datos/enigh-ejemplo.csv&#39;</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">datos_ingreso &lt;-<span class="st"> </span>encuesta_ingreso <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">num_focos =</span> FOCOS) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ingreso_miles =</span> (INGCOR <span class="op">/</span><span class="st"> </span><span class="dv">1000</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tel_celular =</span> <span class="kw">ifelse</span>(SERV_<span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;No&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">piso_firme =</span> <span class="kw">ifelse</span>(PISOS <span class="op">!=</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(PISOS), <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;No&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lavadora =</span> <span class="kw">ifelse</span>(LAVAD <span class="op">!=</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(LAVAD), <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;No&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">automovil =</span> VEHI1_N <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">marginacion =</span> <span class="kw">fct_reorder</span>(marginación, ingreso_miles, median)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">ocupadas =</span> PEROCU) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">educacion_jef =</span> NIVELAPROB) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="st">  </span><span class="kw">select</span>(ingreso_miles, num_focos, tel_celular, </a>
+<a class="sourceLine" id="cb18-12" data-line-number="12">         marginacion, ocupadas, piso_firme, lavadora, automovil, educacion_jef)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">ingreso_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(datos_ingreso, <span class="dt">prop =</span> <span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">entrena &lt;-<span class="st"> </span><span class="kw">training</span>(ingreso_split)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">prueba &lt;-<span class="st"> </span><span class="kw">testing</span>(ingreso_split)</a></code></pre></div>
+<p>Supóngase que interesa estimar el ingreso de los hogares, para ello se usa una encuesta por teléfono celular, más aún, supóngase que solo se accede a zonas que no tienen marginación muy alta.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">muestra_sesgada &lt;-<span class="st"> </span><span class="kw">filter</span>(entrena, </a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">                          tel_celular <span class="op">==</span><span class="st"> &quot;Sí&quot;</span>, </a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">                          marginacion<span class="op">==</span><span class="st">&quot;Muy bajo&quot;</span>)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">sesgados_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(muestra_sesgada)</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">entrena_sesgo &lt;-<span class="st"> </span><span class="kw">training</span>(sesgados_split)</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">validacion_sesgo &lt;-<span class="st"> </span><span class="kw">testing</span>(sesgados_split)</a></code></pre></div>
+<p>Se construye un modelo lineal para el logaritmo de ingresos con los datos disponibles.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">library</span>(splines)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">formula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="st">&quot;log(ingreso_miles) ~ ns(num_focos, 3) + </span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">              ns(ocupadas, 3) +  lavadora + automovil + piso_firme +</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">              ns(educacion_jef, 3)&quot;</span>)</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">mod_sesgo &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> entrena_sesgo)</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co"># tomamos una muestra representativa para comparar, del mismo tamaño que la sesgada</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">mod_representativa &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> <span class="kw">sample_n</span>(entrena, <span class="kw">nrow</span>(entrena_sesgo)))</a></code></pre></div>
+<p>Y se evalúa el error en una muestra de prueba construida con datos con las mismas características sesgadas que los datos de entrenamiento (hogares con teléfono celular y grado de marginación muy bajo).</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">preds_val &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_sesgo, <span class="dt">newdata =</span> validacion_sesgo)</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">mean</span>(<span class="kw">abs</span>(preds_val <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>validacion_sesgo<span class="op">$</span>ingreso_miles))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.37</code></pre>
+<p>El error en una muestra más similar a la población que se pretende aplicar el
+algoritmo es mayor:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">preds_prueba_sesgo &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_sesgo, <span class="dt">newdata =</span> prueba)</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">preds_prueba &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_representativa, <span class="dt">newdata =</span> prueba)</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">prueba<span class="op">$</span>pred_sesgada &lt;-<span class="st"> </span>preds_prueba_sesgo</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">prueba<span class="op">$</span>pred_rep &lt;-<span class="st"> </span>preds_prueba</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="kw">mean</span>(<span class="kw">abs</span>(preds_prueba_sesgo <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>prueba<span class="op">$</span>ingreso_miles))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.42</code></pre>
+<p>Sin embargo, el principal problema se refleja en la siguiente gráfica, donde
+usamos escalas logarítmicas para hacer comparaciones multiplicativas, que nos interesan
+por la naturaleza del ingreso. Cada punto
+representa un hogar, la muestra es más similar a la población donde se aplicará la
+metodología, y en el
+eje horizontal graficamos la predicción de los hogares utilizando el modelo,
+mientras que el eje vertical corresponde al ingreso de cada hogar. Como referencia
+agregamos la recta <span class="math inline">\(y = x\)</span>, y un suavizador (ver por ejemplo <a href="https://en.wikipedia.org/wiki/Local_regression">aquí</a>). Nos concetramos
+en vel el desempeño para los hogares de ingresos relativamente bajos
+(menos de 10 mil pesos al mes):</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">breaks_y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">80</span>)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">g_sesgo &lt;-<span class="st"> </span><span class="kw">ggplot</span>(prueba <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(pred_sesgada <span class="op">&lt;</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">30</span>)), </a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">  <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">exp</span>(pred_sesgada), <span class="dt">y =</span> ingreso_miles)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_abline</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">span =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_x_log10</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">30</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_log10</span>(<span class="dt">breaks =</span> breaks_y) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Predicción (miles al trimestre)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Ingreso corriente (miles al trimestre)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Desempeño en prueba </span><span class="ch">\n</span><span class="st">con sesgo en entrenamiento&quot;</span>) </a>
+<a class="sourceLine" id="cb26-10" data-line-number="10">g_representativa &lt;-<span class="st"> </span><span class="kw">ggplot</span>(prueba <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(pred_sesgada <span class="op">&lt;</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">30</span>)), </a>
+<a class="sourceLine" id="cb26-11" data-line-number="11">  <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">exp</span>(pred_rep), <span class="dt">y =</span> ingreso_miles)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-12" data-line-number="12"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_abline</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">span =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-14" data-line-number="14"><span class="st">  </span><span class="kw">scale_x_log10</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">30</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_log10</span>(<span class="dt">breaks =</span> breaks_y) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-15" data-line-number="15"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Predicción (miles al trimestre)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-16" data-line-number="16"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Ingreso corriente (miles al trimestre)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-17" data-line-number="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Desempeño en prueba </span><span class="ch">\n</span><span class="st">con muestra representativa en entrenamiento&quot;</span>) </a>
+<a class="sourceLine" id="cb26-18" data-line-number="18">g_sesgo <span class="op">+</span><span class="st"> </span>g_representativa</a></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;
+## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 3 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-60-1.png" width="864" /></p>
+<p>Aunque comunmente esperamos sobrepredecir valores observados relativamente bajos, y lo
+contrario para valores relativamente altos,
+para los que tienen ingresos de menos de 10 mil pesos mensuales,
+el modelo sesgado sobrepredice el ingreso verdadero por alrededor del 40%:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">prueba_bajo &lt;-<span class="st"> </span>prueba <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(ingreso_miles <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">sesgo &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">exp</span>(prueba_bajo<span class="op">$</span>pred_sesgada))<span class="op">/</span><span class="kw">mean</span>(prueba_bajo<span class="op">$</span>ingreso_miles) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="kw">round</span>(sesgo,<span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 0.412</code></pre>
+<p>Al compararse con el mismo modelo entrenado con una muestra representativa, donde
+el efecto es considerablemente menor:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">prueba_bajo &lt;-<span class="st"> </span>prueba <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(ingreso_miles <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">sesgo &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">exp</span>(prueba_bajo<span class="op">$</span>pred_rep))<span class="op">/</span><span class="kw">mean</span>(prueba_bajo<span class="op">$</span>ingreso_miles) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="kw">round</span>(sesgo,<span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 0.152</code></pre>
+<p>Se tienen entonces dos problemas:</p>
+<ol style="list-style-type: decimal">
+<li>El sesgo produce un error considerablemente más grande en la implementación que en la validación.<br />
+</li>
+<li>Peor aún, el sesgo es mayor para hogares de menores ingresos (las predicciones son altas), lo cual puede producir una focalización mediocre si buscamos identificar hogares de menores ingresos.</li>
+</ol>
+</div>
+<div id="natural" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Muestras naturales: comparaciones causales</h3>
+<p>Este ejemplo está tomado de (<span class="citation">Hastie, Tibshirani, and Friedman (<a href="referencias.html#ref-ESL">2017</a>)</span> y <span class="citation">Rossouw et al. (<a href="referencias.html#ref-saheart">1983</a>)</span>). Consideramos los siguientes datos donde queremos predecir enfermedad del corazón (chd)<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">sa_heart &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/sa-heart.csv&quot;</span>)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   sbp = col_double(),
+##   tobacco = col_double(),
+##   ldl = col_double(),
+##   adiposity = col_double(),
+##   famhist = col_character(),
+##   typea = col_double(),
+##   obesity = col_double(),
+##   alcohol = col_double(),
+##   age = col_double(),
+##   chd = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">sa_heart &lt;-<span class="st"> </span>sa_heart <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">presion_arterial =</span> sbp, <span class="dt">tabaco =</span> tobacco, <span class="dt">colesterol_ldl =</span> ldl, </a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">         <span class="dt">adiposidad =</span> adiposity, <span class="dt">historia_fam =</span> famhist, <span class="dt">tipo_a =</span> typea, <span class="dt">obesidad =</span> obesity, </a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">         <span class="dt">edad =</span> age, <span class="dt">enf_coronaria =</span> chd)</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">sa_heart</a></code></pre></div>
+<pre><code>## # A tibble: 462 x 10
+##    presion_arterial tabaco colesterol_ldl adiposidad historia_fam tipo_a
+##               &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
+##  1              160  12              5.73       23.1 Present          49
+##  2              144   0.01           4.41       28.6 Absent           55
+##  3              118   0.08           3.48       32.3 Present          52
+##  4              170   7.5            6.41       38.0 Present          51
+##  5              134  13.6            3.5        27.8 Present          60
+##  6              132   6.2            6.47       36.2 Present          62
+##  7              142   4.05           3.38       16.2 Absent           59
+##  8              114   4.08           4.59       14.6 Present          62
+##  9              114   0              3.83       19.4 Present          49
+## 10              132   0              5.8        31.0 Present          69
+## # … with 452 more rows, and 4 more variables: obesidad &lt;dbl&gt;, alcohol &lt;dbl&gt;,
+## #   edad &lt;dbl&gt;, enf_coronaria &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">library</span>(recipes)</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">125</span>)</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">sa_split &lt;-<span class="st"> </span>rsample<span class="op">::</span><span class="kw">initial_split</span>(sa_heart, <span class="dt">prop =</span> <span class="fl">0.75</span>)</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">sa_split</a></code></pre></div>
+<pre><code>## &lt;Analysis/Assess/Total&gt;
+## &lt;347/115/462&gt;</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">receta_sa &lt;-<span class="st"> </span><span class="kw">training</span>(sa_split) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="st">  </span><span class="kw">recipe</span>(enf_coronaria <span class="op">~</span><span class="st"> </span>.) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="st">  </span><span class="kw">step_dummy</span>(historia_fam) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="st">  </span><span class="kw">step_mutate</span>(<span class="dt">enf_coronaria =</span> <span class="kw">factor</span>(enf_coronaria)) <span class="op">%&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5"><span class="st">  </span><span class="kw">prep</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">sa_entrena &lt;-<span class="st"> </span>receta_sa <span class="op">%&gt;%</span><span class="st"> </span>juice</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">sa_boosted &lt;-<span class="st"> </span><span class="kw">boost_tree</span>(<span class="dt">trees =</span> <span class="dv">3000</span>, <span class="dt">mode =</span> <span class="st">&quot;classification&quot;</span>, </a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">                        <span class="dt">learn_rate =</span> <span class="fl">0.001</span>, <span class="dt">tree_depth =</span> <span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">                        <span class="dt">sample_size =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;xgboost&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6"><span class="st">  </span><span class="kw">fit</span>(enf_coronaria <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> sa_entrena)</a></code></pre></div>
+<p>Se puede evaluar este modelo y afinar parámetros también. Aquí interesa interpretar el efecto de las variables en este modelo. Para eso se considera la gráfica de dependencia parcial de la prevalencia de enfermedad de corazón y la variable obesidad</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(pdp)</a></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;pdp&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     partial</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">pdp_ob &lt;-<span class="st"> </span>pdp<span class="op">::</span><span class="kw">partial</span>(sa_boosted<span class="op">$</span>fit,  <span class="dt">pred.var =</span> <span class="st">&quot;presion_arterial&quot;</span>,</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">  <span class="dt">plot =</span> <span class="ot">TRUE</span>, <span class="dt">plot.engine =</span> <span class="st">&quot;ggplot2&quot;</span>, <span class="dt">prob =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">  <span class="dt">train =</span> sa_entrena <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>enf_coronaria))</a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">pdp_ob <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Presión arterial sistólica&quot;) + ylab(&quot;</span>Predicción promedio<span class="st">&quot;)</span></a></code></pre></div>
+<pre><code>## Warning: Use of `object[[1L]]` is discouraged. Use `.data[[1L]]` instead.</code></pre>
+<pre><code>## Warning: Use of `object[[&quot;yhat&quot;]]` is discouraged. Use `.data[[&quot;yhat&quot;]]`
+## instead.</code></pre>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-66-1.png" width="480" /></p>
+<p>La interpretación correcta de este gráfica de <strong>dependencia parcial</strong> (ver <span class="citation">Hastie, Tibshirani, and Friedman (<a href="referencias.html#ref-ESL">2017</a>)</span>)
+depende del hecho de que
+este es un estudio retrospectivo, donde <strong>algunos pacientes con riesgo de enfermedad
+de corazón sufrieron intervenciones para reducir su riesgo</strong>, entre los
+que está tomar medicinas para reducir la presión. Una interpretación
+causal de reducciones de la presión arterial como promotora de
+enfermedades del corazón es incorrecta y potencialmente peligrosa (ver más en <span class="citation">Hastie, Tibshirani, and Friedman (<a href="referencias.html#ref-ESL">2017</a>)</span>).</p>
+</div>
+</div>
+<div id="desarrollo-de-los-modelos" class="section level2 unnumbered">
+<h2>Desarrollo de los modelos</h2>
+</div>
+<div id="fugas-entrenamiento-validación" class="section level2 unnumbered">
+<h2>Fugas Entrenamiento Validación</h2>
+<p>Se presentarán varios ejemplos de cómo las fugas de entrenamiento a validación producen estimaciones sesgadas del desempeño de predictores.</p>
+<div id="selección-de-variables-antes-de-dividir-los-datos" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Selección de variables antes de dividir los datos</h3>
+
+<div class="resumen">
+Cualquier paso de preprocesamiento debe hacerse sin usar datos de validación. Esto incluye
+cuando usamos métodos como validación cruzada
+</div>
+
+<p>Este ejemplo es originalmente de <span class="citation">(Hastie, Tibshirani, and Friedman <a href="referencias.html#ref-ESL">2017</a>)</span>, y se utilizará datos sintéticos,
+generados con el siguiente proceso:</p>
+<ol style="list-style-type: decimal">
+<li>Simulando variables respuesta <span class="math inline">\(y\)</span> con distribución binomial,<br />
+</li>
+<li>Simulando 1000 covariables independientes, cada una con distribución normal
+estándar.</li>
+</ol>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">simular &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">p =</span> <span class="dv">500</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>){</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">  datos &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span>p, <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="st">    </span><span class="kw">bind_cols</span>()</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">  datos<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw">rbinom</span>(n, <span class="dv">1</span>, prob)</a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">  datos</a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb48-7" data-line-number="7"><span class="kw">set.seed</span>(<span class="dv">8234</span>)</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8">datos_entrena &lt;-<span class="st"> </span><span class="kw">simular</span>(<span class="dt">n =</span> <span class="dv">200</span>, <span class="dt">p =</span> <span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb48-9" data-line-number="9">datos_prueba &lt;-<span class="st"> </span><span class="kw">simular</span>(<span class="dt">n =</span> <span class="dv">2000</span>, <span class="dt">p =</span> <span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb48-10" data-line-number="10"><span class="kw">dim</span>(datos_entrena)</a></code></pre></div>
+<pre><code>## [1]  200 1001</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">datos_entrena <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(y) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">y</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">113</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">87</td>
+</tr>
+</tbody>
+</table>
+<p>La selección de variables está dada por la siguiente función. Esta función selecciona las variables más correlacionadas con la variable objetivo.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">seleccionar &lt;-<span class="st"> </span><span class="cf">function</span>(datos, <span class="dt">num_var =</span> <span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">  correlaciones &lt;-<span class="st"> </span>datos <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb51-3" data-line-number="3"><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">matches</span>(<span class="st">&quot;V&quot;</span>), <span class="dt">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;x&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb51-4" data-line-number="4"><span class="st">    </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb51-5" data-line-number="5"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">corr =</span> <span class="kw">abs</span>(<span class="kw">cor</span>(y, x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb51-6" data-line-number="6"><span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(corr)) </a>
+<a class="sourceLine" id="cb51-7" data-line-number="7">  <span class="co"># seleccionar </span></a>
+<a class="sourceLine" id="cb51-8" data-line-number="8">  seleccionadas &lt;-<span class="st"> </span>correlaciones <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb51-9" data-line-number="9"><span class="st">    </span><span class="kw">top_n</span>(num_var, <span class="dt">wt =</span> corr) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb51-10" data-line-number="10"><span class="st">    </span><span class="kw">pull</span>(variable)</a>
+<a class="sourceLine" id="cb51-11" data-line-number="11">  datos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">one_of</span>(<span class="kw">c</span>(<span class="st">&quot;y&quot;</span>, seleccionadas)))</a>
+<a class="sourceLine" id="cb51-12" data-line-number="12">}</a></code></pre></div>
+<div id="método-erróneo" class="section level4 unnumbered">
+<h4>Método erróneo</h4>
+<p>Aquí se ven las 10 variables que fueron seleccionadas, Por sí solo este método no es incorrecto, pero cuando se ejecuta sobre los datos que se usarán en validación (validación cruzada), entonces la estimación de desempeño es optimista:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">datos_filtrados &lt;-<span class="st"> </span><span class="kw">seleccionar</span>(datos_entrena)</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">datos_filtrados <span class="op">%&gt;%</span><span class="st"> </span>head <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, round, <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">y</th>
+<th align="right">V337</th>
+<th align="right">V464</th>
+<th align="right">V984</th>
+<th align="right">V461</th>
+<th align="right">V525</th>
+<th align="right">V732</th>
+<th align="right">V39</th>
+<th align="right">V774</th>
+<th align="right">V491</th>
+<th align="right">V682</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">1.592</td>
+<td align="right">-0.587</td>
+<td align="right">1.763</td>
+<td align="right">-0.847</td>
+<td align="right">0.452</td>
+<td align="right">-0.604</td>
+<td align="right">-0.400</td>
+<td align="right">-1.146</td>
+<td align="right">-0.938</td>
+<td align="right">0.136</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">1.782</td>
+<td align="right">0.604</td>
+<td align="right">0.739</td>
+<td align="right">-0.533</td>
+<td align="right">1.752</td>
+<td align="right">0.945</td>
+<td align="right">1.142</td>
+<td align="right">-0.638</td>
+<td align="right">-0.342</td>
+<td align="right">-1.308</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">1.528</td>
+<td align="right">0.635</td>
+<td align="right">-0.326</td>
+<td align="right">0.734</td>
+<td align="right">-0.207</td>
+<td align="right">-0.974</td>
+<td align="right">1.574</td>
+<td align="right">2.401</td>
+<td align="right">0.428</td>
+<td align="right">0.176</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">0.799</td>
+<td align="right">-1.436</td>
+<td align="right">0.724</td>
+<td align="right">0.366</td>
+<td align="right">1.680</td>
+<td align="right">0.476</td>
+<td align="right">0.376</td>
+<td align="right">-1.673</td>
+<td align="right">-0.683</td>
+<td align="right">0.161</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.759</td>
+<td align="right">-0.208</td>
+<td align="right">-0.373</td>
+<td align="right">0.208</td>
+<td align="right">-1.009</td>
+<td align="right">-0.028</td>
+<td align="right">-1.209</td>
+<td align="right">0.759</td>
+<td align="right">2.038</td>
+<td align="right">1.402</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">-0.377</td>
+<td align="right">-1.044</td>
+<td align="right">1.358</td>
+<td align="right">-0.223</td>
+<td align="right">0.469</td>
+<td align="right">1.221</td>
+<td align="right">0.582</td>
+<td align="right">0.378</td>
+<td align="right">-0.116</td>
+<td align="right">0.173</td>
+</tr>
+</tbody>
+</table>
+<p>Para cualquier corte de validación que se haga (ya sea que se separan un conjunto de datos, o hacer validación cruzada), el porcentaje de aciertos parece ser mayor a 0.5:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">corte_validacion &lt;-<span class="st"> </span>datos_filtrados <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">valida &lt;-<span class="st"> </span><span class="kw">anti_join</span>(datos_filtrados, corte_validacion)</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3">modelo_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>., corte_validacion, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">predict</span>(modelo_<span class="dv">1</span>, valida) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">==</span><span class="st"> </span>valida<span class="op">$</span>y) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.73</code></pre>
+<p>Sin embargo, el desempeño real del modelo será:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">predict</span>(modelo_<span class="dv">1</span>, datos_prueba) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">==</span><span class="st"> </span>datos_prueba<span class="op">$</span>y) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.49</code></pre>
+</div>
+<div id="método-correcto" class="section level4 unnumbered">
+<h4>Método correcto</h4>
+<p>La selección de variables debe hacerse en cada vuelta de validación cruzada:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">corte_validacion &lt;-<span class="st"> </span>datos_entrena <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sample_frac</span>(<span class="fl">0.7</span>)</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2">datos_filtrados_corte &lt;-<span class="st"> </span><span class="kw">seleccionar</span>(corte_validacion)</a>
+<a class="sourceLine" id="cb57-3" data-line-number="3">valida &lt;-<span class="st"> </span><span class="kw">anti_join</span>(datos_entrena, corte_validacion)</a>
+<a class="sourceLine" id="cb57-4" data-line-number="4">modelo_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>., datos_filtrados_corte, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb57-5" data-line-number="5"><span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">predict</span>(modelo_<span class="dv">1</span>, valida) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">==</span><span class="st"> </span>valida<span class="op">$</span>y) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.52</code></pre>
+</div>
+</div>
+<div id="sobremuestrear-antes-de-particionar" class="section level3">
+<h3><span class="header-section-number">5.3.4</span> Sobremuestrear antes de particionar</h3>
+<p>Una de las formas de resolver problemas de desbalance de clases es la técnica de sobremuestreo, sin embargo, se tiene que ser muy cuidadoso para evitar errores de fuga de información al aplicar estas técnicas.</p>
+<p>En este ejemplo se verá que sobremuestrear una clase chica antes de separar datos de validación o hacer validación cruzada puede producir estimaciones demasiado optimistas del error de predicción.</p>
+<p>Supóngase que tenemos desbalance severo entre nuestras dos clases:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">99134</span>)</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2">datos_desbalance &lt;-<span class="st"> </span><span class="kw">simular</span>(<span class="dt">n =</span> <span class="dv">500</span>, <span class="dt">p =</span> <span class="dv">20</span>, <span class="dt">prob =</span> <span class="fl">0.1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">factor</span>(y, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)))</a>
+<a class="sourceLine" id="cb59-4" data-line-number="4">datos_desbalance <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(y) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">y</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">41</td>
+</tr>
+<tr class="even">
+<td align="left">0</td>
+<td align="right">459</td>
+</tr>
+</tbody>
+</table>
+<div id="manera-incorrecta" class="section level4 unnumbered">
+<h4>Manera incorrecta</h4>
+<p>Supóngase que primero aplicamos (SMOTE)<span class="citation">(Chawla et al. <a href="referencias.html#ref-chawla">2002</a>)</span> para intentar balancear los
+datos:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">receta_balance &lt;-<span class="st"> </span><span class="kw">recipe</span>(y <span class="op">~</span><span class="st"> </span>., datos_desbalance) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="st">  </span><span class="kw">step_smote</span>(y) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb60-3" data-line-number="3"><span class="st">  </span><span class="kw">prep</span>()</a>
+<a class="sourceLine" id="cb60-4" data-line-number="4">datos_smote &lt;-<span class="st"> </span><span class="kw">juice</span>(receta_balance) </a></code></pre></div>
+<p>Obteniendo así,</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">datos_smote <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(y) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">y</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">459</td>
+</tr>
+<tr class="even">
+<td align="left">0</td>
+<td align="right">459</td>
+</tr>
+</tbody>
+</table>
+<p>Ahora se separará entrenamiento y validación</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">sep_datos_smote &lt;-<span class="st"> </span><span class="kw">initial_split</span>(datos_smote)</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">entrena_smote &lt;-<span class="st"> </span><span class="kw">training</span>(sep_datos_smote)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">prueba_smote &lt;-<span class="st"> </span><span class="kw">testing</span>(sep_datos_smote)</a></code></pre></div>
+<p>Y se genera un método de clasificación usando un bosque aleatorio de árboles de decisión:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">metricas &lt;-<span class="st"> </span><span class="kw">metric_set</span>(accuracy, recall, precision)</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">bosque &lt;-<span class="st"> </span><span class="kw">rand_forest</span>(<span class="dt">trees =</span> <span class="dv">500</span>, <span class="dt">mtry =</span> <span class="dv">20</span>, <span class="dt">mode =</span> <span class="st">&quot;classification&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;ranger&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="st">  </span><span class="kw">fit</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> entrena_smote)</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5">bosque <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-6" data-line-number="6"><span class="st">  </span><span class="kw">predict</span>(prueba_smote) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-7" data-line-number="7"><span class="st">  </span><span class="kw">bind_cols</span>(prueba_smote) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb63-8" data-line-number="8"><span class="st">  </span><span class="kw">metricas</span>(<span class="dt">truth =</span> y, <span class="dt">estimate =</span> .pred_class) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-9" data-line-number="9"><span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, round, <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>kable</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.metric</th>
+<th align="left">.estimator</th>
+<th align="right">.estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">accuracy</td>
+<td align="left">binary</td>
+<td align="right">0.926</td>
+</tr>
+<tr class="even">
+<td align="left">recall</td>
+<td align="left">binary</td>
+<td align="right">0.973</td>
+</tr>
+<tr class="odd">
+<td align="left">precision</td>
+<td align="left">binary</td>
+<td align="right">0.887</td>
+</tr>
+</tbody>
+</table>
+<p>En primera instancia parece ser que el desempeño es muy bueno. Se sabe que esto
+es ficticio, pues no hay relación de <span class="math inline">\(y\)</span> con el resto de las covariables.</p>
+</div>
+<div id="manera-correcta" class="section level4 unnumbered">
+<h4>Manera correcta</h4>
+<p>Antes de hacer el rebalanceo de clases se separa en entrenamiento y validación. Si se
+quiere, esta parte puede hacerse usando muestreo estratificado, por ejemplo, pero aquí
+la construimos con muestreo aleatorio simple:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">sep_datos &lt;-<span class="st"> </span><span class="kw">initial_split</span>(datos_desbalance, <span class="dt">prop =</span> <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2">entrena &lt;-<span class="st"> </span><span class="kw">training</span>(sep_datos)</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">prueba &lt;-<span class="st"> </span><span class="kw">testing</span>(sep_datos)</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">receta_balance &lt;-<span class="st"> </span><span class="kw">recipe</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> entrena) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="st">  </span><span class="kw">step_smote</span>(y) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="st">  </span><span class="kw">prep</span>()</a>
+<a class="sourceLine" id="cb65-4" data-line-number="4">entrena_balanceado &lt;-<span class="st"> </span><span class="kw">juice</span>(receta_balance)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">bosque_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">rand_forest</span>(<span class="dt">trees =</span> <span class="dv">500</span>, <span class="dt">mtry =</span> <span class="dv">20</span>, <span class="dt">mode =</span> <span class="st">&quot;classification&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;ranger&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="st">  </span><span class="kw">fit</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> entrena_balanceado)</a>
+<a class="sourceLine" id="cb66-4" data-line-number="4">bosque_<span class="dv">1</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-5" data-line-number="5"><span class="st">  </span><span class="kw">predict</span>(prueba) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-6" data-line-number="6"><span class="st">  </span><span class="kw">bind_cols</span>(prueba) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb66-7" data-line-number="7"><span class="st">  </span><span class="kw">metricas</span>(<span class="dt">truth =</span> y, <span class="dt">estimate=</span>.pred_class) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb66-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, round, <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb66-9" data-line-number="9"><span class="st">  </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.metric</th>
+<th align="left">.estimator</th>
+<th align="right">.estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">accuracy</td>
+<td align="left">binary</td>
+<td align="right">0.828</td>
+</tr>
+<tr class="even">
+<td align="left">recall</td>
+<td align="left">binary</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">precision</td>
+<td align="left">binary</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+<p>Aunque el <em>accuracy</em> parece alto, la precisión y la sensibilidad son cero. Un clasificador trivial
+que siempre predice la clase dominante puede tener mejor exactitud que el que hemos construido.</p>
+</div>
+</div>
+</div>
+<div id="fugas-en-implementación" class="section level2 unnumbered">
+<h2>Fugas en implementación</h2>
+<div id="variables-no-disponibles-al-momento-de-predicción" class="section level3">
+<h3><span class="header-section-number">5.3.5</span> Variables no disponibles al momento de predicción</h3>
+<p>En este caso se muestra un ejemplo donde se utiliza erróneamente una variable que
+no estará disponible al momento de hacer las predicciones (datos de <span class="citation">(Greene <a href="referencias.html#ref-greene">2003</a>)</span>).</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">credito &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/AER_credit_card_data.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">gasto =</span> expenditure, <span class="dt">dependientes =</span> dependents, <span class="dt">ingreso =</span> income,</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3">         <span class="dt">edad =</span> age, <span class="dt">propietario =</span> owner) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">propietario =</span> <span class="kw">fct_recode</span>(propietario, <span class="kw">c</span>(<span class="dt">si =</span> <span class="st">&quot;yes&quot;</span>)))</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   card = col_character(),
+##   reports = col_double(),
+##   age = col_double(),
+##   income = col_double(),
+##   share = col_double(),
+##   expenditure = col_double(),
+##   owner = col_character(),
+##   selfemp = col_character(),
+##   dependents = col_double(),
+##   months = col_double(),
+##   majorcards = col_double(),
+##   active = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">credito <span class="op">%&gt;%</span><span class="st"> </span>head <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, round, <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">card</th>
+<th align="right">reports</th>
+<th align="right">edad</th>
+<th align="right">ingreso</th>
+<th align="right">share</th>
+<th align="right">gasto</th>
+<th align="left">propietario</th>
+<th align="left">selfemp</th>
+<th align="right">dependientes</th>
+<th align="right">months</th>
+<th align="right">majorcards</th>
+<th align="right">active</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">yes</td>
+<td align="right">0</td>
+<td align="right">37.7</td>
+<td align="right">4.5</td>
+<td align="right">0.0</td>
+<td align="right">125.0</td>
+<td align="left">si</td>
+<td align="left">no</td>
+<td align="right">3</td>
+<td align="right">54</td>
+<td align="right">1</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">yes</td>
+<td align="right">0</td>
+<td align="right">33.2</td>
+<td align="right">2.4</td>
+<td align="right">0.0</td>
+<td align="right">9.9</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="right">3</td>
+<td align="right">34</td>
+<td align="right">1</td>
+<td align="right">13</td>
+</tr>
+<tr class="odd">
+<td align="left">yes</td>
+<td align="right">0</td>
+<td align="right">33.7</td>
+<td align="right">4.5</td>
+<td align="right">0.0</td>
+<td align="right">15.0</td>
+<td align="left">si</td>
+<td align="left">no</td>
+<td align="right">4</td>
+<td align="right">58</td>
+<td align="right">1</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">yes</td>
+<td align="right">0</td>
+<td align="right">30.5</td>
+<td align="right">2.5</td>
+<td align="right">0.1</td>
+<td align="right">137.9</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="right">0</td>
+<td align="right">25</td>
+<td align="right">1</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="left">yes</td>
+<td align="right">0</td>
+<td align="right">32.2</td>
+<td align="right">9.8</td>
+<td align="right">0.1</td>
+<td align="right">546.5</td>
+<td align="left">si</td>
+<td align="left">no</td>
+<td align="right">2</td>
+<td align="right">64</td>
+<td align="right">1</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">yes</td>
+<td align="right">0</td>
+<td align="right">23.2</td>
+<td align="right">2.5</td>
+<td align="right">0.0</td>
+<td align="right">92.0</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="right">0</td>
+<td align="right">54</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>Se quiere construir un modelo para predecir que solicitudes fueron aceptadas y automatizar el proceso de selección. Se usa una regresión logística con Keras y penalización L2:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">823</span>)</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">credito_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(credito)</a>
+<a class="sourceLine" id="cb70-3" data-line-number="3">entrena &lt;-<span class="st"> </span><span class="kw">training</span>(credito_split)</a>
+<a class="sourceLine" id="cb70-4" data-line-number="4">prueba &lt;-<span class="st"> </span><span class="kw">testing</span>(credito_split)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="co"># preparacion de datos</span></a>
+<a class="sourceLine" id="cb71-2" data-line-number="2">credito_receta &lt;-<span class="st"> </span><span class="kw">recipe</span>(card <span class="op">~</span><span class="st"> </span>., credito) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="st">  </span><span class="kw">step_normalize</span>(<span class="kw">all_numeric</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb71-4" data-line-number="4"><span class="st">  </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>(), <span class="op">-</span>card) </a>
+<a class="sourceLine" id="cb71-5" data-line-number="5"><span class="co"># modelo</span></a>
+<a class="sourceLine" id="cb71-6" data-line-number="6">modelo_regularizado &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="st">  </span><span class="kw">logistic_reg</span>(<span class="dt">penalty =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb71-8" data-line-number="8"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;keras&quot;</span>, <span class="dt">epochs =</span> <span class="dv">500</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb71-9" data-line-number="9"><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;classification&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co"># ajustar parametros de preprocesamiento</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">receta_prep &lt;-<span class="st"> </span>credito_receta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">prep</span>(entrena)</a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="co"># preprocesar datos</span></a>
+<a class="sourceLine" id="cb72-4" data-line-number="4">entrena_prep &lt;-<span class="st"> </span><span class="kw">bake</span>(receta_prep, entrena)</a>
+<a class="sourceLine" id="cb72-5" data-line-number="5">prueba_prep &lt;-<span class="st"> </span><span class="kw">bake</span>(receta_prep, prueba)</a>
+<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="co"># ajustar modelo</span></a>
+<a class="sourceLine" id="cb72-7" data-line-number="7">ajuste &lt;-<span class="st"> </span>modelo_regularizado <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb72-8" data-line-number="8"><span class="st">  </span><span class="kw">fit</span>(card<span class="op">~</span><span class="st"> </span>gasto <span class="op">+</span><span class="st"> </span>dependientes <span class="op">+</span><span class="st"> </span>ingreso <span class="op">+</span><span class="st"> </span>edad <span class="op">+</span><span class="st"> </span>propietario_si, <span class="dt">data =</span> entrena_prep)</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="co"># evaluar</span></a>
+<a class="sourceLine" id="cb73-2" data-line-number="2">metricas &lt;-<span class="st"> </span><span class="kw">metric_set</span>(accuracy, recall, precision)</a>
+<a class="sourceLine" id="cb73-3" data-line-number="3">ajuste <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(prueba_prep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb73-4" data-line-number="4"><span class="st">  </span><span class="kw">bind_cols</span>(prueba) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="st">  </span><span class="kw">metricas</span>(<span class="dt">truth =</span> <span class="kw">factor</span>(card), <span class="dt">estimate =</span> .pred_class) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, round, <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="st">  </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.metric</th>
+<th align="left">.estimator</th>
+<th align="right">.estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">accuracy</td>
+<td align="left">binary</td>
+<td align="right">0.906</td>
+</tr>
+<tr class="even">
+<td align="left">recall</td>
+<td align="left">binary</td>
+<td align="right">0.667</td>
+</tr>
+<tr class="odd">
+<td align="left">precision</td>
+<td align="left">binary</td>
+<td align="right">0.949</td>
+</tr>
+</tbody>
+</table>
+<p>Y parece tener un desempeño razonable. Si quitamos la variable <em>expenditure</em> se
+degrada totalmente el desempeño del modelo:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">ajuste_<span class="dv">2</span> &lt;-<span class="st"> </span>modelo_regularizado <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="st">  </span><span class="kw">fit</span>(card<span class="op">~</span><span class="st"> </span>dependientes <span class="op">+</span><span class="st"> </span>ingreso <span class="op">+</span><span class="st"> </span>edad <span class="op">+</span><span class="st"> </span>propietario_si, <span class="dt">data =</span> entrena_prep)</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">ajuste_<span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">predict</span>(prueba_prep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4"><span class="st">  </span><span class="kw">bind_cols</span>(prueba) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="st">  </span><span class="kw">metricas</span>(<span class="dt">truth =</span> <span class="kw">factor</span>(card), <span class="dt">estimate =</span> .pred_class) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, round, <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb74-7" data-line-number="7"><span class="st">  </span><span class="kw">kable</span>()</a></code></pre></div>
+<pre><code>## Warning: While computing binary `precision()`, no predicted events were detected (i.e. `true_positive + false_positive = 0`). 
+## Precision is undefined in this case, and `NA` will be returned.
+## Note that 84 true event(s) actually occured for the problematic event level, &#39;no&#39;.</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.metric</th>
+<th align="left">.estimator</th>
+<th align="right">.estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">accuracy</td>
+<td align="left">binary</td>
+<td align="right">0.745</td>
+</tr>
+<tr class="even">
+<td align="left">recall</td>
+<td align="left">binary</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">precision</td>
+<td align="left">binary</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<p>La sensibilidad es muy mala y la precisión no se puede calcular pues el modelo no hace predicciones positivas para el conjunto de prueba.</p>
+<p>La razón de esta degradación en el desempeño es que <em>gasto</em> se refiere a uso de tarjetas de crédito. Esto incluye
+la tarjeta para la que queremos hacer predicción de aceptación:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">entrena <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">algun_gasto =</span> gasto <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(algun_gasto, card) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="st">  </span><span class="kw">tally</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb76-5" data-line-number="5"><span class="st">  </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">algun_gasto</th>
+<th align="left">card</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="left">no</td>
+<td align="right">212</td>
+</tr>
+<tr class="even">
+<td align="left">FALSE</td>
+<td align="left">yes</td>
+<td align="right">19</td>
+</tr>
+<tr class="odd">
+<td align="left">TRUE</td>
+<td align="left">yes</td>
+<td align="right">759</td>
+</tr>
+</tbody>
+</table>
+<p>Lo que indica que algún gasto probablemente incluye el gasto en la tarjeta actual,
+y la variable <em>gasto</em> es medida posteriormente a la entrega de la tarjeta:</p>
+<ul>
+<li>El desempeño de este modelo para nuevas aplicaciones será muy malo, pues la variable
+<em>gasto</em>, en el momento de la aplicación, evidentemente no cuenta cuánto va a gastar
+cada cliente en el futuro.</li>
+</ul>
+</div>
+</div>
+<div id="evaluación-de-punto-de-corte" class="section level2 unnumbered">
+<h2>Evaluación de punto de corte</h2>
+<p>Las mejores decisiones de punto de corte pueden hacerse con análisis de costo beneficio,
+con curvas tipo <em>lift</em> basadas en ganancias y pérdidas de cada decisión.
+Aunque esta información muchas veces no está disponible, es la
+situación ideal para evaluar cómo ayuda el modelo y cuánto valen las acciones que pretendemos
+tomar. Es posible hacer este análisis con valores inciertos de costo beneficio.</p>
+<p>Supóngase que estamos pensando en un tratamiento para retener estudiantes en algún programa
+de entrenamiento o mejora.</p>
+<ul>
+<li>El tratamiento de retención cuesta 5000 pesos por alumno,</li>
+<li>Estimamos mediante experimentos o algún análisis externo que nuestro tratamiento reduce la probabilidad de abandono
+en un 60%,</li>
+<li>Tenemos algún tipo de valuación del valor social de que un alumno persista en el programa.</li>
+</ul>
+<p>Podemos evaluar a nuestro modelo en el contexto del problema de las siguiente
+forma:</p>
+<ul>
+<li>Suponemos que trataremos a un porcentaje de los estudiantes con mayor probabilidad de rotar.</li>
+<li>Calculamos el costos esperado si tratamos a un porcentaje de los estudiantes:
+simulamos reduciendo su probabilidad de abandono por el tratamiento y sumamos los costos de tratarlos.</li>
+<li>Comparamos contra el escenario de no aplicar ningún tratamiento</li>
+</ul>
+<p>No es necesario usar medidas muy técnicas para dar un resumen de cómo
+nos puede ayudar el tratamiento y modelo para mantener el valor de la cartera:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="kw">filter</span>(perdidas_sim, tipo<span class="op">==</span><span class="st">&quot;Tratamiento modelo&quot;</span>),</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2">       <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(corte), <span class="dt">y =</span> <span class="op">-</span><span class="st"> </span>perdida <span class="op">/</span><span class="st"> </span><span class="fl">1e6</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb77-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Ganancia incremental (millones)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb77-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Corte inferior de tratamiento (probabilidad)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb77-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Ganancia vs ninguna acción&quot;) + theme_minimal()</span></a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p>Se puede escoger un punto de corte entre 0.2 y 0.3, por ejemplo, o hacer más simulaciones
+para refinar la elección.</p>
+<p>Si se quiere separar el efecto del tratamiento con el efecto del tratamiento aplicado
+según el modelo, se puede comparar con la acción que consiste en tratar a los estudiantes
+al azar:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">ggplot</span>(perdidas_sim, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(corte), <span class="dt">y =</span> <span class="op">-</span><span class="st"> </span>perdida <span class="op">/</span><span class="st"> </span><span class="fl">1e6</span>, </a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">                         <span class="dt">group =</span> <span class="kw">interaction</span>(tipo, corte), <span class="dt">colour =</span> tipo)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Ganancia incremental (millones)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Corte inferior de tratamiento (probabilidad)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb78-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Ganancia vs ninguna acción&quot;) + theme_minimal()</span></a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<ul>
+<li>La conclusión es que el modelo <strong>ayuda considerablemente a la focalización del programa</strong> (el área entre
+las dos curvas mostradas arriba).</li>
+</ul>
+</div>
+<div id="desbalance-de-clases" class="section level2 unnumbered">
+<h2>Desbalance de clases</h2>
+<p>Cuando se tiene un desbalance severo de clases podemos enfrentar dos problemas:
+existen en términos absolutos muy pocos elementos de una clase para poder
+discriminarla de manera efectiva (aún cuando se tengan los atributos
+o <em>features</em> correctos), o métodos usuales de evaluación de predicción
+son deficientes para evaluar el desempeño de predicciones.</p>
+<p>Considérense los siguientes datos (del paquete de <span class="citation">James et al. (<a href="referencias.html#ref-ISLR">2017</a>)</span>):</p>
+<p>“Los datos contienen 5.822 registros de clientes reales. Cada registro consta de 86 variables, que contienen datos sociodemográficos (variables 1-43) y de propiedad del producto (variables 44-86). Los datos sociodemográficos se derivan de los códigos postales. Todos los clientes que viven en zonas con el mismo código postal tienen los mismos atributos sociodemográficos. La variable 86 (Compra) indica si el cliente adquirió una póliza de seguro de caravanas” (<span class="citation">James et al. (<a href="referencias.html#ref-james">2013</a>)</span>)<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
+<p>Se quiere predecir la variable <em>Purchase</em>:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">caravan &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datos/caravan.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">MOSTYPE =</span> <span class="kw">factor</span>(MOSTYPE),</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3">         <span class="dt">MOSHOOFD =</span> <span class="kw">factor</span>(MOSHOOFD)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Compra =</span> <span class="kw">fct_recode</span>(Purchase, <span class="dt">si =</span> <span class="st">&quot;Yes&quot;</span>, <span class="dt">no =</span> <span class="st">&quot;No&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb79-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Compra =</span> <span class="kw">fct_rev</span>(Compra)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-6" data-line-number="6"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Purchase)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   Purchase = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="kw">nrow</span>(caravan)</a></code></pre></div>
+<pre><code>## [1] 5822</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">caravan <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Compra) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct =</span> <span class="dv">100</span> <span class="op">*</span><span class="st"> </span>n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct =</span> <span class="kw">round</span>(pct, <span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   Compra     n   pct
+##   &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;
+## 1 si       348  5.98
+## 2 no      5474 94.0</code></pre>
+<p>Esta es la distribución natural de respuesta que se ve en los datos, y se tiene relativamente pocos datos en la categoría “Si”.</p>
+<p>Se usará muestreo estratificado para obtener proporciones similares en conjuntos de entrenamiento y prueba:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">823</span>)</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">caravan_split =<span class="st"> </span><span class="kw">initial_split</span>(caravan, <span class="dt">strata =</span> Compra, <span class="dt">prop =</span> <span class="fl">0.9</span>)</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">caravan_split</a></code></pre></div>
+<pre><code>## &lt;Analysis/Assess/Total&gt;
+## &lt;5240/582/5822&gt;</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">entrena &lt;-<span class="st"> </span><span class="kw">training</span>(caravan_split)</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">prueba &lt;-<span class="st"> </span><span class="kw">testing</span>(caravan_split)</a></code></pre></div>
+<p>Y se usará regresión logística (lo mismo aplica para otros métodos que produzcan probabilidades de clase, como boosting, árboles aleatorios o redes neuronales):</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">library</span>(tune)</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="co"># preparacion de datos</span></a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">caravan_receta &lt;-<span class="st"> </span><span class="kw">recipe</span>(Compra <span class="op">~</span><span class="st"> </span>., entrena) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="st">  </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>(), <span class="op">-</span>Compra)</a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">caravan_receta_prep &lt;-<span class="st"> </span>caravan_receta <span class="op">%&gt;%</span><span class="st"> </span>prep</a>
+<a class="sourceLine" id="cb89-6" data-line-number="6"><span class="co"># modelo</span></a>
+<a class="sourceLine" id="cb89-7" data-line-number="7">modelo_log &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb89-8" data-line-number="8"><span class="st">  </span><span class="kw">logistic_reg</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb89-9" data-line-number="9"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;glm&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb89-10" data-line-number="10"><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;classification&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb89-11" data-line-number="11"><span class="st">  </span><span class="kw">fit</span>(Compra <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> caravan_receta_prep <span class="op">%&gt;%</span><span class="st"> </span>juice)</a></code></pre></div>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<div id="análisis-incorrecto" class="section level4 unnumbered">
+<h4>Análisis incorrecto</h4>
+<p>La matriz de confusión de entrenamiento es</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">predictions_ent_glm &lt;-<span class="st"> </span>modelo_log <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="st">  </span><span class="kw">predict</span>(<span class="dt">new_data =</span> <span class="kw">juice</span>(caravan_receta_prep)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-3" data-line-number="3"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">juice</span>(caravan_receta_prep) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Compra))</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4">predictions_ent_glm <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-5" data-line-number="5"><span class="st">  </span><span class="kw">conf_mat</span>(Compra, .pred_class)</a></code></pre></div>
+<pre><code>##           Truth
+## Prediction   si   no
+##         si    6    9
+##         no  299 4926</code></pre>
+<p>Y los de prueba:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">prueba_procesado &lt;-<span class="st"> </span><span class="kw">bake</span>(caravan_receta_prep, prueba)</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">predictions_glm &lt;-<span class="st"> </span>modelo_log <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb93-3" data-line-number="3"><span class="st">  </span><span class="kw">predict</span>(<span class="dt">new_data =</span> prueba_procesado) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb93-4" data-line-number="4"><span class="st">  </span><span class="kw">bind_cols</span>(prueba_procesado <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Compra))</a>
+<a class="sourceLine" id="cb93-5" data-line-number="5">predictions_glm <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb93-6" data-line-number="6"><span class="st">  </span><span class="kw">conf_mat</span>(Compra, .pred_class)</a></code></pre></div>
+<pre><code>##           Truth
+## Prediction  si  no
+##         si   0   4
+##         no  43 535</code></pre>
+<p>Y se obtiene un desempeño pobre según esta matriz de confusión (prueba y entrenamiento). La sensibilidad es muy baja, aunque la especificidad (tasa de correctos negativos) sea alta. Una conclusión típica es que
+<em>el modelo no tiene valor predictivo</em>, o que
+<em>es necesario sobre muestrear la clase de ocurrencia baja</em>.</p>
+</div>
+<div id="análisis-correcto" class="section level4 unnumbered">
+<h4>Análisis correcto</h4>
+<p>En lugar de empezar con sobre/sub muestreo,
+que modifica lsas proporciones naturales de las categorías en los datos, podemos trabajar con probabilidades
+en lugar de predicciones de clase con punto de corte de 0.5.</p>
+<p>Por ejemplo, podemos visualizar con una curva ROC (o curva lift, precisión-recall, o alguna otra similar que
+tome en cuenta probabilidades):</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">predictions_prob &lt;-<span class="st"> </span>modelo_log <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="st">  </span><span class="kw">predict</span>(<span class="dt">new_data =</span> prueba_procesado, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="st">  </span><span class="kw">bind_cols</span>(prueba_procesado <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Compra)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(.pred_si, Compra)</a></code></pre></div>
+<pre><code>## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+## prediction from a rank-deficient fit may be misleading</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">datos_roc &lt;-<span class="st"> </span><span class="kw">roc_curve</span>(predictions_prob, Compra, .pred_si)</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"><span class="kw">autoplot</span>(datos_roc) <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-3" data-line-number="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;1 - especificidad&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;sensibilidad&quot;</span>)</a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-98-1.png" width="480" /></p>
+<p>Donde se ve que es posible alcanzar buenos niveles de sensibilidad si se acepta alguna degradación en la especificidad, que originalmente es muy alta. Por ejemplo, cortando en 0.05 se puede obtener especificidad y sensibilidad que posiblemente sean adecuadas para el problema:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1">datos_roc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">abs</span>(.threshold <span class="op">-</span><span class="st"> </span><span class="fl">0.04</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">1e-4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">4</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   .threshold specificity sensitivity
+##        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+## 1     0.0399       0.553       0.744
+## 2     0.0399       0.555       0.744</code></pre>
+<p><strong>¿Qué pasa si hacemos sub/sobremuestreo? </strong></p>
+<p>Sobremuestreamos:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">caravan_receta_smote &lt;-<span class="st"> </span><span class="kw">recipe</span>(Compra <span class="op">~</span><span class="st"> </span>., entrena) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="st">  </span><span class="kw">step_dummy</span>(MOSTYPE, MOSHOOFD) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="st">  </span><span class="kw">step_smote</span>(Compra)</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4">smote_prep &lt;-<span class="st"> </span><span class="kw">prep</span>(caravan_receta_smote)</a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="co"># modelo</span></a>
+<a class="sourceLine" id="cb100-6" data-line-number="6">entrena_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">juice</span>(smote_prep)</a>
+<a class="sourceLine" id="cb100-7" data-line-number="7">entrena_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Compra)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   Compra     n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 si      4935
+## 2 no      4935</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">modelo_log_smote &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="st">  </span><span class="kw">logistic_reg</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;glm&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb102-4" data-line-number="4"><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;classification&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"><span class="st">  </span><span class="kw">fit</span>(Compra <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> entrena_<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<p>En entrenamiento la matriz de confusión es <em>aparentemente</em> mejor:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">predictions_ent_glm &lt;-<span class="st"> </span>modelo_log_smote <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="st">  </span><span class="kw">predict</span>(<span class="dt">new_data =</span> entrena_<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb104-3" data-line-number="3"><span class="st">  </span><span class="kw">bind_cols</span>(entrena_<span class="dv">1</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Compra))</a>
+<a class="sourceLine" id="cb104-4" data-line-number="4">predictions_ent_glm <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb104-5" data-line-number="5"><span class="st">  </span><span class="kw">conf_mat</span>(Compra, .pred_class)</a></code></pre></div>
+<pre><code>##           Truth
+## Prediction   si   no
+##         si 3854 1271
+##         no 1081 3664</code></pre>
+<p>Pero en prueba los resultados son muy similares. Se agrega también el
+modelo construido submuestreando la clase dominante:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">entrena_sub &lt;-<span class="st"> </span>caravan_receta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step_downsample</span>(Compra) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">prep</span>() <span class="op">%&gt;%</span><span class="st"> </span>juice</a>
+<a class="sourceLine" id="cb106-2" data-line-number="2">modelo_log_sub &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb106-3" data-line-number="3"><span class="st">  </span><span class="kw">logistic_reg</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-4" data-line-number="4"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;glm&quot;</span>)  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-5" data-line-number="5"><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;classification&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb106-6" data-line-number="6"><span class="st">  </span><span class="kw">fit</span>(Compra <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> entrena_sub)</a></code></pre></div>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">predictions_prob &lt;-<span class="st"> </span>modelo_log_smote <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="st">  </span><span class="kw">predict</span>(<span class="dt">new_data =</span> prueba_procesado, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb108-3" data-line-number="3"><span class="st">  </span><span class="kw">bind_cols</span>(prueba_procesado <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Compra)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb108-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(.pred_si, Compra)</a></code></pre></div>
+<pre><code>## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+## prediction from a rank-deficient fit may be misleading</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">predictions_prob_sub &lt;-<span class="st"> </span>modelo_log_sub <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb110-2" data-line-number="2"><span class="st">  </span><span class="kw">predict</span>(<span class="dt">new_data =</span> prueba_procesado, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="st">  </span><span class="kw">bind_cols</span>(prueba_procesado <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Compra)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(.pred_si, Compra)</a></code></pre></div>
+<pre><code>## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
+## prediction from a rank-deficient fit may be misleading</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">datos_roc_smote &lt;-<span class="st"> </span><span class="kw">roc_curve</span>(predictions_prob, Compra, .pred_si)</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2">datos_roc_sub &lt;-<span class="st"> </span><span class="kw">roc_curve</span>(predictions_prob_sub, Compra, .pred_si)</a>
+<a class="sourceLine" id="cb112-3" data-line-number="3">datos_roc_comp &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(datos_roc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">tipo =</span> <span class="st">&quot;natural&quot;</span>),</a>
+<a class="sourceLine" id="cb112-4" data-line-number="4">                            datos_roc_smote <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">tipo =</span> <span class="st">&quot;con sobre muestreo&quot;</span>),</a>
+<a class="sourceLine" id="cb112-5" data-line-number="5">                            datos_roc_sub <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">tipo =</span> <span class="st">&quot;con sub muestreo&quot;</span>)</a>
+<a class="sourceLine" id="cb112-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb112-7" data-line-number="7"><span class="kw">ggplot</span>(datos_roc_comp,</a>
+<a class="sourceLine" id="cb112-8" data-line-number="8">       <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>specificity, <span class="dt">y =</span> sensitivity, <span class="dt">colour =</span> tipo)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-9" data-line-number="9"><span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">lty =</span> <span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-11" data-line-number="11"><span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-12" data-line-number="12"><span class="st">  </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<ul>
+<li><p><strong>El problema original no era que el ajuste no funcionaba, sino que evaluamos el punto
+de corte incorrecto</strong>. Un punto de corte de 0.5 con SMOTE equivale a uno mucho más chico sin
+SMOTE.</p></li>
+<li><p>Peor aún, las <strong>probabilidades del modelo construido con sobremuestreo no reflejan las tasas
+de ocurrencia de la respuesta que nos interesa</strong>, lo cual puede producir resúmenes engañosos de las
+tasas de respuesta que esperamos observar en producción.</p></li>
+</ul>
+</div>
+</div>
+<div id="equidad-con-atributos-protegidos" class="section level2 unnumbered">
+<h2>Equidad con atributos protegidos</h2>
+<p>El siguiente ejemplo es derivado de (<span class="citation">Hardt, Price, and Srebro (<a href="referencias.html#ref-hardt">2016</a>)</span>). Supongamos que tenemos un atributo protegido <span class="math inline">\(A\)</span> que
+tiene dos valores: azul y naranja. Naranja es el grupo minoritario desaventajado.
+Usaremos datos simulados como sigue: el atributo <em>score</em> está asociado
+al atributo protegido:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">inv_logit &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb113-2" data-line-number="2">  <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>x))</a>
+<a class="sourceLine" id="cb113-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb113-4" data-line-number="4">simular_datos &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">2000</span>)){</a>
+<a class="sourceLine" id="cb113-5" data-line-number="5">  score_azul &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="kw">rnorm</span>(n[<span class="dv">1</span>], <span class="dv">50</span>, <span class="dv">10</span>), <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb113-6" data-line-number="6">  score_naranja &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="kw">rnorm</span>(n[<span class="dv">2</span>], <span class="dv">40</span>, <span class="dv">10</span>), <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb113-7" data-line-number="7">  azul &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">tipo =</span> <span class="st">&quot;azul&quot;</span>, <span class="dt">score =</span> score_azul)</a>
+<a class="sourceLine" id="cb113-8" data-line-number="8">  naranja &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">tipo =</span> <span class="st">&quot;naranja&quot;</span>, <span class="dt">score =</span> score_naranja)</a>
+<a class="sourceLine" id="cb113-9" data-line-number="9">  datos &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(azul, naranja) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-10" data-line-number="10"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">coef_0 =</span> <span class="kw">ifelse</span>(tipo <span class="op">==</span><span class="st"> &quot;azul&quot;</span>, <span class="fl">0.0</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb113-11" data-line-number="11">           <span class="dt">prob_real_pos =</span> <span class="kw">inv_logit</span>(<span class="op">-</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>coef_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span> <span class="op">*</span><span class="st"> </span>(score<span class="dv">-40</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-12" data-line-number="12"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">atr_1 =</span> <span class="kw">rpois</span>(<span class="kw">nrow</span>(.), <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb113-13" data-line-number="13">  datos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>coef_<span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-14" data-line-number="14"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">paga =</span> <span class="kw">map_dbl</span>(prob_real_pos, <span class="op">~</span><span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, .x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb113-15" data-line-number="15"><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>prob_real_pos)</a>
+<a class="sourceLine" id="cb113-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb113-17" data-line-number="17"><span class="kw">set.seed</span>(<span class="dv">1221</span>)</a>
+<a class="sourceLine" id="cb113-18" data-line-number="18">tbl_datos &lt;-<span class="st"> </span><span class="kw">simular_datos</span>()</a></code></pre></div>
+<p>Una gráfica de conteos para el score se obtiene un grupo minoritario con valores de la variable score
+más baja:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">ggplot</span>(tbl_datos, <span class="kw">aes</span>(<span class="dt">x =</span> score, <span class="dt">fill =</span> tipo)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-105-1.png" width="384" /></p>
+<p>Se ajusta un modelo simple de regresión logística:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">reg_log &lt;-<span class="st"> </span><span class="kw">glm</span>(paga <span class="op">~</span><span class="st">  </span>score <span class="op">+</span><span class="st"> </span>atr_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>tipo, tbl_datos, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</a>
+<a class="sourceLine" id="cb116-2" data-line-number="2">tbl_datos &lt;-<span class="st"> </span>tbl_datos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">prob_pos =</span> <span class="kw">predict</span>(reg_log, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>))</a></code></pre></div>
+<p>Las tasas reales de cumplimiento son iguales para los dos grupos. En primer lugar, se considera una estrategia donde se aplica el mismo punto de corte para todos los grupos</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">resultado_cortes &lt;-<span class="st"> </span><span class="cf">function</span>(tbl_datos, cortes){</a>
+<a class="sourceLine" id="cb117-2" data-line-number="2">  resultado &lt;-<span class="st"> </span>tbl_datos <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb117-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">recibe =</span> <span class="kw">ifelse</span>(tipo <span class="op">==</span><span class="st"> &quot;azul&quot;</span>, prob_pos <span class="op">&gt;</span><span class="st"> </span>cortes[<span class="dv">1</span>], prob_pos <span class="op">&gt;</span><span class="st"> </span>cortes[<span class="dv">2</span>]),</a>
+<a class="sourceLine" id="cb117-4" data-line-number="4">           <span class="dt">decision =</span> <span class="kw">ifelse</span>(recibe, <span class="st">&quot;Aceptado&quot;</span>, <span class="st">&quot;Rechazado&quot;</span>)) </a>
+<a class="sourceLine" id="cb117-5" data-line-number="5">  resultado <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(tipo, decision, paga) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb117-6" data-line-number="6"><span class="st">    </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb117-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb117-8" data-line-number="8">resultados_conteo &lt;-<span class="st"> </span><span class="kw">resultado_cortes</span>(tbl_datos, <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.6</span>)) </a>
+<a class="sourceLine" id="cb117-9" data-line-number="9">resultados_conteo</a></code></pre></div>
+<pre><code>## # A tibble: 8 x 4
+##   tipo    decision   paga     n
+##   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 azul    Aceptado      0   905
+## 2 azul    Aceptado      1  2400
+## 3 azul    Rechazado     0  4149
+## 4 azul    Rechazado     1  2546
+## 5 naranja Aceptado      0    47
+## 6 naranja Aceptado      1   101
+## 7 naranja Rechazado     0  1353
+## 8 naranja Rechazado     1   499</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">resultados_conteo <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb119-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(tipo, decision) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb119-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total =</span> <span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span>total) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb119-6" data-line-number="6"><span class="st">  </span><span class="kw">filter</span>(decision <span class="op">==</span><span class="st"> &quot;Aceptado&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+## # Groups:   tipo [2]
+##   tipo    decision     n total  prop
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+## 1 azul    Aceptado  3305 10000 0.330
+## 2 naranja Aceptado   148  2000 0.074</code></pre>
+<p>Nótese que el grupo naranja ha recibido considerablemente menos aceptaciones que el grupo azul, tanto
+en total como en proporción. Más aún, con la precisión o tasa de verdaderos positivos
+podemos evaluar qué proporción de los que cumplirían si fueran aceptados fueron
+aceptados según nuestro punto de corte:</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1">resultados_conteo <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(paga <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(tipo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tvp =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb121-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(decision <span class="op">==</span><span class="st"> &quot;Aceptado&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+## # Groups:   tipo [2]
+##   tipo    decision  paga     n   tvp
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+## 1 azul    Aceptado     1  2400 0.485
+## 2 naranja Aceptado     1   101 0.168</code></pre>
+<p>y se ve que el grupo naranja también está en desventaja, pues entre los que cumplen hay menos decisiones
+de aceptación.</p>
+<p>El siguiente paso es considerar <strong>paridad demográfica</strong>. En este caso, decidimos dar el mismo número
+de préstamos a cada grupo, dependiendo de su tamaño.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">calcular_puntos_paridad &lt;-<span class="st"> </span><span class="cf">function</span>(tbl_datos, prop){</a>
+<a class="sourceLine" id="cb123-2" data-line-number="2">  tbl_datos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(tipo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb123-3" data-line-number="3"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">corte =</span> <span class="kw">quantile</span>(prob_pos, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>prop))</a>
+<a class="sourceLine" id="cb123-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb123-5" data-line-number="5">cortes_paridad_tbl &lt;-<span class="st"> </span><span class="kw">calcular_puntos_paridad</span>(tbl_datos, <span class="fl">0.45</span>)</a>
+<a class="sourceLine" id="cb123-6" data-line-number="6">cortes_paridad_tbl</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   tipo    corte
+##   &lt;chr&gt;   &lt;dbl&gt;
+## 1 azul    0.521
+## 2 naranja 0.297</code></pre>
+<p>El corte para azul es más exigente que para naranja. En sí eso no es un problema pero observamos:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">cortes_paridad &lt;-<span class="st"> </span>cortes_paridad_tbl <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(corte)</a>
+<a class="sourceLine" id="cb125-2" data-line-number="2">resultados_conteo &lt;-<span class="st"> </span><span class="kw">resultado_cortes</span>(tbl_datos, cortes_paridad) </a>
+<a class="sourceLine" id="cb125-3" data-line-number="3">resultados_conteo <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb125-4" data-line-number="4"><span class="st">  </span><span class="kw">filter</span>(paga <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb125-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(tipo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb125-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tvp =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb125-7" data-line-number="7"><span class="st">  </span><span class="kw">filter</span>(decision <span class="op">==</span><span class="st"> &quot;Aceptado&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+## # Groups:   tipo [2]
+##   tipo    decision  paga     n   tvp
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+## 1 azul    Aceptado     1  3094 0.626
+## 2 naranja Aceptado     1   410 0.683</code></pre>
+<p>Y así que además de ser más exigente con el grupo azul, a los que cumplen del grupo azul también
+se les otorga menos decisiones de aceptación. Adicionalmente, se aceptan considerablemente menos
+personas de la población.</p>
+<p>La solución de <strong>igual de de oportunidad</strong> es cortar de forma que la tasa de aceptación dentro del grupo
+de los que pagan sea similar para ambas poblaciones, lo que ocurre aproximadamente en 0.35:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">calcular_cortes_oportunidad &lt;-<span class="st"> </span><span class="cf">function</span>(tbl_datos, prop){</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2">  tbl_datos <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-3" data-line-number="3"><span class="st">    </span><span class="kw">filter</span>(paga<span class="op">==</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-4" data-line-number="4"><span class="st">    </span><span class="kw">group_by</span>(tipo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-5" data-line-number="5"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">rank_p =</span> <span class="kw">rank</span>(prob_pos) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(prob_pos) ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-6" data-line-number="6"><span class="st">    </span><span class="kw">filter</span>(rank_p <span class="op">&lt;</span><span class="st"> </span>prop) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-7" data-line-number="7"><span class="st">    </span><span class="kw">top_n</span>(<span class="dv">1</span>, rank_p) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-8" data-line-number="8"><span class="st">    </span><span class="kw">select</span>(tipo, <span class="dt">corte =</span> prob_pos)</a>
+<a class="sourceLine" id="cb127-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb127-10" data-line-number="10">cortes_op &lt;-<span class="st"> </span><span class="kw">calcular_cortes_oportunidad</span>(tbl_datos, <span class="fl">0.35</span>)</a>
+<a class="sourceLine" id="cb127-11" data-line-number="11">resultados_conteo &lt;-<span class="st"> </span><span class="kw">resultado_cortes</span>(tbl_datos, cortes_op <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(corte)) </a>
+<a class="sourceLine" id="cb127-12" data-line-number="12">resultados_conteo <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-13" data-line-number="13"><span class="st">  </span><span class="kw">filter</span>(paga <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-14" data-line-number="14"><span class="st">  </span><span class="kw">group_by</span>(tipo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-15" data-line-number="15"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tvp =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb127-16" data-line-number="16"><span class="st">  </span><span class="kw">filter</span>(decision <span class="op">==</span><span class="st"> &quot;Aceptado&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+## # Groups:   tipo [2]
+##   tipo    decision  paga     n   tvp
+##   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+## 1 azul    Aceptado     1  3215 0.650
+## 2 naranja Aceptado     1   391 0.652</code></pre>
+<p><strong>Nota</strong>: es importante notar que si la variable de resultado positivo es injustamente asignada, entonces
+este método no resuelve el problema. En este caso es relevante entender cuáles son los criterios con
+los que se considera un resultado existoso dependiendo de el grupo del atributo protegido (por ejemplo,
+si a un segmento particular se le permite mayores atrasos en los pagos y a otro menos, o un grupo se
+considera un delicuente reincidente por una ofensa mucho menor que otros grupos).</p>
+</div>
+<div id="interpretabilidad" class="section level2 unnumbered">
+<h2>Interpretabilidad</h2>
+<p>Se pueden usar medidas como importancia de permutaciones para examinar modelos. En este ejemplo, se regresa al ejercicio de predicción de aceptación de solicitudes de crédito, y consideramos la importancia basada en permutaciones (<span class="citation">Molnar (<a href="referencias.html#ref-molnar2019">2019</a>)</span>):</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">823</span>)</a>
+<a class="sourceLine" id="cb129-2" data-line-number="2">credito_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(credito)</a>
+<a class="sourceLine" id="cb129-3" data-line-number="3">entrena &lt;-<span class="st"> </span><span class="kw">training</span>(credito_split)</a>
+<a class="sourceLine" id="cb129-4" data-line-number="4">prueba &lt;-<span class="st"> </span><span class="kw">testing</span>(credito_split)</a>
+<a class="sourceLine" id="cb129-5" data-line-number="5"><span class="co"># preparacion de datos</span></a>
+<a class="sourceLine" id="cb129-6" data-line-number="6">credito_receta &lt;-<span class="st"> </span><span class="kw">recipe</span>(card <span class="op">~</span><span class="st"> </span>., credito) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb129-7" data-line-number="7"><span class="st">  </span><span class="kw">step_normalize</span>(<span class="kw">all_numeric</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-8" data-line-number="8"><span class="st">  </span><span class="kw">step_dummy</span>(<span class="kw">all_nominal</span>(), <span class="op">-</span>card) </a>
+<a class="sourceLine" id="cb129-9" data-line-number="9"><span class="co"># modelo</span></a>
+<a class="sourceLine" id="cb129-10" data-line-number="10">modelo_regularizado &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb129-11" data-line-number="11"><span class="st">  </span><span class="kw">logistic_reg</span>(<span class="dt">penalty =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-12" data-line-number="12"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;keras&quot;</span>, <span class="dt">epochs =</span> <span class="dv">500</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb129-13" data-line-number="13"><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;classification&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="co"># ajustar parametros de preprocesamiento</span></a>
+<a class="sourceLine" id="cb130-2" data-line-number="2">receta_prep &lt;-<span class="st"> </span>credito_receta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">prep</span>(entrena)</a>
+<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="co"># preprocesar datos</span></a>
+<a class="sourceLine" id="cb130-4" data-line-number="4">entrena_prep &lt;-<span class="st"> </span><span class="kw">bake</span>(receta_prep, entrena)</a>
+<a class="sourceLine" id="cb130-5" data-line-number="5">prueba_prep &lt;-<span class="st"> </span><span class="kw">bake</span>(receta_prep, prueba)</a>
+<a class="sourceLine" id="cb130-6" data-line-number="6"><span class="co"># ajustar modelo</span></a>
+<a class="sourceLine" id="cb130-7" data-line-number="7">ajuste &lt;-<span class="st"> </span>modelo_regularizado <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb130-8" data-line-number="8"><span class="st">  </span><span class="kw">fit</span>(card<span class="op">~</span><span class="st"> </span>gasto <span class="op">+</span><span class="st"> </span>dependientes <span class="op">+</span><span class="st"> </span>ingreso <span class="op">+</span><span class="st"> </span>edad <span class="op">+</span><span class="st"> </span>propietario_si, <span class="dt">data =</span> entrena_prep)</a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">library</span>(iml)</a>
+<a class="sourceLine" id="cb131-2" data-line-number="2">modelo &lt;-<span class="st"> </span>ajuste<span class="op">$</span>fit</a>
+<a class="sourceLine" id="cb131-3" data-line-number="3">entrena_x &lt;-<span class="st"> </span>entrena_prep <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(gasto, dependientes, ingreso, edad, propietario_si)</a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">predictor &lt;-<span class="st"> </span>Predictor<span class="op">$</span><span class="kw">new</span>(modelo, <span class="dt">data =</span> entrena_x, <span class="dt">y =</span> <span class="kw">ifelse</span>(entrena_prep<span class="op">$</span>card <span class="op">==</span><span class="st"> &quot;yes&quot;</span>,<span class="dv">2</span>,<span class="dv">1</span>) ,</a>
+<a class="sourceLine" id="cb131-5" data-line-number="5">                           <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>)</a>
+<a class="sourceLine" id="cb131-6" data-line-number="6">imp &lt;-<span class="st"> </span>FeatureImp<span class="op">$</span><span class="kw">new</span>(predictor, <span class="dt">loss =</span> <span class="st">&quot;ce&quot;</span>, <span class="dt">compare =</span> <span class="st">&quot;difference&quot;</span>)</a>
+<a class="sourceLine" id="cb131-7" data-line-number="7"><span class="kw">plot</span>(imp) <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<ul>
+<li><p>Se ve que, para esta red sin capas ocultas, la importancia se concentra en un solo
+predictor, <em>gasto</em>, que como vimos representa una fuga de información. Este diagnóstico es útil en general,
+y aunque no tan dramático como este ejemplo, puede señalar cuáles variables es importante considerar con cuidado.</p></li>
+<li><p>Es importante considerar también el efecto de variables asociadas a grupos protegidos, y de ser necesario, examinar
+con cuidado cómo afectan las predicciones.</p></li>
+<li><p>Modelos parsimoniosos, que usan menos atributos, facilitan el análisis, el mantenimiento
+del flujo de datos, y reducen
+exponernos a problemas de fugas o efectos indeseables.</p></li>
+</ul>
+</div>
+<div id="explicación-de-predicciones" class="section level2 unnumbered">
+<h2>Explicación de predicciones</h2>
+<p>Para explicar predicciones individuales se pueden usar los valores de Shapley (<span class="citation">Molnar (<a href="referencias.html#ref-molnar2019">2019</a>)</span>), (<span class="citation">Lundberg and Lee (<a href="referencias.html#ref-shapley">2017</a>)</span>). Estas gráficas indican
+la contribución asignada de cada atributo a una predicción individual, bajo la idea de considerar efectos marginales sobre la predicción
+dependiendo de la presencia o ausencia de otros atributos. <strong>Las contribuciones obtenidas</strong> suman la diferencia que
+hay entre la predicción particular y la predicción promedio.</p>
+<p>Pueden examinarse también promedios a lo largo de grupos de interés.</p>
+<p>Considérese el ejemplo de factores para detectar una enfermedad del corazón en el estudio de Sudáfrica que vimos
+en este <a href="cuadernillos-de-trabajo.html#natural">ejemplo</a></p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">modelo_sa &lt;-<span class="st"> </span>sa_boosted<span class="op">$</span>fit</a>
+<a class="sourceLine" id="cb132-2" data-line-number="2">sa_entrena_x &lt;-<span class="st"> </span>sa_entrena <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>enf_coronaria)</a>
+<a class="sourceLine" id="cb132-3" data-line-number="3">predict_fun &lt;-<span class="st"> </span><span class="cf">function</span>(object, newdata){</a>
+<a class="sourceLine" id="cb132-4" data-line-number="4">  new_data_x =<span class="st"> </span><span class="kw">xgb.DMatrix</span>(<span class="kw">data.matrix</span>(newdata), <span class="dt">missing =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb132-5" data-line-number="5">  results&lt;-<span class="kw">predict</span>(modelo_sa, new_data_x)</a>
+<a class="sourceLine" id="cb132-6" data-line-number="6">  <span class="kw">return</span>(results)</a>
+<a class="sourceLine" id="cb132-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb132-8" data-line-number="8">predictor &lt;-<span class="st"> </span>Predictor<span class="op">$</span><span class="kw">new</span>(modelo_sa, <span class="dt">data =</span> sa_entrena_x, <span class="dt">y =</span> sa_entrena<span class="op">$</span>chd ,</a>
+<a class="sourceLine" id="cb132-9" data-line-number="9">                           <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>, <span class="dt">predict.function =</span> predict_fun)</a></code></pre></div>
+<pre><code>## Warning: Unknown or uninitialised column: `chd`.</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="co"># el caso de interés es el caso 15</span></a>
+<a class="sourceLine" id="cb134-2" data-line-number="2">valores_shapley &lt;-<span class="st"> </span>Shapley<span class="op">$</span><span class="kw">new</span>(predictor, <span class="dt">x.interest =</span> (sa_entrena_x[<span class="dv">15</span>, ]))</a>
+<a class="sourceLine" id="cb134-3" data-line-number="3">valores_shapley<span class="op">$</span><span class="kw">plot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p>En este caso, varias medidas contribuyen positivamente a la probabilidad de enfermedad del corazon, como
+es uso de tabaco, edad, y mediciones de colesterol. Estas constribuciones explican la probabiidad tan alta de este individuo particular.</p>
+<p>En contraste, la siguiente persona está cerca del promedio, aumentando positivamente la probabiidad la edad y medida
+de colesterol, pero negativamente el no uso de tabaco y ninguna historia familiar de diabetes:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="co"># el caso de interés es el caso 24</span></a>
+<a class="sourceLine" id="cb135-2" data-line-number="2">valores_shapley &lt;-<span class="st"> </span>Shapley<span class="op">$</span><span class="kw">new</span>(predictor, <span class="dt">x.interest =</span> (sa_entrena_x[<span class="dv">24</span>, ]))</a>
+<a class="sourceLine" id="cb135-3" data-line-number="3">valores_shapley<span class="op">$</span><span class="kw">plot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
+<p><img src="IA-responsable_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+<p><strong>Observación</strong>: igual que en el modelo y en las gráficas de dependencia parcial que se discutieron anteriormente,
+estos coeficientes <strong>no</strong> deben interpretarse de manera causal (por ejemplo: es necesario bajar el colesterol
+para estos dos individuos). Esta es la información que usa el modelo para construir la predicción a partir de la predicción
+promedio sobre la población.</p>
+<p>Se pueden calcular los valores de shapley para dos grupos de edad, por ejemplo.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="15">
+<li id="fn15"><p>Datos accesibles en <a href="http://archive.ics.uci.edu/ml/datasets/heart+Disease" class="uri">http://archive.ics.uci.edu/ml/datasets/heart+Disease</a><a href="cuadernillos-de-trabajo.html#fnref15" class="footnote-back">↩</a></p></li>
+<li id="fn16"><p>Datos y más información accesible en  <a href="http://www.liacs.nl/~putten/library/cc2000/data.html" class="uri">http://www.liacs.nl/~putten/library/cc2000/data.html</a>.<a href="cuadernillos-de-trabajo.html#fnref16" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="herramientas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/EL-BID/Manual-IA-Responsable/edit/master/92-casos_estudio.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["IA-responsable.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true,
+"toolbar": {
+"position": "fixed"
+}
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
