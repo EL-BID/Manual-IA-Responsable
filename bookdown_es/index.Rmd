@@ -1,5 +1,5 @@
 --- 
-title: "IA Responsable (Ciclo de vida de IA)"
+title: "Uso responsable de la IA para las políticas públicas"
 #author: "Felipe González, Teresa Ortiz, Roberto Sánchez "
 #date: "`r Sys.Date()`"
 output: pdf_document
@@ -15,12 +15,13 @@ biblio-style: apalike
 ---
 
 
-# Manual Técnico {-}
+# Manual de ciencia de datos {-}
 
-```{r cover, fig.cap="Portada Temporal", echo=FALSE, out.width="80%"}
+```{r cover, fig.cap="Portada", echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/cover.png")
 ```
 
+Para consultar la versión en PDF haga click [aquí.](https://publications.iadb.org/es/ia-responsable-manual-tecnico-ciclo-de-vida-de-la-inteligencia-artificial)
 
 ## Iniciativa fAIr LAC {-}
 
@@ -39,12 +40,22 @@ Este manual está pensado para equipos técnicos trabajando en la aplicación de
 ***
 
 ### Banco Interamericano de Desarrollo (BID) - Sector Social {-}
-El Sector Social (SCL) está conformado por un equipo multidisciplinario que actúa bajo la convicción de que la inversión en las personas permite mejorar sus vidas y superar los desafíos del desarrollo en América Latina y el Caribe. Junto con los países de la región, el Sector Social formula soluciones de política pública para reducir la pobreza y mejorar la prestación de servicios de educación, trabajo, protección social y salud. El objetivo es construir una región más productiva donde predomine la igualdad de oportunidades para hombres y mujeres, y una mayor inclusión de los grupos más vulnerables. www. iadb.org/en/about-us/departments/scl 
+El Sector Social (SCL) está conformado por un equipo multidisciplinario que actúa bajo la convicción de que la inversión en las personas permite mejorar sus vidas y superar los desafíos del desarrollo en América Latina y el Caribe. Junto con los países de la región, el Sector Social formula soluciones de política pública para reducir la pobreza y mejorar la prestación de servicios de educación, trabajo, protección social y salud. El objetivo es construir una región más productiva donde predomine la igualdad de oportunidades para hombres y mujeres, y una mayor inclusión de los grupos más vulnerables. www.iadb.org/en/about-us/departments/scl/ 
 
 ### Banco Interamericano de Desarrollo (BID) – BID Lab {-}
 BID Lab es el laboratorio de innovación del Grupo BID. Allí se movilizan financiamiento, conocimiento y conexiones para catalizar la innovación orientada a la inclusión en América Latina y el Caribe. Para BID Lab, la innovación es una herramienta poderosa que puede transformar a la región creando oportunidades sin precedentes para las poblaciones en situación vulnerable por las condiciones económicas, sociales y ambientales en que se encuentran. https://bidlab.org/ 
 
-### Agradecimientos {-}
-Por su tiempo y valiosos aportes, expresamos un agradecimiento especial a Cristina Pombo, coordinadora de la iniciativa fAIr LAC del BID y al Prof. Ricardo Baeza-Yates, Director de Ciencia de Datos en Northeastern University, Campus de Silicon Valley, e integrante del Grupo de Expertos y Expertas de fAIr LAC.
+### Organización para la Cooperación y el Desarrollo Económico (OECD) {-}
+La OECD (por sus siglas en inglés) es una organización internacional que trabaja para construir mejores políticas para una vida mejor. Nuestro objetivo es elaborar políticas que fomenten la prosperidad, la igualdad, las oportunidades y el bienestar para todos. Junto con los gobiernos, los responsables políticos y los ciudadanos, trabajamos en el establecimiento de normas internacionales basadas en pruebas y en la búsqueda de soluciones a una serie de retos sociales, económicos y medioambientales. Un ejemplo de establecimiento de normas son los Principios de la OECD sobre Inteligencia Artificial (IA), que son los primeros principios de este tipo adoptados por los gobiernos. Estos principios promueven una IA innovadora y fiable que respete los derechos humanos y los valores democráticos. https://oecd.ai/en/ai-principles/
 
-Agradecemos igualmente el apoyo prestado y los comentarios recibidos de Luis Tejerina, Elena Arias Ortiz, Natalia González Alarcón, Tetsuro Narita, Constanza Gómez-Mont, Daniel Korn, Ulises Cortés, José Antonio Guridi Bustos, Cesar Rosales y Sofia Trejo.
+### OECD - AI Policy Observatory  {-}
+El Observatorio [OECD.AI](https://oecd.ai/en/) es un hub de políticas públicas sobre inteligencia artificial (IA). Ayuda a los países a fomentar, alimentar y supervisar el desarrollo y el uso de una IA confiable. Utilizado por los responsables políticos y otras partes interesadas en más de 170 países, OECD.AI se ha convertido en un centro reconocido para la evidencia, el debate y la orientación orientada a la política, con el apoyo de fuertes asociaciones con actores de todos los grupos de interés y con otras organizaciones internacionales. Ofrece un análisis basado en evidencias sobre la IA.
+OECD.AI es una fuente única de datos y visualizaciones en tiempo real sobre la evolución de la IA. También contiene una base de datos de políticas de IA de más de 60 países que permite a los gobiernos comparar las respuestas políticas y desarrollar buenas prácticas. OECD.AI mide nuestro progreso colectivo hacia una IA digna de confianza; su red de expertas y expertos y el blog AI Wonk facilitan los debates colaborativos sobre políticas de IA.
+
+Se puede acceder a otros trabajos de la OECD relacionados con la aplicación específica de la IA en el sector público a través del Observatorio de la Innovación del Sector Público (OPSI) de la OECD (https://oecd-opsi.org/), que ofrece una visión general de las medidas de IA aplicadas en el sector público, incluidas las relativas a la elaboración de políticas de gobernanza de la IA y el diseño y la prestación de servicios públicos.
+
+
+### Agradecimientos {-}
+Por su tiempo y valiosos aportes, expresamos un agradecimiento especial a Cristina Pombo, coordinadora de la iniciativa fAIr LAC del BID y al Prof. Ricardo Baeza-Yates, Director de Ciencia de Datos en Northeastern University, Campus de Silicon Valley, e integrante del Grupo de Expertos y Expertas de fAIr LAC. Los autores también agradecen por las contribuciones recibidas de Karine Perset, administradora del OECD.AI, y de Luis Aranda, analista de políticas del OECD.AI. 
+
+Agradecemos igualmente el apoyo prestado y los comentarios recibidos de Luis Tejerina, Elena Arias Ortiz, Natalia González Alarcón, Tetsuro Narita, Constanza Gómez-Mont, Daniel Korn, Ulises Cortés, José Antonio Guridi Bustos, César Rosales y Sofía Trejo.
