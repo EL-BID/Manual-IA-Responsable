@@ -2,15 +2,14 @@
 title: "Uso responsable de la IA para las políticas públicas"
 #author: "Felipe González, Teresa Ortiz, Roberto Sánchez "
 #date: "`r Sys.Date()`"
-output: pdf_document
+site: bookdown::bookdown_site
+documentclass: book
 description: Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable
   de aprendizaje de máquina e Inteligencia Artifical
-documentclass: book
 link-citations: yes
 bibliography:
 - referencias.bib
 - packages.bib
-site: bookdown::bookdown_site
 biblio-style: apalike
 ---
 
