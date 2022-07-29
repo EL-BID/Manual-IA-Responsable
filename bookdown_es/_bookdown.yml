@@ -2,6 +2,6 @@ book_filename: "IA-responsable"
 delete_merged_file: true
 language:
   ui:
-    chapter_name: "Sección "
+    chapter_name: ""
   label:
-    fig: "Ilustración "
+    fig: "Figura "
