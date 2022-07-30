@@ -1,6 +1,9 @@
 \mainmatter
 
-```{r setup2}
+
+# Introducción {-}
+
+```{r setup2, echo=FALSE, include=FALSE}
 #https://stackoverflow.com/a/26743812/4927395 
 library(knitr)
 library(ggplot2)
@@ -23,9 +26,6 @@ knit_hooks$set(plot = function(x, options) {
         sep = '')
 }) #comment out to restore numbering
 ```
-
-
-# Introducción {-}
 
 Los métodos de aprendizaje automático (que para resumir en este documento llamamos ML, por sus siglas en inglés, Machine Learning), como un subconjunto de lo que se conoce como inteligencia artificial, son cada vez más requeridos y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos, desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos grados de éxito y con esto ha aparecido la preocupación creciente de cómo entender el desempeño e influencia positiva o negativa de estos métodos en la sociedad [@barocas; @Suresh]. 
 
