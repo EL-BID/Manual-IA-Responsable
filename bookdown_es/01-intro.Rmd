@@ -111,7 +111,8 @@ Se proponen tres herramientas para acompañar el desarrollo del sistema de IA:
 * **Herramienta 3:** [Perfil del modelo.](#herramienta-3-perfil-del-modelo) Es la descripción final de un sistema de IA; reporta los principales supuestos, las características más importantes del sistema y las medidas de mitigación implementadas. 
 
 **Recuadro 1.** Fuentes de sesgo un sistema de IA 
-```{block2, type='rmdpunto'}
+
+<div class="cajaAzul">
 Uno de los conceptos más importantes para los retos del ciclo de vida de la IA es el de los sesgos, pues muchas de las medidas de mitigación y retos que tienen que contemplarse durante el desarrollo de los modelos depende de su correcta comprensión y tratamiento.  Para abordar tempranamente este problema es conveniente tener revisiones específicas en las distintas etapas del ciclo de vida. En cada revisión debe invitarse a los expertos y usuarios finales del sistema que corresponda para verificar y  defender las hipótesis realizadas durante cada etapa. Esto permite enriquecer los puntos de vista, encontrar suposiciones erradas y agregar aspectos no considerados. 
 
 El **error  del sistema** es la diferencia  entre el valor  predicho, resultado del modelo, y el valor real de la variable que se está estimando. Si el error es sistemático en una dirección o en un subconjunto específico de los datos, se llama **sesgo**.^[En modelos de predicción existe una compensación entre la varianza y el sesgo que capta el modelo y su objetivo de generalización de aprendizaje. Por un lado, un modelo con sesgo alto puede crear sistemas que subajustan y aprenden muy poco de los datos observados, pero modelos con alta varianza pueden tener el efecto contrario y sobreajustar, aprendiendo perfectamente los datos de entrenamiento. La sección de ‘Desarrollo de modelos y validación’ de este manual describe estos fenómenos con mayor detalle y ofrece medidas para mitigar sus riesgos.] Por ejemplo, si una balanza siempre pesa un kilo más, está sesgada; o si un valor es siempre menor, como el salario de las mujeres para un trabajo equivalente al que realizan los hombres, la variable salario está sesgada. Por otro lado, cuando el **error** es aleatorio, se llama **ruido**. 
@@ -124,5 +125,5 @@ Hay  diferentes **fuentes  de  sesgo** .  Algunos  sesgos  son  intrínsecos  a 
 
 ![*Fuente:* basado en @Suresh.](images/suresh2.png)
 
-```
+</div>
 
