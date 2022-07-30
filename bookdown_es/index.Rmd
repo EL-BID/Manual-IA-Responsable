@@ -24,7 +24,7 @@ Para consultar la versión en PDF haga click [aquí.](https://publications.iadb.
 
 ## Iniciativa fAIr LAC {-}
 
-El Banco Interamericano de Desarrollo (BID), en colaboración con socios y aliados estratégicos, lidera la iniciativa fAIr LAC mediante la cual se busca promover la adopción responsable de la Inteligencia Artificial (IA) y los sistemas de soporte de decisión para mejorar la prestación de servicios sociales y crear oportunidades de desarrollo en aras de atenuar la desigualdad social. Este manual es parte de un grupo de documentos y herramientas para equipos técnicos y responsables de la formulación de políticas públicas para guiarles en la mitigación de los retos de los sistemas de soporte de decisión y promover una adopción responsable de la IA (@fair). 
+El Banco Interamericano de Desarrollo (BID), en colaboración con socios y aliados estratégicos, lidera la iniciativa fAIr LAC mediante la cual se busca promover la adopción responsable de la Inteligencia Artificial (IA) y los sistemas de soporte de decisión para mejorar la prestación de servicios sociales y crear oportunidades de desarrollo en aras de atenuar la desigualdad social. Este manual es parte de un grupo de documentos y herramientas para equipos técnicos y responsables de la formulación de políticas públicas para guiarles en la mitigación de los retos de los sistemas de soporte de decisión y promover una adopción responsable de la IA [@fair]. 
 
 
 ## ¿Por qué este manual? {-}
