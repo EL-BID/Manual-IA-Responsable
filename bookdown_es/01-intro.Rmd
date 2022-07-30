@@ -31,13 +31,13 @@ Los métodos de aprendizaje automático (que para resumir en este documento llam
 
 ## Machine Learning (ML) y sistemas de toma/soporte de decisiones {-}
 
-La Organización para la Cooperación y el Desarrollo Económico (OECD por sus siglas inglés) describe la IA como un sistema computacional que es capaz de influir en el entorno produciendo un resultado (predicciones, recomendaciones o decisiones) para un conjunto de objetivos determinado. Utiliza datos e insumos de fuentes humanas o sensores para (i) percibir entornos reales y/o virtuales; (ii) abstraer estas percepciones en modelos mediante el análisis de forma automatizada (por ejemplo, con aprendizaje automático), o manual; y (iii) utilizar la inferencia del modelo para formular resultados. Los sistemas de IA están diseñados para funcionar con distintos niveles de autonomía [Adaptado de @oecd2019].  
+La Organización para la Cooperación y el Desarrollo Económico (OECD por sus siglas inglés) describe la IA como un sistema computacional que es capaz de influir en el entorno produciendo un resultado (predicciones, recomendaciones o decisiones) para un conjunto de objetivos determinado. Utiliza datos e insumos de fuentes humanas o sensores para (i) percibir entornos reales y/o virtuales; (ii) abstraer estas percepciones en modelos mediante el análisis de forma automatizada (por ejemplo, con aprendizaje automático), o manual; y (iii) utilizar la inferencia del modelo para formular resultados. Los sistemas de IA están diseñados para funcionar con distintos niveles de autonomía [Adaptado de @oecd2019, c].  
 
 ```{r sistema, fig.cap=capFig("Vista conceptual de un sistema de IA"), echo=FALSE, out.width="90%"}
 knitr::include_graphics("images/sistema_IA.png")
 ```
 
-Aunque los métodos de aprendizaje automático no son el único tipo de algoritmos que pueden utilizar los sistemas de IA, sí son los que han tenido más crecimiento de los últimos años. Se trata de un conjunto de técnicas para permitir que un sistema aprenda comportamientos de manera automatizada a través de patrones e inferencias en lugar de instrucciones explícitas o simbólicas introducidas por un ser humano [@oecd2019].
+Aunque los métodos de aprendizaje automático no son el único tipo de algoritmos que pueden utilizar los sistemas de IA, sí son los que han tenido más crecimiento de los últimos años. Se trata de un conjunto de técnicas para permitir que un sistema aprenda comportamientos de manera automatizada a través de patrones e inferencias en lugar de instrucciones explícitas o simbólicas introducidas por un ser humano [@oecd2019, c].
 
 Este manual analiza algunos de los retos más comunes en el uso de las tecnologías de aprendizaje automático para la toma de decisiones o el apoyo a las mismas. Entre ellos se encuentran la detección y mitigación de errores y de sesgos y la evaluación de resultados no deseados por una empresa, institución del sector público o sociedad.  
 
@@ -52,14 +52,13 @@ Para el desarrollo de un sistema de toma/soporte de decisión exitoso basado en 
 Por otra parte, la evaluación de un sistema de aprendizaje no tiene sentido fuera de su contexto. Preguntas como ¿cuál es la tasa de error apropiada? o ¿cuáles sesgos son poco aceptables?, entre otras, solo pueden considerarse y responderse dentro del contexto específico de su aplicación, de los propósitos y motivaciones de los tomadores de decisiones, así como por el riesgo que se presenta en los usuarios finales. Es decir, muchos de los criterios técnicos tienen que entenderse a la luz del problema específico. Los sistemas de toma/soporte de  decisión  nunca  son  perfectos,  pero  si  se  conocen  sus  sesgos  y  sus  limitaciones  incluso un sistema con una precisión baja podría ser útil y utilizarse responsablemente. En el caso contrario, tener un sistema con métricas de evaluación altas no elimina el riesgo de un uso irresponsable si no se entienden sus limitaciones.
 
 
-```{block2, type='rmdpunto'}
+<div class="cajaAzulMarino">
 **Objetivos**
 
 - Este manual se centra en el subconjunto de desafíos que están relacionados con los procesos técnicos a lo largo del ciclo de vida de los sistemas de IA utilizados para la toma y soporte de decisiones de política pública.
 
 - Este manual describe cómo diferentes sesgos y deficiencias pueden ser causados por  los  datos  de  entrenamiento,  por  decisiones  en  el  desarrollo  del  modelo  o tomadas durante el proceso de validación y monitoreo. 
-
-```
+</div>
 
 
 ## Componentes de un sistema de IA para políticas públicas {-} 
@@ -78,7 +77,7 @@ La IA no sustituye a la política pública, pues por sí misma no soluciona el p
 
 5. **Evaluación de política:** se evalúan la eficacia, la fiabilidad, el costo, las consecuencias previstas y no previstas y otras características  pertinentes de la medida de política en cuestión. Si sus resultados son positivos, se escala o continúa la intervención. 
 
-En paralelo con el ciclo de elaboración de políticas públicas, el desarrollo de un sistema de IA tiene su propio ciclo de vida que incluye las siguientes etapas [@oecd2019]: (i) Conceptualización y diseño; (ii) Recolección y procesamiento de datos; (iii) Desarrollo y validación de modelos, y (iv) Uso y monitoreo. Estas fases suelen tener lugar en forma iterativa y no son necesariamente secuenciales (Figura \@ref(fig:ciclo2)). 
+En paralelo con el ciclo de elaboración de políticas públicas, el desarrollo de un sistema de IA tiene su propio ciclo de vida que incluye las siguientes etapas [@oecd2019, c]: (i) Conceptualización y diseño; (ii) Recolección y procesamiento de datos; (iii) Desarrollo y validación de modelos, y (iv) Uso y monitoreo. Estas fases suelen tener lugar en forma iterativa y no son necesariamente secuenciales (Figura \@ref(fig:ciclo2)). 
 
 ```{r ciclo2, fig.topcaption=TRUE, fig.cap=capFig("Ciclo de vida de las políticas públicas asistido por un sistema de toma/soporte a la toma de decisiones. *Fuente:* Preparado por los autores."), echo=FALSE, out.width="100%"}
 knitr::include_graphics("images/ciclo-politica2.png")
@@ -111,7 +110,6 @@ Se proponen tres herramientas para acompañar el desarrollo del sistema de IA:
 * **Herramienta 3:** [Perfil del modelo.](#herramienta-3-perfil-del-modelo) Es la descripción final de un sistema de IA; reporta los principales supuestos, las características más importantes del sistema y las medidas de mitigación implementadas. 
 
 **Recuadro 1.** Fuentes de sesgo un sistema de IA 
-
 <div class="cajaAzul">
 Uno de los conceptos más importantes para los retos del ciclo de vida de la IA es el de los sesgos, pues muchas de las medidas de mitigación y retos que tienen que contemplarse durante el desarrollo de los modelos depende de su correcta comprensión y tratamiento.  Para abordar tempranamente este problema es conveniente tener revisiones específicas en las distintas etapas del ciclo de vida. En cada revisión debe invitarse a los expertos y usuarios finales del sistema que corresponda para verificar y  defender las hipótesis realizadas durante cada etapa. Esto permite enriquecer los puntos de vista, encontrar suposiciones erradas y agregar aspectos no considerados. 
 
