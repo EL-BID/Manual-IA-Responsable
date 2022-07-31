@@ -71,3 +71,11 @@ pre code {
     margin: 30px 0;
     border-radius: 10px;
 }
+
+.cajaAzulFuerte {
+    background-color:#1f87a6;
+    color: #ffffff;
+    padding:20px;
+    margin: 30px 0;
+    border-radius: 10px;
+}
