@@ -1,49 +1,53 @@
 # Conceptualización y diseño 
-La implementación de una solución de IA no puede ir separada del ciclo de vida de la política pública con IA^[ Ver sección “Componentes de un sistema de IA para políticas públicas”.] La IA es una herramienta, que debe estar condicionada a un buen diseño de la intervención o acción que se tomará con los resultados del sistema. La IA en ningún momento sustituye a la política pública. Esto implica que cualquier proyecto de IA robusto y responsable debe partir del problema y no desde la tecnología. 
+La implementación de una solución de IA no puede ir separada del ciclo de vida de la política pública con IA.^[Ver sección “Componentes de un sistema de IA para políticas públicas”.] La IA es una herramienta, que debe estar condicionada a un buen diseño de la intervención o acción que se tomará con los resultados del sistema. La IA en ningún momento sustituye a la política pública. Esto implica que cualquier proyecto de IA robusto y responsable debe partir del problema y no desde la tecnología. 
 
 ##  Definición correcta del problema y de la respuesta de política pública
-En este manual se asume que existen, al menos, dos actores involucrados en el desarrollo de los sistemas, el tomador de decisiones de políticas públicas y el equipo técnico que lo implementará. La definición de la intervención siempre debe ser responsabilidad del tomador de decisiones quien es quien tiene un conocimiento del problema social. 
+Este manual asume que existen, al menos, dos actores involucrados en el desarrollo de los sistemas: el tomador de decisiones de políticas públicas y el equipo técnico que los implementará. La definición de la intervención siempre debe ser responsabilidad del tomador de decisiones, que es quien tiene un conocimiento del problema social. 
 
-Sin embargo, el equipo técnico debe poder entender el problema para que pueda vincular los resultados del modelo a la intervención deseada. Así mismo, es responsable de guiar y orientar en el diseño del sistema explicando lo que es viable y definiendo claramente las limitantes y riesgos del sistema, por lo que se requiere una comunicación constante entre ambos actores. 
+Sin embargo, el equipo técnico debe poder entender el problema para que pueda vincular los resultados del modelo a la intervención deseada. Así mismo, es responsable de guiar y orientar en el diseño del sistema, explicando lo que es viable y definiendo claramente las limitantes y riesgos del sistema, por lo que se requiere una comunicación constante entre ambos actores. 
 
-Un caso de esto es la definición de la población donde se aplicará el sistema, la definición de grupos protegidos, así como las medidas de justicia algorítmica a aplicarse^[En la sección 2 de este manual se discutirá a profundidad distintas definiciones de justicia algorítmica y sus implicaciones.]
-. Estas definiciones tienen un impacto directo a la forma en la que se puede evaluar la calidad y cobertura de los datos o el posible sesgo en los resultados del modelo.
+Un caso concreto es la definición de la población donde se aplicará el sistema, la definición de grupos protegidos, así como las medidas de justicia algorítmica por aplicar.^[La sección 3 de este manual discute a profundidad distintas definiciones de justicia algorítmica y sus implicaciones.] Estas definiciones tienen un impacto directo en la forma como puede evaluarse la calidad y cobertura de los datos o el posible sesgo en los resultados del modelo. 
 
-## Necesidad y Proporcionalidad
+## Principios de IA responsable
 
-Una vez que se tiene identificado el problema y la intervención es necesario replantearse el uso de la IA bajo criterios de necesidad y proporcionalidad. Aunque la IA tiene el potencial suficiente para hacer más eficiente algunos procesos y expandir la capacidad del estado, también se debe tener en cuenta que no es la respuesta para todo.
+Aunque la IA tiene un importante potencial para agilizar procesos y ampliar la capacidad del Estado, también hay que señalar que no es una bala de plata. Una vez definidos el problema y el tipo de intervención, es necesario contextualizar y replantear el uso de la IA y el aprendizaje automático en consonancia con los Principios de la IA de la Organización para la Cooperación y el Desarrollo Económico (OECD por sus siglas en inglés; ver recuadro 2). 
 
-En este punto es importante considerar también estándares y leyes que pueden regular el caso de uso donde se quiere implementar el sistema. Por ejemplo, requisitos de explicabilidad en las predicciones podrían limitar el uso de algunos algoritmos para los que es muy difícil dar interpretabilidad a los resultados.^[El punto de explicabilidad e interpretabilidad se describe en la sección de este manual.] 
-
+Es importante tener en cuenta la gobernanza más amplia que enmarca la aplicación de un sistema de IA, incluidas las normas y leyes de la jurisdicción donde va aimplantarse el sistema. También es importante establecer los requisitos adecuados durante la conceptualización y diseño del sistema, porque pueden definir o limitar las opciones de desarrollo para el equipo técnico. Por ejemplo, los requisitos de explicabilidad en las predicciones podrían limitar el uso de algunos algoritmos para los que sea muy difícil interpretar los resultados. 
 
 
-```{block2, type='rmdtip'}
-**Medidas: Conceptualización y diseño de políticas públicas**
+**Recuadro 2** Principios de IA responsable OECD 
+<div class="cajaAzul">
+Los Principios de la IA de la Organización para la Cooperación y el Desarrollo Económicos (OECD por sus siglas en inglés) promueven el uso responsable de la Inteligencia Artificial (IA), respetando los derechos humanos y los valores democráticos. Los principios establecen normas para la IA que son suficientemente prácticas y flexibles para resistir el paso del tiempo. Incluyen cinco principios basados en valores para la gestión de una IA responsable: 
 
-- Definición correcta del problema y de la respuesta de política pública:  
-  
-  *	(Cualitativo) ¿Se definió claramente el problema de política pública que se está buscando resolver?   *	(Cualitativo) Describa cómo se da respuesta a este problema actualmente, considerando a las instituciones relacionadas y cuál es su propuesta para solucionar dicho problema usando IA.
-  * (Cualitativo)¿Se definieron las acciones o intervenciones que se realizarán a partir del resultado del sistema de Inteligencia Artificial?
+- **Crecimiento inclusivo, desarrollo sostenible y bienestar:** las partes interesadas deben comprometerse a crear una IA confiable que contribuya a inducir resultados benéficos para las personas, así como para el planeta. 
 
-- Necesidad y proporcionalidad 
+- **Valores  centrados  en  el  ser  humano  y  la  equidad:** los valores de los derechos humanos, la democracia y el Estado de derecho deben incorporarse a lo largo del ciclo de vida del sistema de IA, permitiendo al mismo tiempo la intervención humana mediante mecanismos de salvaguardia.
 
-  * (Cualitativo) ¿Afectará su proyecto de forma directa o indirecta a la vida de personas o de personas o grupos vulnerables?  
-  * (Cualitativo) Para la implementación de estas tecnologías, ¿se han revisado casos de proyectos similares anteriores?  
-  * (Cualitativa) ¿Se identificaron los distintos grupos o atributos protegidos dentro del proyecto? (por ejemplo: edad, género, raza, nivel de marginación, etc.)  
+- **Transparencia y explicabilidad:** los actores que desarrollan u operan los sistemas de IA deben  proporcionar información para fomentar una comprensión general de los sistemas entre las partes interesadas que permita a las personas afectadas por los sistemas de IA comprender el resultado y cuestionar la decisión cuando sea necesario. 
 
-```
+- **Robustez, seguridad y protección:** los sistemas de IA deben funcionar adecuadamente durante todo su ciclo de vida. Los actores deben garantizar la trazabilidad y aplicar enfoques sistemáticos de gestión de riesgos para mitigarlos. 
+
+- **Responsabilidad:** los actores que desarrollen, desplieguen u operen sistemas de IA deben respetar los principios y ser responsables del buen funcionamiento de esos sistemas 
+
+Los Principios de la IA de la OECD contienen cinco recomendaciones para las políticas nacionales y la cooperación internacional: (1) Invertir en investigación y desarrollo de IA; (2) Fomentar un ecosistema digital para la IA; (3) Configurar un entorno político propicio para la IA; (4) Desarrollar la capacidad humana y prepararse para la transformación del mercado laboral, y (5) Promover la cooperación internacional para una IA digna de confianza [@oecd2019, b] . Los principios fueron adoptados en mayo de 2019 por los países miembros de la OECD y son la primera norma internacional sobre IA suscrita por los gobiernos. Más allá de los miembros de la OECD, otros países como Argentina, Brasil, Costa Rica, Malta, Perú, Rumania, Ucrania, Singapur y Egipto se han adherido a los Principios de la IA y son bienvenidas más adhesiones. En junio de 2019, el G20 adoptó los Principios de IA centrados en el ser humano que se basan en los Principios de IA de la OECD. 
+</div>
+
+**Recuadro 3** Lista de verificación - Conceptualización y diseño  
+<div class="cajaAzul">
+
+$\Large\checkmark$ Definición correcta del problema y de la respuesta de la política pública: 
+
+- (Cualitativo) ¿Está claramente definido el problema de política pública? 
+- (Cualitativo) Describir cómo se aborda actualmente este problema –considerando las respuestas de las instituciones relacionadas– y cómo el uso de la IA mejoraría la respuesta gubernamental a ese problema.
+- (Cualitativo) ¿Se identificaron los grupos o los  atributos protegidos dentro del proyecto (por ejemplo, edad, género, nivel educativo, raza, nivel de marginación, etc.)? 
+- (Cualitativo) ¿Se definieron las acciones o intervenciones que se llevarán a cabo en función del resultado del sistema de IA? 
+
+$\Large\checkmark$ Principios de la IA:
+
+- (Cuantitativo) ¿Se ha justificado la necesidad de un sistema de IA, teniendo en cuenta otras posibles soluciones que no requieran el uso de datos personales y decisiones automatizadas? 
+- (Cuantitativo) ¿Existen pruebas de que tanto la acción de las políticas públicas como la recomendación del sistema de IA supondrán un beneficio para las personas y el planeta al impulsar el crecimiento inclusivo, el desarrollo sostenible y el bienestar? 
+- (Cualitativo) ¿Se han identificado proyectos  similares y se han analizado  para obtener aprendizajes y establecer errores comunes? 
+- (Cuantitativo) ¿Se ha considerado la posibilidad de minimizar la exposición de información personal identificable (por ejemplo, anonimizando o no recogiendo información no relevante para el análisis)? 
 
 
-```{block2, type='rmdtip'}
-**Medidas: Gobernanza y seguridad^[La dimensión de Gobernanza y seguridad es una dimensión separada de la dimensión de conceptualización y diseño según el marco de retos de la IA de fAIr LAC: (@fair). Por los objetivos de este manual y para mantenerlo lo más conciso posible se incluyen en esta sección. (@fair)]**
-
-- Consentimiento informado y límites de privacidad: 
-  * (Cuantitativa) ¿Se ha definido de forma clara la finalidad del tratamiento de los datos que va a recopilar y/o procesar?
-  * (Cuantitativa) ¿Su proyecto cuenta con los acuerdos legales de transferencia de información necesarios?
-  
-- Gobernanza y ciberseguridad 
-  * (Cuantitativa) El Proyecto cuenta con estructuras y mecanismos concretos de gobernanza y ciberseguridad?
-  * (Cuantitativa) ¿Se han considerado formas de reducir al mínimo la exposición de información personal identificable? (por ejemplo, mediante la anonimización o la no recopilación de información que no sea pertinente para el análisis)
-
-
-```
+</div>
