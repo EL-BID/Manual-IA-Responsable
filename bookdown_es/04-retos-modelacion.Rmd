@@ -1,37 +1,30 @@
-# Desarrollo de modelos
+# Desarrollo del modelo y validación
 
-El proceso de desarrollo de un modelo conlleva muchas decisiones que tienen implicaciones en los resultados de este. Algunas decisiones pueden llevar a cometer errores metodológicos que generen sesgos o que eviten que el sistema generalice de forma adecuada, entre estos encontramos fugas de información, sobreajuste y subajuste. 
+El proceso de desarrollo de un modelo conlleva muchas decisiones que tienen implicaciones en sus resultados. Algunas decisiones pueden llevar a cometer errores metodológicos que generen sesgos o que eviten que el sistema generalice en forma adecuada. Entre estos encontramos fugas de información, sobreajuste y subajuste. 
 
-Pero también hay otro grupo de decisiones que no son necesariamente problemas metodológicos que pueden cambiar sustancialmente la forma en la que se comporta el sistema, ¿cómo elegir entre dos modelos?, ¿qué tipo de errores reportar?, ¿qué definición de justicia algorítmica se elegirá? Como se comentó al principio del manual ninguna de estas preguntas tiene sentido fuera del contexto de la aplicación específica. Lo que sí es posible es crear un marco de entendimiento de estos errores para que puedan ser discutidos entre los equipos técnicos y los tomadores de decisiones de política pública. 
+Además, hay otro grupo de decisiones que no son necesariamente problemas metodológicos que pueden cambiar sustancialmente la forma como se comporta el sistema: ¿cómo elegir entre dos modelos?, ¿qué tipo de errores reportar?, ¿qué definición de justicia algorítmica se elegirá? Al comienzo del manual se comentó que ninguna de estas preguntas tiene sentido fuera del contexto de la aplicación específica. Lo que sí es posible es crear un marco de entendimiento de estos errores para que puedan ser discutidos entre los equipos técnicos y los tomadores de decisiones de política pública. 
 
-En esta sección del manual se exponen retos que aparecen durante los procesos de entrenamiento y validación de los sistemas de soporte y toma de decisión. En este caso la mayoría de los errores se deben a fallos metodológicos en la evaluación y a no plantear de forma correcta el objetivo de ajuste del sistema o las métricas que se buscan optimizar. 
+En esta sección del manual se exponen retos que aparecen durante los procesos de entrenamiento y validación de los sistemas de soporte y toma de decisión. En este caso la mayoría de los errores se deben a fallos metodológicos en la evaluación y a no plantear en forma correcta el objetivo de ajuste del sistema o las métricas que se busca optimizar. 
 
+## Ausencia o uso inadecuado de muestras de validación 
 
-## Ausencia y errores de validación
+Los modelos de aprendizaje automático se entrenan principalmente para crear predicciones en casos no observados. De nada sirve evaluar un sistema en su desempeño de predicción de las observaciones con las que se entrenó, pues el sistema podría únicamente memorizar cada respuesta^[Este fenómeno está relacionado con el sobreajuste que se verá más adelante.]. Su utilidad se encuentra en la medida en la que el sistema logra generalizar un aprendizaje para predecir con datos fuera del conjunto de entrenamiento (out-of-sample). La validación generalmente involucra al menos dos muestras (1 y 2), y de preferencia tres: 
 
-Uno de los primeros errores graves en este proceso es la no consideración de
-etapas robustas de validación y prueba de los modelos
+1. **Datos de entrenamiento:** subconjunto de los datos utilizados para entrenar el modelo.  
+2. **Datos de validación:** subconjunto de los datos con los que se evalúa el entrenamiento en forma iterativa.  
+3. **Datos de prueba:** subconjunto de los datos que deben mantenerse ocultos hasta después de seleccionar el modelo y que son usados para confirmar los resultados. 
 
-Los modelos de aprendizaje automático se entrenan principalmente para crear predicciones en casos no observados. De nada sirve evaluar un sistema en su desempeño de predicción de las observaciones con las que se entrenó, pues el sistema podría únicamente memorizar cada respuesta^[Este fenómeno está relacionado con el sobreajuste que se verá más adelante.]. Su utilidad se encuentra en la medida en la que el sistema logra generalizar un aprendizaje para predecir con datos fuera del conjunto de entrenamiento (*out-of-sample*).
+Para evitar que una partición aleatoria en datos de entrenamiento y validación favorezca o perjudique la evaluación, en general se hace una validación cruzada. Esta consiste en dividir los datos en *k* pedazos, calculando el promedio de *k* evaluaciones, donde los datos de validación son cada uno de los pedazos y los *k*-1 restantes son los datos de entrenamiento. Esto en inglés se llama *k-fold evaluation* y normalmente se escoge *k=5* o *k=10*.
 
-La validación generalmente involucra al menos dos muestras (1 y 2), y de preferencia tres:
-
-1. **Datos de entrenamiento**: Subconjunto de los datos utilizados para entrenar el modelo.  
-2. **Datos de validación**: Subconjunto de los datos con los que se evalúa el entrenamiento de forma iterativa.  
-3.	**Datos de prueba**: Subconjunto de los datos que se deben mantener ocultos hasta después de seleccionar el modelo y son usados para confirmar los resultados.
-
-Para evitar que una partición aleatoria en datos de entrenamiento y validación favorezca o perjudique la evaluación, en general se hace una validación cruzada. Esto consiste en dividir los datos en *k* pedazos, calculando el promedio de *k* evaluaciones, donde los datos de validación son cada uno de los pedazos y los k-1 restantes son los datos de entrenamiento. Esto en inglés se llama *k-fold evaluation* y normalmente se escoge *k=5* o *k=10*.
-
-```{r ciclo, fig.cap="Etapas de evaluación. Construcción propia.", echo=FALSE, out.width="80%"}
+```{r ciclo, fig.cap="Etapas de evaluación. *Fuente:* Construcción propia", echo=FALSE, out.width="90%"}
 knitr::include_graphics("images/etapas-modelo.png")
 ```
+El primer reto es no tener un proceso de validación apropiado o que incluso sea inexistente. En este caso, los resultados del modelo se presentarían únicamente con el desempeño del conjunto de datos de entrenamiento. Las métricas de desempeño de este conjunto no deberían utilizarse como indicador del potencial comportamiento del modelo para casos nuevos, pues se podría estar sobreestimando su desempeño. 
 
-```{block2, type='rmdnote'}
-El primer reto es no tener un proceso de validación apropiado o que incluso sea inexistente. En este caso, los resultados del modelo se presentarían únicamente con el desempeño del conjunto de datos de entrenamiento. Las métricas de desempeño de este conjunto no deberían utilizarse como indicador del potencial comportamiento del modelo para casos nuevos ya que podría estar sobreestimando su desempeño. 
-```
+Una validación exitosa también se relaciona con los criterios de calidad, tales como la completitud y representatividad de la información que se vio en el capítulo anterior, porque si la población objetivo es distinta a la representada por datos utilizados durante el entrenamiento, aunque el proceso de evaluación se haya realizado en forma correcta, es posible tener un comportamiento completamente distinto. 
 
-Una validación exitosa está también relacionada a los criterios de calidad tales como la completitud y representatividad de la información que vimos en el capítulo anterior, ya que, si la población objetivo es distinta a la representada por datos utilizados durante el entrenamiento, aunque el proceso de evaluación se haya realizado de forma correcta, se puede tener un comportamiento completamente distinto.
 
+############# aquí voy
 
 ```{block2, type='rmdtip'}
 **Medidas: ausencia de muestras de validación**
