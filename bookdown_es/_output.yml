@@ -1,6 +1,8 @@
 bookdown::gitbook:
   css: [css/style.css, css/toc.css]
   split_bib: FALSE
+  includes:
+    in_header: html/header.html
   config:
     toc:
       collapse: section
