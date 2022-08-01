@@ -25,9 +25,9 @@ Los algoritmos complejos, como las redes neuronales profundas, pueden tener mill
 
 Existe en muchos casos la necesidad legal y/o ética de dar explicaciones individuales acerca de  cómo  fueron  tomadas  ciertas  decisiones  (por  ejemplo,  por  qué  a  una  persona  no  se  le otorgó un crédito o por qué alguien no califica para un programa social).^[En la Unión Europea, por ejemplo, el artículo 22 de GDPR describe el derecho de una persona a rebatir la decisión de un sistema, especialmente cuando es automática.]
 
-En áreas de investigación, como visión artificial y procesamiento del lenguaje natural, las implementaciones más exitosas suelen estar desarrolladas con modelos de alta complejidad, como  redes  neuronales  profundas,  que  son  en  principio  poco  transparentes  en  cuanto  a cómo se hacen las predicciones subyacentes (Carrillo, Cantú, & Noriega, 2020). 
+En áreas de investigación, como visión artificial y procesamiento del lenguaje natural, las implementaciones más exitosas suelen estar desarrolladas con modelos de alta complejidad, como  redes  neuronales  profundas,  que  son  en  principio  poco  transparentes  en  cuanto  a cómo se hacen las predicciones subyacentes [@carrillo]. 
 
-Aunque se trata de un área de investigación en curso, ya existen varios métodos para aumentar la explicabilidad de las predicciones (Molnar, 2019). Pueden utilizarse métodos como el de explicaciones contrafactuales (Wachter, Mittelstadt, & Russell, 2017), valores de Shapley (Lundberg & Lee, 2017) o gradientes integrados para redes profundas (Sundararajan, Taly, & Yan, 2017). 
+Aunque se trata de un área de investigación en curso, ya existen varios métodos para aumentar la explicabilidad de las predicciones [@molnar2019]. Pueden utilizarse métodos como el de explicaciones contrafactuales [@wachter], valores de Shapley [@NIPS2017_7062] o gradientes integrados para redes profundas [@gradient]. 
 
 
 **Recuadro 20** Explicabilidad de predicciones individuales   
@@ -55,7 +55,7 @@ Este tipo de sesgo perjudica la explicabilidad de un sistema y puede ser difíci
 <div class="cajaAzul"> 
 - (Cualitativo)  Incluir  todas  las  características  disponibles  para  construir  modelos  aumenta el riesgo de que se generen sesgos. Las variables por incluirse en el proceso de aprendizaje deben tener algún sustento teórico o explicación de por qué pueden ayudar en la tarea de predicción. 
 - (Cuantitativo)  Métodos  más  parsimoniosos,  que  usan  menos  características,  son preferibles a modelos que utilizan muchas características. 
-- (Cuantitativo) Métodos como gráficas de dependencia parcial [@Friedman] o importancia basada en permutaciones [@Breiman], [@molnar2019] pueden señalar variables problemáticas que reciben mucho peso en la predicción, en contra de observaciones pasadas o conocimiento experto. 
+- (Cuantitativo) Métodos como gráficas de dependencia parcial [@friedman] o importancia basada en permutaciones [@breimanrandom], [@molnar2019] pueden señalar variables problemáticas que reciben mucho peso en la predicción, en contra de observaciones pasadas o conocimiento experto. 
 </div>
 ## Trazabilidad 
 
