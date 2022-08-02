@@ -58,14 +58,14 @@ pre code {
 }
 
 .cajaAzul {
-    background-color:#d9eef8  ;
+    background-color:#dff1fd  ;
     padding:20px;
     margin: 30px 0;
     border-radius: 10px;
 }
 
 .cajaAzulMarino {
-    background-color:#2951d7;
+    background-color:#1255cc;
     color: #ffffff;
     padding:20px;
     margin: 30px 0;
@@ -73,9 +73,10 @@ pre code {
 }
 
 .cajaAzulFuerte {
-    background-color:#1f87a6;
+    background-color:#458abf;
     color: #ffffff;
     padding:20px;
     margin: 30px 0;
     border-radius: 10px;
 }
+
