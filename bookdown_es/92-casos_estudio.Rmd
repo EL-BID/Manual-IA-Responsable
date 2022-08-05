@@ -7,14 +7,13 @@ paquetes que así lo usan. Emplea el lenguaje de programación R y los siguiente
 @recipes, @themis, @rsample, @parsnip, @yardstick, @workflows, @tune, @knitr, 
 @patchwork.
 
-Todo el material es reproducible según instrucciones en este [repositorio](https://github.com/EL-BID/Manual-IA-Responsable), el cual contiene un archivo Dockerfile que describe las dependencias de infraestructura para su replicación. 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(error = TRUE, message = FALSE, warning = FALSE)
 ```
 
 
-```{r, message=FALSE, warning = FALSE}
+```{r, message=FALSE, warning = FALSE, echo = FALSE}
 library(tidyverse)
 library(recipes)
 library(themis)
@@ -27,7 +26,7 @@ library(knitr)
 library(patchwork)
 ```
 
-
+Todo el material es reproducible según instrucciones en este [repositorio](https://github.com/EL-BID/Manual-IA-Responsable), el cual contiene un archivo Dockerfile que describe las dependencias de infraestructura para su replicación. 
 
 ## Recolección y procesamiento de datos {-}
 
