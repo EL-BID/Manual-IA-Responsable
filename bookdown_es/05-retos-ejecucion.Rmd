@@ -6,6 +6,20 @@ Una vez que los métodos de aprendizaje automático se comienzan utilizar para t
 - Monitorear, en particular, resultados indeseables que pueden provenir de la interacción de usuarios con sistemas de toma/soporte de decisiones. 
 - Evaluar  la  recolección  y  procesamiento  de  datos  para  mejorar  desempeño  o  evaluar resultados.
 
+## Degradación de desempeño 
+
+El desempeño de un modelo puede degradarse con el tiempo por múltiples razones: 
+
+- Los modelos de ML que asumen una relación estática entre las variables de entrada y de salida pueden degradar la calidad de sus predicciones por cambios en las relaciones subyacentes del contexto de estudio. 
+
+- También puede deberse a un cambio en la calidad de los datos por la forma de recolección o incluso redefiniciones metodológicas utilizadas para recolectar información. Por ejemplo, en registros administrativos un ministerio o secretaría podría cambiar los procesos de recolección de datos, digitalizar sistemas, sistematizar limpieza o procesamiento que haga que el aprendizaje de un sistema ya no sea relevante. 
+
+- También esto ocurre en sistemas interactivos donde el sistema y sus usuarios forman un ciclo de realimentación cerrado, con lo cual el sistema se va degradando porque los usuarios solo pueden interactuar con elementos que son decididos por el sistema. 
+
+Para mitigar estos posibles errores es necesario monitorear el comportamiento de las variables de entrada y actualizar supuestos con tomadores de decisión y conocimiento experto. 
+
+También debe vigilarse el comportamiento de las métricas de error en el tiempo: cantidades con tasa total de positivos y negativos (incluyendo desagregaciones por otras variables protegidas o de interés), distribución de predicciones y atributos. 
+
 **Recuadro 18** Lista de verificación - Degradación de desempeño 
 
 <div class="cajaAzul">
@@ -26,9 +40,10 @@ $\Large\checkmark$ Degradación de desempeño:
 La forma y los datos que se recopilan para el mantenimiento de los algoritmos de predicción debe planearse con el objeto de mejorar en lo posible y entender mejor las consecuencias del uso de los modelos. 
 
 Las mejoras que se esperan en el proceso pueden ser difíciles de evaluar sin contrafactuales sólidos. 
+
 Pruebas con diseño experimental pueden planearse, por ejemplo, de tipo A/B u otras [@vaver], cuando sea posible, para entender qué cambios particulares, deseables o indeseables, introduce el uso de los modelos. 
 
-**Recuadro 18** Lista de verificación - Experimentos y evaluación del modelo  
+**Recuadro 19** Lista de verificación - Experimentos y evaluación del modelo  
 
 <div class="cajaAzul">
 
