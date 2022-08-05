@@ -10,7 +10,7 @@ paquetes que así lo usan. Emplea el lenguaje de programación R y los siguiente
 Todo el material es reproducible según instrucciones en este [repositorio](https://github.com/EL-BID/Manual-IA-Responsable), el cual contiene un archivo Dockerfile que describe las dependencias de infraestructura para su replicación. 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(error = TRUE, message = FALSE, warning = FALSE)
 ```
 
 
@@ -345,7 +345,7 @@ dim(datos_entrena)
 datos_entrena %>% group_by(y) %>% tally() %>% kable()
 ```
 
-La selección de variables está dada por la siguiente función. Esta función selecciona las vari - ables más correlacionadas con la variable objetivo: 
+La selección de variables está dada por la siguiente función. Esta función selecciona las variables más correlacionadas con la variable objetivo: 
 
 ```{r}
 seleccionar <- function(datos, num_var = 10){
