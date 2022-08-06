@@ -263,7 +263,7 @@ Se tienen entonces dos problemas:
 
 2.	Peor aún, el sesgo es mayor para hogares de menores ingresos (las predicciones son altas), lo cual puede producir una focalización mediocre si buscamos identificar hogares de menores ingresos.
 
-### Muestras naturales: comparaciones causales {#natural}{-}
+### Muestras naturales: comparaciones causales {-}
 
 Este ejemplo está tomado de [@ESL] y [@saheart]. Se consideran los siguientes datos, donde el objetivo es predecir enfermedad del corazón (chd)^[Datos accesibles en http://archive.ics.uci.edu/ml/datasets/heart+Disease]: 
 
@@ -333,7 +333,7 @@ Este ejemplo es originalmente de [@ESL]. Se utilizarán datos sintéticos, gener
 
 ```{r, message = FALSE}
 simular <- function(n = 100, p = 500, prob = 0.5){
-  datos <- map(1:p, ~ rnorm(n)) %>% 
+  datos <- map(set_names(1:p, paste0("V", 1:p)), ~ rnorm(n)) %>% 
     bind_cols()
   datos$y <- rbinom(n, 1, prob)
   datos
@@ -350,7 +350,7 @@ La selección de variables está dada por la siguiente función. Esta función s
 ```{r}
 seleccionar <- function(datos, num_var = 10){
   correlaciones <- datos %>% 
-    pivot_longer(cols = matches("V"), names_to = "variable", values_to = "x") %>% 
+    pivot_longer(cols = -y, names_to = "variable", values_to = "x") %>% 
     group_by(variable) %>% 
     summarise(corr = abs(cor(y, x))) %>% 
     arrange(desc(corr)) 
@@ -1034,7 +1034,7 @@ Para  explicar  predicciones  individuales  pueden  usarse  los  valores  de  Sh
 
 Pueden examinarse también promedios a lo largo de grupos de interés. 
 
-Considérese el [ejemplo](#natural)  de  factores  para  detectar  una  enfermedad  del  corazón [@saheart]:
+Considérese el ejemplo  de  factores  para  detectar  una  enfermedad  del  corazón [@saheart]:
 
 ```{r}
 modelo_sa <- sa_boosted$fit

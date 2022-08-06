@@ -288,3 +288,10 @@ En la práctica no existe una respuesta única ni una medida de justicia algorí
 * (Cuantitativo) Recolectar información más relevante de subgrupos protegidos (tanto casos como características) para mejorar el desempeño predictivo en grupos minoritarios. 
 
 </div>
+
+
+<div class="cajaAzulMarino">
+**Actividad:**  
+Al terminar esta fase se recomienda el llenado de las secciones de Desarrollo del modelo del Perfil del modelo y llevar a cabo una discusión con el tomador de decisiones de políticas públicas (ver Herramienta 3). 
+
+</div>
