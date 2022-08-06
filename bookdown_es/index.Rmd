@@ -14,7 +14,7 @@ biblio-style: apalike
 ---
 
 
-# Manual de ciencia de datos {-}
+# {-}
 
 ```{r cover, echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/cover.png")
@@ -22,6 +22,34 @@ knitr::include_graphics("images/cover.png")
 
 Para consultar la versión en PDF haga click [aquí.](https://publications.iadb.org/es/ia-responsable-manual-tecnico-ciclo-de-vida-de-la-inteligencia-artificial)
 
+# Uso responsable de la IA para las políticas públicas {-} 
+
+## Manual de ciencia de datos {-}
+Felipe González, Teresa Ortiz y Roberto Sánchez Ávalos 
+
+<br>
+<br>
+<br>
+
+https://www.iadb.org/
+
+Copyright © 2020 Banco Interamericano de Desarrollo. Esta obra se encuentra sujeta a una licencia Creative Commons IGO 3.0 Reconocimiento-NoComercial- SinObrasDerivadas [(CC-IGO 3.0 BY-NC-ND)](https://creativecommons.org/licenses/ by-nc-nd/3.0/igo/legalcode)   y puede ser reproducida para cualquier uso no-comercial otorgando el reconocimiento respectivo al BID. No se permiten obras derivadas. 
+
+Cualquier disputa relacionada con el uso de las obras del BID que no pueda resolverse amistosamente se someterá a arbitraje de conformidad con las reglas de la CNUDMI (UNCITRAL). El uso del nombre del BID para cualquier fin distinto al reconocimiento respectivo y el uso del logotipo del BID, no están autorizados por esta licencia CC-IGO y requieren de un acuerdo de licencia adicional. 
+
+Note que el enlace URL incluye términos y condiciones adicionales de esta licencia. 
+
+Las opiniones expresadas en esta publicación son de los autores y no necesariamente reflejan el punto de vista del Banco Interamericano de Desarrollo, de su Directorio Ejecutivo ni de los países que representa. 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ### Banco Interamericano de Desarrollo (BID) - Sector Social {-}
 
@@ -53,6 +81,17 @@ Se puede acceder a otros trabajos de la OECD relacionados con la aplicación esp
 
 El Banco Interamericano de Desarrollo (BID), en colaboración con socios y aliados estratégicos, lidera la iniciativa fAIr LAC mediante la cual se busca promover la adopción responsable de la Inteligencia Artificial (IA) y los sistemas de soporte de decisión para mejorar la prestación de servicios sociales y crear oportunidades de desarrollo en aras de atenuar la desigualdad social. Este manual es parte de un grupo de documentos y herramientas para equipos técnicos y responsables de la formulación de políticas públicas para guiarles en la mitigación de los retos de los sistemas de soporte de decisión y promover una adopción responsable de la IA [@fair]. 
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="cajaAzulMarino">
 
 ### Agradecimientos {-}
 
@@ -60,6 +99,17 @@ Por su tiempo y valiosos aportes, expresamos un agradecimiento especial a Cristi
 
 Agradecemos igualmente el apoyo prestado y los comentarios recibidos de Luis Tejerina, Elena Arias Ortiz, Natalia González Alarcón, Tetsuro Narita, Constanza Gómez-Mont, Daniel Korn, Ulises Cortés, José Antonio Guridi Bustos, César Rosales y Sofía Trejo. 
 
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 # Resumen Ejecutivo {-}
 
@@ -87,7 +137,7 @@ Este manual está pensado para equipos técnicos que trabajan en la aplicación 
 
 # Glosario {-}
 
-* **Aprendizaje  automático:** conjunto  de  técnicas  que  permiten  a  un  sistema  aprender comportamientos  de  forma  automatizada  a  través  de  patrones  e  inferencias  en  lugar de instrucciones explícitas o simbólicas introducidas por un ser humano [@oecd2019].
+* **Aprendizaje  automático:** conjunto  de  técnicas  que  permiten  a  un  sistema  aprender comportamientos  de  forma  automatizada  a  través  de  patrones  e  inferencias  en  lugar de instrucciones explícitas o simbólicas introducidas por un ser humano [@oecd2019c].
 
 * **Atributo protegido:** una característica o variable protegida es aquella en que queremos que se cumpla cierto criterio de equidad en las predicciones. En un conjunto de datos podemos tener más de una variable protegida, como edad, género, raza, etc.
 
@@ -99,7 +149,7 @@ Este manual está pensado para equipos técnicos que trabajan en la aplicación 
 
 * **Inequidad  algorítmica:** falla  técnica  en  los  modelos  que  produce  disparidad  de resultados para grupos protegidos que deben evaluarse con la definición de justicia algorítmica determinada en un punto anterior (podría ser más de una).
 
-* **Inteligencia artificial:** sistema computacional que es capaz de influir en el entorno y producir un resultado (predicciones, recomendaciones o decisiones) para un conjunto de objetivos determinado. Utiliza datos e insumos de fuentes humanas o sensores para (i) percibir entornos reales y/o virtuales; (ii) abstraer estas percepciones en modelos mediante el análisis en forma automatizada (por ejemplo, con aprendizaje automático), o manual; y (iii) utilizar la inferencia del modelo para formular resultados. Los sistemas de IA están diseñados para funcionar con distintos niveles de autonomía (adaptado de [@oecd2019]). 
+* **Inteligencia artificial:** sistema computacional que es capaz de influir en el entorno y producir un resultado (predicciones, recomendaciones o decisiones) para un conjunto de objetivos determinado. Utiliza datos e insumos de fuentes humanas o sensores para (i) percibir entornos reales y/o virtuales; (ii) abstraer estas percepciones en modelos mediante el análisis en forma automatizada (por ejemplo, con aprendizaje automático), o manual; y (iii) utilizar la inferencia del modelo para formular resultados. Los sistemas de IA están diseñados para funcionar con distintos niveles de autonomía [adaptado de @oecd2019c]. 
 
 * **Población  objetivo:** conjunto  de  elementos  que  se  pretende  intervenir  (personas, hogares, zonas geográficas, etc.). Los modelos se construyen con el fin de aplicarse a la población objetivo. 
 
