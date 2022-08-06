@@ -9,7 +9,7 @@ paquetes que así lo usan. Emplea el lenguaje de programación R y los siguiente
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(error = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(error = FALSE, message = FALSE, warning = FALSE)
 ```
 
 
@@ -521,7 +521,7 @@ credito_receta <- recipe(card ~ ., credito) %>%
 # modelo
 modelo_regularizado <- 
   logistic_reg(penalty = 1) %>% 
-  set_engine("keras", epochs = 500, verbose = FALSE)  %>% 
+  # set_engine("keras", epochs = 500, verbose = FALSE)  %>% 
   set_mode("classification") 
 ```
 
@@ -996,7 +996,7 @@ credito_receta <- recipe(card ~ ., credito) %>%
 # modelo
 modelo_regularizado <- 
   logistic_reg(penalty = 1) %>% 
-  set_engine("keras", epochs = 500, verbose = FALSE)  %>% 
+  # set_engine("keras", epochs = 500, verbose = FALSE)  %>% 
   set_mode("classification") 
 ```
 
@@ -1011,7 +1011,7 @@ ajuste <- modelo_regularizado %>%
   fit(card~ gasto + dependientes + ingreso + edad + propietario_si, data = entrena_prep)
 ```
 
-```{r}
+```{r, eval = FALSE}
 library(iml)
 modelo <- ajuste$fit
 entrena_x <- entrena_prep %>% dplyr::select(gasto, dependientes, ingreso, edad, propietario_si)
@@ -1019,6 +1019,11 @@ predictor <- Predictor$new(modelo, data = entrena_x, y = ifelse(entrena_prep$car
                            type = "prob")
 imp <- FeatureImp$new(predictor, loss = "ce", compare = "difference")
 plot(imp) + theme_minimal()
+```
+
+
+```{r, echo=FALSE, out.width="60%"}
+knitr::include_graphics("images/plot-feature-importance.png")
 ```
 
 * Se  ve  que,  para  esta  red  sin  capas  ocultas,  la  importancia  se  concentra  en  un  solo predictor, gasto ,  que  como  se  ve  representa  una  fuga  de  información.  Este  diagnóstico es útil en general y, aunque no tan dramático como este ejemplo, puede señalar cuáles variables es importante considerar con cuidado.
@@ -1035,7 +1040,7 @@ Pueden examinarse también promedios a lo largo de grupos de interés.
 
 Considérese el ejemplo  de  factores  para  detectar  una  enfermedad  del  corazón [@saheart]:
 
-```{r}
+```{r, eval=FALSE}
 modelo_sa <- sa_boosted$fit
 sa_entrena_x <- sa_entrena %>% dplyr::select(-enf_coronaria)
 predict_fun <- function(object, newdata){
@@ -1051,14 +1056,22 @@ valores_shapley <- Shapley$new(predictor, x.interest = (sa_entrena_x[15, ]))
 valores_shapley$plot() + theme_minimal()
 ```
 
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("images/plot-shapely.png")
+```
+
 En  este  caso,  varias  medidas  contribuyen  positivamente  a  la  probabilidad  de  enfermedad del corazón, como son uso de tabaco, edad y mediciones de colesterol. Estas contribuciones explican la probabilidad tan alta de este individuo particular. 
 
 En  contraste,  la  siguiente  persona  está  cerca  del  promedio,  aumentando  positivamente  la probabilidad  la  edad  y  la  medida  de  colesterol,  pero  negativamente  el  no  uso  de  tabaco  y ninguna historia familiar de diabetes:
 
-```{r}
+```{r, eval=FALSE}
 # el caso de interés es el caso 24
 valores_shapley <- Shapley$new(predictor, x.interest = (sa_entrena_x[24, ]))
 valores_shapley$plot() + theme_minimal()
+```
+
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("images/plot-shapely-2.png")
 ```
 
 Observación: igual que en el modelo y en las gráficas de dependencia parcial que se dis - cutieron anteriormente, estos coeficientes no deben interpretarse de manera causal (por ejemplo: es necesario bajar el colesterol para estos dos individuos). Esta es la información que usa el modelo para construir la predicción a partir de la predicción promedio sobre la población. 
