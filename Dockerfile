@@ -26,8 +26,8 @@ RUN chmod -R a+x ${PYTHON_VENV_PATH}
 
 RUN .${PYTHON_VENV_PATH}/bin/activate && \
  pip install --upgrade setuptools==42.0.2 && \
- pip install --upgrade tensorflow==2.0.0b1 \
-     keras==2.3.1 \ 
+ pip install --upgrade tensorflow==2.0.1 \
+     keras==2.3.1 \
      h5py==2.10.0 \
      requests==2.22.0 \
      Pillow==5.4.1 \
@@ -35,13 +35,13 @@ RUN .${PYTHON_VENV_PATH}/bin/activate && \
      --no-cache-dir
 
 RUN install2.r --error \
-     reticulate tensorflow  keras 
+     reticulate tensorflow  keras
 
 
 RUN install2.r --error \
      broom dials infer parsnip recipes \
-     rsample tune workflows yardstick themis \ 
-     ranger 
+     rsample tune workflows yardstick themis \
+     ranger
 
 RUN install2.r --error patchwork iml xgboost pdp
 
