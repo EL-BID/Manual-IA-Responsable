@@ -16,7 +16,7 @@ Los modelos de aprendizaje automático se entrenan principalmente para crear pre
 
 Para evitar que una partición aleatoria en datos de entrenamiento y validación favorezca o perjudique la evaluación, en general se hace una validación cruzada. Esta consiste en dividir los datos en *k* pedazos, calculando el promedio de *k* evaluaciones, donde los datos de validación son cada uno de los pedazos y los *k*-1 restantes son los datos de entrenamiento. Esto en inglés se llama *k-fold evaluation* y normalmente se escoge *k=5* o *k=10*.
 
-```{r ciclo, fig.cap="Etapas de evaluación. *Fuente:* Construcción propia", echo=FALSE, out.width="90%"}
+```{r ciclo, fig.topcaption=TRUE, fig.cap="Etapas de evaluación. *Fuente:* Construcción propia", echo=FALSE, out.width="90%"}
 knitr::include_graphics("images/etapas-modelo.png")
 ```
 El primer reto es no tener un proceso de validación apropiado o que incluso sea inexistente. En este caso, los resultados del modelo se presentarían únicamente con el desempeño del conjunto de datos de entrenamiento. Las métricas de desempeño de este conjunto no deberían utilizarse como indicador del potencial comportamiento del modelo para casos nuevos, pues se podría estar sobreestimando su desempeño. 
@@ -148,17 +148,17 @@ $$\text{Exactitud} = \frac{\text{ VP+VN }}{\text{ VP + VN + FP + FN}}$$
 
 2. **Precisión**: fracción de aquellos clasificados como positivos por el modelo que en reali - dad eran positivos:  
 
-$$\text{Precision} = \frac{VP}{VP+FP}$$
+$$\text{Precision} = \frac{\text{VP}}{\text{VP+FP}}$$
 
 3. **Sensibilidad (Recall)**: fracción de positivos que el modelo clasificó correctamente: 
 
 
-$$\text{Sensibilidad} = \frac{VP}{VP+FN}$$
+$$\text{Sensibilidad} = \frac{\text{VP}}{\text{VP+FN}}$$
 3. **Especificidad**: fracción de negativos que el modelo clasificó correctamente:  
  
 
 
-$$\text{Especificidad} = \frac{VN}{VN+FP}$$
+$$\text{Especificidad} = \frac{\text{VN}}{\text{VN+FP}}$$
 Es necesario tener en cuenta el contexto del problema a la hora de definir los criterios para evaluar los modelos de clasificación. Por ejemplo, si el modelo clasifica la prevalencia de una enfermedad mortal, el costo de no diagnosticar (falso negativo) es mucho mayor que el costo de enviar a una persona sana a hacerse más pruebas (falso positivo). En otras palabras, dependiendo de la aplicación, el costo de los falsos negativos puede ser muy diferente del costo de los falsos positivos. Por ello, se recomienda el uso del análisis costo-beneficio, porque compara el resultado del modelo en el contexto de la toma de decisiones. 
 
 Estos criterios también pueden ser engañosos en función de la composición de la base de datos de entrenamiento y evaluación. Por ejemplo, cuando se utilizan datos desbalanceados, una precisión de 95 % puede significar en realidad un rendimiento inferior del modelo. Las soluciones parciales a este problema incluyen el uso de medidas que combinan la precisión y la sensibilidad, como la métrica F1 o la curva Precision-Recall , que pueden ayudar a analizar el equilibrio entre los verdaderos positivos y los falsos positivos en el contexto de la aplicación. 
@@ -182,7 +182,7 @@ Sub y sobreajuste ocurren cuando la información predictiva en los datos se usa 
 
 * El **subajuste** se produce cuando el modelo es incapaz de funcionar bien con los datos de entrenamiento o de generalizar con los nuevos datos. Esto ocurre cuando las características individuales de las observaciones se agrupan en exceso y se les da poca importancia. Un modelo poco ajustado tiende a ignorar los patrones de la estructura predictiva. Esto se refleja en errores sistemáticos e identificables, por ejemplo, sub/sobre predicción sistemática para ciertos grupos o valores de las variables de entrada. 
 
-```{r sub-sobre-ajuste, fig.cap="Sub y sobreajuste. *Fuente:* Preparado por los autores", echo=FALSE, out.width="90%"}
+```{r sub-sobre-ajuste,fig.topcaption=TRUE, fig.cap="Sub y sobreajuste. *Fuente:* Preparado por los autores", echo=FALSE, out.width="90%"}
 knitr::include_graphics("images/under_over_fit.png")
 ```
 
