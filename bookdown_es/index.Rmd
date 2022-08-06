@@ -16,7 +16,7 @@ biblio-style: apalike
 
 # Manual de ciencia de datos {-}
 
-```{r cover, fig.cap="Portada", echo=FALSE, out.width="80%"}
+```{r cover, echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/cover.png")
 ```
 
