@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Referencias | IA Responsable (Ciclo de vida de IA)</title>
+  <title>Referencias | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</title>
   <meta name="description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Referencias | IA Responsable (Ciclo de vida de IA)" />
+  <meta property="og:title" content="Referencias | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Referencias | IA Responsable (Ciclo de vida de IA)" />
+  <meta name="twitter:title" content="Referencias | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
   
   <meta name="twitter:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
   
@@ -31,7 +30,8 @@
   
 <link rel="prev" href="cuadernillos-de-trabajo.html"/>
 
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,29 +47,34 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="../images/favicon.ico"/>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -113,6 +118,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/toc.css" type="text/css" />
 </head>
@@ -130,80 +158,125 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./index.html">IA Responsable</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Manual Técnico</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><i class="fa fa-check"></i>Uso responsable de la IA para las políticas públicas</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#manual-de-ciencia-de-datos"><i class="fa fa-check"></i>Manual de ciencia de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#organización-para-la-cooperación-y-el-desarrollo-económicos"><i class="fa fa-check"></i>Organización para la Cooperación y el Desarrollo Económicos</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#oecd---ai-policy-observatory"><i class="fa fa-check"></i>OECD - AI Policy Observatory</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a><ul>
-<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>ML y sistemas de toma/soporte de decisiones</a></li>
-<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a><ul>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html"><i class="fa fa-check"></i>Resumen Ejecutivo</a>
+<ul>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glosario.html"><a href="glosario.html"><i class="fa fa-check"></i>Glosario</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#machine-learning-ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>Machine Learning (ML) y sistemas de toma/soporte de decisiones</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a>
+<ul>
 <li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ciclo-de-vida-de-la-política-pública-con-ia"><i class="fa fa-check"></i>Ciclo de vida de la política pública con IA</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#retos-del-ciclo-de-vida-del-ml"><i class="fa fa-check"></i>Retos del ciclo de vida del ML</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a><ul>
+<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#definición-correcta-del-problema-y-de-la-respuesta-de-política-pública"><i class="fa fa-check"></i><b>1.1</b> Definición correcta del problema y de la respuesta de política pública</a></li>
-<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#necesidad-y-proporcionalidad"><i class="fa fa-check"></i><b>1.2</b> Necesidad y Proporcionalidad</a></li>
+<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#principios-de-ia-responsable"><i class="fa fa-check"></i><b>1.2</b> Principios de IA responsable</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html"><i class="fa fa-check"></i><b>2</b> Fuente y manejo de datos</a><ul>
-<li class="chapter" data-level="2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#reto-estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Reto: Estados indeseables o subóptimos en datos recolectados</a></li>
-<li class="chapter" data-level="2.1.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
+<li class="chapter" data-level="2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html"><i class="fa fa-check"></i><b>2</b> Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Estados indeseables o subóptimos en datos recolectados</a></li>
+<li class="chapter" data-level="2.1.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#información-incompleta-acerca-de-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Información incompleta acerca de la población objetivo</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
-<li class="chapter" data-level="2.2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
+<li class="chapter" data-level="2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#cualificación-y-exhaustividad-de-los-datos-para-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Cualificación y exhaustividad de los datos para la población objetivo</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="2.2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
+<li class="chapter" data-level="2.3" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html"><i class="fa fa-check"></i><b>3</b> Desarrollo de modelos</a><ul>
-<li class="chapter" data-level="3.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#ausencia-y-errores-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia y errores de validación</a></li>
-<li class="chapter" data-level="3.2" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-datos---variables-no-disponbiles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.1</b> Fugas de datos - Variables no disponbiles en la predicción</a></li>
+<li class="chapter" data-level="3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html"><i class="fa fa-check"></i><b>3</b> Desarrollo del modelo y validación</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#ausencia-o-uso-inadecuado-de-muestras-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia o uso inadecuado de muestras de validación</a></li>
+<li class="chapter" data-level="3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#contaminación-entrenamiento-validación"><i class="fa fa-check"></i><b>3.2.1</b> Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="3.2.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-datos-no-disponibles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.2</b> Fugas de datos no disponibles en la predicción</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Clasificación: probabilidades y clases</a></li>
-<li class="chapter" data-level="3.4" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
-<li class="chapter" data-level="3.5" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a></li>
-<li class="chapter" data-level="3.6" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a></li>
+<li class="chapter" data-level="3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#modelos-de-clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Modelos de clasificación: probabilidades y clases</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#datos-desbalanceados"><i class="fa fa-check"></i><b>3.3.1</b> Datos desbalanceados</a></li>
+<li class="chapter" data-level="3.3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#puntos-de-corte-arbitrarios"><i class="fa fa-check"></i><b>3.3.2</b> Puntos de corte arbitrarios</a></li>
+<li class="chapter" data-level="3.3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#idoneidad-de-las-métricas-de-evaluación"><i class="fa fa-check"></i><b>3.3.3</b> Idoneidad de las métricas de evaluación</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a><ul>
+<li class="chapter" data-level="3.4" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
+<li class="chapter" data-level="3.5" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fallas-no-medidas-por-el-modelo"><i class="fa fa-check"></i><b>3.5.1</b> Fallas no medidas por el modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#definición-de-justicia-y-equidad-algorítmica"><i class="fa fa-check"></i><b>3.6.1</b> Definición de justicia y equidad algorítmica</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#degradación-de-desempeño"><i class="fa fa-check"></i><b>4.1</b> Degradación de desempeño</a></li>
 <li class="chapter" data-level="4.2" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#experimentos-y-recopilación-de-datos"><i class="fa fa-check"></i><b>4.2</b> Experimentos y recopilación de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a><ul>
-<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a></li>
-<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.2</b> Explicabilidad de predicciones individuales</a></li>
-<li class="chapter" data-level="5.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.3</b> Trazabilidad</a></li>
+<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad"><i class="fa fa-check"></i><b>5.1.1</b> Interpretabilidad</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.1.2</b> Explicabilidad de predicciones individuales</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#modelos-parsimoniosos"><i class="fa fa-check"></i><b>5.1.3</b> Modelos parsimoniosos</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a><ul>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-checklist-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación (Checklist) de IA robusta y responsable</a></li>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a></li>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo</a></li>
+<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.2</b> Trazabilidad</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a><ul>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-de-métrica-y-objetivos"><i class="fa fa-check"></i>Mala correspondencia de métrica y objetivos</a></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-y-sesgo"><i class="fa fa-check"></i>Muestras naturales y sesgo</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-mala-representatividad"><i class="fa fa-check"></i><b>5.3.1</b> Muestras naturales: mala representatividad</a></li>
-<li class="chapter" data-level="5.3.2" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#natural"><i class="fa fa-check"></i><b>5.3.2</b> Muestras naturales: comparaciones causales</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación de IA robusta y responsable</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#fuente-de-recolección-y-origen-de-los-datos"><i class="fa fa-check"></i>Fuente de recolección y origen de los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-los-modelos"><i class="fa fa-check"></i>Desarrollo de los modelos</a></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-entrenamiento-validación"><i class="fa fa-check"></i>Fugas Entrenamiento Validación</a><ul>
-<li class="chapter" data-level="5.3.3" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#selección-de-variables-antes-de-dividir-los-datos"><i class="fa fa-check"></i><b>5.3.3</b> Selección de variables antes de dividir los datos</a></li>
-<li class="chapter" data-level="5.3.4" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i><b>5.3.4</b> Sobremuestrear antes de particionar</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo-model-card"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo (Model Card)</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-en-implementación"><i class="fa fa-check"></i>Fugas en implementación</a><ul>
-<li class="chapter" data-level="5.3.5" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-al-momento-de-predicción"><i class="fa fa-check"></i><b>5.3.5</b> Variables no disponibles al momento de predicción</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#recolección-y-procesamiento-de-datos-1"><i class="fa fa-check"></i>Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales-1"><i class="fa fa-check"></i>Mala correspondencia entre variables disponibles y variables ideales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-probabilísticas-y-naturales-1"><i class="fa fa-check"></i>Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-comparaciones-causales"><i class="fa fa-check"></i>Muestras naturales: comparaciones causales</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#evaluación-de-punto-de-corte"><i class="fa fa-check"></i>Evaluación de punto de corte</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-modelo-y-validación"><i class="fa fa-check"></i>Desarrollo de modelo y validación</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#contaminación-entrenamiento-validación-1"><i class="fa fa-check"></i>Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i>Sobremuestrear antes de particionar</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-en-el-momento-de-predicción"><i class="fa fa-check"></i>Variables no disponibles en el momento de predicción</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#puntos-de-corte-arbitrarios-1"><i class="fa fa-check"></i>Puntos de corte arbitrarios</a></li>
 <li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desbalance-de-clases"><i class="fa fa-check"></i>Desbalance de clases</a></li>
 <li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#equidad-con-atributos-protegidos"><i class="fa fa-check"></i>Equidad con atributos protegidos</a></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad"><i class="fa fa-check"></i>Interpretabilidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#rendición-de-cuentas-2"><i class="fa fa-check"></i>Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad-1"><i class="fa fa-check"></i>Interpretabilidad</a></li>
 <li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#explicación-de-predicciones"><i class="fa fa-check"></i>Explicación de predicciones</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
 <li class="divider"></li>
@@ -218,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">IA Responsable (Ciclo de vida de IA)</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</a>
           </h1>
         </div>
 
@@ -226,168 +299,171 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="referencias" class="section level1 unnumbered">
-<h1>Referencias</h1>
+<div id="referencias" class="section level1 unnumbered hasAnchor">
+<h1>Referencias<a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-<div id="refs" class="references">
-<div id="ref-barocas">
-<p>Barocas, Solon, and Andrew D. Selbst. 2014. “Big Data’s Disparate Impact.” Working Paper Series. <em>SSRN eLibrary</em>. http://ssrn.com/paper=2477899: SSRN.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-barocas" class="csl-entry">
+Barocas, Solon, and Andrew D. Selbst. 2014. <span>“<span class="nocase">Big Data’s Disparate Impact</span>.”</span> Working Paper Series. <em>SSRN eLibrary</em>.
 </div>
-<div id="ref-bolukbasi">
-<p>Bolukbasi, Tolga, Kai-Wei Chang, James Y. Zou, Venkatesh Saligrama, and Adam Tauman Kalai. 2016. “Man Is to Computer Programmer as Woman Is to Homemaker? Debiasing Word Embeddings.” <em>ArXiv</em> abs/1607.06520.</p>
+<div id="ref-bolukbasi" class="csl-entry">
+Bolukbasi, Tolga, Kai-Wei Chang, James Y. Zou, Venkatesh Saligrama, and Adam Tauman Kalai. 2016. <span>“Man Is to Computer Programmer as Woman Is to Homemaker? Debiasing Word Embeddings.”</span> <em>ArXiv</em> abs/1607.06520.
 </div>
-<div id="ref-breimanrandom">
-<p>Breiman, Leo. 2001. “Random Forests.” <em>Machine Learning</em> 45 (1). Kluwer Academic Publishers: 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>.</p>
+<div id="ref-breimanrandom" class="csl-entry">
+Breiman, Leo. 2001. <span>“Random Forests.”</span> <em>Machine Learning</em> 45 (1): 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>.
 </div>
-<div id="ref-boulamwini">
-<p>Buolamwini, Joy, and Timnit Gebru. 2018. “Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification.” In <em>Proceedings of the 1st Conference on Fairness, Accountability and Transparency</em>, edited by Sorelle A. Friedler and Christo Wilson, 81:77–91. Proceedings of Machine Learning Research. New York, NY, USA: PMLR. <a href="http://proceedings.mlr.press/v81/buolamwini18a.html">http://proceedings.mlr.press/v81/buolamwini18a.html</a>.</p>
+<div id="ref-boulamwini" class="csl-entry">
+Buolamwini, Joy, and Timnit Gebru. 2018. <span>“Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification.”</span> In <em>Proceedings of the 1st Conference on Fairness, Accountability and Transparency</em>, edited by Sorelle A. Friedler and Christo Wilson, 81:77–91. Proceedings of Machine Learning Research. New York, NY, USA: PMLR. <a href="http://proceedings.mlr.press/v81/buolamwini18a.html">http://proceedings.mlr.press/v81/buolamwini18a.html</a>.
 </div>
-<div id="ref-carrillo">
-<p>Carrillo, Cantú, A. 2020. “Individual Explanations in Machine.” <em>IADB</em>.</p>
+<div id="ref-carrillo" class="csl-entry">
+Carrillo, Cantú, A. 2020. <span>“Individual Explanations in Machine.”</span> <em>IADB</em>.
 </div>
-<div id="ref-chawla">
-<p>Chawla, Nitesh V., Kevin W. Bowyer, Lawrence O. Hall, and W. Philip Kegelmeyer. 2002. “SMOTE: Synthetic Minority over-Sampling Technique.” <em>Journal of Artificial Intelligence Research</em> 16: 321–57.</p>
+<div id="ref-chawla" class="csl-entry">
+Chawla, Nitesh V., Kevin W. Bowyer, Lawrence O. Hall, and W. Philip Kegelmeyer. 2002. <span>“SMOTE: Synthetic Minority over-Sampling Technique.”</span> <em>Journal of Artificial Intelligence Research</em> 16: 321–57.
 </div>
-<div id="ref-fair">
-<p>Cristina Pombo, Natalia González Alarcón, Marcelo Cabrol. 2020. “FAIr Lac: Adopción ética Y Responsable de La Inteligencia Artificial En América Latina Y El Caribe.” <em>Nota Técnica No. IDB-TN-1839</em>.</p>
+<div id="ref-fair" class="csl-entry">
+Cristina Pombo, Natalia González Alarcón, Marcelo Cabrol. 2020. <span>“fAIr LAC: Adopción Ética y Responsable de La Inteligencia Artificial En América Latina y El Caribe.”</span> <em>Nota Técnica No. IDB-TN-1839</em>.
 </div>
-<div id="ref-drivendata2019">
-<p>DrivenData. 2019. “An Ethics Checklist for Data Scientists.” <a href="https://deon.drivendata.org/">https://deon.drivendata.org/</a>.</p>
+<div id="ref-drivendata2019" class="csl-entry">
+DrivenData. 2019. <span>“An Ethics Checklist for Data Scientists.”</span> <a href="https://deon.drivendata.org/">https://deon.drivendata.org/</a>.
 </div>
-<div id="ref-friedman">
-<p>Friedman, Jerome H. 2001. “Greedy Function Approximation: A Gradient Boosting Machine.” <em>The Annals of Statistics</em> 29 (5). Institute of Mathematical Statistics: 1189–1232. <a href="http://www.jstor.org/stable/2699986">http://www.jstor.org/stable/2699986</a>.</p>
+<div id="ref-friedman" class="csl-entry">
+Friedman, Jerome H. 2001. <span>“Greedy Function Approximation: A Gradient Boosting Machine.”</span> <em>The Annals of Statistics</em> 29 (5): 1189–1232. <a href="http://www.jstor.org/stable/2699986">http://www.jstor.org/stable/2699986</a>.
 </div>
-<div id="ref-frit">
-<p>Fritzler, A. 2015. “An Ethical Checklist for Data Sciencie.”</p>
+<div id="ref-frit" class="csl-entry">
+Fritzler, A. 2015. <span>“An Ethical Checklist for Data Sciencie.”</span>
 </div>
-<div id="ref-gebru">
-<p>Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III au2, and Kate Crawford. 2020. “Datasheets for Datasets.”</p>
+<div id="ref-gebru" class="csl-entry">
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III au2, and Kate Crawford. 2020. <span>“Datasheets for Datasets.”</span> <a href="https://arxiv.org/abs/1803.09010">https://arxiv.org/abs/1803.09010</a>.
 </div>
-<div id="ref-GelmanHill">
-<p>Gelman, Andrew, and Jennifer Hill. 2006. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. 1st ed. Cambridge University Press. <a href="http://www.amazon.com/Analysis-Regression-Multilevel-Hierarchical-Models/dp/052168689X/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1313405184&amp;sr=1-1">http://www.amazon.com/Analysis-Regression-Multilevel-Hierarchical-Models/dp/052168689X/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1313405184&amp;sr=1-1</a>.</p>
+<div id="ref-GelmanHill" class="csl-entry">
+Gelman, Andrew, and Jennifer Hill. 2006. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. 1st ed. Cambridge University Press. <a href="http://www.amazon.com/Analysis-Regression-Multilevel-Hierarchical-Models/dp/052168689X/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1313405184&amp;sr=1-1">http://www.amazon.com/Analysis-Regression-Multilevel-Hierarchical-Models/dp/052168689X/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1313405184&amp;sr=1-1</a>.
 </div>
-<div id="ref-greene">
-<p>Greene, W.H. 2003. <em>Econometric Analysis</em>. Pearson Education. <a href="https://books.google.com.mx/books?id=njAcXDlR5U8C">https://books.google.com.mx/books?id=njAcXDlR5U8C</a>.</p>
+<div id="ref-greene" class="csl-entry">
+Greene, W. H. 2003. <em>Econometric Analysis</em>. Pearson Education. <a href="https://books.google.com.mx/books?id=njAcXDlR5U8C">https://books.google.com.mx/books?id=njAcXDlR5U8C</a>.
 </div>
-<div id="ref-hardt">
-<p>Hardt, Moritz, Eric Price, and Nathan Srebro. 2016. “Equality of Opportunity in Supervised Learning.” <em>CoRR</em> abs/1610.02413. <a href="http://arxiv.org/abs/1610.02413">http://arxiv.org/abs/1610.02413</a>.</p>
+<div id="ref-hardt" class="csl-entry">
+Hardt, Moritz, Eric Price, and Nathan Srebro. 2016. <span>“Equality of Opportunity in Supervised Learning.”</span> <em>CoRR</em> abs/1610.02413. <a href="http://arxiv.org/abs/1610.02413">http://arxiv.org/abs/1610.02413</a>.
 </div>
-<div id="ref-ESL">
-<p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2017. <em>The Elements of Statistical Learning</em>. Springer Series in Statistics. Springer New York Inc. <a href="http://web.stanford.edu/~hastie/ElemStatLearn/">http://web.stanford.edu/~hastie/ElemStatLearn/</a>.</p>
+<div id="ref-ESL" class="csl-entry">
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2017. <em>The Elements of Statistical Learning</em>. Springer Series in Statistics. Springer New York Inc. <a href="http://web.stanford.edu/~hastie/ElemStatLearn/">http://web.stanford.edu/~hastie/ElemStatLearn/</a>.
 </div>
-<div id="ref-themis">
-<p>Hvitfeldt, Emil. 2020. <em>Themis: Extra Recipes Steps for Dealing with Unbalanced Data</em>. <a href="https://CRAN.R-project.org/package=themis">https://CRAN.R-project.org/package=themis</a>.</p>
+<div id="ref-themis" class="csl-entry">
+Hvitfeldt, Emil. 2020. <em>Themis: Extra Recipes Steps for Dealing with Unbalanced Data</em>. <a href="https://CRAN.R-project.org/package=themis">https://CRAN.R-project.org/package=themis</a>.
 </div>
-<div id="ref-king">
-<p>Imai, Kosuke, Gary King, and Elizabeth Stuart. 2008. “Misunderstandings Among Experimentalists and Observationalists About Causal Inference.” <em>Journal of the Royal Statistical Society, Series A</em> 171, part 2: 481502.</p>
+<div id="ref-king" class="csl-entry">
+Imai, Kosuke, Gary King, and Elizabeth Stuart. 2008. <span>“Misunderstandings Among Experimentalists and Observationalists about Causal Inference.”</span> <em>Journal of the Royal Statistical Society, Series A</em> 171, part 2: 481502.
 </div>
-<div id="ref-enigh">
-<p>INEGI. 2014. “Encuesta Nacional de Ingresos Y Gastos de Los Hogares (Enigh-2014). Diseño Muestral.” <a href="http://internet.contenidos.inegi.org.mx/contenidos/Productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825070359.pdf">http://internet.contenidos.inegi.org.mx/contenidos/Productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825070359.pdf</a>.</p>
+<div id="ref-enigh" class="csl-entry">
+INEGI. 2014. <span>“Encuesta Nacional de Ingresos y Gastos de Los Hogares (ENIGH-2014). Diseño Muestral.”</span> <a href="http://internet.contenidos.inegi.org.mx/contenidos/Productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825070359.pdf">http://internet.contenidos.inegi.org.mx/contenidos/Productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/702825070359.pdf</a>.
 </div>
-<div id="ref-wilson">
-<p>J., Wilson. 2014. “CWhat Your Iq Score Doesn’t Tell You.” <em>CNN</em>.</p>
+<div id="ref-james" class="csl-entry">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer. <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">https://faculty.marshall.usc.edu/gareth-james/ISL/</a>.
 </div>
-<div id="ref-ISLR">
-<p>James, Gareth, Daniela Witten, Trevor Hastie, and Rob Tibshirani. 2017. <em>ISLR: Data for an Introduction to Statistical Learning with Applications in R</em>. <a href="https://CRAN.R-project.org/package=ISLR">https://CRAN.R-project.org/package=ISLR</a>.</p>
+<div id="ref-Jobin" class="csl-entry">
+Jobin, Anna, Marcello Ienca, and Effy Vayena. 2019. <span>“The Global Landscape of AI Ethics Guidelines.”</span> <em>Nature Machine Intelligence</em>. <a href="https://www.nature.com/articles/s42256-019-0088-2">https://www.nature.com/articles/s42256-019-0088-2</a>.
 </div>
-<div id="ref-james">
-<p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in R</em>. Springer. <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">https://faculty.marshall.usc.edu/gareth-james/ISL/</a>.</p>
+<div id="ref-kaufman" class="csl-entry">
+Kaufman, Shachar, Saharon Rosset, and Claudia Perlich. 2011. <span>“Leakage in Data Mining: Formulation, Detection, and Avoidance.”</span> In <em>Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 6:556–63. <a href="https://doi.org/10.1145/2020408.2020496">https://doi.org/10.1145/2020408.2020496</a>.
 </div>
-<div id="ref-Jobin">
-<p>Jobin, Anna, Marcello Ienca, and Effy Vayena. 2019. “The Global Landscape of Ai Ethics Guidelines.” <em>Nature Machine Intelligence</em>. <a href="https://www.nature.com/articles/s42256-019-0088-2">https://www.nature.com/articles/s42256-019-0088-2</a>.</p>
+<div id="ref-tune" class="csl-entry">
+Kuhn, Max. 2020. <em>Tune: Tidy Tuning Tools</em>. <a href="https://CRAN.R-project.org/package=tune">https://CRAN.R-project.org/package=tune</a>.
 </div>
-<div id="ref-kaufman">
-<p>Kaufman, Shachar, Saharon Rosset, and Claudia Perlich. 2011. “Leakage in Data Mining: Formulation, Detection, and Avoidance.” In <em>Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 6:556–63. <a href="https://doi.org/10.1145/2020408.2020496">https://doi.org/10.1145/2020408.2020496</a>.</p>
+<div id="ref-rsample" class="csl-entry">
+Kuhn, Max, Fanny Chow, and Hadley Wickham. 2020. <em>Rsample: General Resampling Infrastructure</em>. <a href="https://CRAN.R-project.org/package=rsample">https://CRAN.R-project.org/package=rsample</a>.
 </div>
-<div id="ref-tune">
-<p>Kuhn, Max. 2020. <em>Tune: Tidy Tuning Tools</em>. <a href="https://CRAN.R-project.org/package=tune">https://CRAN.R-project.org/package=tune</a>.</p>
+<div id="ref-parsnip" class="csl-entry">
+Kuhn, Max, and Davis Vaughan. 2020a. <em>Parsnip: A Common API to Modeling and Analysis Functions</em>. <a href="https://CRAN.R-project.org/package=parsnip">https://CRAN.R-project.org/package=parsnip</a>.
 </div>
-<div id="ref-rsample">
-<p>Kuhn, Max, Fanny Chow, and Hadley Wickham. 2020. <em>Rsample: General Resampling Infrastructure</em>. <a href="https://CRAN.R-project.org/package=rsample">https://CRAN.R-project.org/package=rsample</a>.</p>
+<div id="ref-yardstick" class="csl-entry">
+———. 2020b. <em>Yardstick: Tidy Characterizations of Model Performance</em>. <a href="https://CRAN.R-project.org/package=yardstick">https://CRAN.R-project.org/package=yardstick</a>.
 </div>
-<div id="ref-parsnip">
-<p>Kuhn, Max, and Davis Vaughan. 2020a. <em>Parsnip: A Common Api to Modeling and Analysis Functions</em>. <a href="https://CRAN.R-project.org/package=parsnip">https://CRAN.R-project.org/package=parsnip</a>.</p>
+<div id="ref-recipes" class="csl-entry">
+Kuhn, Max, and Hadley Wickham. 2020. <em>Recipes: Preprocessing Tools to Create Design Matrices</em>. <a href="https://CRAN.R-project.org/package=recipes">https://CRAN.R-project.org/package=recipes</a>.
 </div>
-<div id="ref-yardstick">
-<p>———. 2020b. <em>Yardstick: Tidy Characterizations of Model Performance</em>. <a href="https://CRAN.R-project.org/package=yardstick">https://CRAN.R-project.org/package=yardstick</a>.</p>
+<div id="ref-kuhn" class="csl-entry">
+Kuhn, M., and K. Johnson. 2013. <em>Applied Predictive Modeling</em>. SpringerLink : B<span>ü</span>cher. Springer New York. <a href="https://books.google.com.mx/books?id=xYRDAAAAQBAJ">https://books.google.com.mx/books?id=xYRDAAAAQBAJ</a>.
 </div>
-<div id="ref-recipes">
-<p>Kuhn, Max, and Hadley Wickham. 2020. <em>Recipes: Preprocessing Tools to Create Design Matrices</em>. <a href="https://CRAN.R-project.org/package=recipes">https://CRAN.R-project.org/package=recipes</a>.</p>
+<div id="ref-hipertension" class="csl-entry">
+Lackland, Daniel. 2014. <span>“Racial Differences in Hypertension: Implications for High Blood Pressure Management.”</span> <em>The American Journal of the Medical Sciences</em> 348 (June). <a href="https://doi.org/10.1097/MAJ.0000000000000308">https://doi.org/10.1097/MAJ.0000000000000308</a>.
 </div>
-<div id="ref-kuhn">
-<p>Kuhn, M., and K. Johnson. 2013. <em>Applied Predictive Modeling</em>. SpringerLink : Bücher. Springer New York. <a href="https://books.google.com.mx/books?id=xYRDAAAAQBAJ">https://books.google.com.mx/books?id=xYRDAAAAQBAJ</a>.</p>
+<div id="ref-missingrubin" class="csl-entry">
+Little, R. J. A., and D. B. Rubin. 2002. <em>Statistical Analysis with Missing Data</em>. Wiley Series in Probability and Mathematical Statistics. Probability and Mathematical Statistics. Wiley. <a href="http://books.google.com/books?id=aYPwAAAAMAAJ">http://books.google.com/books?id=aYPwAAAAMAAJ</a>.
 </div>
-<div id="ref-hipertension">
-<p>Lackland, Daniel. 2014. “Racial Differences in Hypertension: Implications for High Blood Pressure Management.” <em>The American Journal of the Medical Sciences</em> 348 (June). <a href="https://doi.org/10.1097/MAJ.0000000000000308">https://doi.org/10.1097/MAJ.0000000000000308</a>.</p>
+<div id="ref-lohr" class="csl-entry">
+Lohr, S. L. 2009. <em>Sampling: Design and Analysis</em>. Advanced (Cengage Learning). Cengage Learning. <a href="https://books.google.com.mx/books?id=aSXKXbyNlMQC">https://books.google.com.mx/books?id=aSXKXbyNlMQC</a>.
 </div>
-<div id="ref-missingrubin">
-<p>Little, R.J.A., and D.B. Rubin. 2002. <em>Statistical Analysis with Missing Data</em>. Wiley Series in Probability and Mathematical Statistics. Probability and Mathematical Statistics. Wiley. <a href="http://books.google.com/books?id=aYPwAAAAMAAJ">http://books.google.com/books?id=aYPwAAAAMAAJ</a>.</p>
+<div id="ref-NIPS2017_7062" class="csl-entry">
+Lundberg, Scott M, and Su-In Lee. 2017. <span>“A Unified Approach to Interpreting Model Predictions.”</span> In <em>Advances in Neural Information Processing Systems 30</em>, edited by I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, 4765–74. Curran Associates, Inc. <a href="http://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions.pdf">http://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions.pdf</a>.
 </div>
-<div id="ref-lohr">
-<p>Lohr, S.L. 2009. <em>Sampling: Design and Analysis</em>. Advanced (Cengage Learning). Cengage Learning. <a href="https://books.google.com.mx/books?id=aSXKXbyNlMQC">https://books.google.com.mx/books?id=aSXKXbyNlMQC</a>.</p>
+<div id="ref-shapley" class="csl-entry">
+Lundberg, Scott, and Su-In Lee. 2017. <span>“A Unified Approach to Interpreting Model Predictions.”</span> <em>ArXiv</em> abs/1705.07874.
 </div>
-<div id="ref-shapley">
-<p>Lundberg, Scott, and Su-In Lee. 2017. “A Unified Approach to Interpreting Model Predictions.” <em>ArXiv</em> abs/1705.07874.</p>
+<div id="ref-mellon2017twitter" class="csl-entry">
+Mellon, Jonathan, and Christopher Prosser. 2017. <span>“Twitter and Facebook Are Not Representative of the General Population: Political Attitudes and Demographics of British Social Media Users.”</span> <em>Research &amp; Politics</em> 4 (3): 2053168017720008.
 </div>
-<div id="ref-miller">
-<p>Miller, Tim. 2019. “Explanation in Artificial Intelligence: Insights from the Social Sciences.” <em>Artif. Intell.</em> 267: 1–38.</p>
+<div id="ref-miller" class="csl-entry">
+Miller, Tim. 2019. <span>“Explanation in Artificial Intelligence: Insights from the Social Sciences.”</span> <em>Artif. Intell.</em> 267: 1–38.
 </div>
-<div id="ref-Mitchell">
-<p>Mitchell, Margaret, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji, and Timnit Gebru. 2018. “Model Cards for Model Reporting.” <em>CoRR</em> abs/1810.03993. <a href="http://arxiv.org/abs/1810.03993">http://arxiv.org/abs/1810.03993</a>.</p>
+<div id="ref-Mitchell" class="csl-entry">
+Mitchell, Margaret, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji, and Timnit Gebru. 2018. <span>“Model Cards for Model Reporting.”</span> <em>CoRR</em> abs/1810.03993. <a href="http://arxiv.org/abs/1810.03993">http://arxiv.org/abs/1810.03993</a>.
 </div>
-<div id="ref-molnar2019">
-<p>Molnar, Christoph. 2019. <em>Interpretable Machine Learning: A Guide for Making Black Box Models Explainable</em>.</p>
+<div id="ref-molnar2019" class="csl-entry">
+Molnar, Christoph. 2019. <em>Interpretable Machine Learning: A Guide for Making Black Box Models Explainable</em>.
 </div>
-<div id="ref-Obermeyer4">
-<p>Obermeyer, Ziad, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. 2019. “Dissecting Racial Bias in an Algorithm Used to Manage the Health of Populations.” <em>Science</em> 366 (6464). American Association for the Advancement of Science: 447–53. <a href="https://doi.org/10.1126/science.aax2342">https://doi.org/10.1126/science.aax2342</a>.</p>
+<div id="ref-Obermeyer4" class="csl-entry">
+Obermeyer, Ziad, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. 2019. <span>“Dissecting Racial Bias in an Algorithm Used to Manage the Health of Populations.”</span> <em>Science</em> 366 (6464): 447–53. <a href="https://doi.org/10.1126/science.aax2342">https://doi.org/10.1126/science.aax2342</a>.
 </div>
-<div id="ref-oecd2019">
-<p>OECD. 2019. <em>Artificial Intelligence in Society</em>. <a href="https://doi.org/https://doi.org/https://doi.org/10.1787/eedfee77-en">https://doi.org/https://doi.org/https://doi.org/10.1787/eedfee77-en</a>.</p>
+<div id="ref-oecd2019c" class="csl-entry">
+OECD. 2019c. <em>Artificial Intelligence in Society</em>. https://doi.org/<a href="https://doi.org/https://doi.org/10.1787/eedfee77-en">https://doi.org/https://doi.org/10.1787/eedfee77-en</a>.
 </div>
-<div id="ref-patchwork">
-<p>Pedersen, Thomas Lin. 2019. <em>Patchwork: The Composer of Plots</em>. <a href="https://CRAN.R-project.org/package=patchwork">https://CRAN.R-project.org/package=patchwork</a>.</p>
+<div id="ref-oecd2021" class="csl-entry">
+———. 2021. <em>Https://Www.oecd.org/Digital/Digital-Government/Good-Practice-Principles-for-Data-Ethics-in-the-Public-Sector.htm</em>. <a href="https://www.oecd.org/digital/digital-government/good-practice-principles-for-data-ethics-in-the-public-sector.htm">https://www.oecd.org/digital/digital-government/good-practice-principles-for-data-ethics-in-the-public-sector.htm</a>.
 </div>
-<div id="ref-saheart">
-<p>Rossouw, Jacques E., Johan du Plessis, A J Spinnler Benadé, P C Jordaan, Johan Kotze, Pieter L. Jooste, and José Joaquim Ferreira. 1983. “Coronary Risk Factor Screening in Three Rural Communities. The Coris Baseline Study.” <em>South African Medical Journal = Suid-Afrikaanse Tydskrif Vir Geneeskunde</em> 64 12: 430–6.</p>
+<div id="ref-patchwork" class="csl-entry">
+Pedersen, Thomas Lin. 2019. <em>Patchwork: The Composer of Plots</em>. <a href="https://CRAN.R-project.org/package=patchwork">https://CRAN.R-project.org/package=patchwork</a>.
 </div>
-<div id="ref-gradient">
-<p>Sundararajan, Mukund, Ankur Taly, and Qiqi Yan. 2017. “Axiomatic Attribution for Deep Networks.” <em>ArXiv</em> abs/1703.01365.</p>
+<div id="ref-saheart" class="csl-entry">
+Rossouw, Jacques E., Johan du Plessis, A J Spinnler Benadé, P C Jordaan, Johan Kotze, Pieter L. Jooste, and José Joaquim Ferreira. 1983. <span>“Coronary Risk Factor Screening in Three Rural Communities. The CORIS Baseline Study.”</span> <em>South African Medical Journal = Suid-Afrikaanse Tydskrif Vir Geneeskunde</em> 64 12: 430–36.
 </div>
-<div id="ref-Suresh">
-<p>Suresh, Harini, and John V. Guttag. 2019. “A Framework for Understanding Unintended Consequences of Machine Learning.” <em>ArXiv</em> abs/1901.10002.</p>
+<div id="ref-gradient" class="csl-entry">
+Sundararajan, Mukund, Ankur Taly, and Qiqi Yan. 2017. <span>“Axiomatic Attribution for Deep Networks.”</span> <em>ArXiv</em> abs/1703.01365.
 </div>
-<div id="ref-mice">
-<p>van Buuren, Stef, and Karin Groothuis-Oudshoorn. 2011. “mice: Multivariate Imputation by Chained Equations in R.” <em>Journal of Statistical Software</em> 45 (3): 1–67. <a href="https://www.jstatsoft.org/v45/i03/">https://www.jstatsoft.org/v45/i03/</a>.</p>
+<div id="ref-Suresh" class="csl-entry">
+Suresh, Harini, and John V. Guttag. 2019. <span>“A Framework for Understanding Unintended Consequences of Machine Learning.”</span> <em>ArXiv</em> abs/1901.10002.
 </div>
-<div id="ref-workflows">
-<p>Vaughan, Davis. 2020. <em>Workflows: Modeling Workflows</em>. <a href="https://CRAN.R-project.org/package=workflows">https://CRAN.R-project.org/package=workflows</a>.</p>
+<div id="ref-mice" class="csl-entry">
+van Buuren, Stef, and Karin Groothuis-Oudshoorn. 2011. <span>“<span class="nocase">mice</span>: Multivariate Imputation by Chained Equations in r.”</span> <em>Journal of Statistical Software</em> 45 (3): 1–67. <a href="https://www.jstatsoft.org/v45/i03/">https://www.jstatsoft.org/v45/i03/</a>.
 </div>
-<div id="ref-vaver">
-<p>Vaver, Jon, and Jim Koehler. 2011. “Measuring Ad Effectiveness Using Geo Experiments.” Google Inc. <a href="http://googleresearch.blogspot.com/2011/12/measuring-ad-effectiveness-using-geo.html">http://googleresearch.blogspot.com/2011/12/measuring-ad-effectiveness-using-geo.html</a>.</p>
+<div id="ref-workflows" class="csl-entry">
+Vaughan, Davis. 2020. <em>Workflows: Modeling Workflows</em>. <a href="https://CRAN.R-project.org/package=workflows">https://CRAN.R-project.org/package=workflows</a>.
 </div>
-<div id="ref-verma">
-<p>Verma, Sahil, and Julia Rubin. 2018. “Fairness Definitions Explained.” In <em>Proceedings of the International Workshop on Software Fairness</em>, 1–7. FairWare ’18. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3194770.3194776">https://doi.org/10.1145/3194770.3194776</a>.</p>
+<div id="ref-vaver" class="csl-entry">
+Vaver, Jon, and Jim Koehler. 2011. <span>“Measuring Ad Effectiveness Using Geo Experiments.”</span> Google Inc. <a href="http://googleresearch.blogspot.com/2011/12/measuring-ad-effectiveness-using-geo.html">http://googleresearch.blogspot.com/2011/12/measuring-ad-effectiveness-using-geo.html</a>.
 </div>
-<div id="ref-wachter">
-<p>Wachter, Sandra, Brent D. Mittelstadt, and Chris Russell. 2017. “Counterfactual Explanations Without Opening the Black Box: Automated Decisions and the Gdpr.” <em>ArXiv</em> abs/1711.00399.</p>
+<div id="ref-verma" class="csl-entry">
+Verma, Sahil, and Julia Rubin. 2018. <span>“Fairness Definitions Explained.”</span> In <em>Proceedings of the International Workshop on Software Fairness</em>, 1–7. FairWare ’18. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3194770.3194776">https://doi.org/10.1145/3194770.3194776</a>.
 </div>
-<div id="ref-Athey">
-<p>Wager, Stefan, and Susan Athey. 2018. “Estimation and Inference of Heterogeneous Treatment Effects Using Random Forests.” <em>Journal of the American Statistical Association</em>. <a href="https://www.gsb.stanford.edu/faculty-research/publications/estimation-inference-heterogeneous-treatment-effects-using-random">https://www.gsb.stanford.edu/faculty-research/publications/estimation-inference-heterogeneous-treatment-effects-using-random</a>.</p>
+<div id="ref-wachter" class="csl-entry">
+Wachter, Sandra, Brent D. Mittelstadt, and Chris Russell. 2017. <span>“Counterfactual Explanations Without Opening the Black Box: Automated Decisions and the GDPR.”</span> <em>ArXiv</em> abs/1711.00399.
 </div>
-<div id="ref-tidyverse">
-<p>Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+<div id="ref-Athey" class="csl-entry">
+Wager, Stefan, and Susan Athey. 2018. <span>“Estimation and Inference of Heterogeneous Treatment Effects Using Random Forests.”</span> <em>Journal of the American Statistical Association</em>. <a href="https://www.gsb.stanford.edu/faculty-research/publications/estimation-inference-heterogeneous-treatment-effects-using-random">https://www.gsb.stanford.edu/faculty-research/publications/estimation-inference-heterogeneous-treatment-effects-using-random</a>.
 </div>
-<div id="ref-anemiaracial">
-<p>Williams, D M. 1981. “Racial differences of hemoglobin concentration: measurements of iron, copper, and zinc.” <em>The American Journal of Clinical Nutrition</em> 34 (9): 1694–1700. <a href="https://doi.org/10.1093/ajcn/34.9.1694">https://doi.org/10.1093/ajcn/34.9.1694</a>.</p>
+<div id="ref-tidyverse" class="csl-entry">
+Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
 </div>
-<div id="ref-knitr">
-<p>Xie, Yihui. 2019. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.name/knitr/">https://yihui.name/knitr/</a>.</p>
+<div id="ref-anemiaracial" class="csl-entry">
+Williams, D M. 1981. <span>“<span class="nocase">Racial differences of hemoglobin concentration: measurements of iron, copper, and zinc</span>.”</span> <em>The American Journal of Clinical Nutrition</em> 34 (9): 1694–1700. <a href="https://doi.org/10.1093/ajcn/34.9.1694">https://doi.org/10.1093/ajcn/34.9.1694</a>.
+</div>
+<div id="ref-wilson" class="csl-entry">
+Wilson, Jacque. 2014. <span>“What Your IQ Score Doesn’t Tell You.”</span> <em>CNN</em>.
+</div>
+<div id="ref-knitr" class="csl-entry">
+Xie, Yihui. 2019. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.name/knitr/">https://yihui.name/knitr/</a>.
 </div>
 </div>
 </div>
-
-
-
 
 
 
@@ -416,7 +492,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -435,6 +510,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -455,6 +531,10 @@ gitbook.start({
 "text": null
 },
 "download": ["IA-responsable.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true,

@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introducción | IA Responsable (Ciclo de vida de IA)</title>
+  <title>Introducción | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</title>
   <meta name="description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introducción | IA Responsable (Ciclo de vida de IA)" />
+  <meta property="og:title" content="Introducción | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introducción | IA Responsable (Ciclo de vida de IA)" />
+  <meta name="twitter:title" content="Introducción | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
   
   <meta name="twitter:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
   
@@ -29,9 +28,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
+<link rel="prev" href="glosario.html"/>
 <link rel="next" href="conceptualización-y-diseño.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,29 +47,34 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="../images/favicon.ico"/>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -113,6 +118,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <link rel="stylesheet" href="css/toc.css" type="text/css" />
 </head>
@@ -130,80 +158,125 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./index.html">IA Responsable</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Manual Técnico</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><i class="fa fa-check"></i>Uso responsable de la IA para las políticas públicas</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#manual-de-ciencia-de-datos"><i class="fa fa-check"></i>Manual de ciencia de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#organización-para-la-cooperación-y-el-desarrollo-económicos"><i class="fa fa-check"></i>Organización para la Cooperación y el Desarrollo Económicos</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#oecd---ai-policy-observatory"><i class="fa fa-check"></i>OECD - AI Policy Observatory</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a><ul>
-<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>ML y sistemas de toma/soporte de decisiones</a></li>
-<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a><ul>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html"><i class="fa fa-check"></i>Resumen Ejecutivo</a>
+<ul>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glosario.html"><a href="glosario.html"><i class="fa fa-check"></i>Glosario</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#machine-learning-ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>Machine Learning (ML) y sistemas de toma/soporte de decisiones</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a>
+<ul>
 <li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ciclo-de-vida-de-la-política-pública-con-ia"><i class="fa fa-check"></i>Ciclo de vida de la política pública con IA</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#retos-del-ciclo-de-vida-del-ml"><i class="fa fa-check"></i>Retos del ciclo de vida del ML</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a><ul>
+<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#definición-correcta-del-problema-y-de-la-respuesta-de-política-pública"><i class="fa fa-check"></i><b>1.1</b> Definición correcta del problema y de la respuesta de política pública</a></li>
-<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#necesidad-y-proporcionalidad"><i class="fa fa-check"></i><b>1.2</b> Necesidad y Proporcionalidad</a></li>
+<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#principios-de-ia-responsable"><i class="fa fa-check"></i><b>1.2</b> Principios de IA responsable</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html"><i class="fa fa-check"></i><b>2</b> Fuente y manejo de datos</a><ul>
-<li class="chapter" data-level="2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#reto-estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Reto: Estados indeseables o subóptimos en datos recolectados</a></li>
-<li class="chapter" data-level="2.1.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
+<li class="chapter" data-level="2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html"><i class="fa fa-check"></i><b>2</b> Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Estados indeseables o subóptimos en datos recolectados</a></li>
+<li class="chapter" data-level="2.1.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#información-incompleta-acerca-de-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Información incompleta acerca de la población objetivo</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
-<li class="chapter" data-level="2.2.2" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
+<li class="chapter" data-level="2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#cualificación-y-exhaustividad-de-los-datos-para-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Cualificación y exhaustividad de los datos para la población objetivo</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="2.2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="fuente-y-manejo-de-datos.html"><a href="fuente-y-manejo-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
+<li class="chapter" data-level="2.3" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html"><i class="fa fa-check"></i><b>3</b> Desarrollo de modelos</a><ul>
-<li class="chapter" data-level="3.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#ausencia-y-errores-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia y errores de validación</a></li>
-<li class="chapter" data-level="3.2" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#fugas-de-datos---variables-no-disponbiles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.1</b> Fugas de datos - Variables no disponbiles en la predicción</a></li>
+<li class="chapter" data-level="3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html"><i class="fa fa-check"></i><b>3</b> Desarrollo del modelo y validación</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#ausencia-o-uso-inadecuado-de-muestras-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia o uso inadecuado de muestras de validación</a></li>
+<li class="chapter" data-level="3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#contaminación-entrenamiento-validación"><i class="fa fa-check"></i><b>3.2.1</b> Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="3.2.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-datos-no-disponibles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.2</b> Fugas de datos no disponibles en la predicción</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Clasificación: probabilidades y clases</a></li>
-<li class="chapter" data-level="3.4" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
-<li class="chapter" data-level="3.5" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a></li>
-<li class="chapter" data-level="3.6" data-path="desarrollo-de-modelos.html"><a href="desarrollo-de-modelos.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a></li>
+<li class="chapter" data-level="3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#modelos-de-clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Modelos de clasificación: probabilidades y clases</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#datos-desbalanceados"><i class="fa fa-check"></i><b>3.3.1</b> Datos desbalanceados</a></li>
+<li class="chapter" data-level="3.3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#puntos-de-corte-arbitrarios"><i class="fa fa-check"></i><b>3.3.2</b> Puntos de corte arbitrarios</a></li>
+<li class="chapter" data-level="3.3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#idoneidad-de-las-métricas-de-evaluación"><i class="fa fa-check"></i><b>3.3.3</b> Idoneidad de las métricas de evaluación</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a><ul>
+<li class="chapter" data-level="3.4" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
+<li class="chapter" data-level="3.5" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fallas-no-medidas-por-el-modelo"><i class="fa fa-check"></i><b>3.5.1</b> Fallas no medidas por el modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#definición-de-justicia-y-equidad-algorítmica"><i class="fa fa-check"></i><b>3.6.1</b> Definición de justicia y equidad algorítmica</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#degradación-de-desempeño"><i class="fa fa-check"></i><b>4.1</b> Degradación de desempeño</a></li>
 <li class="chapter" data-level="4.2" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#experimentos-y-recopilación-de-datos"><i class="fa fa-check"></i><b>4.2</b> Experimentos y recopilación de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a><ul>
-<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a></li>
-<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.2</b> Explicabilidad de predicciones individuales</a></li>
-<li class="chapter" data-level="5.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.3</b> Trazabilidad</a></li>
+<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad"><i class="fa fa-check"></i><b>5.1.1</b> Interpretabilidad</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.1.2</b> Explicabilidad de predicciones individuales</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#modelos-parsimoniosos"><i class="fa fa-check"></i><b>5.1.3</b> Modelos parsimoniosos</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a><ul>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-checklist-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación (Checklist) de IA robusta y responsable</a></li>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a></li>
-<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo</a></li>
+<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.2</b> Trazabilidad</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a><ul>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-de-métrica-y-objetivos"><i class="fa fa-check"></i>Mala correspondencia de métrica y objetivos</a></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-y-sesgo"><i class="fa fa-check"></i>Muestras naturales y sesgo</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-mala-representatividad"><i class="fa fa-check"></i><b>5.3.1</b> Muestras naturales: mala representatividad</a></li>
-<li class="chapter" data-level="5.3.2" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#natural"><i class="fa fa-check"></i><b>5.3.2</b> Muestras naturales: comparaciones causales</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación de IA robusta y responsable</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#fuente-de-recolección-y-origen-de-los-datos"><i class="fa fa-check"></i>Fuente de recolección y origen de los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-los-modelos"><i class="fa fa-check"></i>Desarrollo de los modelos</a></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-entrenamiento-validación"><i class="fa fa-check"></i>Fugas Entrenamiento Validación</a><ul>
-<li class="chapter" data-level="5.3.3" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#selección-de-variables-antes-de-dividir-los-datos"><i class="fa fa-check"></i><b>5.3.3</b> Selección de variables antes de dividir los datos</a></li>
-<li class="chapter" data-level="5.3.4" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i><b>5.3.4</b> Sobremuestrear antes de particionar</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo-model-card"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo (Model Card)</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#fugas-en-implementación"><i class="fa fa-check"></i>Fugas en implementación</a><ul>
-<li class="chapter" data-level="5.3.5" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-al-momento-de-predicción"><i class="fa fa-check"></i><b>5.3.5</b> Variables no disponibles al momento de predicción</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#recolección-y-procesamiento-de-datos-1"><i class="fa fa-check"></i>Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales-1"><i class="fa fa-check"></i>Mala correspondencia entre variables disponibles y variables ideales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-probabilísticas-y-naturales-1"><i class="fa fa-check"></i>Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-comparaciones-causales"><i class="fa fa-check"></i>Muestras naturales: comparaciones causales</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#evaluación-de-punto-de-corte"><i class="fa fa-check"></i>Evaluación de punto de corte</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-modelo-y-validación"><i class="fa fa-check"></i>Desarrollo de modelo y validación</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#contaminación-entrenamiento-validación-1"><i class="fa fa-check"></i>Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i>Sobremuestrear antes de particionar</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-en-el-momento-de-predicción"><i class="fa fa-check"></i>Variables no disponibles en el momento de predicción</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#puntos-de-corte-arbitrarios-1"><i class="fa fa-check"></i>Puntos de corte arbitrarios</a></li>
 <li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desbalance-de-clases"><i class="fa fa-check"></i>Desbalance de clases</a></li>
 <li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#equidad-con-atributos-protegidos"><i class="fa fa-check"></i>Equidad con atributos protegidos</a></li>
-<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad"><i class="fa fa-check"></i>Interpretabilidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#rendición-de-cuentas-2"><i class="fa fa-check"></i>Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad-1"><i class="fa fa-check"></i>Interpretabilidad</a></li>
 <li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#explicación-de-predicciones"><i class="fa fa-check"></i>Explicación de predicciones</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
 <li class="divider"></li>
@@ -218,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">IA Responsable (Ciclo de vida de IA)</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</a>
           </h1>
         </div>
 
@@ -226,99 +299,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introducción" class="section level1 unnumbered">
-<h1>Introducción</h1>
-<p>Los métodos de aprendizaje automático, como un subconjunto de lo que se conoce como inteligencia artificial (que para resumir en este documento llamamos ML, por sus siglas en inglés, <em>Machine Learning</em>) son cada vez más requeridos y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos, desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos grados de éxito, y con esto ha aparecido la preocupación creciente de cómo entender el desempeño e influencia positiva o negativa de estos métodos en la sociedad (<span class="citation">Barocas and Selbst (<a href="referencias.html#ref-barocas">2014</a>)</span>) (<span class="citation">Suresh and Guttag (<a href="referencias.html#ref-Suresh">2019</a>)</span>).</p>
-<div id="ml-y-sistemas-de-tomasoporte-de-decisiones" class="section level2 unnumbered">
-<h2>ML y sistemas de toma/soporte de decisiones</h2>
-<p>La OCDE describe a los sistemas de soporte de decisión como un “sistema computacional que puede, para un determinado conjunto de objetivos definidos por humanos, hacer predicciones y recomendaciones o tomar decisiones que influyen en entornos reales o virtuales.” Y que están diseñados para operar con distintos niveles de autonomía (<span class="citation">OECD (<a href="referencias.html#ref-oecd2019">2019</a>)</span>).</p>
-<p>En este manual se pretende discutir los problemas más comunes en el uso del aprendizaje automático (ML) como parte de un sistema de toma/soporte de decisión, como detectar errores de implementación, sesgos, y evaluar la posibilidad de resultados indeseables para la sociedad, una compañía o institución particular.</p>
-<p>Aunque los métodos de aprendizaje automático no son el único tipo de algoritmos que pueden utilizar los sistemas de IA, sí son los que han tenido más crecimiento de los últimos años. Se trata de un conjunto de técnicas para permitir que un sistema aprenda comportamientos de manera automatizada a través de patrones e inferencias en lugar de instrucciones explícitas o simbólicas introducidas por un humano (<span class="citation">OECD (<a href="referencias.html#ref-oecd2019">2019</a>)</span>).</p>
+<div id="introducción" class="section level1 unnumbered hasAnchor">
+<h1>Introducción<a href="introducción.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Los métodos de aprendizaje automático (que para resumir en este documento llamamos ML, por sus siglas en inglés, Machine Learning), como un subconjunto de lo que se conoce como inteligencia artificial, son cada vez más requeridos y utilizados por tomadores de decisiones para informar acciones o intervenciones en varios contextos, desde negocios hasta política pública. En la práctica, estos métodos se han utilizado con diversos grados de éxito y con esto ha aparecido la preocupación creciente de cómo entender el desempeño e influencia positiva o negativa de estos métodos en la sociedad <span class="citation">(<a href="referencias.html#ref-barocas" role="doc-biblioref">Barocas and Selbst 2014</a>; <a href="referencias.html#ref-Suresh" role="doc-biblioref">Suresh and Guttag 2019</a>)</span>.</p>
+<div id="machine-learning-ml-y-sistemas-de-tomasoporte-de-decisiones" class="section level2 unnumbered hasAnchor">
+<h2>Machine Learning (ML) y sistemas de toma/soporte de decisiones<a href="introducción.html#machine-learning-ml-y-sistemas-de-tomasoporte-de-decisiones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La Organización para la Cooperación y el Desarrollo Económico (OECD por sus siglas inglés) describe la IA como un sistema computacional que es capaz de influir en el entorno produciendo un resultado (predicciones, recomendaciones o decisiones) para un conjunto de objetivos determinado. Utiliza datos e insumos de fuentes humanas o sensores para (i) percibir entornos reales y/o virtuales; (ii) abstraer estas percepciones en modelos mediante el análisis de forma automatizada (por ejemplo, con aprendizaje automático), o manual; y (iii) utilizar la inferencia del modelo para formular resultados. Los sistemas de IA están diseñados para funcionar con distintos niveles de autonomía <span class="citation">(Adaptado de <a href="referencias.html#ref-oecd2019c" role="doc-biblioref">OECD 2019c</a>)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:sistema"></span>
+<p class="caption">
+Figura 0.1: Vista conceptual de un sistema de IA
+</p>
+<img src="images/sistema_IA.png" alt="Vista conceptual de un sistema de IA" width="90%" />
+</div>
+<p>Aunque los métodos de aprendizaje automático no son el único tipo de algoritmos que pueden utilizar los sistemas de IA, sí son los que han tenido más crecimiento de los últimos años. Se trata de un conjunto de técnicas para permitir que un sistema aprenda comportamientos de manera automatizada a través de patrones e inferencias en lugar de instrucciones explícitas o simbólicas introducidas por un ser humano <span class="citation">(<a href="referencias.html#ref-oecd2019c" role="doc-biblioref">OECD 2019c</a>)</span>.</p>
+<p>Este manual analiza algunos de los retos más comunes en el uso de las tecnologías de aprendizaje automático para la toma de decisiones o el apoyo a las mismas. Entre ellos se encuentran la detección y mitigación de errores y de sesgos y la evaluación de resultados no deseados por una empresa, institución del sector público o sociedad.</p>
 <p>Se consideran dos arquetipos de inclusión de aprendizaje automático en el proceso de toma de decisiones:<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Sistemas de <ins>soporte</ins> de decisión</strong>: Relacionado al concepto de inteligencia asistida o aumentada, se utiliza para describir los sistemas en donde la información generada por los modelos de aprendizaje automático se utiliza como insumo para la toma de decisiones por un humano.</p></li>
-<li><p><strong>Sistemas de <ins>toma</ins> de decisión</strong>: Relacionada con el concepto de inteligencia automatizada y autónoma. Las decisiones finales y su consecuente acción se toman sin intervención humana directa. Es decir, el sistema pasa a realizar tareas previamente desarrolladas por un humano. En muchos contextos se usa ADM para denominar estos sistemas por su sigla en inglés: <em>Automated Decision Making</em>.</p></li>
+<li><p><strong>Sistemas de soporte de decisión:</strong> relacionados con el concepto de inteligencia asistida o aumentada, se utilizan para describir los sistemas en donde la información generada por los modelos de aprendizaje automático se usa como insumo para la toma de decisiones por un ser humano.</p></li>
+<li><p><strong>Sistemas de toma de decisión:</strong> estos sistemas se relacionan con el concepto de inteligencia automatizada y autónoma. Las decisiones finales y su consecuente acción se toman sin intervención humana directa. Es decir, el sistema pasa a realizar tareas previamente desarrolladas por un ser humano. En muchos contextos se emplea ADM para denominar estos sistemas por su sigla en inglés: <em>Automated Decision Making</em>.</p></li>
 </ol>
-<p>Para el desarrollo de un sistema de toma/soporte de decisión exitoso basado en aprendizaje automático se debe considerar que existe una gran variedad de técnicas, conocimiento experto del tema y de modelación en general. En este manual no se pretende discutir métodos particulares de aprendizaje automático ni de procesos específicos de ajuste de hiper-parámetros, ver por ejemplo (<span class="citation">Hastie, Tibshirani, and Friedman (<a href="referencias.html#ref-ESL">2017</a>)</span>), (<span class="citation">Kuhn and Johnson (<a href="referencias.html#ref-kuhn">2013</a>)</span>), (<span class="citation">Gelman and Hill (<a href="referencias.html#ref-GelmanHill">2006</a>)</span>), sino concentrarse en su evaluación y en los retos más importantes que los sistemas comparten sin importar el tipo de algoritmo o tecnología utilizada.</p>
-<p>Por otra parte, la evaluación de un sistema de aprendizaje automatizado no tiene sentido fuera de su contexto, preguntas como: ¿cuál es una tasa de error apropiado? o ¿cuáles son sesgos poco aceptables?, entre otras, sólo pueden considerarse y ser respondidas dentro del contexto específico de su aplicación, de los propósitos y motivaciones de los tomadores de decisiones, así como por el riesgo que se presenta en los usuarios finales. Es decir, muchos de los criterios técnicos tienen que ser entendidos bajo la luz del problema específico, los sistemas de toma/soporte de decisión nunca son perfectos, pero si se conocen sus sesgos y sus limitaciones incluso un sistema con una precisión baja podría ser útil y ser utilizado responsablemente. En el caso contrario, el tener un sistema con métricas de evaluación altas no elimina el riesgo de un uso irresponsable si no se entienden sus limitaciones.</p>
-
-<div class="rmdpunto">
-<p><strong>Principio guía</strong></p>
+<p>Para el desarrollo de un sistema de toma/soporte de decisión exitoso basado en aprendizaje automático debe considerarse que existe una gran variedad de técnicas, conocimiento experto del tema y de modelación en general. En este manual no se pretende discutir métodos particulares de aprendizaje automático ni de procesos específicos de ajuste de hiperparámetros –ver, por ejemplo, <span class="citation">Hastie, Tibshirani, and Friedman (<a href="referencias.html#ref-ESL" role="doc-biblioref">2017</a>)</span>; <span class="citation">M. Kuhn and Johnson (<a href="referencias.html#ref-kuhn" role="doc-biblioref">2013</a>)</span>; <span class="citation">Gelman and Hill (<a href="referencias.html#ref-GelmanHill" role="doc-biblioref">2006</a>)</span>– sino concentrarse en su evaluación y en los retos más importantes que los sistemas comparten sin importar el tipo de algoritmo o tecnología utilizada.</p>
+<p>Por otra parte, la evaluación de un sistema de aprendizaje no tiene sentido fuera de su contexto. Preguntas como ¿cuál es la tasa de error apropiada? o ¿cuáles sesgos son poco aceptables?, entre otras, solo pueden considerarse y responderse dentro del contexto específico de su aplicación, de los propósitos y motivaciones de los tomadores de decisiones, así como por el riesgo que se presenta en los usuarios finales. Es decir, muchos de los criterios técnicos tienen que entenderse a la luz del problema específico. Los sistemas de toma/soporte de decisión nunca son perfectos, pero si se conocen sus sesgos y sus limitaciones incluso un sistema con una precisión baja podría ser útil y utilizarse responsablemente. En el caso contrario, tener un sistema con métricas de evaluación altas no elimina el riesgo de un uso irresponsable si no se entienden sus limitaciones.</p>
+<div class="cajaAzulMarino">
+<p><strong>Objetivos</strong></p>
 <ul>
-<li><p>Este manual se concentra en el subconjunto de retos que están relacionados a procesos técnicos a lo largo del ciclo de vida de la IA como sistema de toma/soporte de decisión. Su objetivo es describir cómo distintos sesgos y deficiencias pueden ser causadas por los datos de entrenamiento, problemas y decisiones en el desarrollo del modelo, en el proceso de validación o monitoreo que pueden producir resultados indeseables e inequidad en la toma de decisiones.</p></li>
-<li>La evaluación sólo tiene sentido en términos del contexto de la decisión, y de los resultados que son deseables para los tomadores de decisiones, instituciones o compañías involucradas.</li>
+<li><p>Este manual se centra en el subconjunto de desafíos que están relacionados con los procesos técnicos a lo largo del ciclo de vida de los sistemas de IA utilizados para la toma y soporte de decisiones de política pública.</p></li>
+<li><p>Este manual describe cómo diferentes sesgos y deficiencias pueden ser causados por los datos de entrenamiento, por decisiones en el desarrollo del modelo o tomadas durante el proceso de validación y monitoreo.</p></li>
 </ul>
 </div>
-
 </div>
-<div id="componentes-de-un-sistema-de-ia-para-políticas-públicas" class="section level2 unnumbered">
-<h2>Componentes de un sistema de IA para políticas públicas</h2>
-<div id="ciclo-de-vida-de-la-política-pública-con-ia" class="section level3 unnumbered">
-<h3>Ciclo de vida de la política pública con IA</h3>
-<p>La IA no sustituye a la política pública ya que por sí misma no soluciona el problema social, su función es asistir proveyendo información para la toma o soporte de decisiones. El ciclo de política pública asistido por IA está compuesto por las siguientes etapas:</p>
+<div id="componentes-de-un-sistema-de-ia-para-políticas-públicas" class="section level2 unnumbered hasAnchor">
+<h2>Componentes de un sistema de IA para políticas públicas<a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ciclo-de-vida-de-la-política-pública-con-ia" class="section level3 unnumbered hasAnchor">
+<h3>Ciclo de vida de la política pública con IA<a href="introducción.html#ciclo-de-vida-de-la-política-pública-con-ia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La IA no sustituye a la política pública, pues por sí misma no soluciona el problema social. Su función es asistir proveyendo información para la toma o soporte de decisiones. El ciclo de política pública asistido por IA lo componen las siguientes etapas:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Identificación del problema:</strong> Todo proyecto de IA debe iniciar identificando correctamente el problema social en el que la política pública busca impactar, identificando sus posibles causas y consecuencias.<br />
-</li>
-<li><strong>Formulación de intervención:</strong> Se formula la intervención o política que se está considerando aplicar a ciertas personas, unidades o procesos. Supondremos generalmente que se tiene evidencia del beneficio de esa política cuando se aplica a la población objetivo.<br />
-</li>
-<li><strong>Sistema de toma/soporte de decisión:</strong> Una vez definida la intervención, se inicia el ciclo de la IA con el diseño y desarrollo del sistema de toma/soporte de decisión, cuyo resultado será utilizado para focalizar u orientar la intervención elegida en el punto anterior.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></li>
-<li><strong>Implementación de política:</strong> Se implementa la política pública ya sea como proyecto piloto y/o con una escala mayor.<br />
-</li>
-<li><strong>Evaluación de política:</strong> Se evalúa la eficacia, la fiabilidad, el costo, las consecuencias previstas y no previstas y otras características pertinentes de la medida de política en cuestión, si sus resultados son positivos se escala o continúa la intervención.</li>
+<li><p><strong>Identificación del problema:</strong> todo proyecto de IA debe iniciar identificando correctamente el problema social al que la política pública busca impactar, detallando sus posibles causas y consecuencias.</p></li>
+<li><p><strong>Formulación de intervención:</strong> se explicita la intervención o política que se está considerando aplicar a ciertas personas, unidades o procesos. Se supone generalmente que se tiene evidencia del beneficio de esa política cuando se aplica a la población objetivo.</p></li>
+<li><p><strong>Sistema de toma/soporte de decisión:</strong> una vez definida la intervención, se inicia el ciclo de la IA con el diseño y desarrollo del sistema de toma/soporte de decisión, cuyo resultado se utilizará para focalizar u orientar la intervención elegida en el punto anterior.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p></li>
+<li><p><strong>Implementación de política:</strong> se pone en funcionamiento la política pública, ya sea como proyecto piloto y/o con una escala mayor.</p></li>
+<li><p><strong>Evaluación de política:</strong> se evalúan la eficacia, la fiabilidad, el costo, las consecuencias previstas y no previstas y otras características pertinentes de la medida de política en cuestión. Si sus resultados son positivos, se escala o continúa la intervención.</p></li>
 </ol>
-<div class="figure"><span id="fig:ciclo2"></span>
-<img src="images/ciclo-politica.png" alt="Ciclo de diseño de política pública. Construcción propia." width="100%" />
+<p>En paralelo con el ciclo de elaboración de políticas públicas, el desarrollo de un sistema de IA tiene su propio ciclo de vida que incluye las siguientes etapas <span class="citation">(<a href="referencias.html#ref-oecd2019c" role="doc-biblioref">OECD 2019c</a>)</span>: (i) Conceptualización y diseño; (ii) Recolección y procesamiento de datos; (iii) Desarrollo y validación de modelos, y (iv) Uso y monitoreo. Estas fases suelen tener lugar en forma iterativa y no son necesariamente secuenciales (Figura <a href="introducción.html#fig:ciclo2">0.2</a>).</p>
+<div class="figure"><span style="display:block;" id="fig:ciclo2"></span>
 <p class="caption">
-Ilustración 0.2: Ciclo de diseño de política pública. Construcción propia.
+Figura 0.2: Ciclo de vida de las políticas públicas asistido por un sistema de toma/soporte a la toma de decisiones. <em>Fuente:</em> Preparado por los autores.
 </p>
+<img src="images/ciclo-politica2.png" alt="Ciclo de vida de las políticas públicas asistido por un sistema de toma/soporte a la toma de decisiones. *Fuente:* Preparado por los autores." width="100%" />
 </div>
-<p>Paralelamente al ciclo de política pública, el desarrollo de un sistema de IA tiene su propio ciclo que normalmente incluye las siguientes fases: i) Planeación y diseño, ii) recolección, conocimiento y preparación de datos, iii) modelado, iv) evaluación e implementación y vi) monitoreo. Estas fases suelen tener lugar de manera iterativa y no son necesariamente secuenciales.</p>
-<p>En la interrelación de estos dos ciclos se genera un importante grupo de retos para obtener una IA robusta y responsable que tienen que ser evaluados y considerados durante el desarrollo y uso de estos sistemas (Ilustración <a href="introducción.html#fig:retos">0.3</a>): Existen retos transversales (rendición de cuentas, gobernanza y seguridad) como son la transparencia, el consentimiento y la protección de datos personales; retos relacionados con el diseño de política pública, la definición de la intervención, así como criterios de necesidad y proporcionalidad en el uso de la IA; retos que se dan durante el ciclo de vida la IA, por sesgos en los datos, errores de implementación en el modelado, validación y monitoreo. .</p>
-<div class="figure"><span id="fig:retos"></span>
-<img src="images/retos.png" alt="Retos de los sistemas de toma/soporte de decisión. Fuente: @fair" width="100%" />
-<p class="caption">
-Ilustración 0.3: Retos de los sistemas de toma/soporte de decisión. Fuente: <span class="citation">Cristina Pombo (<a href="referencias.html#ref-fair">2020</a>)</span>
-</p>
-</div>
-<p>Uno de los conceptos más importantes para los retos del ciclo de vida de la IA es el de sesgos, ya que muchas de las medidas de mitigación y retos que se tienen que contemplar durante el desarrollo de los modelos depende de su correcto entendimiento y tratamiento. Para abordar tempranamente este problema es conveniente tener revisiones específicas en las distintas etapas del ciclo de vida. En cada revisión se debe invitar a los expertos y usuarios finales del sistema que corresponda, para verificar y defender las hipótesis realizadas durante cada etapa. Esto permite enriquecer los puntos de vista, encontrar suposiciones erradas y agregar aspectos no considerados.</p>
-<p>El <strong>error</strong> del sistema es la diferencia entre el valor predicho resultado del modelo y el valor real de la variable que se está estimando. Si el error es sistemático en una dirección o en un subconjunto específico de los datos, se llama <strong>sesgo</strong><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Por ejemplo, si una balanza siempre pesa un kilo más, está sesgada; o si un valor es siempre menor, como el salario de las mujeres para un trabajo equivalente con respecto a los hombres, la variable salario está sesgada. Por otro lado, si el error es aleatorio, se llama <strong>ruido</strong>.</p>
-<p>El sesgo de un sistema de IA puede tener implicaciones éticas al utilizar sus resultados para tomar decisiones de política pública que lleven a acciones que puedan considerarse injustas o prejuiciosas para subgrupos de la población objetivo. Esta evaluación del sesgo está sujeta a una definición de justicia algorítmica específica que debe decidir el tomador de decisiones de política pública.</p>
-<p>Por ejemplo, en algunos casos el objetivo de un sistema puede estar orientado a satisfacer criterios de paridad demográfica, equidad de posibilidades, tener representatividad por cuotas, entre muchas otras. En algunas ocasiones el cumplimiento de una definición de justicia algorítmica<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> imposibilita el cumplimiento de otra, es decir pueden ser parcial o totalmente excluyentes.</p>
-<p>Existen distintas <strong>fuentes de sesgo</strong>, algunos causados por problemas intrínsecos a los datos: Por ejemplo: Sesgos históricos o estados indeseable, cuando existen patrones en el mundo que no se quieren replicar o propagar en el modelo; sesgo de representación, se produce cuando existe información incompleta, ya sea por atributos faltantes, diseño de la muestra o ausencia total o parcial de subpoblaciones; Y sesgos de medición, que surgen por el uso u omisión de variables a ser utilizadas en los modelos. (<span class="citation">Suresh and Guttag (<a href="referencias.html#ref-Suresh">2019</a>)</span>)</p>
-<div class="figure"><span id="fig:sesgos"></span>
-<img src="images/suresh.png" alt="Fuentes de sesgo en un sistema de IA. Fuente: @Suresh" width="100%" />
-<p class="caption">
-Ilustración 0.4: Fuentes de sesgo en un sistema de IA. Fuente: <span class="citation">Suresh and Guttag (<a href="referencias.html#ref-Suresh">2019</a>)</span>
-</p>
-</div>
-<p>Otros sesgos aparecen por errores metodológicos: Por ejemplo, sesgos durante el entrenamiento por errores en procesos de validación, definición de métricas y evaluación de resultados (sesgo de evaluación), sesgos por tener supuestos erróneos sobre la población objetivo que puedan afectar a la definición del modelo, sesgos por el mal de uso y monitoreo de los modelos ya sea por interpretaciones inapropiadas de sus resultados o cambios temporales de los patrones en el mundo real o en los métodos de captura de datos, entre otros.</p>
-<div style="page-break-after: always;"></div>
+<p>En la interrelación de estos dos ciclos se generan importantes retos que deben ser evaluados y considerados durante el desarrollo y uso de sistemas de IA robustos y responsables.</p>
 </div>
 </div>
-<div id="retos-del-ciclo-de-vida-del-ml" class="section level2 unnumbered">
-<h2>Retos del ciclo de vida del ML</h2>
-<p>Para la construcción de sistemas de toma/soporte de decisión robustos y responsables es necesario considerar las posibles fuentes de sesgo y deficiencias que pueden ser causadas por los datos de entrenamiento, problemas y decisiones en el desarrollo del modelo, definir de forma clara los objetivos de los sistemas y los criterios de justicia que se buscarán cumplir, entender las limitantes y errores en el contexto del proyecto específico y establecer medidas de monitoreo de los sistemas para evitar producir resultados indeseables e inequidad en la toma de decisiones.</p>
-<p>Para lograrlo, este manual presenta los retos y errores usuales en la construcción y aplicación de métodos de aprendizaje automático durante el ciclo de vida de la IA. Se describe en cinco secciones los problemas más comunes que se pueden encontrar, diagnósticos para detectarlos y sugerencias para mitigarlos:</p>
-<ol start="0" style="list-style-type: decimal">
-<li><strong>Conceptualización y diseño:</strong> que ser refiere a la información y criterios necesarios a obtener de parte del tomador de decisiones de política pública para iniciar un proyecto de IA.</li>
-<li><strong>Fuente y manejo de datos:</strong> que se refieren principalmente a deficiencias, sesgos (por ejemplo, en etiquetado y medición, recolección de datos, autoselección, representatividad) y al proceso que genera los datos utilizados.</li>
-<li><strong>Desarrollo del modelo:</strong> que se refiere a métodos y principios importantes para construir modelos robustos y validados correctamente.</li>
-<li><strong>Uso y monitoreo:</strong> que se refiere a la interpretación de los resultados del modelo (cómo se construyen las predicciones, qué variables son importantes), evaluación una vez puesto en producción y principios de monitoreo para evitar consecuencias inesperadas.</li>
-<li><strong>Rendición de cuentas:</strong> que se refiere a las medidas de explicabilidad y transparencia implementadas para fomentar la comprensión de un sistema de IA.</li>
+<div id="retos-del-ciclo-de-vida-del-ml" class="section level2 unnumbered hasAnchor">
+<h2>Retos del ciclo de vida del ML<a href="introducción.html#retos-del-ciclo-de-vida-del-ml" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para la construcción de sistemas de toma/soporte de decisión robustos y responsables es necesario efectuar varias tareas: considerar las posibles fuentes de sesgo y deficiencias que pueden causar los datos de entrenamiento y problemas y decisiones en el desarrollo del modelo; definir en forma clara los objetivos de los sistemas y los criterios de justicia que se buscará cumplir; entender las limitantes y errores en el contexto del proyecto específico y establecer medidas de monitoreo de los sistemas para evitar que se produzcan resultados indeseables e inequidad en la toma de decisiones.</p>
+<p>Para lograrlo, este manual presenta los retos y errores usuales en la construcción y aplicación de métodos de aprendizaje automático durante el ciclo de vida de la IA. Cinco secciones describen los problemas más comunes que pueden encontrarse, diagnósticos para detectarlos y sugerencias para mitigarlos:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Conceptualización y diseño:</strong> se refiere a la información y criterios necesarios que debe obtener el tomador de decisiones de política pública para iniciar un proyecto de IA.</p></li>
+<li><p><strong>Recolección y procesamiento de datos:</strong> se enfoca en el proceso de generación de datos, la selección y el control de las distintas fuentes, y la identificación y mitigación de las deficiencias y sesgos.</p></li>
+<li><p><strong>Desarrollo del modelo y validación:</strong> alude a métodos y principios importantes para construir modelos robustos y validados correctamente.</p></li>
+<li><p><strong>Uso y monitoreo:</strong> es la evaluación del modelo en producción y seguimiento de los principios clave para evitar una degradación inesperada.</p></li>
 </ol>
-<p>Para acompañar su desarrollo se proponen tres herramientas que deberán contestarse a lo largo del desarrollo del sistema:</p>
+<p>Además, un quinto aspecto, la Rendición de cuentas, es una dimensión transversal en el ciclo de vida del sistema de IA que se refiere a las medidas de transparencia y explicabilidad para promover la comprensión de los mecanismos a través de los cuales un sistema de IA produce un resultado, la reproducibilidad del resultado y la capacidad del usuario para identificar y cuestionar errores o resultados inesperados.</p>
+<p>Los actores de la IA en cada etapa del ciclo de vida deben ser responsables del buen funcionamiento de un sistema de IA en función de sus roles en el desarrollo y del contexto del uso del sistema.</p>
+<p>Se proponen tres herramientas para acompañar el desarrollo del sistema de IA:</p>
 <ul>
-<li><a href="herramientas.html#herramienta-1-lista-de-verificación-checklist-de-ia-robusta-y-responsable">Lista de verificación</a> (Checklist): Herramienta que consolida las principales preocupaciones por dimensión de riesgo del ciclo de vida de IA. El checklist debe revisarse de forma continua por el equipo técnico acompañado por el tomador de decisiones.<br />
+<li><strong>Herramienta 1:</strong> <a href="#herramienta-1-lista-de-verificación-checklist-de-ia-robusta-y-responsable">Lista de verificación de IA robusta y responsable.</a> Esta herramienta consolida las principales preocupaciones por la dimensión de riesgo del ciclo de vida de IA. Esta lista debe revisarla en forma continua el equipo técnico acompañado por el tomador de decisiones.<br />
 </li>
-<li><a href="herramientas.html#herramienta-2-perfil-de-datos">Perfil de Datos</a>: El perfil de datos es un análisis exploratorio inicial durante la fase de Conocimiento y preparación de datos del ciclo de vida de IA. Brinda información para evaluar la calidad, integridad, temporalidad, consistencia y posibles sesgos, daños potenciales y las implicaciones de su uso.<br />
+<li><strong>Herramienta 2:</strong> <a href="herramientas.html#herramienta-2-perfil-de-datos">Perfil de Datos.</a> Este perfil es un análisis exploratorio inicial durante la fase de Recolección y procesamiento de datos del ciclo de vida de IA. Brinda información para evaluar la calidad, integridad, temporalidad, consistencia y posibles sesgos, daños potenciales e implicaciones de su uso.<br />
 </li>
-<li><a href="herramientas.html#herramienta-3-perfil-del-modelo">Perfil de Modelo</a>: Descripción final de un sistema de IA, reporta los principales supuestos, las características más importantes del sistema y las medidas de mitigación implementadas.</li>
+<li><strong>Herramienta 3:</strong> <a href="#herramienta-3-perfil-del-modelo">Perfil del modelo.</a> Es la descripción final de un sistema de IA; reporta los principales supuestos, las características más importantes del sistema y las medidas de mitigación implementadas.</li>
 </ul>
-<div class="figure"><span id="fig:retos-tecnicos"></span>
-<img src="images/retos-tecnicos.png" alt="Retos técnicos del ciclo de vida del ML. Construcción propia." width="100%" />
-<p class="caption">
-Ilustración 0.5: Retos técnicos del ciclo de vida del ML. Construcción propia.
-</p>
+<strong>Recuadro 1.</strong> Fuentes de sesgo un sistema de IA
+<div class="cajaAzul">
+<p>Uno de los conceptos más importantes para los retos del ciclo de vida de la IA es el de los sesgos, pues muchas de las medidas de mitigación y retos que tienen que contemplarse durante el desarrollo de los modelos depende de su correcta comprensión y tratamiento. Para abordar tempranamente este problema es conveniente tener revisiones específicas en las distintas etapas del ciclo de vida. En cada revisión debe invitarse a los expertos y usuarios finales del sistema que corresponda para verificar y defender las hipótesis realizadas durante cada etapa. Esto permite enriquecer los puntos de vista, encontrar suposiciones erradas y agregar aspectos no considerados.</p>
+<p>El <strong>error del sistema</strong> es la diferencia entre el valor predicho, resultado del modelo, y el valor real de la variable que se está estimando. Si el error es sistemático en una dirección o en un subconjunto específico de los datos, se llama <strong>sesgo</strong>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> Por ejemplo, si una balanza siempre pesa un kilo más, está sesgada; o si un valor es siempre menor, como el salario de las mujeres para un trabajo equivalente al que realizan los hombres, la variable salario está sesgada. Por otro lado, cuando el <strong>error</strong> es aleatorio, se llama <strong>ruido</strong>.</p>
+<p>El sesgo de un sistema de IA puede tener implicaciones éticas cuando sus resultados se utilizan para formular políticas públicas que pueden considerarse injustas o perjudiciales para determinados subgrupos de la población. Esta evaluación del sesgo está sujeta a una definición específica de equidad algorítmica, que deben determinar los responsables de las políticas públicas.</p>
+<p>Una definición de equidad algorítmica es una representación matemática de un objetivo de política pública que se incorpora al proceso de selección y ajuste del modelo. Por ejemplo, en algunos casos el objetivo de un sistema puede estar ligado a criterios como la paridad demográfica, la igualdad de posibilidades y tener representación por cuotas, entre otros muchos criterios. En algunas ocasiones, el cumplimiento de una definición de equidad algorítmica hace imposible el cumplimiento de otra, es decir, pueden ser parcial o totalmente excluyentes. La definición de equidad algorítmica es una tarea de los responsables de las políticas públicas y no de los equipos técnicos. El equipo técnico solo tiene la tarea de realizar validaciones para garantizar su cumplimiento. La sección 3 de este manual analiza en profundidad las diferentes definiciones de equidad algorítmica y sus implicaciones.</p>
+<p>Hay diferentes <strong>fuentes de sesgo</strong> . Algunos sesgos son intrínsecos a los datos, como los sesgos históricos o los estados indeseables, que son patrones preexistentes en la sociedad o en los datos recolectados que no es deseable reproducir en el modelo. El <strong>sesgo de representación</strong> se produce cuando hay información incompleta debido a la falta de atributos, al diseño de la muestra o a la ausencia total o parcial de datos de subpoblaciones. Los <strong>sesgos de medición</strong> surgen por la omisión (inclusión) de variables que deberían (no) estar incluidas en el modelo <span class="citation">(<a href="referencias.html#ref-Suresh" role="doc-biblioref">Suresh and Guttag 2019</a>)</span>. Otros sesgos aparecen debido a errores metodológicos: por ejemplo, durante el entrenamiento debido a errores en los procesos de validación, definición de métricas y evaluación de resultados (<strong>sesgo de evaluación</strong>), o <strong>debido a supuestos</strong> erróneos sobre la población objetivo que pueden afectar la definición del modelo; también pueden surgir debido al mal uso y seguimiento de los modelos, ya sea por interpretaciones inadecuadas de sus resultados o por cambios temporales en los patrones del mundo real o en los métodos de captación de datos. A lo largo de las diferentes secciones de este manual se presentarán las principales razones de estos sesgos y se propondrán diferentes medidas para mitigarlos.</p>
+<div class="figure">
+<img src="images/suresh2.png" alt="" />
+<p class="caption"><em>Fuente:</em> basado en <span class="citation">Suresh and Guttag (<a href="referencias.html#ref-Suresh" role="doc-biblioref">2019</a>)</span>.</p>
+</div>
 </div>
 
 </div>
@@ -326,10 +388,9 @@ Ilustración 0.5: Retos técnicos del ciclo de vida del ML. Construcción propia
 <div class="footnotes">
 <hr />
 <ol start="3">
-<li id="fn3"><p>Estos dos tipos de sistemas son genéricos, es decir no necesariamente usan aprendizaje automático. También estos sistemas pueden ser interactivos y aprender en forma dinámica usando técnicas de aprendizaje por refuerzo, pero en este documento sólo consideramos sistemas no interactivos.<a href="introducción.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>La IA se puede utilizar de distintas maneras, algunas de ellas pueden ser: i) Sistemas de alerta temprana o detección de anomalías: predicción de deserción escolar o alertas de fenómenos hidrometeorológicos; ii) Sistemas de recomendación o personalización: recomendación para vacantes laborales o personalización de materiales educativos; y iii) Sistemas de reconocimiento, diagnóstico de enfermedades, detección de objetos o reconocimiento biométrico.<a href="introducción.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>Un modelo que presenta sesgo no necesariamente terminará en decisiones prejuiciosas, en ocasiones incluso puede ser deseable incrementar el sesgo de un sistema. En modelos de predicción existe una compensación entre la varianza y el sesgo que captura el modelo y su objetivo de generalización de aprendizaje. Por un lado un modelo con sesgo alto puede crear sistemas que subajustan y aprenden muy poco de los datos observados pero modelos con alta varianza pueden tener el efecto contrario y sobreajustar aprendiendo perfectamente los datos de entrenamiento. En la sección de ‘Desarrollo de Modelos’ de este manual se describe estos fenómenos con mayor detalle y medidas para mitigar sus riesgos.<a href="introducción.html#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p>La definición de justicia algorítmica es una representación matemática de este objetivo de política pública que se incorpora en el proceso de ajuste y selección de modelo. En la sección 2 de este manual se discutirá a profundidad distintas definiciones de justicia algorítmica y sus implicaciones.<a href="introducción.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Estos dos tipos de sistemas son genéricos, es decir, no utilizan necesariamente el aprendizaje automático. Además, estos sistemas pueden ser interactivos y aprender dinámicamente mediante técnicas de aprendizaje por refuerzo, pero en este manual solo consideramos los sistemas no interactivos.<a href="introducción.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>La IA puede utilizarse de distintas maneras. Algunas de ellas pueden ser: i) Sistemas de alerta temprana o detección de anomalías: predicción de deserción escolar o alertas de fenómenos hidrometeorológicos; ii) Sistemas de recomendación o personalización: recomendación para vacantes laborales o personalización de materiales educativos, y iii) Sistemas de reconocimiento, diagnóstico de enfermedades, detección de objetos o reconocimiento biométrico.<a href="introducción.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>En modelos de predicción existe una compensación entre la varianza y el sesgo que capta el modelo y su objetivo de generalización de aprendizaje. Por un lado, un modelo con sesgo alto puede crear sistemas que subajustan y aprenden muy poco de los datos observados, pero modelos con alta varianza pueden tener el efecto contrario y sobreajustar, aprendiendo perfectamente los datos de entrenamiento. La sección de ‘Desarrollo de modelos y validación’ de este manual describe estos fenómenos con mayor detalle y ofrece medidas para mitigar sus riesgos.<a href="introducción.html#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -337,12 +398,11 @@ Ilustración 0.5: Retos técnicos del ciclo de vida del ML. Construcción propia
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="glosario.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="conceptualización-y-diseño.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -361,6 +421,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -381,6 +442,10 @@ gitbook.start({
 "text": null
 },
 "download": ["IA-responsable.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true,

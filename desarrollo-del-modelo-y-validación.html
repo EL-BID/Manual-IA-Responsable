@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Desarrollo del modelo y validación | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</title>
+  <meta name="description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Desarrollo del modelo y validación | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Desarrollo del modelo y validación | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
+  
+  <meta name="twitter:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="recolección-y-procesamiento-de-datos.html"/>
+<link rel="next" href="uso-y-monitoreo.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="../images/favicon.ico"/>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">IA Responsable</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><i class="fa fa-check"></i>Uso responsable de la IA para las políticas públicas</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#manual-de-ciencia-de-datos"><i class="fa fa-check"></i>Manual de ciencia de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#organización-para-la-cooperación-y-el-desarrollo-económicos"><i class="fa fa-check"></i>Organización para la Cooperación y el Desarrollo Económicos</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#oecd---ai-policy-observatory"><i class="fa fa-check"></i>OECD - AI Policy Observatory</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html"><i class="fa fa-check"></i>Resumen Ejecutivo</a>
+<ul>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glosario.html"><a href="glosario.html"><i class="fa fa-check"></i>Glosario</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#machine-learning-ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>Machine Learning (ML) y sistemas de toma/soporte de decisiones</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ciclo-de-vida-de-la-política-pública-con-ia"><i class="fa fa-check"></i>Ciclo de vida de la política pública con IA</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#retos-del-ciclo-de-vida-del-ml"><i class="fa fa-check"></i>Retos del ciclo de vida del ML</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#definición-correcta-del-problema-y-de-la-respuesta-de-política-pública"><i class="fa fa-check"></i><b>1.1</b> Definición correcta del problema y de la respuesta de política pública</a></li>
+<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#principios-de-ia-responsable"><i class="fa fa-check"></i><b>1.2</b> Principios de IA responsable</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html"><i class="fa fa-check"></i><b>2</b> Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Estados indeseables o subóptimos en datos recolectados</a></li>
+<li class="chapter" data-level="2.1.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#cualificación-y-exhaustividad-de-los-datos-para-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Cualificación y exhaustividad de los datos para la población objetivo</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="2.2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html"><i class="fa fa-check"></i><b>3</b> Desarrollo del modelo y validación</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#ausencia-o-uso-inadecuado-de-muestras-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia o uso inadecuado de muestras de validación</a></li>
+<li class="chapter" data-level="3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#contaminación-entrenamiento-validación"><i class="fa fa-check"></i><b>3.2.1</b> Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="3.2.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-datos-no-disponibles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.2</b> Fugas de datos no disponibles en la predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#modelos-de-clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Modelos de clasificación: probabilidades y clases</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#datos-desbalanceados"><i class="fa fa-check"></i><b>3.3.1</b> Datos desbalanceados</a></li>
+<li class="chapter" data-level="3.3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#puntos-de-corte-arbitrarios"><i class="fa fa-check"></i><b>3.3.2</b> Puntos de corte arbitrarios</a></li>
+<li class="chapter" data-level="3.3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#idoneidad-de-las-métricas-de-evaluación"><i class="fa fa-check"></i><b>3.3.3</b> Idoneidad de las métricas de evaluación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
+<li class="chapter" data-level="3.5" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fallas-no-medidas-por-el-modelo"><i class="fa fa-check"></i><b>3.5.1</b> Fallas no medidas por el modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#definición-de-justicia-y-equidad-algorítmica"><i class="fa fa-check"></i><b>3.6.1</b> Definición de justicia y equidad algorítmica</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#degradación-de-desempeño"><i class="fa fa-check"></i><b>4.1</b> Degradación de desempeño</a></li>
+<li class="chapter" data-level="4.2" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#experimentos-y-recopilación-de-datos"><i class="fa fa-check"></i><b>4.2</b> Experimentos y recopilación de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad"><i class="fa fa-check"></i><b>5.1.1</b> Interpretabilidad</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.1.2</b> Explicabilidad de predicciones individuales</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#modelos-parsimoniosos"><i class="fa fa-check"></i><b>5.1.3</b> Modelos parsimoniosos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.2</b> Trazabilidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación de IA robusta y responsable</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#fuente-de-recolección-y-origen-de-los-datos"><i class="fa fa-check"></i>Fuente de recolección y origen de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo-model-card"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo (Model Card)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#recolección-y-procesamiento-de-datos-1"><i class="fa fa-check"></i>Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales-1"><i class="fa fa-check"></i>Mala correspondencia entre variables disponibles y variables ideales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-probabilísticas-y-naturales-1"><i class="fa fa-check"></i>Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-comparaciones-causales"><i class="fa fa-check"></i>Muestras naturales: comparaciones causales</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-modelo-y-validación"><i class="fa fa-check"></i>Desarrollo de modelo y validación</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#contaminación-entrenamiento-validación-1"><i class="fa fa-check"></i>Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i>Sobremuestrear antes de particionar</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-en-el-momento-de-predicción"><i class="fa fa-check"></i>Variables no disponibles en el momento de predicción</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#puntos-de-corte-arbitrarios-1"><i class="fa fa-check"></i>Puntos de corte arbitrarios</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desbalance-de-clases"><i class="fa fa-check"></i>Desbalance de clases</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#equidad-con-atributos-protegidos"><i class="fa fa-check"></i>Equidad con atributos protegidos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#rendición-de-cuentas-2"><i class="fa fa-check"></i>Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad-1"><i class="fa fa-check"></i>Interpretabilidad</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#explicación-de-predicciones"><i class="fa fa-check"></i>Explicación de predicciones</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="http://fairlac.iadb.org/" target="blank">fAIr LAC, IADB Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="desarrollo-del-modelo-y-validación" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Desarrollo del modelo y validación<a href="desarrollo-del-modelo-y-validación.html#desarrollo-del-modelo-y-validación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>El proceso de desarrollo de un modelo conlleva muchas decisiones que tienen implicaciones en sus resultados. Algunas decisiones pueden llevar a cometer errores metodológicos que generen sesgos o que eviten que el sistema generalice en forma adecuada. Entre estos encontramos fugas de información, sobreajuste y subajuste.</p>
+<p>Además, hay otro grupo de decisiones que no son necesariamente problemas metodológicos que pueden cambiar sustancialmente la forma como se comporta el sistema: ¿cómo elegir entre dos modelos?, ¿qué tipo de errores reportar?, ¿qué definición de justicia algorítmica se elegirá? Al comienzo del manual se comentó que ninguna de estas preguntas tiene sentido fuera del contexto de la aplicación específica. Lo que sí es posible es crear un marco de entendimiento de estos errores para que puedan ser discutidos entre los equipos técnicos y los tomadores de decisiones de política pública.</p>
+<p>En esta sección del manual se exponen retos que aparecen durante los procesos de entrenamiento y validación de los sistemas de soporte y toma de decisión. En este caso la mayoría de los errores se deben a fallos metodológicos en la evaluación y a no plantear en forma correcta el objetivo de ajuste del sistema o las métricas que se busca optimizar.</p>
+<div id="ausencia-o-uso-inadecuado-de-muestras-de-validación" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Ausencia o uso inadecuado de muestras de validación<a href="desarrollo-del-modelo-y-validación.html#ausencia-o-uso-inadecuado-de-muestras-de-validación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los modelos de aprendizaje automático se entrenan principalmente para crear predicciones en casos no observados. De nada sirve evaluar un sistema en su desempeño de predicción de las observaciones con las que se entrenó, pues el sistema podría únicamente memorizar cada respuesta<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>. Su utilidad se encuentra en la medida en la que el sistema logra generalizar un aprendizaje para predecir con datos fuera del conjunto de entrenamiento (out-of-sample). La validación generalmente involucra al menos dos muestras (1 y 2), y de preferencia tres:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Datos de entrenamiento:</strong> subconjunto de los datos utilizados para entrenar el modelo.<br />
+</li>
+<li><strong>Datos de validación:</strong> subconjunto de los datos con los que se evalúa el entrenamiento en forma iterativa.<br />
+</li>
+<li><strong>Datos de prueba:</strong> subconjunto de los datos que deben mantenerse ocultos hasta después de seleccionar el modelo y que son usados para confirmar los resultados.</li>
+</ol>
+<p>Para evitar que una partición aleatoria en datos de entrenamiento y validación favorezca o perjudique la evaluación, en general se hace una validación cruzada. Esta consiste en dividir los datos en <em>k</em> pedazos, calculando el promedio de <em>k</em> evaluaciones, donde los datos de validación son cada uno de los pedazos y los <em>k</em>-1 restantes son los datos de entrenamiento. Esto en inglés se llama <em>k-fold evaluation</em> y normalmente se escoge <em>k=5</em> o <em>k=10</em>.</p>
+<div class="figure"><span style="display:block;" id="fig:ciclo"></span>
+<p class="caption">
+Figura 3.1: Etapas de evaluación. <em>Fuente:</em> Construcción propia
+</p>
+<img src="images/etapas-modelo.png" alt="Etapas de evaluación. *Fuente:* Construcción propia" width="90%" />
+</div>
+<p>El primer reto es no tener un proceso de validación apropiado o que incluso sea inexistente. En este caso, los resultados del modelo se presentarían únicamente con el desempeño del conjunto de datos de entrenamiento. Las métricas de desempeño de este conjunto no deberían utilizarse como indicador del potencial comportamiento del modelo para casos nuevos, pues se podría estar sobreestimando su desempeño.</p>
+<p>Una validación exitosa también se relaciona con los criterios de calidad, tales como la completitud y representatividad de la información que se vio en el capítulo anterior, porque si la población objetivo es distinta a la representada por datos utilizados durante el entrenamiento, aunque el proceso de evaluación se haya realizado en forma correcta, es posible tener un comportamiento completamente distinto.</p>
+<p><strong>Recuadro 9.</strong> Lista de verificación - Ausencia o uso inadecuado de muestras de validación</p>
+<div class="cajaAzul">
+<ul>
+<li><p>(Cuantitativo) ¿Se construyeron las muestras de validación y prueba adecuadamente, considerando un tamaño apropiado que cubra a subgrupos de interés y protegidos y evite fugas de información durante su implementación?</p>
+<ul>
+<li><p>La construcción de la muestra de validación debe producirse según un diseño muestral que permita inferencia a la población objetivo <span class="citation">(<a href="referencias.html#ref-lohr" role="doc-biblioref">Lohr 2009</a>)</span>.</p></li>
+<li><p>La muestra de validación debe cubrir a subgrupos de interés y protegidos, de manera que sea posible hacer inferencia a sus subpoblaciones. Eso incluye tamaños de muestras adecuados según metodología de muestreo <span class="citation">(<a href="referencias.html#ref-lohr" role="doc-biblioref">Lohr 2009</a>)</span>.</p></li>
+<li><p>Si no está disponible tal muestra, es indispensable un análisis de riesgos y limitaciones de la muestra natural, conducida por expertos y personas que conozcan el proceso que generó esos datos muestrales.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="fugas-de-información" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Fugas de información<a href="desarrollo-del-modelo-y-validación.html#fugas-de-información" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La fuga de datos se produce cuando el modelo observa información adicional al conjunto de entrenamiento <span class="citation">(<a href="referencias.html#ref-kaufman" role="doc-biblioref">Kaufman, Rosset, and Perlich 2011</a>)</span>. Esta información adicional modifica el proceso de aprendizaje y pone en duda la validación del modelo como forma de estimar el rendimiento de producción del sistema.</p>
+<p>Esto ocurre de dos maneras:</p>
+<ul>
+<li><p><strong>Contaminación entrenamiento-validación:</strong> la muestra de entrenamiento recibe fugas de los datos de validación, lo que implica el uso de datos de validación en entrenamiento e invalida la estimación del error de predicción.</p></li>
+<li><p><strong>Fugas de datos no disponibles en la predicción:</strong> muestras de validación y entrenamiento tienen agrupaciones temporales o de otro tipo que no se conservan en el proceso de entrenamiento y validación. En este caso, entrenamiento y validación reciben fugas de información que no estará disponible en el momento de hacer predicciones.</p></li>
+</ul>
+<div id="contaminación-entrenamiento-validación" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Contaminación entrenamiento-validación<a href="desarrollo-del-modelo-y-validación.html#contaminación-entrenamiento-validación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La contaminación entrenamiento-validación se produce cuando todas o una parte de las muestras de validación o de prueba se utilizan para la construcción de los modelos durante el entrenamiento. Este error suele dar lugar a niveles de rendimiento poco realistas en el conjunto de validación, pues el modelo está haciendo predicciones basadas en observaciones que ha visto anteriormente.</p>
+<p>Este error suele producirse al aplicar metodologías de preprocesamiento que agregan y comparten información de la composición de la base de datos a las observaciones individuales: por ejemplo, escalando una variable, creando covariables con promedios o recuentos, metodologías de sobre o submuestreo, etc. Estos procesos deben realizarse después de dividir el conjunto de datos de entrenamiento y validación.</p>
+<p><strong>Recuadro 10.</strong> Lista de verificación - Contaminación entrenamiento-validación</p>
+<div class="cajaAzul">
+(Cuantitativo) Cualquier procesamiento y preparación de datos de entrenamiento debe evitar usar los datos de validación o prueba de alguna manera. Debe manten- erse una barrera sólida entre entrenamiento vs. validación y prueba. Esto incluye re- codificación de datos, normalizaciones, selección de variables, identificación de datos atípicos y cualquier otro tipo de preparación de cualquier variable que vaya a incluirse en los modelos. Esto incluye también ponderaciones o balance de muestras basadas en sobre/sub muestreo.
+</div>
+</div>
+<div id="fugas-de-datos-no-disponibles-en-la-predicción" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Fugas de datos no disponibles en la predicción<a href="desarrollo-del-modelo-y-validación.html#fugas-de-datos-no-disponibles-en-la-predicción" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este error se produce cuando se entrena un modelo con información que no estará disponible de la misma manera o con la misma calidad cuando el modelo se ponga en producción. Generalmente, tiene que ver con la temporalidad de los datos o las agrupaciones. En casos más sutiles, este error puede ser difícil de detectar, porque la variable está presente, pero la información se actualiza en forma retroactiva.
+Este tipo de error generalmente produce modelos que parecen muy optimistas, y ocurre de muchas maneras.</p>
+<p>Un ejemplo de esto puede verse en las estadísticas de delincuencia y mortalidad. Las denuncias de un robo pueden tardar en aparecer en las bases de datos de las autoridades debido a procesos burocráticos o administrativos, y la incidencia observada en un periodo podría aumentar sistemáticamente con el paso del tiempo. En este ejemplo, la variable objetivo está disponible en la producción, pero puede no estar completa debido a ciertos desfases inherentes a la notificación. Si no se tiene en cuenta este fenómeno durante el entrenamiento y se utilizan datos que ya están completos, la evaluación del modelo puede parecer precisa, pero en producción la precisión de los datos se degradará considerablemente.</p>
+<p><strong>Recuadro 11.</strong> Fugas de datos no disponibles en la predicción</p>
+<div class="cajaAzul">
+<p>El esquema de validación <strong>debe replicar tan cerca como sea posible</strong> el esquema con el cual se aplicarán las predicciones. Esto incluye que hay que replicar:</p>
+<ul>
+<li><p>Ventanas temporales de observación y registro de variables y ventanas de predicción.</p></li>
+<li><p>Si existen grupos en los datos, considerar si habrá información disponible de cada grupo cuando se haga la predicción, o si será necesario predecir para nuevos grupos.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="modelos-de-clasificación-probabilidades-y-clases" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Modelos de clasificación: probabilidades y clases<a href="desarrollo-del-modelo-y-validación.html#modelos-de-clasificación-probabilidades-y-clases" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En aprendizaje automático, los algoritmos de clasificación supervisada son sistemas cuyo objetivo es asignar una categoría o etiqueta de clase a las nuevas observaciones. Se denomina clasificación binaria cuando la variable objetivo tiene dos clases (por ejemplo, clasificar un correo electrónico como spam o no spam), y clasificación multiclase cuando hay más de dos clases (por ejemplo, algoritmo de identificación de especies vegetales).</p>
+<div id="datos-desbalanceados" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Datos desbalanceados<a href="desarrollo-del-modelo-y-validación.html#datos-desbalanceados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En un problema de clasificación, un conjunto de datos desbalanceados se produce cuando la distribución de las observaciones entre las clases conocidas no está distribuida por igual. Estos tipos de conjuntos de datos tendrán una o más clases con muchos ejemplos, denominadas clases mayoritarias, y una o más clases con menos observaciones, denominadas clases minoritarias (por ejemplo, grupos con menos de 1 % de las observaciones totales). Estos últimos grupos presentan dificultades considerables para los modelos de predicción, pues puede haber poca información sobre ellos.</p>
+<p>En datos muy desbalanceados, los predictores de clase pueden tener un rendimiento pobre (por ejemplo, nunca predicen la clase minoritaria), aunque las medidas de rendimiento sean buenas. En particular, si siempre predecimos la clase mayoritaria, la precisión será igual al porcentaje de elementos de esta clase.</p>
+<div class="cajaAzulFuerte">
+<p><em>Ejemplos</em></p>
+<ul>
+<li><p>Considere que se tiene un millón de datos: 999.000 negativos y 1000 positivos. Puede ser buena idea submuestrear los negativos por una fracción dada (por ejemplo, 10 %) ponderando cada caso muestreado por 10 en el ajuste y el posproceso.</p></li>
+<li><p>Considere que se tiene un millón de datos: 999.950 negativos y 50 positivos. Puede ser imposible discriminar apropiadamente los 50 datos positivos. Construir conjuntos de validación empeora la situación: no es posible validar el desempeño predictivo ni construir un modelo que tenga buen desempeño.</p></li>
+</ul>
+</div>
+<p><strong>Recuadro 12.</strong> Lista de verificación – Datos desbalanceados</p>
+<div class="cajaAzul">
+<p>(Cuantitativo) Hacer <strong>predicciones de probabilidad</strong> en lugar de clase. Estas probabilidades pueden ser incorporadas al proceso de decisión posterior como tales. Evitar puntos de corte estándar de probabilidad como 0.5, o predecir según máxima probabilidad.</p>
+<ul>
+<li><p>(Cuantitativo) Cuando el número absoluto de casos minoritarios es muy reducido, puede ser muy difícil encontrar información apropiada para discriminar esa clase. Se requiere <strong>recolectar más datos de la clase minoritaria</strong>.</p></li>
+<li><p>(Cuantitativo) Submuestrear la clase dominante (ponderando hacia arriba los casos para no perder calibración) puede ser una estrategia exitosa para reducir el tamaño de los datos y el tiempo de entrenamiento sin afectar el desempeño predictivo.</p></li>
+<li><p>(Cuantitativo) Replicar la clase minoritaria, para balancear mejor las clases (sobremuestreo).</p></li>
+<li><p>(Cuantitativo) Algunas técnicas de aprendizaje automático permiten ponderar cada clase por un peso distinto para que el peso total de cada clase quede balanceado. Si esto es posible, es preferible a sub o sobremuestreo.</p></li>
+</ul>
+</div>
+</div>
+<div id="puntos-de-corte-arbitrarios" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Puntos de corte arbitrarios<a href="desarrollo-del-modelo-y-validación.html#puntos-de-corte-arbitrarios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En los problemas de clasificación para la toma de decisiones se recomienda utilizar algoritmos de clasificación probabilística en lugar de clasificar la observación solo con su clase más probable. El resultado de un algoritmo de clasificación probabilística es una distribución de probabilidad sobre el conjunto de clases. Estos métodos pueden proporcionar información al responsable de toma de decisiones sobre la incertidumbre relativa a la clasificación.</p>
+<p>Para tomar la decisión sobre si la observación debe clasificarse como positiva o negativa, el equipo técnico debe elegir el umbral a partir del cual la observación se clasifica como perteneciente a cada clase. A menudo se acepta erróneamente un punto de corte de 0,5 para las clasificaciones binarias, pues es el valor por defecto de muchos modelos de aprendizaje automático. Esta decisión puede tener importantes implicaciones si se toma fuera del contexto del problema en cuestión, por lo que es importante que se discuta y se seleccione teniendo en cuenta los tipos de errores y sus implicaciones.</p>
+<p><strong>Recuadro 13.</strong> Lista de verificación – Puntos de corte arbitrarios</p>
+<div class="cajaAzul">
+<ul>
+<li><p>(Cuantitativo) El uso de <strong>algoritmos de clasificación probabilística</strong> es más adecuado para que la toma de decisiones incorpore la incertidumbre con respecto a la clasificación.</p></li>
+<li><p>(Cuantitativo) Evitar los puntos de corte de probabilidad estándar, como el 0,5. Elegir una interpretación óptima de las probabilidades predichas, analizando las métricas de error.</p>
+</div></li>
+</ul>
+</div>
+<div id="idoneidad-de-las-métricas-de-evaluación" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Idoneidad de las métricas de evaluación<a href="desarrollo-del-modelo-y-validación.html#idoneidad-de-las-métricas-de-evaluación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En problemas de clasificación, los puntos de corte se toman con criterios relacionados con el contexto de la decisión. La mayoría se construye mediante el análisis de la matriz de confusión de clasificación.</p>
+<div class="figure">
+<img src="images/matriz-confusion.png" alt="" />
+<p class="caption">Tabla 1. Matriz de confusión.</p>
+</div>
+<p>Los errores de un modelo de clasificación pueden dividirse en falsos positivos y falsos negativos. Un falso positivo es una observación para la que el modelo predice incorrectamente la clase positiva. Y un falso negativo es una observación para la que el modelo predice incorrectamente la clase negativa. Estas métricas pueden combinarse de diferentes maneras en función del caso de uso y del objetivo de la política social. Las métricas más utilizadas son:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Exactitud (Accuracy)</strong>: una de las métricas más utilizadas para evaluar los modelos de clasificación es la fracción de las predicciones que el modelo tuvo correctas:</li>
+</ol>
+<p><span class="math display">\[\text{Exactitud} = \frac{\text{ VP+VN }}{\text{ VP + VN + FP + FN}}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Precisión</strong>: fracción de aquellos clasificados como positivos por el modelo que en reali - dad eran positivos:</li>
+</ol>
+<p><span class="math display">\[\text{Precision} = \frac{\text{VP}}{\text{VP+FP}}\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Sensibilidad (Recall)</strong>: fracción de positivos que el modelo clasificó correctamente:</li>
+</ol>
+<p><span class="math display">\[\text{Sensibilidad} = \frac{\text{VP}}{\text{VP+FN}}\]</span>
+3. <strong>Especificidad</strong>: fracción de negativos que el modelo clasificó correctamente:</p>
+<p><span class="math display">\[\text{Especificidad} = \frac{\text{VN}}{\text{VN+FP}}\]</span>
+Es necesario tener en cuenta el contexto del problema a la hora de definir los criterios para evaluar los modelos de clasificación. Por ejemplo, si el modelo clasifica la prevalencia de una enfermedad mortal, el costo de no diagnosticar (falso negativo) es mucho mayor que el costo de enviar a una persona sana a hacerse más pruebas (falso positivo). En otras palabras, dependiendo de la aplicación, el costo de los falsos negativos puede ser muy diferente del costo de los falsos positivos. Por ello, se recomienda el uso del análisis costo-beneficio, porque compara el resultado del modelo en el contexto de la toma de decisiones.</p>
+<p>Estos criterios también pueden ser engañosos en función de la composición de la base de datos de entrenamiento y evaluación. Por ejemplo, cuando se utilizan datos desbalanceados, una precisión de 95 % puede significar en realidad un rendimiento inferior del modelo. Las soluciones parciales a este problema incluyen el uso de medidas que combinan la precisión y la sensibilidad, como la métrica F1 o la curva Precision-Recall , que pueden ayudar a analizar el equilibrio entre los verdaderos positivos y los falsos positivos en el contexto de la aplicación.</p>
+<p><strong>Recuadro 14.</strong> Lista de verificación - Idoneidad de las métricas de evaluación</p>
+<div class="cajaAzul">
+<ul>
+<li><p>(Cualitativo) ¿Se cuestionaron las implicaciones de los diferentes tipos de errores para el caso de uso específico, así como la forma correcta de evaluarlos?</p></li>
+<li><p>(Cualitativo) ¿Se explicó en forma clara las limitantes del modelo, identificando tanto los falsos positivos como falsos negativos y las implicaciones que una decisión del sistema tendría en la vida de la población beneficiaria?</p></li>
+<li><p>(Cuantitativo) ¿Se implementó un análisis costo-beneficio del sistema contra el statu quo u otras estrategias de toma/soporte de decisión (cuando es posible)?</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="sub-y-sobreajuste" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Sub y sobreajuste<a href="desarrollo-del-modelo-y-validación.html#sub-y-sobreajuste" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sub y sobreajuste ocurren cuando la información predictiva en los datos se usa de manera poco apropiada para el objetivo final del aprendizaje automático, que es la generalización del aprendizaje y su uso en conjuntos de datos no observados en el entrenamiento.</p>
+<ul>
+<li><p>El <strong>sobreajuste</strong> se produce cuando el modelo memoriza las particularidades de los datos de entrenamiento, pero es incapaz de generalizar a ejemplos no vistos. Un modelo demasiado complejo para los datos disponibles tiende a captar características no informativas como parte de la estructura predictiva. Esto se refleja a menudo en un modelo que funciona muy bien con los datos de entrenamiento, pero que tiene un rendimiento pobre en el conjunto de datos de validación.</p></li>
+<li><p>El <strong>subajuste</strong> se produce cuando el modelo es incapaz de funcionar bien con los datos de entrenamiento o de generalizar con los nuevos datos. Esto ocurre cuando las características individuales de las observaciones se agrupan en exceso y se les da poca importancia. Un modelo poco ajustado tiende a ignorar los patrones de la estructura predictiva. Esto se refleja en errores sistemáticos e identificables, por ejemplo, sub/sobre predicción sistemática para ciertos grupos o valores de las variables de entrada.</p></li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:sub-sobre-ajuste"></span>
+<p class="caption">
+Figura 3.2: Sub y sobreajuste. <em>Fuente:</em> Preparado por los autores
+</p>
+<img src="images/under_over_fit.png" alt="Sub y sobreajuste. *Fuente:* Preparado por los autores" width="90%" />
+</div>
+<p><strong>Recuadro 15.</strong> Lista de verificación - Sub y sobreajuste</p>
+<div class="cajaAzul">
+<ul>
+<li><p>(Cuantitativo) Sobreajuste: debe evitarse modelos cuya brecha validación - entrenamiento sea grande (indicios de sobreajuste). De ser necesario, debe afinarse métodos para moderar el sobreajuste como regularización, restricción del espacio funcional de modelos posibles, usar más datos de entrenamiento o perturbar los datos de entrenamiento, entre otros <span class="citation">(<a href="referencias.html#ref-ESL" role="doc-biblioref">Hastie, Tibshirani, and Friedman 2017</a>)</span>.</p></li>
+<li><p>(Cuantitativo) Subajuste: deben revisarse subconjuntos importantes de casos (por ejemplo, grupos protegidos) para verificar que no existan errores sistemáticos indeseables.</p></li>
+</ul>
+</div>
+</div>
+<div id="errores-no-cuantificados-y-evaluación-humana" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Errores no cuantificados y evaluación humana<a href="desarrollo-del-modelo-y-validación.html#errores-no-cuantificados-y-evaluación-humana" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En muchos casos, existirán aspectos del modelo que no son medidos por las métricas de desempeño que se han escogido.</p>
+<p>Por ejemplo, en un sistema de búsqueda en documento que, aunque tenga buen desempeño de validación en las métricas, seleccione documentos que tiendan a ser demasiado cortos, produzcan resultados poco útiles o imparciales para búsquedas particulares, o prefiera documentos de tipo promocional o propagandístico. Las razones pueden ir desde errores de preprocesamiento (algunos atributos mal calculados) hasta la selección de atributos para hacer las predicciones que consideran solo una parte del problema.</p>
+<div id="fallas-no-medidas-por-el-modelo" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Fallas no medidas por el modelo<a href="desarrollo-del-modelo-y-validación.html#fallas-no-medidas-por-el-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Algunos algoritmos producen resultados de baja calidad que escapan a la evaluación de las métricas de validación. Estos modelos pueden tener un bajo rendimiento cuando se ponen en producción. Las razones para ello son, entre otras, las siguientes:</p>
+<ul>
+<li><p>Errores de preprocesamiento en el momento de calcular predicciones.</p></li>
+<li><p>Tratamiento de los datos que excluyen métricas importantes para hacer predicciones de calidad o no injustas.</p></li>
+<li><p>Ausencia de métricas que midan cierto tipo de errores particulares graves.</p></li>
+</ul>
+<p>Este puede ser un problema difícil, pues por su naturaleza son errores no visibles o medibles directamente. Es necesario descubrir estos sesgos o errores fuera del contexto técnico de evaluación y, de ser posible, incluir métricas adicionales de evaluación que consideren estos problemas.</p>
+<p><strong>Recuadro 16.</strong> Lista de verificación - Fallas no medidas por el modelo</p>
+<div class="cajaAzul">
+<ul>
+<li>(Cualitativo) ¿Se realizó una evaluación humana con expertos del caso de uso para buscar sesgos o errores conocidos? (Por ejemplo, pueden usarse paneles de revisores que examinen predicciones particulares y consideren si son razonables o no. Estos paneles deben balancearse en cuanto al tipo de usuarios que se prevén, incluyendo tomadores de decisiones, si es necesario).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="equidad-y-desempeño-diferencial-de-predictores" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Equidad y desempeño diferencial de predictores<a href="desarrollo-del-modelo-y-validación.html#equidad-y-desempeño-diferencial-de-predictores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Métodos basados en aprendizaje automático pueden producir resultados injustos o discrim- inatorios para subgrupos <span class="citation">(<a href="referencias.html#ref-boulamwini" role="doc-biblioref">Buolamwini and Gebru 2018</a>)</span>, <span class="citation">(<a href="referencias.html#ref-barocas" role="doc-biblioref">Barocas and Selbst 2014</a>)</span>, <span class="citation">(<a href="referencias.html#ref-bolukbasi" role="doc-biblioref">Bolukbasi et al. 2016</a>)</span>. Estos resultados pueden ocasionarlos todos los retos antes mencionados, tanto de la fuente y manejo de los datos como de errores en el diseño del modelo.</p>
+<p>Ejemplos de desempeño diferencial e inequidad incluyen distintas tasas de aceptación para recibir beneficios en distintos grupos o errores de detección en rostros humanos que son diferentes dependiendo de la raza.</p>
+<p>Es importante recordar que la evaluación de los resultados de un sistema de toma/soporte de decisiones se realiza teniendo en cuenta los objetivos del tomador de decisiones, que pueden ser distintos e incluso contradictorios a los objetivos desde el punto de vista del problema de aprendizaje automático. Por ejemplo, un tomador de decisiones podría sacrificar el desempeño global de un modelo para mejorar el desempeño del modelo en un subgrupo, aunque este subgrupo sea pequeño en comparación con la población en su conjunto (por ejemplo, una acción afirmativa para corregir alguna discriminación social existente).</p>
+<p>Aunque el análisis de las implicaciones éticas en los modelos de aprendizaje automático y la relación que estas tienen con una definición de justicia es aún un campo de estudio abierto, existe una importante literatura que busca implantar definiciones matemáticas de equidad en los modelos para describir su imparcialidad o discriminación entre subgrupos y tomar decisiones que mitiguen resultados no deseados.</p>
+<div id="definición-de-justicia-y-equidad-algorítmica" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Definición de justicia y equidad algorítmica<a href="desarrollo-del-modelo-y-validación.html#definición-de-justicia-y-equidad-algorítmica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lo que se entiende por “justicia” puede cambiar según una cultura o tradición y también puede ser específico de un proyecto o problema de política pública. Por ejemplo, en algunos casos las políticas buscan la inclusión social a través de acciones afirmativas –como las cuotas de diversidad y las políticas de reparación– mientras que en otros casos estas políticas se basan simplemente en argumentos regionales o territoriales. Estos criterios deben integrarse en el proceso de diseño, en el análisis de los datos de formación, durante el proceso de evaluación de errores y en la salida del sistema. Este proceso puede dividirse en dos importantes etapas:</p>
+<ul>
+<li><p><strong>Definición de justicia algorítmica:</strong> representación matemática de una definición de justicia específica que se incorpora en el proceso de ajuste y selección del modelo. Es importante tomar en cuenta que estas definiciones pueden ser excluyentes, es decir, satisfacer una podría implicar no satisfacer las demás <span class="citation">(<a href="referencias.html#ref-verma" role="doc-biblioref">Verma and Rubin 2018</a>)</span>.</p></li>
+<li><p><strong>Inequidad algorítmica:</strong> fallas técnicas en los modelos que producen disparidad de resultados para grupos protegidos que deben evaluarse según la definición de justicia algorítmica determinada en el punto anterior (podría ser más de una).</p></li>
+</ul>
+<p>El objetivo del modelador es establecer lineamientos para evitar que deficiencias en los modelos produzcan disparidades indeseables según los distintos subgrupos asociados a una variable protegida (por ejemplo, género, raza o nivel de marginación). Para ello, es necesario seleccionar de antemano una definición de justicia algorítmica. Algunas de las más utilizadas son las siguientes (aunque pueden definirse otras, dependiendo del problema particular y los objetivos de los tomadores de decisiones):</p>
+<p><strong><em>(1) Omisión de variables protegidas </em></strong></p>
+<p>Una estrategia muy cuestionada para prevenir disparidades entre los grupos de una variable protegida <span class="math inline">\(A\)</span> es ignorar la variable. En este proceso se pretende eliminar la posibilidad de disparidad no incluyendo la variable <span class="math inline">\(A\)</span> en el proceso de construcción de predictores. Este enfoque NO resuelve el problema porque:</p>
+<ul>
+<li><p>Típicamente existen otros atributos asociados a <span class="math inline">\(A\)</span> que pueden producir resultados similares, aunque <span class="math inline">\(A\)</span> no se considere (por ejemplo, zona geográfica o código postal y nivel socioeconómico).</p></li>
+<li><p>Puede haber razones importantes para incluir a <span class="math inline">\(A\)</span> en los modelos predictivos. Por ejemplo, en el caso de presión arterial, existen variaciones en los grupos raciales (<span class="math inline">\(A\)</span>) en cuanto a predisposición a presión alta <span class="citation">(<a href="referencias.html#ref-hipertension" role="doc-biblioref">Lackland 2014</a>)</span>; por lo tanto, un modelo que evalúe riesgo sería más preciso y adecuado si incluye la variable <span class="math inline">\(A\)</span>.</p></li>
+</ul>
+<p><strong><em>(2) Paridad demográfica</em></strong></p>
+<p>La paridad demográfica establece, por su parte, que la proporción de cada segmento de una clase protegida <span class="math inline">\(A\)</span> (por ejemplo, el género o ciertos rangos de edad) debe obtener un resultado positivo en una misma proporción (como, por ejemplo, la asignación de becas escolares). Esto es poco deseable por sí mismo: por ejemplo, si quisiéramos construir un clasificador para cierta enfermedad, necesitaríamos considerar que es posible que mujeres y hombres fueran afectados de manera distinta. Sin embargo, la paridad demográfica puede ser un objetivo de los tomadores de decisiones y eso debe tenerse en cuenta en el momento de tomar la decisión asociada a la predicción.</p>
+<p><strong><em>(3) Equidad de posibilidades</em></strong></p>
+<p>El concepto de equidad de posibilidades <span class="citation">(<a href="referencias.html#ref-hardt" role="doc-biblioref">Hardt, Price, and Srebro 2016</a>)</span> es uno menos dependiente de los objetivos de los tomadores de decisiones; se refiere al desempeño predictivo a lo largo de distintos grupos definidos por una variable protegida <span class="math inline">\(A\)</span> <span class="citation">(<a href="referencias.html#ref-verma" role="doc-biblioref">Verma and Rubin 2018</a>)</span>. Si <span class="math inline">\(Y\)</span> es la variable que queremos predecir, y <span class="math inline">\(\hat{Y}\)</span> es nuestra predicción, decimos que nuestra predicción satisface equidad de posibilidades cuando <span class="math inline">\(\hat{Y}\)</span> y <span class="math inline">\(A\)</span> son independientes, dado el valor verdadero <span class="math inline">\(Y\)</span>.</p>
+<p>Esto quiere decir que <span class="math inline">\(A\)</span> no debe influir en la predicción cuando conocemos el valor verdadero <span class="math inline">\(Y\)</span>, o dicho de otra
+manera, la pertenencia o no pertenencia al grupo protegido <span class="math inline">\(A\)</span> no debe influir en la probabilidad de la clasificación.</p>
+<p>Se considera entonces que predictores que se alejan mucho de este criterio son susceptibles de incluir disparidades asociadas a la variable protegida <span class="math inline">\(A\)</span>. Una implicación de este criterio es que, bajo el supuesto de equidad de posibilidades, las tasas de error predictivo sobre cada subgrupo de <span class="math inline">\(A\)</span> son similares y para clasificación binaria las tasas de falsos positivos y de fal- sos negativos son similares.</p>
+<p>Por ejemplo, supongamos que quiere crearse un sistema para la selección de beneficiarios de una beca escolar para una universidad reconocida. La institución define como variable protegida la pertenencia a una comunidad indígena (que supondremos en este caso que toma dos valores: se autodenomina indígena o no se autodenomina indígena). El predictor satisface equidad de posibilidades cuando tanto la tasa de falsos positivos como la de falsos negativos son iguales para personas indígenas como para personas que no lo son.</p>
+<p><strong><em>(4) Justicia contrafactual</em></strong></p>
+<p>EEsta medida considera que un predictor es “justo” si su resultado sigue siendo el mismo cuando se toma el valor del atributo protegido y se cambia a otro valor posible del atributo protegido (como, por ejemplo, introducir un cambio de raza, género u otra condición).</p>
+<p>En la práctica no existe una respuesta única ni una medida de justicia algorítmica que funcione para todos los problemas. En la mayoría de los casos buscar el cumplimiento de una implica no cumplir totalmente con las demás, por lo que su elección debe hacerse en el contexto del problema y deben justificarse sus razones. Equidad de oportunidad muchas veces es un criterio aceptable, que introduce criterios de justicia algorítmica permitiendo también optimizar otros resultados deseables.</p>
+<p><strong>Recuadro 17.</strong> Lista de verificación - Definición de justicia y equidad algorítmicas</p>
+<div class="cajaAzul">
+<ul>
+<li><p>(Cualitativo) Identificar grupos o atributos protegidos. Por ejemplo: edad, género, raza, nivel de marginación, etc.</p></li>
+<li><p>(Cualitativo) ¿Se definió con expertos y tomadores de decisiones la medida de justicia algorítmica que va a usarse en el proyecto?</p></li>
+<li><p>(Cuantitativo) Cuando existen atributos protegidos debe evaluarse qué tanto se alejan las predicciones de la definición de justicia algorítmica elegida.</p></li>
+<li><p>(Cuantitativo) Posprocesar adecuadamente las predicciones, si es necesario, para lograr el criterio de justicia algorítmica elegido (por ejemplo, equidad de posibilidades, oportunidad).</p></li>
+<li><p>(Cuantitativo) En el caso de clasificación, puntos de corte para distintos subgrupos pueden ajustarse para lograr equidad de oportunidad.</p></li>
+<li><p>(Cuantitativo) Recolectar información más relevante de subgrupos protegidos (tanto casos como características) para mejorar el desempeño predictivo en grupos minoritarios.</p></li>
+</ul>
+</div>
+<div class="cajaAzulMarino">
+<p><strong>Actividad:</strong><br />
+Al terminar esta fase se recomienda el llenado de las secciones de Desarrollo del modelo del Perfil del modelo y llevar a cabo una discusión con el tomador de decisiones de políticas públicas (ver Herramienta 3).</p>
+</div>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="10">
+<li id="fn10"><p>Este fenómeno está relacionado con el sobreajuste que se verá más adelante.<a href="desarrollo-del-modelo-y-validación.html#fnref10" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="recolección-y-procesamiento-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="uso-y-monitoreo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/EL-BID/Manual-IA-Responsable/edit/master/04-retos-modelacion.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["IA-responsable.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true,
+"toolbar": {
+"position": "fixed"
+}
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

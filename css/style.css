@@ -41,18 +41,47 @@ pre code {
 .resumen1 {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
-  background: #fde9d9;
+  background: #D9E7E2;
   position:relative;
 }
 .resumen2 {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
-  background: #eaf1dd;
+  background: #D9E7E2;
   position:relative;
 }
 .resumen3 {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
-  background: #dbe5f1;
+  background: #D9E7E2;
   position:relative;
+}
+
+.cajaAzul {
+    background-color:#dff1fd  ;
+    padding:20px;
+    margin: 30px 0;
+    border-radius: 10px;
+}
+
+.cajaAzulMarino {
+    background-color:#1255cc;
+    color: #ffffff;
+    padding:20px;
+    margin: 30px 0;
+    border-radius: 10px;
+}
+
+.cajaAzulFuerte {
+    background-color:#458abf;
+    color: #ffffff;
+    padding:20px;
+    margin: 30px 0;
+    border-radius: 10px;
+}
+
+
+body {
+    font-family: 'GothamNarrow-Medium',Tahoma,Helvetica,sans-serif;
+    color: #666;
 }

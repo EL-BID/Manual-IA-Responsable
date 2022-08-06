@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Recolección y procesamiento de datos | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</title>
+  <meta name="description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Recolección y procesamiento de datos | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Recolección y procesamiento de datos | Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos" />
+  
+  <meta name="twitter:description" content="Documento guía y cuadernos de trabajo para evaluar y mejorar el uso responsable de aprendizaje de máquina e Inteligencia Artifical" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="conceptualización-y-diseño.html"/>
+<link rel="next" href="desarrollo-del-modelo-y-validación.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="../images/favicon.ico"/>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">IA Responsable</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><i class="fa fa-check"></i>Uso responsable de la IA para las políticas públicas</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#manual-de-ciencia-de-datos"><i class="fa fa-check"></i>Manual de ciencia de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid---sector-social"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) - Sector Social</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#banco-interamericano-de-desarrollo-bid-bid-lab"><i class="fa fa-check"></i>Banco Interamericano de Desarrollo (BID) – BID Lab</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#organización-para-la-cooperación-y-el-desarrollo-económicos"><i class="fa fa-check"></i>Organización para la Cooperación y el Desarrollo Económicos</a></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#oecd---ai-policy-observatory"><i class="fa fa-check"></i>OECD - AI Policy Observatory</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#iniciativa-fair-lac"><i class="fa fa-check"></i>Iniciativa fAIr LAC</a>
+<ul>
+<li class="chapter" data-level="" data-path="uso-responsable-de-la-ia-para-las-políticas-públicas.html"><a href="uso-responsable-de-la-ia-para-las-políticas-públicas.html#agradecimientos"><i class="fa fa-check"></i>Agradecimientos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html"><i class="fa fa-check"></i>Resumen Ejecutivo</a>
+<ul>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#por-qué-este-manual"><i class="fa fa-check"></i>¿Por qué este manual?</a></li>
+<li class="chapter" data-level="" data-path="resumen-ejecutivo.html"><a href="resumen-ejecutivo.html#para-quién-es-este-manual"><i class="fa fa-check"></i>¿Para quién es este manual?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glosario.html"><a href="glosario.html"><i class="fa fa-check"></i>Glosario</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#machine-learning-ml-y-sistemas-de-tomasoporte-de-decisiones"><i class="fa fa-check"></i>Machine Learning (ML) y sistemas de toma/soporte de decisiones</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#componentes-de-un-sistema-de-ia-para-políticas-públicas"><i class="fa fa-check"></i>Componentes de un sistema de IA para políticas públicas</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#ciclo-de-vida-de-la-política-pública-con-ia"><i class="fa fa-check"></i>Ciclo de vida de la política pública con IA</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#retos-del-ciclo-de-vida-del-ml"><i class="fa fa-check"></i>Retos del ciclo de vida del ML</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html"><i class="fa fa-check"></i><b>1</b> Conceptualización y diseño</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#definición-correcta-del-problema-y-de-la-respuesta-de-política-pública"><i class="fa fa-check"></i><b>1.1</b> Definición correcta del problema y de la respuesta de política pública</a></li>
+<li class="chapter" data-level="1.2" data-path="conceptualización-y-diseño.html"><a href="conceptualización-y-diseño.html#principios-de-ia-responsable"><i class="fa fa-check"></i><b>1.2</b> Principios de IA responsable</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html"><i class="fa fa-check"></i><b>2</b> Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles"><i class="fa fa-check"></i><b>2.1</b> Calidad y relevancia de los datos disponibles</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#estados-indeseables-o-subóptimos-en-datos-recolectados"><i class="fa fa-check"></i><b>2.1.1</b> Estados indeseables o subóptimos en datos recolectados</a></li>
+<li class="chapter" data-level="2.1.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales"><i class="fa fa-check"></i><b>2.1.2</b> Mala correspondencia entre variables disponibles y variables ideales</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#cualificación-y-exhaustividad-de-los-datos-para-la-población-objetivo"><i class="fa fa-check"></i><b>2.2</b> Cualificación y exhaustividad de los datos para la población objetivo</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#muestras-probabilísticas-y-naturales"><i class="fa fa-check"></i><b>2.2.1</b> Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="2.2.2" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#atributos-faltantes-o-incompletos"><i class="fa fa-check"></i><b>2.2.2</b> Atributos faltantes o incompletos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="recolección-y-procesamiento-de-datos.html"><a href="recolección-y-procesamiento-de-datos.html#comparación-causal"><i class="fa fa-check"></i><b>2.3</b> Comparación causal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html"><i class="fa fa-check"></i><b>3</b> Desarrollo del modelo y validación</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#ausencia-o-uso-inadecuado-de-muestras-de-validación"><i class="fa fa-check"></i><b>3.1</b> Ausencia o uso inadecuado de muestras de validación</a></li>
+<li class="chapter" data-level="3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-información"><i class="fa fa-check"></i><b>3.2</b> Fugas de información</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#contaminación-entrenamiento-validación"><i class="fa fa-check"></i><b>3.2.1</b> Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="3.2.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fugas-de-datos-no-disponibles-en-la-predicción"><i class="fa fa-check"></i><b>3.2.2</b> Fugas de datos no disponibles en la predicción</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#modelos-de-clasificación-probabilidades-y-clases"><i class="fa fa-check"></i><b>3.3</b> Modelos de clasificación: probabilidades y clases</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#datos-desbalanceados"><i class="fa fa-check"></i><b>3.3.1</b> Datos desbalanceados</a></li>
+<li class="chapter" data-level="3.3.2" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#puntos-de-corte-arbitrarios"><i class="fa fa-check"></i><b>3.3.2</b> Puntos de corte arbitrarios</a></li>
+<li class="chapter" data-level="3.3.3" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#idoneidad-de-las-métricas-de-evaluación"><i class="fa fa-check"></i><b>3.3.3</b> Idoneidad de las métricas de evaluación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#sub-y-sobreajuste"><i class="fa fa-check"></i><b>3.4</b> Sub y sobreajuste</a></li>
+<li class="chapter" data-level="3.5" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#errores-no-cuantificados-y-evaluación-humana"><i class="fa fa-check"></i><b>3.5</b> Errores no cuantificados y evaluación humana</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#fallas-no-medidas-por-el-modelo"><i class="fa fa-check"></i><b>3.5.1</b> Fallas no medidas por el modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#equidad-y-desempeño-diferencial-de-predictores"><i class="fa fa-check"></i><b>3.6</b> Equidad y desempeño diferencial de predictores</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="desarrollo-del-modelo-y-validación.html"><a href="desarrollo-del-modelo-y-validación.html#definición-de-justicia-y-equidad-algorítmica"><i class="fa fa-check"></i><b>3.6.1</b> Definición de justicia y equidad algorítmica</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html"><i class="fa fa-check"></i><b>4</b> Uso y Monitoreo</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#degradación-de-desempeño"><i class="fa fa-check"></i><b>4.1</b> Degradación de desempeño</a></li>
+<li class="chapter" data-level="4.2" data-path="uso-y-monitoreo.html"><a href="uso-y-monitoreo.html#experimentos-y-recopilación-de-datos"><i class="fa fa-check"></i><b>4.2</b> Experimentos y recopilación de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html"><i class="fa fa-check"></i><b>5</b> Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad-y-explicación-de-predicciones."><i class="fa fa-check"></i><b>5.1</b> Interpretabilidad y explicación de predicciones.</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#interpretabilidad"><i class="fa fa-check"></i><b>5.1.1</b> Interpretabilidad</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#explicabilidad-de-predicciones-individuales"><i class="fa fa-check"></i><b>5.1.2</b> Explicabilidad de predicciones individuales</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#modelos-parsimoniosos"><i class="fa fa-check"></i><b>5.1.3</b> Modelos parsimoniosos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rendición-de-cuentas.html"><a href="rendición-de-cuentas.html#trazabilidad"><i class="fa fa-check"></i><b>5.2</b> Trazabilidad</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html"><i class="fa fa-check"></i>Herramientas</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-1-lista-de-verificación-de-ia-robusta-y-responsable"><i class="fa fa-check"></i>Herramienta 1: Lista de verificación de IA robusta y responsable</a></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-2-perfil-de-datos"><i class="fa fa-check"></i>Herramienta 2: Perfil de Datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#fuente-de-recolección-y-origen-de-los-datos"><i class="fa fa-check"></i>Fuente de recolección y origen de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="herramientas.html"><a href="herramientas.html#herramienta-3-perfil-del-modelo-model-card"><i class="fa fa-check"></i>Herramienta 3: Perfil del Modelo (Model Card)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html"><i class="fa fa-check"></i>Cuadernillos de trabajo</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#recolección-y-procesamiento-de-datos-1"><i class="fa fa-check"></i>Recolección y procesamiento de datos</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales-1"><i class="fa fa-check"></i>Mala correspondencia entre variables disponibles y variables ideales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-probabilísticas-y-naturales-1"><i class="fa fa-check"></i>Muestras probabilísticas y naturales</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#muestras-naturales-comparaciones-causales"><i class="fa fa-check"></i>Muestras naturales: comparaciones causales</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desarrollo-de-modelo-y-validación"><i class="fa fa-check"></i>Desarrollo de modelo y validación</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#contaminación-entrenamiento-validación-1"><i class="fa fa-check"></i>Contaminación entrenamiento-validación</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#sobremuestrear-antes-de-particionar"><i class="fa fa-check"></i>Sobremuestrear antes de particionar</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#variables-no-disponibles-en-el-momento-de-predicción"><i class="fa fa-check"></i>Variables no disponibles en el momento de predicción</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#puntos-de-corte-arbitrarios-1"><i class="fa fa-check"></i>Puntos de corte arbitrarios</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#desbalance-de-clases"><i class="fa fa-check"></i>Desbalance de clases</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#equidad-con-atributos-protegidos"><i class="fa fa-check"></i>Equidad con atributos protegidos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#rendición-de-cuentas-2"><i class="fa fa-check"></i>Rendición de cuentas</a>
+<ul>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#interpretabilidad-1"><i class="fa fa-check"></i>Interpretabilidad</a></li>
+<li class="chapter" data-level="" data-path="cuadernillos-de-trabajo.html"><a href="cuadernillos-de-trabajo.html#explicación-de-predicciones"><i class="fa fa-check"></i>Explicación de predicciones</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="divider"></li>
+<li><a href="http://fairlac.iadb.org/" target="blank">fAIr LAC, IADB Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Uso responsable de la IA para las políticas públicas: Manual de ciencia de datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="recolección-y-procesamiento-de-datos" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Recolección y procesamiento de datos<a href="recolección-y-procesamiento-de-datos.html#recolección-y-procesamiento-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Existe un número cada vez mayor de fuentes de datos que pueden ser utilizadas para la toma de decisión en políticas públicas: censos, encuestas, registros administrativos, registros de uso de páginas web (logs) e incluso imágenes satelitales. Estos datos se vuelven información cuando se obtienen indicadores que describen a la población objetivo o al fenómeno que se está buscando entender.</p>
+<p>No siempre, sin embargo, los datos recolectados tienen una frecuencia, desagregación o cobertura que los haga relevantes, o carecen de la calidad necesaria para utilizarse para la toma de decisiones. Por ejemplo, las encuestas diseñadas mediante muestreo probabilístico especifican por su diseño el tipo de análisis que se puede hacer con ellas, pero este tipo de herramientas suelen levantarse con poca frecuencia y pueden resultar insuficientes para captar el movimiento de los patrones que van a estudiarse. Por otro lado, la información proveniente de registros administrativos o datos provenientes de internet (interacción en redes sociales, visitas y otras medidas en páginas web, etc.) y telefonía (llamadas, ubicación por GPS, etc.) suelen tener una frecuencia mucho mayor, pero en pocos casos cubre a la población en su conjunto, por lo que no es siempre posible utilizarla con el fin de tomar decisiones para toda la población.</p>
+<p>Ya sea que se esté implementando un modelo supervisado o no supervisado, los datos de entrenamiento son un punto muy importante de cualquier sistema de ML. La calidad de los datos puede analizarse mediante criterios como volumen, completitud, validez, relevancia, precisión, puntualidad, accesibilidad, comparabilidad e interoperabilidad de distintas fuentes. Definir con precisión estos criterios en general es difícil, pues el contexto de cada problema tiene particularidades sutiles. La relevancia y precisión se refieren a calidad de medición y utilidad para informar la decisión, mientras que la puntualidad alude a que los datos ocurren con la temporalidad necesaria para informar el problema que va a decidirse. Accesibilidad, comparabilidad e interoperabilidad se refieren a que los datos pueden extraerse oportunamente y a que distintas fuentes de datos tienen la congruencia necesaria para aplicarse conjuntamente en el análisis<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.</p>
+<p>En esta sección se abordan dos problemas comunes para los sistemas de aprendizaje automático durante la fase de recolección y procesamiento de datos<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>.</p>
+<ol style="list-style-type: decimal">
+<li>Calidad y relevancia de los datos disponibles, y</li>
+<li>Cualificación y exhaustividad de los datos para la población objetivo.</li>
+</ol>
+<p>Las secciones 2.1 y 2.2 abordan algunas de las cuestiones destacadas en los Principios de buenas prácticas para la ética de los datos en el sector público de la OECD en relación con la calidad y la cualificación de los datos. Los Principios de Buenas Prácticas tienen por objeto apoyar a los funcionarios públicos en la aplicación de la ética de los datos en los proyectos, productos y servicios del gobierno digital, de modo que: i) la confianza se sitúe en el centro de su diseño y entrega y ii) la integridad pública se mantenga a través de medidas específicas adoptadas por los gobiernos, las organizaciones públicas y, a un nivel más granular, los funcionarios públicos <span class="citation">(<a href="referencias.html#ref-oecd2021" role="doc-biblioref">OECD 2021</a>)</span>.</p>
+<div id="calidad-y-relevancia-de-los-datos-disponibles" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Calidad y relevancia de los datos disponibles<a href="recolección-y-procesamiento-de-datos.html#calidad-y-relevancia-de-los-datos-disponibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los algoritmos de aprendizaje automático captan patrones y relaciones observadas a partir de los datos con los que se han entrenado. Su objetivo es identificar estos mismos patrones para nuevos casos no observados durante el entrenamiento del modelo. Por esta razón, los datos de entrenamiento determinan la forma como se comportará el algoritmo. Sin embargo, los datos disponibles no siempre son ideales para todos los casos de uso. Dos de los principales problemas son:</p>
+<ol style="list-style-type: decimal">
+<li>Estados indeseables o subóptimos en datos recolectados.<br />
+</li>
+<li>Mala correspondencia entre variables disponibles y variables ideales.</li>
+</ol>
+<div id="estados-indeseables-o-subóptimos-en-datos-recolectados" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Estados indeseables o subóptimos en datos recolectados<a href="recolección-y-procesamiento-de-datos.html#estados-indeseables-o-subóptimos-en-datos-recolectados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El primer reto es no tomar en cuenta que los datos con los que entrenamos un modelo de ML pueden haber captado estados indeseables del mundo real. Esos “estados indeseables” pueden ser sesgos e inequidades perjudiciales para subgrupos, pero también puede ser cualquier otro patrón que se considere subóptimo o no deseable desde un punto de vista de política social.</p>
+<div class="cajaAzulFuerte">
+<p><em>Ejemplo</em></p>
+<p>Un caso de este reto se dio en 2015 cuando Amazon experimentó con un sistema de recomendación de recursos humanos a partir de técnicas de aprendizaje supervisado. El modelo entrenaba con una base de datos de los procesos de selección de candidatos de la compañía almacenados durante los diez años anteriores. En esa base de datos se identificaba si un candidato había sido aceptado o rechazado para el trabajo por el departamento. El sistema se basaba en la hipótesis de que el algoritmo podría captar buenos candidatos y reducir el trabajo del departamento de recursos humanos al hacer una primera selección de los candidatos. Lo que el equipo no había tomado en cuenta es que la industria de la tecnología se ha caracterizado por ser predominantemente masculina, por lo que el sistema recomendaba una mayor proporción de hombres, pues más hombres habían sido aceptados en esos puestos históricamente, lo que creaba un sesgo que parecía mostrar que los hombres eran más exitosos, cuando en realidad estaba captando una inequidad.</p>
+</div>
+<p><strong>Recuadro 4.</strong> Lista de verificación - Estados indeseables o subóptimos en datos recolectados</p>
+<div class="cajaAzul">
+<ul>
+<li>(Cualitativo) Discutir las posibles desigualdades sociales históricas en el caso de uso con especialistas en la materia.</li>
+<li>(Cuantitativo) Realizar un análisis exploratorio de los datos disponibles con los que se entrenará el modelo para identificar posibles sesgos históricos o estados indeseables.</li>
+</ul>
+</div>
+</div>
+<div id="mala-correspondencia-entre-variables-disponibles-y-variables-ideales" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Mala correspondencia entre variables disponibles y variables ideales<a href="recolección-y-procesamiento-de-datos.html#mala-correspondencia-entre-variables-disponibles-y-variables-ideales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cuando se toman decisiones de política pública, se hacen a partir de la definición de una o varias variables objetivo “ideales” que tiene en mente el tomador de decisiones. Sin embargo, las variables ideales pueden o no estar disponibles en los datos a los que se tiene acceso. En muchas ocasiones es necesario el uso de variables sustitutas o sucedáneas (proxy) que nos ayude a aproximarnos a la variable ideal. Cuando introducimos este tipo de variables dentro de modelos de ML podemos estar aprendiendo sesgos implícitos que pueden no ser deseables. Por ejemplo, una beca escolar que busque beneficiar a los estudiantes más inteligentes (variable ideal) se encontrará con el problema de definir ese concepto y encontrar una variable que pueda describirlo. Un examen de IQ asigna un valor mediante una prueba estandarizada que se describe como una variable proxy de la inteligencia. Sin embargo, el examen mide únicamente algunas dimensiones de la inteligencia, por lo que subestimará la inteligencia de algunas personas <span class="citation">(<a href="referencias.html#ref-wilson" role="doc-biblioref">Wilson 2014</a>)</span>.</p>
+<p>Las variables objetivo deben plantearse claramente, aunque sean ideales. Las variables disponibles deben analizarse para entender qué tan adecuadas son para utilizarse como proxy de la variable ideal. Se deben identificar sesgos sistemáticos dentro del contexto de su uso.</p>
+<div class="cajaAzulFuerte">
+<p><em>Ejemplo</em></p>
+<p>El sistema de salud de Estados Unidos implementó un algoritmo para predecir las necesidades de cuidado médico que necesitaban distintos pacientes. En este caso, el tomador de decisiones de política pública quería una herramienta que le indicara de forma preventiva qué pacientes tenían un alto riesgo de requerir mayores cuidados médicos utilizando la información histórica de los hospitales. Dado que la variable ideal de riesgo de complicación no estaba disponible, utilizaron como variable proxy el gasto en que incurrieron los pacientes durante su enfermedad, en la hipótesis de que personas más enfermas terminarían gastando más en tratamientos médicos para superar la enfermedad. <span class="citation">Obermeyer et al. (<a href="referencias.html#ref-Obermeyer4" role="doc-biblioref">2019</a>)</span> demostraron que este sistema tenía un sesgo racial porque subestimaba el número de pacientes negros con necesidades de atención médica. El sesgo racial se ocasionaba porque esta subpoblación gastaba, en promedio, menos dinero que los pacientes blancos. Al utilizar el gasto como variable proxy de riesgo de complicación los pacientes blancos más saludables parecían requerir más cuidados de salud que pacientes negros más enfermos. En este caso usar el gasto en salud como medida sustituta de necesidad de cuidado médico fue poco apropiado, pues se encontraba sesgada por una variable omitida de desigualdad económica.</p>
+</div>
+<p><strong>Recuadro 5.</strong> Mala correspondencia entre variables disponibles y variables ideales</p>
+<div class="cajaAzul">
+<ul>
+<li>(Cualitativo) Las variables objetivo ideales deben estar claramente establecidas. Las variables recogidas/disponibles deben analizarse para comprender hasta qué punto son adecuadas para sustituir a la variable objetivo. Deben identificarse los sesgos sistemáticos o la validez de la métrica sustituto.<br />
+</li>
+<li>(Cualitativo) ¿Se ha justificado claramente el uso de la variable de respuesta seleccionada para los fines de la intervención?</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="cualificación-y-exhaustividad-de-los-datos-para-la-población-objetivo" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Cualificación y exhaustividad de los datos para la población objetivo<a href="recolección-y-procesamiento-de-datos.html#cualificación-y-exhaustividad-de-los-datos-para-la-población-objetivo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los modelos de ML pretenden generar información para tomar acciones o políticas para una población objetivo. La mayor parte del tiempo las fuentes de datos no incluyen a toda la población (como sería el caso de un censo), por lo que es usual que solo se tenga disponible un subconjunto o muestra de la misma (una encuesta, una base de datos administrativa, etc.), a partir de la cual se debe buscar desarrollar extrapolaciones, predicciones o estimaciones que ayuden en la toma de decisiones.</p>
+<div id="muestras-probabilísticas-y-naturales" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Muestras probabilísticas y naturales<a href="recolección-y-procesamiento-de-datos.html#muestras-probabilísticas-y-naturales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En estadística, una muestra es un subconjunto de casos o individuos de una población. En ella existen dos extremos posibles:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Muestreo probabilístico</strong>: se llama así a una muestra en donde los casos se seleccionan a partir de un diseño probabilístico. Por ejemplo: muestra aleatoria simple, estratificada, por conglomerados, etc. En este caso, todas las predicciones y estimaciones que pretende aplicarse a la población objetivo pueden evaluarse en cuanto a su precisión con garantías probabilísticas. Es decir, podemos dar rangos de error para estimaciones de cantidades asociadas a toda la población objetivo.</li>
+</ol>
+<p>Por ejemplo: una encuesta nacional de hogares con diseño probabilístico generalmente consiste en una definición de estratificación, unidades de selección aleatoria a distintos niveles (unidades primarias, secundarias, etc.). Cada hogar se selecciona con una probabilidad conocida. Aunque la muestra se diseñe de manera no representativa (por ejemplo, más hogares en zonas rurales o de ingresos bajos), es posible hacer inferencias para toda la población con ciertas garantías acerca del tamaño de error de estimación.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Muestras naturales (no probabilísticas)</strong>: por otro lado, una muestra natural o no probabilística se da cuando los casos no se seleccionan en forma aleatoria, sino por un proceso natural mal o parcialmente conocido. En este caso, no es posible saber qué va a pasar cuando se aplique una política que resulte de un modelo en la población general y no puedan construirse rangos de error de predicciones y estimaciones mediante métodos estadísticos que tengan garantías probabilísticas. Es decir, las cantidades y predicciones estimadas tienen error desconocido, los modelos y características útiles en la muestra pueden no aplicar en la población objetivo, y la situación puede agravarse para grupos protegidos subrepresentados. <span class="citation">Williams (<a href="referencias.html#ref-anemiaracial" role="doc-biblioref">1981</a>)</span>, por ejemplo, muestra que valores predictivos de anemia pueden ser distintos para diferentes grupos raciales y que predicciones desarrolladas para un grupo pueden tener desempeño pobre en otro.</li>
+</ol>
+<p>Un caso usual de este tipo de muestras se da cuando por el canal de captación de la información se excluyen subgrupos particulares de población (sesgo de selección). Por ejemplo, con aplicaciones donde la población que no tenga acceso a Internet o a un teléfono inteligente será excluida. Este es el caso de la información proveniente de redes sociales, registros de llamadas telefónicas, etc.</p>
+<p>Las muestras naturales de datos pueden dar lugar a:</p>
+<ul>
+<li>Errores o sesgos de estimación y/o predicción.</li>
+<li>Estructuras predictivas diferentes de las que observaríamos en la población objetivo (modelos no válidos).</li>
+<li>Extrapolaciones que no están respaldadas por los datos.</li>
+<li>Subrepresentación o sobrerrepresentación de subconjuntos de la población.</li>
+</ul>
+<p>El muestreo probabilístico sería la situación ideal para la mayoría de los proyectos de aprendizaje automático. En este caso, puede entenderse exactamente qué subpoblaciones se muestrearon, a qué tasas y cómo se relacionan esas tasas con las tasas poblacionales. El diseño de la muestra determina el alcance inferencial. Sin embargo, tener una muestra probabilística no es siempre posible.</p>
+<p>Esto no quiere decir que las muestras naturales no sean útiles; en muchas ocasiones son la única fuente de datos disponible para la toma de decisiones. Sin embargo, es importante entender de dónde provienen los datos para poder tomar en cuenta sus limitantes e identificar los riesgos implícitos al tomar decisiones para toda la población.</p>
+<p>Un caso típico son las muestras de datos que provienen de redes sociales en las que la composición demográfica de los usuarios difiere sustancialmente de la población general. Un estudio para el Reino Unido descubrió que, en promedio, los usuarios de Twitter y Facebook son considerablemente más jóvenes que la población general y tienen más probabilidades de tener niveles de educación más altos que los no usuarios <span class="citation">(<a href="referencias.html#ref-mellon2017twitter" role="doc-biblioref">Mellon and Prosser 2017</a>)</span>. Cualquier estudio con estos datos debe explicar cómo estas particularidades pueden afectar los resultados.</p>
+<p>Algo importante que hay que tomar en cuenta es que tener muestras equilibradas en términos de características de la población no es tampoco una condición ni necesaria ni suficiente para calificar como apropiada la base de datos para la construcción de modelos de ML. Por ejemplo, en el caso de información recolectada por redes sociales, el hecho de que se tenga una muestra que contenga 50 % hombres y 50 % mujeres no dice nada sobre el tipo de conclusiones que pueden extraerse con esos datos porque la selección de esas observaciones, al no darse mediante un proceso probabilístico, podría presentar un sesgo en alguna otra dimensión y no necesariamente generalizarse a la población total.</p>
+<p><strong>Recuadro 6.</strong> Lista de verificación - Muestras probabilísticas y naturales</p>
+<div class="cajaAzul">
+<ul>
+<li>(Cualitativo) ¿Se han analizado las posibles diferencias entre la base de datos y la población para la que se está desarrollando el sistema de IA? (Utilice la bibliografía relacionada con el tema y la información de los expertos. Estudie en particular los sesgos de selección no medidos).</li>
+<li>(Cuantitativo) Aunque los modelos pueden construirse con diversas fuentes de datos, diseñadas o naturales, lo ideal es que la validación se realice con una muestra que permita la inferencia estadística a la población. La muestra de validación debe cubrir adecuadamente la población objetivo y las subpoblaciones de interés.</li>
+</ul>
+</div>
+</div>
+<div id="atributos-faltantes-o-incompletos" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Atributos faltantes o incompletos<a href="recolección-y-procesamiento-de-datos.html#atributos-faltantes-o-incompletos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Muchos proyectos de aprendizaje automático están destinados a fallar por la poca calidad de los datos con los que se cuenta. Cuando se recolectan datos del mundo real a través de muestras no probabilísticas es muy común que algunas observaciones tengan datos faltantes, es decir, observaciones para las que no se tienen todos los atributos.</p>
+<p>Los atributos faltantes o incompletos son un fenómeno que puede tener un efecto significativo en las conclusiones extraíbles de los datos. Por un lado, cuando información crucial acerca de las unidades es totalmente desconocida, esto puede resultar en modelos de desempeño pobre, con poca utilidad para la toma de decisiones y, por otro lado, la ausencia de información puede también estar asociada a características relevantes de las unidades para las que se quiere predecir.</p>
+<p>Cuando existen observaciones faltantes es posible implementar distintos métodos de imputación, pero es importante explorar las razones o el “mecanismo de censura” por el que una observación puede tener valores faltantes. En la literatura existen tres principales supuestos <span class="citation">(<a href="referencias.html#ref-missingrubin" role="doc-biblioref">Little and Rubin 2002</a>)</span>:</p>
+<ul>
+<li><strong>Valores faltantes completamente aleatorios (Missing Completely at Random - MCAR)</strong>: se da cuando la probabilidad de faltar es la misma para todas las observaciones. Es decir, la censura o falta se produce totalmente al azar.</li>
+<li><strong>Valores faltantes aleatorios (Missing at Random - MAR)</strong>: se da cuando los valores faltantes no dependen de los valores que toma esa variable, pero sí existe una relación entre los valores faltantes y otros datos observados del individuo.</li>
+<li><strong>Valores faltantes no aleatorios (Missing Not at Random - MNAR)</strong>: se da cuando los valores faltantes dependen de los valores que toma esa variable o de datos no observados. Por ejemplo, es un fenómeno conocido que cuando se levantan encuestas de ingreso autorreportado las personas con mayor ingreso tienden a no revelarlo.</li>
+</ul>
+<p><strong>Recuadro 7.</strong> Atributos faltantes o incompletos</p>
+<div class="cajaAzul">
+<ul>
+<li>(Cualitativo) ¿Se ha realizado un análisis de valores faltantes y de variables omitidas?<br />
+</li>
+<li>(Cualitativo) ¿Se ha identificado si existen variables omitidas importantes para las cuales no se cuenta con mediciones asociadas (en caso de existir)?<br />
+</li>
+<li>(Cualitativo) ¿Se ha identificado las razones por las que existen observaciones faltantes (en caso de existir)?<br />
+</li>
+<li>(Cuantitativo) Los procesos de imputación tienen que evaluarse en cuanto a su sensibilidad a supuestos y datos. De preferencia, deben utilizarse métodos de imputación múltiple que permitan evaluar incertidumbre en la imputación <span class="citation">(<a href="referencias.html#ref-missingrubin" role="doc-biblioref">Little and Rubin 2002</a>)</span>, <span class="citation">(<a href="referencias.html#ref-mice" role="doc-biblioref">van Buuren and Groothuis-Oudshoorn 2011</a>)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="comparación-causal" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Comparación causal<a href="recolección-y-procesamiento-de-datos.html#comparación-causal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cuando los humanos racionalizan el mundo intentan comprenderlo en términos de causa y efecto: si entendemos por qué ocurrió algo, podemos alterar nuestro comportamiento para cambiar resultados futuros.</p>
+<p>Un modelo de ML nos puede dar resultados que parecerían describir relaciones causales sin que necesariamente lo sean. Si la política se aplica en función de hallazgos en términos de las variables incluidas en el modelo, la derivación de políticas a partir de esos modelos puede llevar a decisiones erróneas.</p>
+<p>Técnicas econométricas como los experimentos aleatorios controlados o RCTs (randomized controlled trials), experimentos naturales, diferencia en diferencias y variables instrumentales son utilizadas con estos objetivos para controlar por fenómenos como sesgo por selección o endogénesis por variables omitidas, entre otros. En los últimos años trabajos como <span class="citation">Wager and Athey (<a href="referencias.html#ref-Athey" role="doc-biblioref">2018</a>)</span> han comenzado a introducir en algoritmos de ML estas técnicas y procesos experimentales tipo A/B testing han empezado a utilizarse de forma masiva en contextos digitales por la facilidad de crear experimentos masivos en Internet. Sin embargo, en la mayoría de los casos los algoritmos de ML no buscan describir relaciones causales y es necesario ser muy cuidadosos con este tipo de uso <span class="citation">(<a href="referencias.html#ref-king" role="doc-biblioref">Imai, King, and Stuart 2008</a>)</span>.</p>
+<p><strong>Recuadro 8.</strong> Lista de verificación - Comparación causal</p>
+<div class="cajaAzul">
+<ul>
+<li>(Cualitativo) Comprender y describir las razones por las que la variable de respuesta está correlacionada con variables conocidas y desconocidas. Describir los posibles sesgos basados en el conocimiento y el análisis de los expertos.<br />
+</li>
+<li>(Cualitativo) En caso de que no se haya trabajado para asegurar la causalidad en los resultados, ¿se comunicaron explícitamente las limitaciones de los resultados al responsable de las políticas públicas?<br />
+</li>
+<li>(Cuantitativo) En caso de que se intente la inferencia causal con modelos deben describirse las hipótesis, consideraciones o métodos utilizados para apoyar una interpretación causal. Deben realizarse y documentarse las comprobaciones de robustez.</li>
+</ul>
+</div>
+<div class="cajaAzulMarino">
+<p><strong>Actividad:</strong><br />
+Se recomienda el llenado del Perfil de datos durante la fase de conocimiento y preparación de datos del ciclo de vida de IA (ver Herramienta 2).</p>
+<p>Al terminar esta fase se recomienda el llenado de la sección de fuente y manejo de datos del Perfil del modelo y llevar a cabo una discusión con el tomador de decisiones de política pública (ver Herramienta 3).</p>
+</div>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>En esta etapa se recomienda el llenado del Perfil de datos de la sección de herramientas de este manual.<a href="recolección-y-procesamiento-de-datos.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Aunque no se tratan en detalle en esta sección, otras cuestiones relacionadas con los datos –como el dominio y la estructura de los datos– se incluyen en el perfil de datos.<a href="recolección-y-procesamiento-de-datos.html#fnref9" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="conceptualización-y-diseño.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="desarrollo-del-modelo-y-validación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/EL-BID/Manual-IA-Responsable/edit/master/03-retos-datos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["IA-responsable.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true,
+"toolbar": {
+"position": "fixed"
+}
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
